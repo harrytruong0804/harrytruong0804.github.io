@@ -8,6 +8,13 @@ export interface Post {
 
 export const posts: Post[] = [
   {
+    slug: "meeting-mindset",
+    title: "How to Extract Maximum Value from Any Tech Talk",
+    description: "The Socratic questioning method applied to engineering talks — a 3-phase system for active listening, better questions, and lasting retention.",
+    date: "2026-03-06",
+    tags: ["career", "soft-skills", "learning"],
+  },
+  {
     slug: "tool-search-sequence",
     title: "Tool Search Sequence Diagram",
     description: "A visual sequence diagram showing how Claude Code's tool search mechanism works - from user request to tool execution.",
