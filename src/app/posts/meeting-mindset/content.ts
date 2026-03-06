@@ -412,6 +412,82 @@ export const styles = `
     margin-top: 7px;
   }
 
+  .artifact-scope .keyword-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+  .artifact-scope .keyword-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    width: 20px;
+    flex-shrink: 0;
+  }
+  .artifact-scope .keyword-label {
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .artifact-scope .keyword-arrow {
+    color: var(--muted);
+    font-size: 12px;
+  }
+  .artifact-scope .keyword-word {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--accent);
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    padding: 2px 10px;
+    border-radius: 4px;
+  }
+
+  .artifact-scope .qlist-section {
+    margin: 28px 0;
+  }
+  .artifact-scope .qlist-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 18px 20px;
+    margin-bottom: 12px;
+  }
+  .artifact-scope .qlist-header {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .artifact-scope .qlist-header .qh-num { color: var(--muted); }
+  .artifact-scope .qlist-header .qh-name { color: var(--accent); }
+  .artifact-scope .qlist-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .artifact-scope .qlist-items li {
+    font-size: 13px;
+    color: var(--text);
+    padding: 5px 0;
+    padding-left: 16px;
+    position: relative;
+    line-height: 1.5;
+  }
+  .artifact-scope .qlist-items li::before {
+    content: '>';
+    position: absolute;
+    left: 0;
+    color: var(--accent2);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+  }
+
   .artifact-scope .footnote {
     margin-top: 60px;
     padding-top: 24px;
@@ -541,6 +617,77 @@ export const html = `
     <div class="q-card blue" style="grid-column:span 2;">
       <div class="q-type">&#9316; Counter-perspective</div>
       <div class="q-text">"Is there a scenario where the opposite design decision would be better?"</div>
+    </div>
+  </div>
+
+  <h3>In One Word</h3>
+  <p>If you could distill each question type to a single word, here's what they become:</p>
+
+  <div class="diagram">
+    <div class="diagram-title">// One Word Per Question Type</div>
+    <div class="keyword-row"><span class="keyword-num">&#9312;</span> <span class="keyword-label">Clarification</span> <span class="keyword-arrow">&#8594;</span> <span class="keyword-word">Define</span></div>
+    <div class="keyword-row"><span class="keyword-num">&#9313;</span> <span class="keyword-label">Assumption Probe</span> <span class="keyword-arrow">&#8594;</span> <span class="keyword-word">Foundation</span></div>
+    <div class="keyword-row"><span class="keyword-num">&#9314;</span> <span class="keyword-label">Evidence / Tradeoff</span> <span class="keyword-arrow">&#8594;</span> <span class="keyword-word">Why</span></div>
+    <div class="keyword-row"><span class="keyword-num">&#9315;</span> <span class="keyword-label">Implication</span> <span class="keyword-arrow">&#8594;</span> <span class="keyword-word">Boundary</span></div>
+    <div class="keyword-row"><span class="keyword-num">&#9316;</span> <span class="keyword-label">Counter-perspective</span> <span class="keyword-arrow">&#8594;</span> <span class="keyword-word">Exception</span></div>
+  </div>
+
+  <h3>5 Typical Questions for Each Type</h3>
+
+  <div class="qlist-section">
+    <div class="qlist-block">
+      <div class="qlist-header"><span class="qh-num">&#9312;</span> <span class="qh-name">Define</span></div>
+      <ul class="qlist-items">
+        <li>"What do you mean by that exactly?"</li>
+        <li>"Can you give me a concrete example?"</li>
+        <li>"How would you define X in one sentence?"</li>
+        <li>"Is X the same as Y, or are they different?"</li>
+        <li>"When you say X, what does that look like in practice?"</li>
+      </ul>
+    </div>
+
+    <div class="qlist-block">
+      <div class="qlist-header"><span class="qh-num">&#9313;</span> <span class="qh-name">Foundation</span></div>
+      <ul class="qlist-items">
+        <li>"What has to be true for this to work?"</li>
+        <li>"What are you taking for granted here?"</li>
+        <li>"Does this only apply under certain conditions?"</li>
+        <li>"What would break this approach?"</li>
+        <li>"Who is this designed for — and who does it not apply to?"</li>
+      </ul>
+    </div>
+
+    <div class="qlist-block">
+      <div class="qlist-header"><span class="qh-num">&#9314;</span> <span class="qh-name">Why</span></div>
+      <ul class="qlist-items">
+        <li>"Why this over the alternative?"</li>
+        <li>"What was the moment that made you decide this?"</li>
+        <li>"What did you try first before landing here?"</li>
+        <li>"What would have to change for you to choose differently?"</li>
+        <li>"What's the cost of this choice that you accepted?"</li>
+      </ul>
+    </div>
+
+    <div class="qlist-block">
+      <div class="qlist-header"><span class="qh-num">&#9315;</span> <span class="qh-name">Boundary</span></div>
+      <ul class="qlist-items">
+        <li>"What happens if you take this to the extreme?"</li>
+        <li>"At what point does this stop working?"</li>
+        <li>"What's the worst case if this assumption is wrong?"</li>
+        <li>"Does this still hold when the situation changes?"</li>
+        <li>"What's the one condition that would break this entirely?"</li>
+      </ul>
+    </div>
+
+    <div class="qlist-block">
+      <div class="qlist-header"><span class="qh-num">&#9316;</span> <span class="qh-name">Exception</span></div>
+      <ul class="qlist-items">
+        <li>"When would the opposite be true?"</li>
+        <li>"Is there a case where this rule does not apply?"</li>
+        <li>"Who would strongly disagree with this — and why?"</li>
+        <li>"What context would make this advice harmful?"</li>
+        <li>"If you had to argue against your own point, what would you say?"</li>
+      </ul>
     </div>
   </div>
 
