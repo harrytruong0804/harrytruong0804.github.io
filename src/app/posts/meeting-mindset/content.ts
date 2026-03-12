@@ -11,7 +11,7 @@ export const styles = `
     --accent3: #81c784;
     --red: #ef5350;
     --text: #e2e8f0;
-    --muted: #8892a4;
+    --muted:  #8892a4; 
     --tag-bg: #1e2a3a;
   }
 
