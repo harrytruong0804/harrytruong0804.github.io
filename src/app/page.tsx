@@ -23,8 +23,8 @@ export default function Home() {
         <div className="pixel-border bg-surface p-6 rounded-sm">
           <p className="font-pixel text-xs text-accent2 mb-3">// ABOUT</p>
           <p className="font-retro text-xl leading-relaxed text-foreground/80">
-            Hi! I&apos;m <span className="text-accent">Harry Truong</span>. I learn things with Claude
-            and turn the interesting artifacts into visual notes. This blog is a
+            Hi! I learn things and turn the interesting artifacts into
+            visual notes. This blog is a
             collection of those explorations.
           </p>
         </div>
