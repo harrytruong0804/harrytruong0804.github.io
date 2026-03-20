@@ -20,6 +20,42 @@ export const styles = `
 
   .artifact-scope, .artifact-scope * { margin: 0; padding: 0; box-sizing: border-box; }
 
+  .artifact-scope a { color: inherit; text-decoration: none; }
+
+  .artifact-scope .topbar {
+    background: var(--card-bg);
+    border-bottom: 1px solid var(--card-border);
+    padding: 12px 0;
+  }
+  .artifact-scope .topbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  .artifact-scope .logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+  }
+  .artifact-scope .logo a:hover {
+    opacity: 0.7;
+  }
+  .artifact-scope .meta-tag {
+    background: rgba(192, 57, 43, 0.08);
+    border: 1px solid var(--card-border);
+    color: var(--accent);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 3px;
+    letter-spacing: 1px;
+  }
+
   .artifact-scope {
     background: var(--bg);
     color: var(--text);
@@ -340,6 +376,12 @@ export const styles = `
 `;
 
 export const html = `
+<div class="topbar">
+  <div class="topbar-inner">
+    <span class="logo"><a href="/">&#9664; harrytruong</a></span>
+    <span class="meta-tag">STATISTICS</span>
+  </div>
+</div>
 <div class="noise"></div>
 <div class="container">
 
