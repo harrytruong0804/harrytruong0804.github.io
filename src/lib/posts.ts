@@ -8,6 +8,13 @@ export interface Post {
 
 export const posts: Post[] = [
   {
+    slug: "probability-vs-likelihood",
+    title: "Probability vs. Likelihood: A Coin Flip Story",
+    description: "Two questions that look identical but think in opposite directions — the difference between probability and likelihood explained with 10 coin flips.",
+    date: "2026-03-20",
+    tags: ["statistics", "math", "intuition"],
+  },
+  {
     slug: "first-principles-prompting",
     title: "First Principles Prompting: 15 Prompts That Rebuild Your Thinking",
     description: "A 5-phase framework for using first principles thinking with AI — 15 prompt templates that turn vague problems into structured solutions.",
