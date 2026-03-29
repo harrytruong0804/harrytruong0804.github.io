@@ -8,6 +8,13 @@ export interface Post {
 
 export const posts: Post[] = [
   {
+    slug: "qkv-attention",
+    title: "Q, K, V — The Heart of LLM Attention, Explained Visually",
+    description: "Every modern LLM runs on self-attention. Here's the intuition behind Query, Key, and Value — with interactive diagrams, from scratch.",
+    date: "2026-03-29",
+    tags: ["ai", "transformers", "deep-learning"],
+  },
+  {
     slug: "probability-vs-likelihood",
     title: "Probability vs. Likelihood: A Coin Flip Story",
     description: "Two questions that look identical but think in opposite directions — the difference between probability and likelihood explained with 10 coin flips.",
