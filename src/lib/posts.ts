@@ -8,6 +8,13 @@ export interface Post {
 
 export const posts: Post[] = [
   {
+    slug: "harness-engineering",
+    title: "What is Harness Engineering for AI Agents?",
+    description: "The model is the horse. The harness is the reins, the saddle, and the road. A visual deep dive into the new discipline that makes AI agents work in production.",
+    date: "2026-04-09",
+    tags: ["ai", "agents", "engineering", "architecture"],
+  },
+  {
     slug: "prompt-caching-deep-dive",
     title: "OpenAI Prompt Caching: From KV Tensors to Production Optimization",
     description: "A comprehensive guide to how prompt caching works under the hood, how to measure it, and a tactical playbook for maximizing cache hits — including Agents SDK integration.",
