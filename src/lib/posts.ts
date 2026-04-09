@@ -8,6 +8,13 @@ export interface Post {
 
 export const posts: Post[] = [
   {
+    slug: "prompt-caching-deep-dive",
+    title: "OpenAI Prompt Caching: From KV Tensors to Production Optimization",
+    description: "A comprehensive guide to how prompt caching works under the hood, how to measure it, and a tactical playbook for maximizing cache hits — including Agents SDK integration.",
+    date: "2026-04-09",
+    tags: ["ai", "openai", "performance", "agents"],
+  },
+  {
     slug: "qkv-attention",
     title: "Q, K, V — The Heart of LLM Attention, Explained Visually",
     description: "Every modern LLM runs on self-attention. Here's the intuition behind Query, Key, and Value — with interactive diagrams, from scratch.",
