@@ -496,9 +496,55 @@ export const styles = `
 
   .artifact-scope strong { font-weight: 600; }
   .artifact-scope em { font-style: italic; }
+
+  .artifact-scope .topbar {
+    background: var(--bg-surface);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 0;
+  }
+  .artifact-scope .topbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+  }
+  .artifact-scope .logo {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+  }
+  .artifact-scope .logo a { text-decoration: none; }
+  .artifact-scope .logo a:hover { opacity: 0.7; }
+  .artifact-scope .meta-tag {
+    background: rgba(192, 90, 44, 0.08);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 3px 12px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .artifact-scope {
+    position: relative;
+    z-index: 51;
+  }
 `;
 
 export const html = `
+<div class="topbar">
+  <div class="topbar-inner">
+    <span class="logo"><a href="/">&#9664; harrytruong</a></span>
+    <span class="meta-tag">DEEP DIVE</span>
+  </div>
+</div>
+
 <div class="page">
 
 <!-- HERO -->
