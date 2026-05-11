@@ -8,6 +8,13 @@ export interface Post {
 
 export const posts: Post[] = [
   {
+    slug: "kubernetes-probes",
+    title: "The Three Probes: How Kubernetes Actually Decides Your Pod Is Alive",
+    description: "Startup, readiness, and liveness look almost identical in YAML — but each runs at a different time, asks a different question, and triggers a different reaction. A visual deep dive into the probe lifecycle.",
+    date: "2026-05-11",
+    tags: ["kubernetes", "infrastructure", "production"],
+  },
+  {
     slug: "harness-engineering",
     title: "What is Harness Engineering for AI Agents?",
     description: "The model is the horse. The harness is the reins, the saddle, and the road. A visual deep dive into the new discipline that makes AI agents work in production.",
