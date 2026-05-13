@@ -8,6 +8,13 @@ export interface Post {
 
 export const posts: Post[] = [
   {
+    slug: "vertex-fragment-shader",
+    title: "Vertex vs Fragment Shaders, Explained",
+    description: "Every 3D scene answers two questions: where does this thing go, and what does it look like? A visual walk through the GPU pipeline, from vertices to pixels.",
+    date: "2026-05-13",
+    tags: ["graphics", "gpu", "shaders"],
+  },
+  {
     slug: "kubernetes-probes",
     title: "The Three Probes: How Kubernetes Actually Decides Your Pod Is Alive",
     description: "Startup, readiness, and liveness look almost identical in YAML — but each runs at a different time, asks a different question, and triggers a different reaction. A visual deep dive into the probe lifecycle.",
