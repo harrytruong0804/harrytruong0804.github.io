@@ -8,6 +8,13 @@ export interface Post {
 
 export const posts: Post[] = [
   {
+    slug: "omniverse-usd-animation",
+    title: "Animation in Omniverse USD — A Breakdown",
+    description: "From \"what is a 3D model?\" to SkelRoot, SkelAnimation, and AnimationGraph — a ground-up walk through how USD represents skinned characters and crowds.",
+    date: "2026-05-13",
+    tags: ["graphics", "usd", "omniverse", "animation"],
+  },
+  {
     slug: "vertex-fragment-shader",
     title: "Vertex vs Fragment Shaders, Explained",
     description: "Every 3D scene answers two questions: where does this thing go, and what does it look like? A visual walk through the GPU pipeline, from vertices to pixels.",
