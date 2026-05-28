@@ -8,6 +8,14 @@ export interface Post {
 
 export const posts: Post[] = [
   {
+    slug: "baked-loop-first-principles",
+    title: "From Mesh to Crowd: How 1,583 Recorded Pedestrians Walk a USD Stage",
+    description:
+      "A first-principles tour through meshes, skeletons, skin weights, and textures — then the \"baked loop\" trick that animates an entire recorded MassMotion crowd in Omniverse Kit without an animation graph.",
+    date: "2026-05-28",
+    tags: ["graphics", "usd", "omniverse", "crowd-simulation"],
+  },
+  {
     slug: "omniverse-usd-animation",
     title: "Animation in Omniverse USD — A Breakdown",
     description: "From \"what is a 3D model?\" to SkelRoot, SkelAnimation, and AnimationGraph — a ground-up walk through how USD represents skinned characters and crowds.",
