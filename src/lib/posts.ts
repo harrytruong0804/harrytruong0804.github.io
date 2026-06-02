@@ -8,6 +8,46 @@ export interface Post {
 
 export const posts: Post[] = [
   {
+    slug: "cesium-on-omniverse",
+    title: "How Cesium Puts a 3D Scene on Planet Earth",
+    description:
+      "GPUs render in 32-bit floats that fall apart at planetary scale. Here's the one precision problem that explains georeferencing, ECEF coordinates, and globe anchors — and how Cesium solves it. (Geospatial 3D, Part 1 of 5.)",
+    date: "2026-06-01",
+    tags: ["graphics", "geospatial", "cesium", "omniverse"],
+  },
+  {
+    slug: "3d-tiles-streaming",
+    title: "3D Tiles: How to Stream a Planet That Won't Fit in RAM",
+    description:
+      "The whole Earth is petabytes; your GPU has gigabytes. A first-principles look at the bounding-volume tree, geometric error, and screen-space LOD that make planetary streaming work. (Geospatial 3D, Part 2 of 5.)",
+    date: "2026-06-01",
+    tags: ["graphics", "geospatial", "3d-tiles", "streaming"],
+  },
+  {
+    slug: "google-photorealistic-3d-tiles",
+    title: "Google Photorealistic 3D Tiles, Explained",
+    description:
+      "The real planet as a textured 3D mesh, served from a single URL. What it is, how it plugs into any 3D Tiles renderer, and the billing, attribution, and coverage catches. (Geospatial 3D, Part 3 of 5.)",
+    date: "2026-06-01",
+    tags: ["graphics", "geospatial", "3d-tiles", "google"],
+  },
+  {
+    slug: "gltf-jpeg-of-3d",
+    title: "glTF: The JPEG of 3D",
+    description:
+      "Authoring formats vs delivery formats, the buffer-view-accessor trick that loads meshes straight onto the GPU, PBR materials, and why glTF is the payload inside every 3D tile. (Geospatial 3D, Part 4 of 5.)",
+    date: "2026-06-01",
+    tags: ["graphics", "gltf", "gpu", "3d-tiles"],
+  },
+  {
+    slug: "usd-fabric-pixel",
+    title: "USD → Fabric → Pixel: It's Just React (and Doom)",
+    description:
+      "Omniverse's render pipeline is the same pattern as React's virtual DOM and Doom's BSP tree: a declarative source, a flattened runtime mirror, and a pluggable paint backend. One pattern, three names. (Geospatial 3D, Part 5 of 5.)",
+    date: "2026-06-01",
+    tags: ["graphics", "usd", "omniverse", "rendering"],
+  },
+  {
     slug: "baked-loop-first-principles",
     title: "From Mesh to Crowd: How 1,583 Recorded Pedestrians Walk a USD Stage",
     description:
