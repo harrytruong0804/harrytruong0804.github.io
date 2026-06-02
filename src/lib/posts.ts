@@ -8,6 +8,14 @@ export interface Post {
 
 export const posts: Post[] = [
   {
+    slug: "ellipse-ellipsoid-spheroid",
+    title: "Ellipse, Ellipsoid, Spheroid — và vì sao WGS84 là \"ellipsoid\"?",
+    description:
+      "Ba cái tên gần giống nhau, rất dễ lẫn. Từ first principles: thêm một chiều và đếm số bán trục độc lập là phân biệt được cả ba — và hiểu vì sao GIS gọi Trái Đất là \"WGS84 ellipsoid\" chứ không phải \"spheroid\".",
+    date: "2026-06-02",
+    tags: ["geospatial", "geodesy", "wgs84", "first-principles"],
+  },
+  {
     slug: "cesium-on-omniverse",
     title: "How Cesium Puts a 3D Scene on Planet Earth",
     description:
