@@ -8,6 +8,14 @@ export interface Post {
 
 export const posts: Post[] = [
   {
+    slug: "rtpso-from-first-principles",
+    title: "RtPso from First Principles — and Why You Wait 85 Seconds",
+    description:
+      "Decoding one Omniverse startup log line from the ground up: why the GPU never runs your shader source, why IR→ISA compilation is forced onto the target machine, what a ray tracing PSO bundles, how disk caching turns cold launches warm, and why an \"async\" compile still blocks the main thread.",
+    date: "2026-06-03",
+    tags: ["graphics", "gpu", "ray-tracing", "omniverse"],
+  },
+  {
     slug: "ellipse-ellipsoid-spheroid",
     title: "Ellipse, Ellipsoid, Spheroid — và vì sao WGS84 là \"ellipsoid\"?",
     description:
