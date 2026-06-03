@@ -160,7 +160,13 @@ export const html = `
   <header class="hero">
     <div class="eyebrow">Graphics internals &middot; first principles</div>
     <h1>RtPso, from the<br>ground up &mdash; <em>and why<br>you wait 85 seconds</em></h1>
-    <p class="dek">Before debugging your Omniverse startup, you need the mental model. Here is the whole chain: from shader source, to the GPU, to the wait that freezes your app.</p>
+    <p class="dek">A debugging story that turned into a mental model. It begins, like most of them do, with an app that simply refused to start.</p>
+  </header>
+
+  <!-- ===================== THE STORY ===================== -->
+  <section>
+    <p class="lead">It was supposed to be a routine restart. I launched the Omniverse app and waited for the window to appear. Ten seconds passed. Then twenty. No window, no crash, no error dialog &mdash; just a process sitting there, fans spinning, apparently doing nothing at all.</p>
+    <p>The temptation, when something hangs like that, is to assume it's broken &mdash; kill it, restart, repeat. But before reaching for the power switch, I did the one thing that actually moves a debugging session forward: I opened the logs. And there it was, the same line printing every five seconds, the number on the end creeping upward each time I scrolled:</p>
 
     <div class="logstrip">
       <div class="bar"><i class="dot1"></i><i class="dot2"></i><i class="dot3"></i></div>
@@ -168,8 +174,11 @@ export const html = `
 PsoRaytracing.cpp:<b>waitForAsyncInitFinished()</b>:688:
 *** Waiting for <b>RtPso async group async compilation</b>: <b>85 seconds so far</b></pre>
     </div>
-    <figcaption>The line we are decoding. Every word in it will make sense by the end.</figcaption>
-  </header>
+    <figcaption>Not an error &mdash; an <b>[Info]</b> line. The app wasn't broken. It was <em>waiting</em>, and politely telling me so every five seconds.</figcaption>
+
+    <p>Eighty-five seconds. To <em>start</em>. My first reaction was relief &mdash; at least it wasn't a deadlock. My second was confusion, because one word in that line refused to sit still: <strong>async</strong>. If the work is asynchronous, running off on some background thread, then <em>why is anything waiting on it?</em> &ldquo;Async&rdquo; and &ldquo;blocked for 85 seconds&rdquo; sound like a contradiction.</p>
+    <p>So I stopped guessing and went down to first principles. To really understand this one line &mdash; what an <span class="mono">RtPso</span> is, what its &ldquo;async group&rdquo; compiles, and why the main thread ends up frozen anyway &mdash; I had to rebuild the whole chain from the bottom: from what the GPU actually executes, all the way up to the moment a background compile reaches out and stalls your app. Here is that chain, one layer at a time.</p>
+  </section>
 
   <!-- ===================== LAYER 0 ===================== -->
   <section>
