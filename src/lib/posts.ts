@@ -11,7 +11,7 @@ export const posts: Post[] = [
     slug: "usd-composer-extension-from-scratch",
     title: "Writing a USD Composer Extension From Scratch",
     description:
-      "Everything in Omniverse Kit is an extension — the viewport, the menus, your tool. A first-principles walkthrough of the full contract: the extension.toml manifest, the IExt lifecycle, omni.ui idioms, layered MVVM, build wiring, and the gotchas that each cost somebody an afternoon.",
+      "Everything in Omniverse Kit is an extension — the viewport, the menus, your tool. A first-principles walkthrough of the full contract: the extension.toml manifest, the IExt lifecycle, omni.ui idioms, a clean UI/core split, build wiring, and the gotchas that each cost somebody an afternoon.",
     date: "2026-06-10",
     tags: ["graphics", "usd", "omniverse", "kit"],
   },

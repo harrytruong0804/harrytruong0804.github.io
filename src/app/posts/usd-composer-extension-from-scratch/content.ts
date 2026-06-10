@@ -129,9 +129,9 @@ export const html = `
   <h1>Writing a USD Composer Extension From Scratch</h1>
   <div class="meta">
     First-principles guide: UI + logic, end to end.<br>
-    Running example: a USD scene query tool &mdash; search prims by name / type / schema,
-    highlight matches in the viewport, frame the camera on click. Referred to below as
-    <code>acme.usd_query_tool</code>.
+    Running example: a geo-integration tool &mdash; compute a model's ground footprint and
+    assign it as a Cesium tileset's clipping boundary, so the world tiles are cut away
+    where the model sits. Referred to below as <code>acme.geo_integration</code>.
   </div>
 </header>
 
@@ -139,13 +139,13 @@ export const html = `
   <b>Contents</b>
   <ol>
     <li><a href="#principles">First principles &mdash; what an extension actually is</a></li>
-    <li><a href="#reference">The running example: a scene query tool at a glance</a></li>
+    <li><a href="#reference">The running example: a geo clipping tool at a glance</a></li>
     <li><a href="#anatomy">Anatomy: the folder contract</a></li>
     <li><a href="#manifest">The manifest &mdash; extension.toml</a></li>
     <li><a href="#lifecycle">Lifecycle &mdash; IExt, startup, shutdown</a></li>
     <li><a href="#ui">UI from first principles &mdash; omni.ui</a></li>
-    <li><a href="#architecture">Logic architecture &mdash; layered MVVM</a></li>
-    <li><a href="#kit-services">Talking to Kit &mdash; stage, events, viewport, commands</a></li>
+    <li><a href="#architecture">Logic architecture &mdash; the UI / core split</a></li>
+    <li><a href="#kit-services">Talking to Kit &mdash; stage, selection, events, notifications</a></li>
     <li><a href="#wiring">Wiring it into the app &mdash; build &amp; registration</a></li>
     <li><a href="#testing">Testing</a></li>
     <li><a href="#checklist">From-scratch checklist &amp; gotchas</a></li>
@@ -184,153 +184,168 @@ entire contract.
 </ul>
 
 <!-- ================================================================ -->
-<h2 id="reference"><span class="num">2.</span>The running example: a scene query tool at a glance</h2>
+<h2 id="reference"><span class="num">2.</span>The running example: a geo clipping tool at a glance</h2>
 
-<p>The query tool is a complete, real example of "window + logic" done properly.
-What it does: search prims on the open stage by name / type / API schema / custom property
-(form-based or a typed query string with <code>AND</code>/<code>OR</code>), list results,
-highlight them in the viewport, and frame the camera on click.</p>
+<p>The example is a complete, real "window + logic" extension, small enough to read in one
+sitting. The problem it solves: you place a building model on a Cesium globe (photoreal world
+tiles), and the streamed terrain pokes through your model. The fix is a <em>clipping
+boundary</em> &mdash; a polygon, bound to the tileset, inside which the world tiles are cut away
+so the model sits in a clean hole.</p>
 
-<div class="flow">USER                    UI LAYER                 VIEWMODEL LAYER             CORE / SERVICES
- &#9474;                       &#9474;                          &#9474;                            &#9474;
- &#9474; clicks Search &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9654; QueryToolWindow            &#9474;                            &#9474;
- &#9474;                       &#9474; _on_basic_search() &#9472;&#9472;&#9472;&#9472;&#9654; SearchViewModel              &#9474;
- &#9474;                       &#9474;                          &#9474; execute_basic_search() &#9472;&#9472;&#9654; QueryBuilder.build_tree(criteria)
- &#9474;                       &#9474;                          &#9474;                            QueryEngine._execute_search(stage,&hellip;)
- &#9474;                       &#9474;                          &#9474;                            &#9474;  iterate prims, evaluate AND/OR tree
- &#9474;                       &#9474;                          &#9474; &#9664;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472; SearchResultSet &#9472;&#9472;&#9496;
- &#9474;                       &#9474; &#9664;&#9472;&#9472; results_callback &#9472;&#9472;&#9472;&#9472;&#9474; results.set_results(&hellip;)
- &#9474; sees result list      &#9474; ResultsPanel.set_results &#9474; HighlightManager.highlight_results(paths)
- &#9474; clicks a row &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9654; &#9474; _on_result_selected &#9472;&#9472;&#9472;&#9654; &#9474; select_result(i) &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9654; FramePrimsCommand (camera focus)</div>
+<p>The tool's window has three inputs and one button: a model prim path (typed, or grabbed
+from the viewport selection), a tileset picker, a margin in meters &mdash; then
+<b>Calculate &amp; Assign Boundary</b>. One click computes the model's ground footprint
+(bounding-box corners &rarr; world space &rarr; 2D convex hull &rarr; expand by margin) and
+authors it as a Cesium cartographic polygon bound to the tileset:</p>
 
-<p>Where it lives and how it reaches the app (three hops &mdash; each explained in
-<a href="#wiring">&sect;9</a>):</p>
+<div class="flow">USER                      UI LAYER (geo_window.py)         CORE (boundary.py &mdash; pure USD)
+ &#9474;                         &#9474;                                &#9474;
+ &#9474; clicks Use Selection &#9472;&#9472;&#9654; _on_use_selection()             &#9474;
+ &#9474;                         &#9474;  reads viewport selection       &#9474;
+ &#9474; clicks Refresh &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9654; _refresh_tilesets() &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9654; find_tilesets(stage)
+ &#9474;                         &#9474;  rebuilds ComboBox items        &#9474;  traverse, match tileset prims
+ &#9474; clicks Calculate &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9654; _on_assign_boundary()           &#9474;
+ &#9474;                         &#9474;  guard stage/path/tileset &#9472;&#9472;&#9472;&#9472;&#9654; compute_footprint(stage, path, margin)
+ &#9474;                         &#9474;                                &#9474;  bbox corners &rarr; world &rarr; hull &rarr; +margin
+ &#9474;                         &#9474;                          &#9472;&#9472;&#9472;&#9472;&#9472;&#9654; assign_boundary(stage, tileset, footprint)
+ &#9474;                         &#9474;                                &#9474;  find/create overlay + polygon, author curve
+ &#9474; sees status + toast &#9664;&#9472;&#9472; _set_status() / _notify() &#9664;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</div>
 
-<div class="flow">git submodule                 link / junction                      app manifest
-externals/acme.usd_query_tool &#9472;&#9472;&#9654; source/extensions/acme.usd_query_tool &#9472;&#9472;&#9654; my_app.kit
-(its own git repo)            (Kit build scans this folder)        "acme.usd_query_tool" = {}</div>
+<p>On the stage, the result is a small pipeline of prims and relationships (this mirrors
+exactly what Cesium for Omniverse's own UI authors):</p>
+
+<div class="flow">CesiumTilesetPrim
+  rel cesium:rasterOverlayBinding &#9472;&#9472;&#9654; CesiumPolygonRasterOverlayPrim   (child of the tileset)
+        rel cesium:cartographicPolygonBinding &#9472;&#9472;&#9654; BasisCurves polygon prim
+                                                  (CesiumGlobeAnchorSchemaAPI applied)</div>
+
+<p>Where it lives and how it reaches the app (explained in <a href="#wiring">&sect;9</a>):</p>
+
+<div class="flow">extension folder                            app manifest
+source/extensions/acme.geo_integration &#9472;&#9472;&#9654; my_app.kit
+(Kit build scans this folder)               "acme.geo_integration" = {}</div>
 
 <!-- ================================================================ -->
 <h2 id="anatomy"><span class="num">3.</span>Anatomy: the folder contract</h2>
 
-<p>The full layout of the example. The top half (config / data / docs / premake) is the
+<p>The full layout of the example. The top half (config / premake / README) is the
 <em>extension contract</em>; the bottom half (the Python package) is <em>your architecture
 choice</em> &mdash; Kit doesn't care how you organize it.</p>
 
-<div class="tree">acme.usd_query_tool/
+<div class="tree">acme.geo_integration/
 &#9500;&#9472;&#9472; config/
 &#9474;   &#9492;&#9472;&#9472; extension.toml            <span class="n">&larr; THE manifest. Identity, deps, entry module (&sect;4)</span>
-&#9500;&#9472;&#9472; data/
-&#9474;   &#9500;&#9472;&#9472; icon.svg                  <span class="n">&larr; shown in the Extension Manager</span>
-&#9474;   &#9492;&#9472;&#9472; preview.svg
-&#9500;&#9472;&#9472; docs/
-&#9474;   &#9500;&#9472;&#9472; README.md                 <span class="n">&larr; user-facing docs (rendered in Extension Manager)</span>
-&#9474;   &#9492;&#9472;&#9472; CHANGELOG.md
-&#9500;&#9472;&#9472; premake5.lua                  <span class="n">&larr; 10 lines: link folders into the build output (&sect;9)</span>
+&#9500;&#9472;&#9472; premake5.lua                  <span class="n">&larr; ~10 lines: link folders into the build output (&sect;9)</span>
+&#9500;&#9472;&#9472; README.md                     <span class="n">&larr; user-facing docs (rendered in the Extension Manager)</span>
 &#9492;&#9472;&#9472; acme/                         <span class="n">&larr; Python namespace package</span>
-    &#9492;&#9472;&#9472; usd_query_tool/           <span class="n">&larr; the module named in [[python.module]]</span>
-        &#9500;&#9472;&#9472; __init__.py           <span class="n">&larr; re-exports the IExt class</span>
+    &#9492;&#9472;&#9472; geo_integration/          <span class="n">&larr; the module named in [[python.module]]</span>
+        &#9500;&#9472;&#9472; __init__.py           <span class="n">&larr; re-exports the IExt class, with an ImportError guard (&sect;7)</span>
         &#9500;&#9472;&#9472; extension.py          <span class="n">&larr; lifecycle: on_startup / on_shutdown (&sect;5)</span>
-        &#9500;&#9472;&#9472; <span class="d">models/</span>               <span class="n">&larr; pure data: FilterCriteria, SearchResult, QueryCondition</span>
-        &#9500;&#9472;&#9472; <span class="d">core/</span>                 <span class="n">&larr; logic: query_engine, query_parser, query_builder,</span>
-        &#9474;                         <span class="n">  stage_collector, highlight_manager, filter_matchers</span>
-        &#9500;&#9472;&#9472; <span class="d">services/</span>             <span class="n">&larr; Kit adapters: stage_service, clipboard_service, event_service</span>
-        &#9500;&#9472;&#9472; <span class="d">viewmodel/</span>            <span class="n">&larr; state + orchestration: search_viewmodel, filter_state,</span>
-        &#9474;                         <span class="n">  results_viewmodel, ui_state_manager</span>
-        &#9500;&#9472;&#9472; <span class="d">ui/</span>                   <span class="n">&larr; omni.ui code: query_tool_window, panels/, widgets/, styles/</span>
-        &#9500;&#9472;&#9472; <span class="d">utils/</span>                <span class="n">&larr; usd_helpers, string_utils, constants</span>
-        &#9492;&#9472;&#9472; <span class="d">tests/</span>                <span class="n">&larr; pytest-style tests, runnable inside Kit (&sect;10)</span></div>
+        &#9500;&#9472;&#9472; <span class="d">core/</span>
+        &#9474;   &#9492;&#9472;&#9472; boundary.py       <span class="n">&larr; pure USD logic: footprint math + prim authoring. Zero omni imports.</span>
+        &#9492;&#9472;&#9472; <span class="d">ui/</span>
+            &#9492;&#9472;&#9472; geo_window.py     <span class="n">&larr; ALL omni.ui code: the window, style dict, callbacks</span></div>
 
 <div class="box info">
 <b>Naming convention.</b> The folder name <b>is</b> the extension id:
-<code>acme.usd_query_tool</code>. The Python package path must mirror it with dots &rarr; folders:
-<code>acme/usd_query_tool/</code>. Get this wrong and Kit can't import your module.
+<code>acme.geo_integration</code>. The Python package path must mirror it with dots &rarr; folders:
+<code>acme/geo_integration/</code>. Get this wrong and Kit can't import your module.
 </div>
+
+<p>Optional but conventional: <code>data/icon.svg</code> + <code>data/preview.svg</code>
+(shown in the Extension Manager) and <code>docs/CHANGELOG.md</code>. The example skips them;
+a tool you ship to others shouldn't.</p>
 
 <!-- ================================================================ -->
 <h2 id="manifest"><span class="num">4.</span>The manifest &mdash; extension.toml</h2>
 
-<p>This file is what makes the folder an extension. The example manifest, abridged
-to the parts that matter:</p>
+<p>This file is what makes the folder an extension. The example's manifest, nearly complete:</p>
 
-<span class="file">acme.usd_query_tool/config/extension.toml</span>
+<span class="file">acme.geo_integration/config/extension.toml</span>
 <pre><code>[package]
-title = <span class="str">"USD Scene Query Tool"</span>
+title = <span class="str">"Geo Integration"</span>
 version = <span class="str">"0.1.0"</span>
-description = <span class="str">"A USD Scene Query Tool for searching prims by name, type, schema..."</span>
-category = <span class="str">"Query"</span>
-icon = <span class="str">"data/icon.svg"</span>
+description = <span class="str">"Calculate a model's ground footprint and assign it as a Cesium tileset clipping boundary."</span>
+category = <span class="str">"Geo"</span>
+keywords = [<span class="str">"kit"</span>, <span class="str">"cesium"</span>, <span class="str">"georeference"</span>, <span class="str">"boundary"</span>, <span class="str">"clipping"</span>]
 
 [dependencies]                          <span class="comment"># other EXTENSIONS, loaded before yours</span>
 <span class="str">"omni.kit.uiapp"</span> = {}                   <span class="comment"># base UI application stack</span>
-<span class="str">"omni.kit.menu.utils"</span> = {}              <span class="comment"># add entries to the menu bar</span>
+<span class="str">"omni.kit.menu.utils"</span> = {}              <span class="comment"># add entries to the menu bar (&sect;8)</span>
 <span class="str">"omni.ui"</span> = {}                          <span class="comment"># the widget toolkit (&sect;6)</span>
-<span class="str">"omni.usd"</span> = {}                         <span class="comment"># UsdContext: stage access + stage events (&sect;8)</span>
-<span class="str">"omni.kit.viewport.utility"</span> = {}        <span class="comment"># active viewport / camera</span>
-<span class="str">"omni.kit.clipboard"</span> = {}               <span class="comment"># copy-to-clipboard</span>
-<span class="str">"omni.kit.notification_manager"</span> = {}    <span class="comment"># toast notifications</span>
-<span class="str">"omni.kit.commands"</span> = {}                <span class="comment"># execute undoable commands (FramePrims&hellip;)</span>
+<span class="str">"omni.usd"</span> = {}                         <span class="comment"># UsdContext: stage access + selection (&sect;8)</span>
+<span class="str">"omni.kit.notification_manager"</span> = {}    <span class="comment"># toast notifications (&sect;8)</span>
 
 [[python.module]]
-name = <span class="str">"acme.usd_query_tool"</span>            <span class="comment"># Kit imports THIS package on load</span>
+name = <span class="str">"acme.geo_integration"</span>           <span class="comment"># Kit imports THIS package on load</span>
+
+[documentation]
+pages = [<span class="str">"README.md"</span>]
 
 [[test]]
-dependencies = [<span class="str">"omni.kit.test"</span>, <span class="str">"omni.kit.ui_test"</span>]
-args = [<span class="str">"--no-window"</span>, <span class="str">"--/app/fastShutdown=1"</span>, ...]   <span class="comment"># headless test run flags</span></code></pre>
+dependencies = [<span class="str">"omni.kit.test"</span>]
+args = [<span class="str">"--no-window"</span>, <span class="str">"--/app/fastShutdown=1"</span>,
+        <span class="str">"--/app/file/ignoreUnsavedOnExit=true"</span>]   <span class="comment"># headless test run flags (&sect;10)</span></code></pre>
 
 <p><b>The rule for [dependencies]:</b> every <code>import omni.something</code> in your code
 should have a matching line here. It works without the line <em>if something else already
 loaded that extension</em> &mdash; and then breaks the day the app config changes. Declare what you
-import.</p>
+import. Note there is no Cesium dependency: the tool only <em>authors USD</em>; Cesium picks
+the prims up if it's loaded, and the authoring still works headless without it.</p>
 
 <!-- ================================================================ -->
 <h2 id="lifecycle"><span class="num">5.</span>Lifecycle &mdash; IExt, startup, shutdown</h2>
 
 <p>Kit imports your module and looks for a class implementing <code>omni.ext.IExt</code>.
-Two methods are the whole lifecycle:</p>
+Two methods are the whole lifecycle. This is the example's <em>entire</em> entry point:</p>
 
-<span class="file">acme/usd_query_tool/extension.py (abridged)</span>
+<span class="file">acme/geo_integration/extension.py</span>
 <pre><code><span class="kw">import</span> omni.ext
 <span class="kw">import</span> omni.kit.menu.utils <span class="kw">as</span> menu_utils
-<span class="kw">from</span> .ui.query_tool_window <span class="kw">import</span> <span class="cls">QueryToolWindow</span>
-<span class="kw">from</span> .viewmodel.search_viewmodel <span class="kw">import</span> <span class="cls">SearchViewModel</span>
 
-<span class="kw">class</span> <span class="cls">UsdQueryToolExtension</span>(omni.ext.<span class="cls">IExt</span>):
-    WINDOW_NAME = <span class="str">"USD Scene Query Tool"</span>
+<span class="kw">from</span> .ui.geo_window <span class="kw">import</span> <span class="cls">GeoWindow</span>
+
+<span class="kw">class</span> <span class="cls">GeoIntegrationExtension</span>(omni.ext.<span class="cls">IExt</span>):
+    WINDOW_NAME = <span class="str">"Geo Integration"</span>
+
+    <span class="kw">def</span> <span class="fn">__init__</span>(self):
+        super().__init__()
+        self._window = <span class="kw">None</span>
+        self._menu_entry = <span class="kw">None</span>
 
     <span class="kw">def</span> <span class="fn">on_startup</span>(self, ext_id: str):
-        self._viewmodel = <span class="cls">SearchViewModel</span>()           <span class="comment"># logic first&hellip;</span>
-        self._menu_entry = menu_utils.add_menu_items([  <span class="comment"># &hellip;then a menu entry.</span>
+        self._menu_entry = menu_utils.add_menu_items([
             menu_utils.<span class="cls">MenuItemDescription</span>(
-                name=<span class="str">"USD Query Tool"</span>,
-                onclick_fn=self._on_menu_click)
-        ], <span class="str">"Window"</span>)                                  <span class="comment"># &rarr; Window &#9656; USD Query Tool</span>
-        self._viewmodel.initialize()                    <span class="comment"># subscribe to stage events, auto-load</span>
+                name=<span class="str">"Geo Integration"</span>,
+                onclick_fn=self._on_menu_click,
+                appear_after=<span class="str">"Window"</span>)
+        ], <span class="str">"Window"</span>)                                  <span class="comment"># &rarr; Window &#9656; Geo Integration</span>
 
     <span class="kw">def</span> <span class="fn">on_shutdown</span>(self):                            <span class="comment"># undo EVERYTHING from startup</span>
-        menu_utils.remove_menu_items(self._menu_entry, <span class="str">"Window"</span>)
-        self._viewmodel.shutdown()                      <span class="comment"># unsubscribe events, clear highlights</span>
+        <span class="kw">if</span> self._menu_entry:
+            menu_utils.remove_menu_items(self._menu_entry, <span class="str">"Window"</span>)
+            self._menu_entry = <span class="kw">None</span>
         <span class="kw">if</span> self._window:
             self._window.destroy()
+            self._window = <span class="kw">None</span>
 
     <span class="kw">def</span> <span class="fn">_on_menu_click</span>(self):                          <span class="comment"># LAZY window creation</span>
         <span class="kw">if</span> self._window <span class="kw">is</span> <span class="kw">None</span>:
-            self._window = <span class="cls">QueryToolWindow</span>(self.WINDOW_NAME)
-            self._window.set_viewmodel(self._viewmodel)
+            self._window = <span class="cls">GeoWindow</span>(self.WINDOW_NAME)
         <span class="kw">else</span>:
             self._window.visible = <span class="kw">True</span>
             self._window.focus()</code></pre>
 
 <p>Three deliberate decisions worth copying:</p>
 <ul>
-  <li><b>Lazy window.</b> Startup registers a menu item only; the window (and all its widgets)
-      is built on first click. Keeps app boot fast, and the extension works headless.</li>
-  <li><b>ViewModel is created at startup, window later.</b> Logic lifetime &ne; UI lifetime.
-      The viewmodel subscribes to stage events immediately, so dropdowns are pre-populated
-      before the user ever opens the window.</li>
-  <li><b>Symmetric shutdown.</b> Everything <code>on_startup</code> registers (menu entry,
-      event subscriptions, window) is explicitly torn down. Kit hot-reloads extensions during
-      development &mdash; a leaked subscription or menu item means duplicate callbacks
+  <li><b>Startup is just a menu item.</b> The extension costs nothing until someone uses it.
+      No stage access, no widgets, no subscriptions at boot &mdash; the app starts fast and the
+      extension loads cleanly even headless.</li>
+  <li><b>Lazy window.</b> The window (and every widget in it) is built on first click; after
+      that, the same instance is re-shown and focused instead of rebuilt.</li>
+  <li><b>Symmetric shutdown.</b> Everything <code>on_startup</code> registers (here: a menu
+      entry, plus the window if it was ever created) is explicitly torn down. Kit hot-reloads
+      extensions during development &mdash; a leaked menu item or callback means duplicates
       after every reload.</li>
 </ul>
 
@@ -347,234 +362,276 @@ most layouts:</p>
   <tr><th>Primitive</th><th>Role</th></tr>
   <tr><td><code>ui.Window</code></td><td>A dockable top-level window. Has a <code>.frame</code> you build content into; <code>.visible</code>, <code>.focus()</code>, <code>.destroy()</code>.</td></tr>
   <tr><td><code>ui.VStack</code> / <code>ui.HStack</code></td><td>Vertical / horizontal containers. <b>Layout is nesting + spacing + Spacer</b>, nothing else. <code>height=0</code> on a VStack means "shrink to content".</td></tr>
-  <tr><td><code>ui.CollapsableFrame</code>, <code>ui.ScrollingFrame</code></td><td>Expandable group panel; scroll container. The query tool's accordion is two CollapsableFrames whose expand events collapse each other.</td></tr>
+  <tr><td><code>ui.CollapsableFrame</code>, <code>ui.ScrollingFrame</code></td><td>Expandable group panel; scroll container. The example doesn't need them yet &mdash; reach for them when a form outgrows one screen.</td></tr>
 </table>
 
-<span class="file">the shape of every omni.ui build method</span>
-<pre><code><span class="kw">def</span> <span class="fn">_build_ui</span>(self):
-    <span class="kw">with</span> self.frame:                          <span class="comment"># window content root</span>
-        <span class="kw">with</span> ui.<span class="cls">ScrollingFrame</span>():
-            <span class="kw">with</span> ui.<span class="cls">VStack</span>(spacing=8, height=0):
-                ui.<span class="cls">Label</span>(<span class="str">"USD Scene Query Tool"</span>, name=<span class="str">"title"</span>)
-                ui.<span class="cls">Line</span>(height=2)
-                self._search_panel.build()    <span class="comment"># panels are plain classes with .build()</span>
-                self._results_panel.build()
-                self._status_label = ui.<span class="cls">Label</span>(<span class="str">"Ready"</span>, name=<span class="str">"status"</span>)</code></pre>
+<p>The example's whole window is a <code>VStack</code> of <code>HStack</code> rows
+(label + field + button), built in the constructor of a <code>ui.Window</code> subclass:</p>
+
+<span class="file">acme/geo_integration/ui/geo_window.py (abridged)</span>
+<pre><code><span class="kw">class</span> <span class="cls">GeoWindow</span>(ui.<span class="cls">Window</span>):
+    <span class="kw">def</span> <span class="fn">__init__</span>(self, title: str, **kwargs):
+        super().__init__(title, width=460, height=240, **kwargs)
+        self._model_path_model = ui.<span class="cls">SimpleStringModel</span>(<span class="str">""</span>)
+        self._margin_model = ui.<span class="cls">SimpleFloatModel</span>(5.0)
+        self.frame.set_style(WINDOW_STYLE)        <span class="comment"># style once, at the root (&sect;6.3)</span>
+        <span class="kw">with</span> self.frame:                          <span class="comment"># window content root</span>
+            self._build_ui()
+        self._refresh_tilesets()                  <span class="comment"># populate the combo immediately</span>
+
+    <span class="kw">def</span> <span class="fn">_build_ui</span>(self):
+        <span class="kw">with</span> ui.<span class="cls">VStack</span>(spacing=8, height=0):
+            <span class="kw">with</span> ui.<span class="cls">HStack</span>(height=24, spacing=5):
+                ui.<span class="cls">Label</span>(<span class="str">"Model Prim:"</span>, width=110, name=<span class="str">"label"</span>)
+                ui.<span class="cls">StringField</span>(model=self._model_path_model)
+                ui.<span class="cls">Button</span>(<span class="str">"Use Selection"</span>, width=100, clicked_fn=self._on_use_selection)
+
+            <span class="kw">with</span> ui.<span class="cls">HStack</span>(height=24, spacing=5):
+                ui.<span class="cls">Label</span>(<span class="str">"Tileset:"</span>, width=110, name=<span class="str">"label"</span>)
+                self._tileset_combo = ui.<span class="cls">ComboBox</span>(0)
+                ui.<span class="cls">Button</span>(<span class="str">"Refresh"</span>, width=100, clicked_fn=self._refresh_tilesets)
+
+            <span class="kw">with</span> ui.<span class="cls">HStack</span>(height=24, spacing=5):
+                ui.<span class="cls">Label</span>(<span class="str">"Margin (m):"</span>, width=110, name=<span class="str">"label"</span>)
+                ui.<span class="cls">FloatField</span>(model=self._margin_model, width=80)
+                ui.<span class="cls">Spacer</span>()
+
+            ui.<span class="cls">Button</span>(<span class="str">"Calculate &amp; Assign Boundary"</span>, height=32,
+                      name=<span class="str">"primary"</span>, clicked_fn=self._on_assign_boundary)
+            self._status_label = ui.<span class="cls">Label</span>(<span class="str">"Ready"</span>, name=<span class="str">"status"</span>, height=18)</code></pre>
 
 <h3>6.2 Widgets bind to models, not values</h3>
 <p>Input widgets don't hold their value &mdash; a <b>model object</b> does
 (<code>SimpleStringModel</code>, <code>SimpleBoolModel</code>, <code>SimpleFloatModel</code>&hellip;).
-You subscribe to the model, and read/write through it. This is the single most important
-omni.ui idiom:</p>
+You read and write through the model; the widget is just a view of it. This is the single most
+important omni.ui idiom. In the example, the button handler reads both fields through their
+models:</p>
 
-<span class="file">ui/widgets/name_filter_widget.py (the actual pattern in the example)</span>
-<pre><code><span class="kw">def</span> <span class="fn">build</span>(self):
-    <span class="kw">with</span> ui.<span class="cls">HStack</span>(height=24, spacing=5):
-        ui.<span class="cls">Label</span>(<span class="str">"Name:"</span>, width=100, name=<span class="str">"label"</span>)
+<pre><code>model_path = self._model_path_model.get_value_as_string().strip()
+margin = self._margin_model.get_value_as_float()
+...
+self._model_path_model.set_value(paths[0])   <span class="comment"># writing updates the StringField on screen</span></code></pre>
 
-        self._value_model = ui.<span class="cls">SimpleStringModel</span>(<span class="str">""</span>)          <span class="comment"># the value lives HERE</span>
-        self._text_field = ui.<span class="cls">StringField</span>(model=self._value_model)
-        self._value_model.add_value_changed_fn(self._on_changed) <span class="comment"># subscribe to the model</span>
+<p>Composite widgets expose a model <em>tree</em>. The example's tileset
+<code>ComboBox</code> is repopulated by editing its item children, and read by asking for the
+selected index:</p>
 
-        self._exact_model = ui.<span class="cls">SimpleBoolModel</span>(<span class="kw">True</span>)
-        ui.<span class="cls">CheckBox</span>(model=self._exact_model, width=18)
+<pre><code><span class="comment"># rebuild the dropdown items after a stage scan</span>
+items_model = self._tileset_combo.model
+<span class="kw">for</span> item <span class="kw">in</span> items_model.get_item_children():
+    items_model.remove_item(item)
+<span class="kw">for</span> path <span class="kw">in</span> self._tileset_paths:
+    items_model.append_child_item(<span class="kw">None</span>, ui.<span class="cls">SimpleStringModel</span>(path))
 
-<span class="kw">@property</span>
-<span class="kw">def</span> <span class="fn">value</span>(self) -&gt; str:                                       <span class="comment"># widgets expose typed properties,</span>
-    <span class="kw">return</span> self._value_model.get_value_as_string()           <span class="comment"># callers never touch ui internals</span></code></pre>
+<span class="comment"># read the current selection (an index into the same list)</span>
+index = self._tileset_combo.model.get_item_value_model().get_value_as_int()</code></pre>
 
 <h3>6.3 Styling &mdash; one dict, CSS-like selectors</h3>
 <p>Style is a nested dict applied once at the window root with
 <code>self.frame.set_style(WINDOW_STYLE)</code>. Selectors are
 <code>"Type::name"</code> (the <code>name=</code> you give a widget) and
 <code>":state"</code> pseudo-classes. Colors are <code>0xAABBGGRR</code> ints
-(<b>ARGB with channels reversed vs web hex</b> &mdash; a classic first-week trap).</p>
+(<b>ARGB with channels reversed vs web hex</b> &mdash; a classic first-week trap).
+The example's complete style dict:</p>
 
-<span class="file">ui/styles/style_constants.py (excerpt)</span>
+<span class="file">acme/geo_integration/ui/geo_window.py</span>
 <pre><code>WINDOW_STYLE = {
-    <span class="str">"Window"</span>:            {<span class="str">"background_color"</span>: 0xFF1F1F1F},
-    <span class="str">"Label::title"</span>:      {<span class="str">"font_size"</span>: 18, <span class="str">"color"</span>: 0xFFFFFFFF},   <span class="comment"># ui.Label(..., name="title")</span>
-    <span class="str">"Button::primary"</span>:   {<span class="str">"background_color"</span>: 0xFF3A7D44},
-    <span class="str">"Button::primary:hovered"</span>: {<span class="str">"background_color"</span>: 0xFF4A8D54},   <span class="comment"># pseudo-state</span>
-    <span class="str">"StringField:focused"</span>:     {<span class="str">"border_color"</span>:     0xFF3A7D44},
+    <span class="str">"Window"</span>:          {<span class="str">"background_color"</span>: 0xFF1F1F1F},
+    <span class="str">"Label::label"</span>:    {<span class="str">"font_size"</span>: 12, <span class="str">"color"</span>: 0xFFAAAAAA},  <span class="comment"># ui.Label(..., name="label")</span>
+    <span class="str">"Label::status"</span>:   {<span class="str">"font_size"</span>: 11, <span class="str">"color"</span>: 0xFFAAAAAA},
+    <span class="str">"Button::primary"</span>: {<span class="str">"background_color"</span>: 0xFF447D3A, <span class="str">"border_radius"</span>: 3},
+    <span class="str">"Button::primary:hovered"</span>: {<span class="str">"background_color"</span>: 0xFF548D4A},  <span class="comment"># pseudo-state</span>
+    <span class="str">"StringField"</span>:     {<span class="str">"background_color"</span>: 0xFF333333, <span class="str">"border_radius"</span>: 3},
+    <span class="str">"FloatField"</span>:      {<span class="str">"background_color"</span>: 0xFF333333, <span class="str">"border_radius"</span>: 3},
+    <span class="str">"ComboBox"</span>:        {<span class="str">"background_color"</span>: 0xFF333333, <span class="str">"border_radius"</span>: 3},
 }</code></pre>
 
-<p>Centralizing every color/spacing in <code>style_constants.py</code> (as the example does
-with its <code>COLORS</code> / <code>SPACING</code> dicts) is what keeps a 15-widget UI
-consistent. Copy that file as your starting point.</p>
+<p>Note <code>0xFF447D3A</code>: that's web green <code>#3A7D44</code> with the channels
+reversed. As the style dict grows, move it to its own <code>styles.py</code> with shared
+<code>COLORS</code> / <code>SPACING</code> constants &mdash; one source of truth is what keeps a
+15-widget UI consistent.</p>
 
-<h3>6.4 Composing: widgets &rarr; panels &rarr; window</h3>
-<p>The example splits UI into three grain sizes, each a plain Python class
-(only the window subclasses an omni.ui type):</p>
+<h3>6.4 One window class is fine &mdash; until it isn't</h3>
+<p>The example keeps the entire UI in one class because it fits on one screen: a handful of
+rows, four callbacks, a status label. That's the right call at this size. The growth path,
+when a tool gets bigger, is to split by grain: <b>widgets</b> (one input concern, owns its
+models, exposes <code>value</code> / <code>clear()</code>) &rarr; <b>panels</b> (a functional
+region composed of widgets, takes callbacks in its constructor) &rarr; the <b>window</b>
+(assembles panels, routes callbacks &mdash; zero business logic). Refactor when the window class
+stops fitting in your head, not before.</p>
+
+<!-- ================================================================ -->
+<h2 id="architecture"><span class="num">7.</span>Logic architecture &mdash; the UI / core split</h2>
+
+<p>The example draws exactly one architectural line, and it's the one worth being strict
+about from day one: <b>the core never imports omni</b>. Not <code>omni.ui</code>, not
+<code>omni.usd</code> &mdash; nothing. It works purely on <code>pxr</code> types and receives the
+stage as an argument.</p>
+
+<div class="flow">&#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472; ui/ &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;   omni.ui + omni.usd. Reads widgets, guards input,
+&#9474; geo_window.py            &#9474;   calls core, reports status. No USD authoring here.
+&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9516;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;
+              &#9660;  plain function calls; the stage is passed in
+&#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472; core/ &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;   pure pxr (Gf, Sdf, Usd, UsdGeom). Zero omni imports.
+&#9474; boundary.py              &#9474;   compute_footprint() &middot; find_tilesets() &middot; assign_boundary()
+&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9516;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;
+              &#9660;
+        &#9484;&#9472; pxr / USD &#9472;&#9488;</div>
+
+<p>What that buys, concretely:</p>
 <ul>
-  <li><b>Widget</b> (<code>ui/widgets/</code>) &mdash; one input concern: <code>NameFilterWidget</code>,
-      <code>ObjectTypeWidget</code>, <code>CollapsibleGroup</code>. Owns its models; exposes
-      <code>value</code>, <code>clear()</code>, <code>set_enabled()</code>.</li>
-  <li><b>Panel</b> (<code>ui/panels/</code>) &mdash; a functional region composed of widgets:
-      <code>SearchCriteriaPanel</code>, <code>QueryStringPanel</code>, <code>ResultsPanel</code>.
-      Takes callbacks in its constructor (<code>on_search=&hellip;</code>, <code>on_clear=&hellip;</code>).</li>
-  <li><b>Window</b> (<code>ui/query_tool_window.py</code>) &mdash; extends <code>ui.Window</code>;
-      assembles panels, routes their callbacks to the viewmodel, and pushes viewmodel
-      callbacks back into panels. <em>It contains zero business logic.</em></li>
+  <li><b>Testability.</b> <code>boundary.py</code> runs under plain pytest with just the
+      <code>pxr</code> Python module and an in-memory stage
+      (<code>Usd.Stage.CreateInMemory()</code>) &mdash; no Kit process, no GPU, CI-friendly.
+      Its docstring states this as a design goal.</li>
+  <li><b>One Kit chokepoint.</b> Only the UI layer calls
+      <code>omni.usd.get_context()</code>. Core functions take <code>stage</code> as a
+      parameter &mdash; which is also what makes them reusable from a headless script.</li>
+  <li><b>A typed contract between layers.</b> The two sides exchange a tiny dataclass,
+      not widget state:</li>
 </ul>
 
-<!-- ================================================================ -->
-<h2 id="architecture"><span class="num">7.</span>Logic architecture &mdash; layered MVVM</h2>
+<span class="file">acme/geo_integration/core/boundary.py</span>
+<pre><code><span class="kw">from</span> dataclasses <span class="kw">import</span> dataclass
+<span class="kw">from</span> pxr <span class="kw">import</span> Gf, Sdf, Usd, UsdGeom      <span class="comment"># the ONLY imports. No omni.</span>
 
-<p>The dependency rule: <b>arrows point one way</b>. UI knows the viewmodel; the viewmodel knows
-core + services; core knows only models. Nothing below the UI imports <code>omni.ui</code>.</p>
+<span class="kw">@dataclass</span>
+<span class="kw">class</span> <span class="cls">Footprint</span>:
+    <span class="str">"""Ground footprint polygon in stage world XY (Z-up stage), CCW order."""</span>
+    corners: <span class="cls">List</span>[Gf.<span class="cls">Vec2d</span>]
 
-<div class="flow">&#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472; ui/ &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;   omni.ui only. Dumb. Callbacks in, display out.
-&#9474; window &rarr; panels &rarr; widgets      &#9474;
-&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9516;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;
-                &#9660;
-&#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472; viewmodel/ &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;   State + orchestration. No omni.ui imports.
-&#9474; SearchViewModel  (orchestrator)&#9474;   FilterState / ResultsViewModel / UIStateManager
-&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9516;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9516;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;   notify the UI through registered callbacks.
-       &#9660;                  &#9660;
-&#9484;&#9472;&#9472;&#9472;&#9472; core/ &#9472;&#9472;&#9472;&#9472;&#9472;&#9488;  &#9484;&#9472; services/ &#9472;&#9472;&#9488;   core  = pure-ish domain logic (parser, engine,
-&#9474; query_engine   &#9474;  &#9474; stage_service&#9474;           builder, matchers, highlight)
-&#9474; query_parser   &#9474;  &#9474; event_service&#9474;   services = thin adapters over Kit APIs
-&#9474; stage_collector&#9474;  &#9474; clipboard    &#9474;           (omni.usd context, event stream, clipboard)
-&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9516;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;  &#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9516;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;
-       &#9660;                   &#9660;
-&#9484;&#9472;&#9472;&#9472;&#9472; models/ &#9472;&#9472;&#9472;&#9488;   &#9484;&#9472; Kit / pxr &#9472;&#9488;   models = dataclasses only: FilterCriteria,
-&#9474; pure dataclasses&#9474;  &#9474; omni.*, Usd &#9474;           SearchResult(Set), QueryNode tree
-&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;   &#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</div>
+<span class="kw">def</span> <span class="fn">compute_footprint</span>(stage: Usd.<span class="cls">Stage</span>, prim_path: str, margin: float = 0.0) -&gt; <span class="cls">Footprint</span>: ...
+<span class="kw">def</span> <span class="fn">find_tilesets</span>(stage: Usd.<span class="cls">Stage</span>) -&gt; <span class="cls">List</span>[str]: ...
+<span class="kw">def</span> <span class="fn">assign_boundary</span>(stage: Usd.<span class="cls">Stage</span>, tileset_path: str, footprint: <span class="cls">Footprint</span>) -&gt; str: ...</code></pre>
 
-<h3>Why each layer exists</h3>
-<table>
-  <tr><th>Layer</th><th>Reason it's separate</th><th>Example</th></tr>
-  <tr><td><code>models/</code></td><td>Searchable state is data, not behavior. Dataclasses can be built and asserted in tests with zero setup.</td><td><code>FilterCriteria</code>, <code>SearchResultSet</code>, <code>QueryNode</code>/<code>ConditionNode</code>/<code>BinaryOpNode</code></td></tr>
-  <tr><td><code>core/</code></td><td>The actual algorithms. Depends on <code>pxr.Usd</code> but not on the UI, so it's unit-testable on an in-memory stage.</td><td><code>QueryEngine</code> walks prims and evaluates the AND/OR tree with short-circuiting; <code>QueryParser</code> turns a string into that tree</td></tr>
-  <tr><td><code>services/</code></td><td>Quarantines Kit globals. Only services call <code>omni.usd.get_context()</code> &mdash; everything above receives a <code>Usd.Stage</code> as an argument.</td><td><code>StageService</code> (stage access + event subscription), <code>ClipboardService</code>, <code>EventService</code> (internal pub/sub)</td></tr>
-  <tr><td><code>viewmodel/</code></td><td>One place where "what the user did" becomes "what the system does". Holds state the UI renders; UI stays stateless.</td><td><code>SearchViewModel.execute_basic_search()</code>: guard &rarr; loading flag &rarr; engine &rarr; results &rarr; highlights &rarr; event &rarr; clear loading</td></tr>
-</table>
+<h3>The supporting trick: optional omni imports</h3>
+<p>Anything that <em>does</em> touch Kit, but isn't essential, is imported defensively &mdash;
+so the package stays importable in a plain Python environment. The example does this twice:</p>
 
-<h3>The testability trick: optional omni imports</h3>
-<p>Every file that touches Kit wraps the import &mdash; so <code>core/</code> and
-<code>services/</code> degrade gracefully and the test suite can run outside Kit:</p>
-
-<span class="file">services/stage_service.py &middot; core/highlight_manager.py (same pattern in both)</span>
+<span class="file">acme/geo_integration/ui/geo_window.py</span>
 <pre><code><span class="kw">try</span>:
-    <span class="kw">import</span> omni.usd
-    <span class="kw">import</span> omni.kit.commands
-    HAS_OMNI = <span class="kw">True</span>
+    <span class="kw">import</span> omni.kit.notification_manager <span class="kw">as</span> nm
+    HAS_NOTIFICATIONS = <span class="kw">True</span>
 <span class="kw">except</span> <span class="cls">ImportError</span>:
-    HAS_OMNI = <span class="kw">False</span>          <span class="comment"># pure pytest run: methods become safe no-ops</span></code></pre>
+    HAS_NOTIFICATIONS = <span class="kw">False</span>     <span class="comment"># toasts become safe no-ops</span></code></pre>
 
-<h3>Callback plumbing (how data flows without coupling)</h3>
-<p>No signals framework &mdash; just <code>add_*_callback(fn)</code> lists, fired in plain loops.
-The window registers with the viewmodel on <code>set_viewmodel()</code>:</p>
+<span class="file">acme/geo_integration/__init__.py</span>
+<pre><code><span class="kw">try</span>:
+    <span class="kw">from</span> .extension <span class="kw">import</span> <span class="cls">GeoIntegrationExtension</span>
+    __all__ = [<span class="str">"GeoIntegrationExtension"</span>]
+<span class="kw">except</span> <span class="cls">ImportError</span>:
+    <span class="comment"># Outside Kit (plain pxr environment): core stays importable for tests.</span>
+    __all__ = []</code></pre>
 
-<span class="file">ui/query_tool_window.py</span>
-<pre><code><span class="kw">def</span> <span class="fn">_connect_viewmodel</span>(self):
-    self._viewmodel.ui_state.add_expansion_callback(self._on_expansion_changed)
-    self._viewmodel.ui_state.add_loading_callback(self._on_loading_changed)
-    self._viewmodel.results.add_results_callback(self._on_results_changed)</code></pre>
-
-<p>&hellip;and symmetrically <b>removes</b> them in <code>destroy()</code>. Forgetting the removal is
-the #1 source of "callback fired twice after reload" bugs.</p>
+<p>For a bigger tool, the next layers to add are a <b>viewmodel</b> (state + orchestration
+between UI and core, notifying the UI through registered callbacks) and <b>services</b>
+(thin adapters that quarantine Kit globals like the stage context and event streams). The
+dependency rule stays the same: arrows point one way, and nothing below the UI imports
+<code>omni.ui</code>.</p>
 
 <!-- ================================================================ -->
-<h2 id="kit-services"><span class="num">8.</span>Talking to Kit &mdash; stage, events, viewport, commands</h2>
+<h2 id="kit-services"><span class="num">8.</span>Talking to Kit &mdash; stage, selection, events, notifications</h2>
 
-<p>Five integration points cover ~90% of what a Composer tool needs.</p>
+<p>Five integration points cover ~90% of what a Composer tool needs. The first four appear
+in the example; the fifth is the pattern you'll want next.</p>
 
 <h3>8.1 Get the stage</h3>
 <pre><code><span class="kw">import</span> omni.usd
 stage = omni.usd.get_context().get_stage()      <span class="comment"># pxr.Usd.Stage or None &mdash; ALWAYS check None</span></code></pre>
+<p>Every action in the example starts with this guard &mdash; Composer can run with no stage
+open, and <code>get_stage()</code> returns <code>None</code> then.</p>
 
-<h3>8.2 React to stage events (file opened, assets loaded)</h3>
-<span class="file">services/stage_service.py</span>
+<h3>8.2 Read the viewport selection</h3>
+<span class="file">ui/geo_window.py &mdash; the "Use Selection" button</span>
+<pre><code><span class="kw">def</span> <span class="fn">_on_use_selection</span>(self):
+    paths = omni.usd.get_context().get_selection().get_selected_prim_paths()
+    <span class="kw">if</span> paths:
+        self._model_path_model.set_value(paths[0])   <span class="comment"># selection &rarr; model &rarr; StringField updates</span>
+    <span class="kw">else</span>:
+        self._set_status(<span class="str">"Nothing selected in the viewport"</span>)</code></pre>
+<p>A "Use Selection" button next to a path field is a tiny touch that makes a stage tool feel
+native &mdash; nobody wants to type <code>/World/Factory</code> by hand.</p>
+
+<h3>8.3 Toast notifications</h3>
+<span class="file">ui/geo_window.py</span>
+<pre><code><span class="kw">def</span> <span class="fn">_notify</span>(self, message: str, error: bool = <span class="kw">False</span>):
+    <span class="kw">if</span> <span class="kw">not</span> HAS_NOTIFICATIONS:      <span class="comment"># the optional import from &sect;7</span>
+        <span class="kw">return</span>
+    status = nm.<span class="cls">NotificationStatus</span>.WARNING <span class="kw">if</span> error <span class="kw">else</span> nm.<span class="cls">NotificationStatus</span>.INFO
+    nm.post_notification(message, status=status)</code></pre>
+<p>The example reports every outcome twice: a persistent in-window status label
+(<code>self._status_label.text = message</code>) plus a transient toast. Cheap, and it means
+the user never wonders whether the click did anything.</p>
+
+<h3>8.4 Menu bar entry</h3>
+<pre><code><span class="kw">import</span> omni.kit.menu.utils <span class="kw">as</span> menu_utils
+entry = menu_utils.add_menu_items(
+    [menu_utils.<span class="cls">MenuItemDescription</span>(name=<span class="str">"Geo Integration"</span>,
+                                    onclick_fn=show_window,
+                                    appear_after=<span class="str">"Window"</span>)],   <span class="comment"># position within the menu</span>
+    <span class="str">"Window"</span>)                                  <span class="comment"># parent menu</span>
+menu_utils.remove_menu_items(entry, <span class="str">"Window"</span>)  <span class="comment"># in on_shutdown</span></code></pre>
+
+<h3>8.5 React to stage events (the pattern you'll want next)</h3>
+<p>The example rescans tilesets on a manual Refresh click. The upgrade is to subscribe to
+stage events and refresh automatically when a file opens or finishes loading:</p>
 <pre><code>self._sub = omni.usd.get_context().get_stage_event_stream() \\
-    .create_subscription_to_pop(self._on_stage_event, name=<span class="str">"MyTool.StageService"</span>)
+    .create_subscription_to_pop(self._on_stage_event, name=<span class="str">"MyTool.StageWatch"</span>)
 
 <span class="kw">def</span> <span class="fn">_on_stage_event</span>(self, event):
-    <span class="kw">if</span> event.type == int(omni.usd.<span class="cls">StageEventType</span>.OPENED):        <span class="comment"># new file &rarr; reload dropdowns</span>
+    <span class="kw">if</span> event.type == int(omni.usd.<span class="cls">StageEventType</span>.OPENED):        <span class="comment"># new file &rarr; rescan</span>
         ...
     <span class="kw">elif</span> event.type == int(omni.usd.<span class="cls">StageEventType</span>.ASSETS_LOADED): <span class="comment"># payloads done &rarr; safe to scan</span>
         ...
 
-<span class="comment"># Lifetime = subscription object. To unsubscribe: self._sub = None.</span></code></pre>
+<span class="comment"># Lifetime = the subscription object. To unsubscribe: self._sub = None.</span></code></pre>
 
-<h3>8.3 Select / highlight prims</h3>
-<span class="file">core/highlight_manager.py</span>
-<pre><code>ctx = omni.usd.get_context()
-ctx.get_selection().set_selected_prim_paths(prim_paths, <span class="kw">False</span>)  <span class="comment"># highlight = selection</span>
-ctx.get_selection().clear_selected_prim_paths()</code></pre>
 <div class="box warn">
-<b>Honest caveat:</b> using <em>selection</em> as "highlighting" is a
-shortcut &mdash; it stomps whatever the user had selected. The example's code comments this
-explicitly. A production alternative is a session-layer override (e.g. display color / outline)
-that doesn't touch selection.
+<b>Undo caveat.</b> The example's core authors USD directly through <code>pxr</code>
+(<code>stage.DefinePrim</code>, <code>CreateRelationship</code>, attribute sets) &mdash; which means
+<b>Ctrl+Z does not undo it</b>. Fine for a v1 utility. For production polish, route stage
+mutations through <code>omni.kit.commands</code> / <code>omni.kit.undo</code> so your tool's
+edits behave like every other edit in Composer.
 </div>
-
-<h3>8.4 Move the camera (undoable commands)</h3>
-<span class="file">core/highlight_manager.py</span>
-<pre><code><span class="kw">import</span> omni.kit.commands
-<span class="kw">import</span> omni.kit.viewport.utility <span class="kw">as</span> vp
-
-camera_path = vp.get_active_viewport().camera_path
-omni.kit.commands.execute(<span class="str">"FramePrimsCommand"</span>,
-                          prim_to_move=camera_path,
-                          prims_to_frame=[prim_path])</code></pre>
-<p>Anything that mutates the stage or camera should go through
-<code>omni.kit.commands.execute(...)</code> &mdash; that's what makes it undoable (Ctrl+Z) and
-consistent with the rest of Composer.</p>
-
-<h3>8.5 Menu bar entry</h3>
-<pre><code><span class="kw">import</span> omni.kit.menu.utils <span class="kw">as</span> menu_utils
-entry = menu_utils.add_menu_items(
-    [menu_utils.<span class="cls">MenuItemDescription</span>(name=<span class="str">"My Tool"</span>, onclick_fn=show_window)],
-    <span class="str">"Window"</span>)                                  <span class="comment"># parent menu</span>
-menu_utils.remove_menu_items(entry, <span class="str">"Window"</span>)  <span class="comment"># in on_shutdown</span></code></pre>
 
 <!-- ================================================================ -->
 <h2 id="wiring"><span class="num">9.</span>Wiring it into the app &mdash; build &amp; registration</h2>
 
-<p>This is the part no tutorial covers. Four pieces, in dependency order, for a Kit app
+<p>This is the part no tutorial covers. Three pieces, in dependency order, for a Kit app
 built from NVIDIA's app template (the <code>repo.bat</code> / premake toolchain).</p>
 
-<h3>9.1 The extension's own premake5.lua (10 lines, copy verbatim)</h3>
-<span class="file">acme.usd_query_tool/premake5.lua &mdash; the COMPLETE file</span>
+<h3>9.1 The extension's own premake5.lua (the COMPLETE file)</h3>
+<span class="file">acme.geo_integration/premake5.lua</span>
 <pre><code><span class="comment">-- Use folder name to build extension name and tag.</span>
 <span class="kw">local</span> ext = get_current_extension_info()
 project_ext(ext)
 
 <span class="comment">-- Link only these folders into the extension target directory</span>
 repo_build.prebuild_link {
-    { <span class="str">"data"</span>,  ext.target_dir..<span class="str">"/data"</span> },
-    { <span class="str">"docs"</span>,  ext.target_dir..<span class="str">"/docs"</span> },
-    { <span class="str">"acme"</span>,  ext.target_dir..<span class="str">"/acme"</span> },
+    { <span class="str">"acme"</span>, ext.target_dir..<span class="str">"/acme"</span> },
+}
+
+repo_build.prebuild_copy {
+    { <span class="str">"README.md"</span>, ext.target_dir..<span class="str">"/README.md"</span> },
 }</code></pre>
-<p>No compilation. It <b>symlinks</b> your source folders into
-<code>_build/&lt;platform&gt;/release/exts/acme.usd_query_tool/</code>. Because they're links,
+<p>No compilation. It <b>symlinks</b> your source package into
+<code>_build/&lt;platform&gt;/release/exts/acme.geo_integration/</code>. Because it's a link,
 edits to source are live &mdash; restart the app (or toggle the extension in the Extension Manager
 to hot-reload) and you're running new code.</p>
 
-<h3>9.2 Repo placement: submodule + link</h3>
-<p>The extension can be its <b>own git repo</b>, mounted as a submodule, then
-linked (an NTFS junction on Windows) into the folder the Kit build actually scans:</p>
-<pre><code><span class="comment"># .gitmodules</span>
-[submodule <span class="str">"externals/acme.usd_query_tool"</span>]
-    path = externals/acme.usd_query_tool
-    url  = https://example.com/acme.usd_query_tool.git
-
-<span class="comment"># link (source/extensions/ is what premake's kit.setup_all() scans)</span>
-source/extensions/acme.usd_query_tool  &#9472;&#9472;&#9654;  externals/acme.usd_query_tool</code></pre>
-<div class="box info">
-<b>Simpler option for a new tool:</b> skip the submodule entirely and create the folder
-directly under <code>source/extensions/acme.my_tool/</code>. The submodule+link dance only
-buys you a separately-versioned repo &mdash; useful when one extension is shared between
-several Kit apps. Start simple; extract to a submodule later if needed.
-</div>
+<h3>9.2 Repo placement</h3>
+<p>Simplest: create the folder directly under <code>source/extensions/acme.geo_integration/</code>
+&mdash; that's the directory the Kit build (premake's <code>kit.setup_all()</code>) scans. If the
+extension needs its own life (separate versioning, shared between several Kit apps), make it
+its own git repo under <code>externals/</code>, mounted as a submodule, and link it into
+<code>source/extensions/</code> (an NTFS junction on Windows, a symlink elsewhere). Start
+simple; extract to a submodule later if needed.</p>
 
 <h3>9.3 Register in the app manifest</h3>
 <span class="file">source/apps/my_app.kit</span>
 <pre><code>############ your extensions
-<span class="str">"acme.setup_ext"</span>      = { order = 1000 }   <span class="comment"># order controls startup sequence</span>
-<span class="str">"acme.usd_query_tool"</span> = {}                 <span class="comment"># &larr; one line. That's the registration.</span></code></pre>
+<span class="str">"acme.setup_ext"</span>        = { order = 1000 }   <span class="comment"># order controls startup sequence</span>
+<span class="str">"acme.geo_integration"</span>  = {}                 <span class="comment"># &larr; one line. That's the registration.</span></code></pre>
 
 <h3>9.4 Build &amp; run</h3>
 <pre><code>cd &lt;your-kit-app-repo&gt;
@@ -585,17 +642,20 @@ several Kit apps. Start simple; extract to a submodule later if needed.
 <!-- ================================================================ -->
 <h2 id="testing"><span class="num">10.</span>Testing</h2>
 
-<p>Two tiers, both present in the example:</p>
+<p>The architecture from &sect;7 is what makes testing cheap. Two tiers:</p>
 <ul>
-  <li><b>Pure logic tests</b> (<code>tests/test_query_parser.py</code>,
-      <code>test_query_engine.py</code>, <code>test_filter_matchers.py</code>&hellip;) &mdash; run against
-      in-memory stages (<code>Usd.Stage.CreateInMemory()</code>). The <code>HAS_OMNI</code>
-      guard (&sect;7) is what makes these runnable under plain pytest.</li>
-  <li><b>In-Kit tests</b> &mdash; the <code>[[test]]</code> block in <code>extension.toml</code> declares
-      <code>omni.kit.test</code> + <code>omni.kit.ui_test</code> and headless flags
-      (<code>--no-window</code>). Run via <code>.\\repo.bat test</code>; Kit boots a minimal app,
-      loads your extension, and executes tests inside it &mdash; this is where you can drive actual
-      omni.ui widgets.</li>
+  <li><b>Pure logic tests, outside Kit.</b> Because <code>core/boundary.py</code> imports only
+      <code>pxr</code>, it runs under plain pytest against in-memory stages
+      (<code>Usd.Stage.CreateInMemory()</code>): build a prim with a known bounding box, call
+      <code>compute_footprint()</code>, assert on the hull corners; call
+      <code>assign_boundary()</code> twice and assert the polygon is updated in place rather
+      than duplicated. The <code>ImportError</code> guard in <code>__init__.py</code> is what
+      keeps the package importable in that environment.</li>
+  <li><b>In-Kit tests.</b> The <code>[[test]]</code> block in <code>extension.toml</code> declares
+      <code>omni.kit.test</code> and headless flags (<code>--no-window</code>,
+      <code>--/app/fastShutdown=1</code>). Run via <code>.\\repo.bat test</code>; Kit boots a
+      minimal app, loads your extension, and executes tests inside it &mdash; this is where you
+      verify startup/shutdown and (with <code>omni.kit.ui_test</code>) drive actual widgets.</li>
 </ul>
 
 <!-- ================================================================ -->
@@ -604,48 +664,49 @@ several Kit apps. Start simple; extract to a submodule later if needed.
 <h3>Build order for a new extension</h3>
 <ol>
   <li>Create <code>source/extensions/acme.my_tool/</code> with <code>config/extension.toml</code>,
-      <code>premake5.lua</code> (copy &sect;9.1), <code>data/icon.svg</code>, <code>docs/README.md</code>,
+      <code>premake5.lua</code> (copy &sect;9.1), <code>README.md</code>,
       and the package skeleton <code>acme/my_tool/__init__.py</code> + <code>extension.py</code>.</li>
   <li>Write the minimal <code>IExt</code>: <code>on_startup</code> adds a menu item that opens a
       window containing one <code>ui.Label("hello")</code>; <code>on_shutdown</code> removes it.
       <b>Get this running before writing any logic.</b></li>
   <li>Add <code>"acme.my_tool" = {}</code> to your <code>.kit</code> file; build; launch; verify
       the menu entry appears.</li>
-  <li>Grow inward, layer by layer: <code>models/</code> &rarr;
-      <code>core/</code> (+ pytest on in-memory stages) &rarr; <code>services/</code> &rarr;
-      <code>viewmodel/</code> &rarr; <code>ui/</code> widgets &rarr; panels &rarr; window wiring.</li>
-  <li>Style pass last: one <code>style_constants.py</code>, applied at the window root.</li>
+  <li>Grow inward: <code>core/</code> functions that take a stage and return data
+      (+ pytest outside Kit) &rarr; the window's rows and models &rarr; callbacks that glue them.
+      Keep USD authoring out of the window class.</li>
+  <li>Style pass last: one style dict at the window root; extract to a constants module
+      as it grows.</li>
 </ol>
 
 <h3>Gotchas (each one cost somebody an afternoon)</h3>
 <table>
   <tr><th>Gotcha</th><th>Detail</th></tr>
-  <tr><td>Folder name = extension id = python path</td><td><code>acme.my_tool</code> must contain <code>acme/my_tool/</code> and <code>[[python.module]] name = "acme.my_tool"</code>. Any mismatch &rarr; silent load failure (check the console log).</td></tr>
-  <tr><td>Colors are 0xAABBGGRR</td><td>omni.ui style colors put <b>blue before red</b>. Web <code>#3A7D44</code> (green) becomes <code>0xFF447D3A</code>.</td></tr>
-  <tr><td>Stage can be <code>None</code></td><td>Composer can run with no stage open. Every entry path in the example guards <code>has_stage()</code> first.</td></tr>
+  <tr><td>Folder name = extension id = python path</td><td><code>acme.geo_integration</code> must contain <code>acme/geo_integration/</code> and <code>[[python.module]] name = "acme.geo_integration"</code>. Any mismatch &rarr; silent load failure (check the console log).</td></tr>
+  <tr><td>Colors are 0xAABBGGRR</td><td>omni.ui style colors put <b>blue before red</b>. Web <code>#3A7D44</code> (green) becomes <code>0xFF447D3A</code> &mdash; exactly the value in the example's style dict.</td></tr>
+  <tr><td>Stage can be <code>None</code></td><td>Composer can run with no stage open. Every action in the example guards the stage (and shows a status message) before doing anything.</td></tr>
+  <tr><td>Validate stage conventions early</td><td>The footprint math assumes a Z-up stage; <code>compute_footprint()</code> checks <code>UsdGeom.GetStageUpAxis()</code> and raises a clear <code>ValueError</code> instead of silently producing a sideways polygon.</td></tr>
+  <tr><td>Direct USD edits aren't undoable</td><td>Authoring via raw <code>pxr</code> bypasses Composer's undo stack (&sect;8). Wrap mutations in <code>omni.kit.commands</code> for Ctrl+Z support.</td></tr>
   <tr><td>Subscriptions live as objects</td><td><code>create_subscription_to_pop()</code> returns a handle; if you don't store it, it's garbage-collected and your events silently stop. To unsubscribe, drop the reference.</td></tr>
   <tr><td>Hot reload doubles leaks</td><td>Anything not undone in <code>on_shutdown()</code> (menus, callbacks, subscriptions) duplicates on every extension reload during dev.</td></tr>
-  <tr><td>Don't iterate prototypes</td><td>When walking the stage, skip instancing prototypes (the example filters with <code>include_prototypes=False</code>) or you'll match prims a user can't select.</td></tr>
-  <tr><td>Heavy work blocks the render loop</td><td>Kit UI and Python run on the main thread. The example keeps a progress callback (<code>set_progress_callback</code>) and a loading flag; for big stages, chunk work or use <code>asyncio</code> with <code>omni.kit.app.get_app().next_update_async()</code>.</td></tr>
-  <tr><td>Selection-as-highlight stomps user selection</td><td>&sect;8.3 &mdash; fine for a v1, replace with a non-selection highlight for production.</td></tr>
+  <tr><td>Heavy work blocks the render loop</td><td>Kit UI and Python run on the main thread. A full-stage traversal on a huge scene freezes the viewport; chunk work or use <code>asyncio</code> with <code>omni.kit.app.get_app().next_update_async()</code>.</td></tr>
 </table>
 
 <h3>Where to look in the example when stuck</h3>
 <table>
   <tr><th>"How do I&hellip;"</th><th>Read this file</th></tr>
   <tr><td>structure startup/shutdown, menus, lazy windows</td><td><code>extension.py</code></td></tr>
-  <tr><td>build a form row (label + field + checkbox)</td><td><code>ui/widgets/name_filter_widget.py</code></td></tr>
-  <tr><td>build an accordion of collapsible panels</td><td><code>ui/query_tool_window.py</code> (+ <code>ui/widgets/collapsible_group.py</code>)</td></tr>
-  <tr><td>theme everything consistently</td><td><code>ui/styles/style_constants.py</code></td></tr>
-  <tr><td>react to file-open / assets-loaded</td><td><code>services/stage_service.py</code></td></tr>
-  <tr><td>walk the stage and filter prims</td><td><code>core/query_engine.py</code>, <code>core/stage_collector.py</code>, <code>utils/usd_helpers.py</code></td></tr>
-  <tr><td>select prims and frame the camera</td><td><code>core/highlight_manager.py</code></td></tr>
-  <tr><td>keep UI and logic decoupled</td><td><code>viewmodel/search_viewmodel.py</code></td></tr>
+  <tr><td>build form rows, bind models, drive a ComboBox</td><td><code>ui/geo_window.py</code></td></tr>
+  <tr><td>theme everything consistently</td><td><code>ui/geo_window.py</code> (<code>WINDOW_STYLE</code>)</td></tr>
+  <tr><td>read the viewport selection</td><td><code>ui/geo_window.py</code> (<code>_on_use_selection</code>)</td></tr>
+  <tr><td>show toasts without a hard dependency</td><td><code>ui/geo_window.py</code> (<code>_notify</code> + import guard)</td></tr>
+  <tr><td>compute bounds / hulls from prims</td><td><code>core/boundary.py</code> (<code>compute_footprint</code>)</td></tr>
+  <tr><td>create prims, apply schemas, author relationships</td><td><code>core/boundary.py</code> (<code>assign_boundary</code> internals)</td></tr>
+  <tr><td>keep logic testable outside Kit</td><td><code>core/boundary.py</code> (pure pxr) + <code>__init__.py</code> (import guard)</td></tr>
 </table>
 
 <footer>
   <span class="tag">graphics &middot; usd &middot; omniverse &middot; kit</span><br>
-  Distilled from building a real stage-query extension for a USD Composer&ndash;based Kit app.
+  Distilled from building a real geo-integration extension for a USD Composer&ndash;based Kit app.
   Extension and app names are genericized.
 </footer>
 
