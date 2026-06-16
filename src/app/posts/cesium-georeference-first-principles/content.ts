@@ -143,7 +143,8 @@ export const html = `
     <li><a href="#why">Why &ldquo;relative&rdquo; breaks on Earth</a></li>
     <li><a href="#georef">Georeference: where is my origin on Earth?</a></li>
     <li><a href="#anchor">GlobeAnchor: absolute identity for one object</a></li>
-    <li><a href="#recompute">Why the GPU still wants local numbers</a></li>
+    <li><a href="#formula">From anchor to a transform: the actual formula</a></li>
+    <li><a href="#override">The subtlety: the prim already has a transform</a></li>
     <li><a href="#binding">GeoreferenceBinding: which Earth frame?</a></li>
     <li><a href="#stack">The whole stack on one page</a></li>
     <li><a href="#example">Worked example: a nationwide digital twin</a></li>
@@ -249,12 +250,10 @@ Site.earth = HoGuom + 100 m east</pre>
   <p>Without an anchor, an object is defined by its <em>relationship</em> to a parent. With an anchor, it&rsquo;s defined by its <em>position on the planet</em>. You reach for one the moment an object has a real-world identity that must survive its parent moving, being re-parented, or the whole site shifting &mdash; a sensor at a fixed survey point, a vehicle reporting its own GPS, an asset that belongs to Earth rather than to your hierarchy.</p>
 </div>
 
-<!-- ───────────────────────── 5. RECOMPUTE ───────────────────────── -->
-<h2 id="recompute"><span class="step">5</span>Why the GPU still wants local numbers</h2>
+<!-- ───────────────────────── 5. FORMULA ───────────────────────── -->
+<h2 id="formula"><span class="step">5</span>From anchor to a transform: the actual formula</h2>
 
-<p>Here&rsquo;s the twist that confuses people. You just said an anchored object is defined by GPS. But <strong>the GPU does not render GPS.</strong> It renders the only thing it has ever rendered: <code>parent &middot; local</code> transforms, small floats, exactly as in Section&nbsp;1.</p>
-
-<p>So an anchor can&rsquo;t be the thing fed to the renderer. It&rsquo;s the <em>truth</em>; the renderer needs a <em>local matrix</em>. Cesium&rsquo;s job is to convert one into the other, continuously:</p>
+<p>Here&rsquo;s the twist that confuses people. An anchored object is defined by GPS &mdash; but <strong>the GPU does not render GPS.</strong> It renders the only thing it has ever rendered: <code>parent &middot; local</code> transforms, small floats, exactly as in Section&nbsp;1. So an anchor can&rsquo;t be fed to the renderer directly. It&rsquo;s the <em>truth</em>; the renderer needs a <em>local matrix</em>. Cesium converts one into the other:</p>
 
 <div class="figure">
   <svg class="diagram" viewBox="0 0 760 200" role="img" aria-label="Anchor is truth, local matrix is what the GPU renders">
@@ -273,13 +272,94 @@ Site.earth = HoGuom + 100 m east</pre>
     <text x="320" y="88" fill="#2563eb" font-family="SF Mono,monospace" font-size="12">Cesium converts</text>
     <text x="318" y="124" fill="#6b7785" font-family="SF Mono,monospace" font-size="11">anchor &rarr; parent&middot;local</text>
   </svg>
-  <p class="figure-caption">The anchor is the source of truth; the local transform is a derived, disposable render artifact. Cesium recomputes the local matrix so the GPU keeps doing what it&rsquo;s good at &mdash; near-origin float math.</p>
+  <p class="figure-caption">The anchor is the source of truth; the local transform is a derived render artifact. Let&rsquo;s open up that arrow &mdash; the formula is exactly what makes the next section click.</p>
 </div>
 
-<p>This is why you keep hearing &ldquo;Cesium recomputes local transforms.&rdquo; It&rsquo;s not bureaucracy. The GPS is what you <em>mean</em>; the local matrix is what the hardware can <em>draw</em>. Cesium holds the first and regenerates the second on demand.</p>
+<p>The anchor&rsquo;s three numbers become the prim&rsquo;s <code>xformOp:translate</code> in <strong>two chained steps</strong>:</p>
+
+<pre>xformOp:translate = cartographicToCartesian(lat, lon, h) &middot; ecefToUsdTransform
+                    &#9492;&#9472;&#9472; depends only on the ANCHOR &#9472;&#9472;&#9496;  &#9492;&#9472; from the GEOREFERENCE (origin) &#9472;&#9496;</pre>
+
+<h3>Step 1 &mdash; Geographic &rarr; ECEF (WGS84 constants only)</h3>
+
+<p>First, turn lat/lon/height into an Earth-Centered, Earth-Fixed XYZ. This step touches <strong>nothing about your stage</strong> &mdash; only the fixed constants of the WGS84 ellipsoid:</p>
+
+<pre>&phi; = lat,  &lambda; = lon,  h = height
+N = a / &radic;(1 &minus; e&sup2;&middot;sin&sup2;&phi;)          a = 6378137 m,  e&sup2; = 0.00669438
+X = (N + h)&middot;cos&phi;&middot;cos&lambda;
+Y = (N + h)&middot;cos&phi;&middot;sin&lambda;
+Z = (N&middot;(1 &minus; e&sup2;) + h)&middot;sin&phi;
+P_ecef = (X, Y, Z)</pre>
+
+<p>This is a <strong>pure function of the anchor</strong>. Same lat/lon/h &rarr; same ECEF, on any stage, forever. (In Cesium Native this is <code>cartographicToCartesian</code>; it&rsquo;s the same &ldquo;geodetic &rarr; ECEF&rdquo; conversion you&rsquo;ll find in any geodesy library.)</p>
+
+<h3>Step 2 &mdash; ECEF &rarr; Stage (through the georeference)</h3>
+
+<p>Now drop that planetary point into <em>your</em> scene&rsquo;s coordinates by multiplying with the georeference&rsquo;s matrix:</p>
+
+<pre>P_stage = P_ecef &middot; M_ecefToUsd      (USD row-vector convention)</pre>
+
+<p><code>M_ecefToUsd</code> is the georeference&rsquo;s <code>cesium:ecefToUsdTransform</code> &mdash; derived from the origin you picked (it&rsquo;s the inverse of &ldquo;local &rarr; ECEF&rdquo;: the East-North-Up frame at the origin, possibly scaled). <strong>This is the step that needs the georeference.</strong></p>
+
+<div class="callout">
+  <span class="title">Orientation too &mdash; not just position</span>
+  <p>Cesium places the whole <em>frame</em>, not only the translation: <code>primLocalToWorld = ENU(P_ecef) &middot; M_ecefToUsd</code>, where <code>ENU(P_ecef)</code> is the East-North-Up frame at the anchor point (columns = east, north, up, position). The translation is the <code>P_stage</code> above; the <strong>rotation</strong> is the tiny mismatch between &ldquo;up at the anchor&rdquo; and &ldquo;up at the origin&rdquo; &mdash; Earth&rsquo;s curvature between two nearby points. For points ~100&nbsp;m apart that surfaces as a <code>rotateXYZ</code> of roughly <code>0.0003&nbsp;rad</code>. That small auto-written rotation is Cesium keeping your object level with the true local ground, not the flat origin plane.</p>
+</div>
+
+<h3>Check it with real numbers</h3>
+
+<p>Take one anchored point and run both steps:</p>
+
+<pre>anchor   (32.2132079&deg;, &minus;7.9400261&deg;, 522.244 m)
+  &#9472;&#9472; step 1 &#9472;&#9472;&#9658;  ECEF  (5350147.03, &minus;746204.13, 3380736.32)   = cesium:anchor:position
+  &#9472;&#9472; step 2 &#9472;&#9472;&#9658;  stage translate  (&minus;93.63, 15.96, 0)          = xformOp:translate</pre>
+
+<p>The two derivations agree to within <code>~1e-7</code>. Note the contrast: the anchor&rsquo;s lat/lon is absolute, yet the stage translate <code>(&minus;93.63, 15.96, 0)</code> is small and stage-relative &mdash; because Step&nbsp;2 measured it from <em>this</em> origin.</p>
+
+<div class="callout good">
+  <span class="title">Why an anchor needs a georeference &mdash; exactly</span>
+  <p style="margin-bottom:6px"><code>P_stage = f(anchor lat/lon/h) &middot; M_ecefToUsd(origin)</code></p>
+  <p>The left factor never changes with the origin; the right factor <em>is</em> the origin. So: <strong>no georeference &rarr; no <code>M_ecefToUsd</code> &rarr; you cannot compute <code>P_stage</code></strong>. And <strong>change the origin &rarr; <code>M_ecefToUsd</code> changes &rarr; <code>P_stage</code> shifts</strong>, even though lat/lon never moved. That is precisely why a position can be &ldquo;absolute on Earth&rdquo; yet still &ldquo;depend on the georeference&rdquo; to land somewhere in your stage.</p>
+</div>
+
+<!-- ───────────────────────── 6. OVERRIDE vs FALLBACK ───────────────────────── -->
+<h2 id="override"><span class="step">6</span>The subtlety: the prim already has a transform</h2>
+
+<p>Here&rsquo;s the question that catches everyone, and it&rsquo;s a sharp one: <em>a prim already has <code>xformOps</code> (translate / rotate / scale), and USD already renders it there. So if there&rsquo;s no <code>M_ecefToUsd</code>, why doesn&rsquo;t it just keep using the transform it already has?</em></p>
+
+<p><strong>It does.</strong> That&rsquo;s exactly right &mdash; and admitting it forces a sharper definition of what a globe anchor even is.</p>
+
+<div class="grid g2">
+  <div class="box">
+    <div class="icon blue">U</div>
+    <h4>xformOps = USD&rsquo;s source of truth</h4>
+    <p>The prim&rsquo;s <code>translate / rotate / scale</code>. <strong>Always present, always what USD draws.</strong> A georeference is never required for a prim to exist or render.</p>
+  </div>
+  <div class="box">
+    <div class="icon green">A</div>
+    <h4>Globe anchor = a layer on top</h4>
+    <p>Its one job: <strong>overwrite</strong> those <code>xformOps</code> &mdash; recompute them from lat/lon via the Section&nbsp;5 formula, every update. The anchor doesn&rsquo;t draw anything; it <em>drives</em> the transform USD draws from.</p>
+  </div>
+</div>
+
+<p>So the georeference isn&rsquo;t needed for the prim to render &mdash; it&rsquo;s needed for the anchor to <strong>compute and sync</strong> <code>xformOps</code> &harr; lat/lon. Pull that bridge out and the lat/lon doesn&rsquo;t vanish; it just stops driving anything. Three cases:</p>
+
+<table>
+  <tr><th>Situation</th><th>Where the prim gets its transform</th></tr>
+  <tr><td><span class="tag muted">No anchor</span></td><td>Its own <code>xformOps</code>. Plain USD. No geographic meaning; georeference irrelevant.</td></tr>
+  <tr><td><span class="tag good">Anchor resolves</span><br/>valid&nbsp;+&nbsp;georeference</td><td>Cesium computes the transform from lat/lon and <strong>overwrites</strong> <code>xformOps</code> every update. lat/lon is the master. (This is when you see Cesium auto-write that tiny <code>rotateXYZ</code>.)</td></tr>
+  <tr><td><span class="tag bad">Anchor unresolved</span><br/>no&nbsp;georeference&nbsp;/&nbsp;bad&nbsp;token</td><td>Conversion can&rsquo;t run &rarr; prim <strong>falls back</strong> to its existing <code>xformOps</code>; lat/lon becomes inert data that controls nothing.</td></tr>
+</table>
+
+<div class="callout warn">
+  <span class="title">The classic &ldquo;I changed lat/lon and nothing moved&rdquo; bug</span>
+  <p>If a prim carries both a hand-authored <code>xformOp:translate</code>&nbsp;+&nbsp;<code>orient</code> <em>and</em> anchor lat/lon, but the anchor never resolves &mdash; a missing georeference, or a mistyped anchor schema/token &mdash; the prim renders from its <em>old</em> <code>xformOps</code> and the lat/lon just sits there. Editing lat/lon does nothing visible: not because the math is wrong, but because the anchor never got the bridge it needs to apply that math. Resolve the anchor and lat/lon becomes the master again.</p>
+</div>
+
+<p>So the corrected one-liner: a georeference doesn&rsquo;t let an anchor &ldquo;decide whether the prim shows&rdquo; &mdash; the prim always has somewhere to be. It lets the anchor <strong>keep <code>xformOps</code> in sync with lat/lon</strong>. Lose it, and you fall back to whatever transform the prim already had.</p>
 
 <!-- ───────────────────────── 6. BINDING ───────────────────────── -->
-<h2 id="binding"><span class="step">6</span>GeoreferenceBinding: which Earth frame?</h2>
+<h2 id="binding"><span class="step">7</span>GeoreferenceBinding: which Earth frame?</h2>
 
 <p>So far there&rsquo;s been exactly one georeference. But nothing stops a stage from having several:</p>
 
@@ -297,7 +377,7 @@ Geo_SaiGon     origin &harr; Sai Gon port</pre>
 </div>
 
 <!-- ───────────────────────── 7. STACK ───────────────────────── -->
-<h2 id="stack"><span class="step">7</span>The whole stack on one page</h2>
+<h2 id="stack"><span class="step">8</span>The whole stack on one page</h2>
 
 <p>That&rsquo;s all four concepts. Stack them and you get the full render pipeline &mdash; each layer answering exactly one question:</p>
 
@@ -322,13 +402,13 @@ camera &rarr; GPU pixels</div>
 
 <div class="callout good">
   <span class="title">The escape hatch</span>
-  <p>If you have <strong>one site and a static hierarchy</strong>, concepts 3&ndash;4&ndash;5&ndash;6 mostly evaporate. You need <em>Georeference + USD transforms</em> and you&rsquo;re done. The rest of the machinery exists to solve <strong>scale</strong> (a planet is too big for one float frame) and <strong>mobility</strong> (objects that move across that planet). No scale problem, no mobility problem &rarr; no complexity.</p>
+  <p>If you have <strong>one site and a static hierarchy</strong>, concepts 4 through 7 mostly evaporate. You need <em>Georeference + USD transforms</em> and you&rsquo;re done. The rest of the machinery exists to solve <strong>scale</strong> (a planet is too big for one float frame) and <strong>mobility</strong> (objects that move across that planet). No scale problem, no mobility problem &rarr; no complexity.</p>
 </div>
 
 <!-- ───────────────────────── 8. EXAMPLE ───────────────────────── -->
-<h2 id="example"><span class="step">8</span>Worked example: a nationwide digital twin</h2>
+<h2 id="example"><span class="step">9</span>Worked example: a nationwide digital twin</h2>
 
-<p>Concepts 6 and the multi-origin idea feel abstract until you actually try to model a whole country. So let&rsquo;s build one. Three sites:</p>
+<p>Concept&nbsp;7 (binding) and the multi-origin idea feel abstract until you actually try to model a whole country. So let&rsquo;s build one. Three sites:</p>
 
 <pre>Ho Guom Lake      (Hanoi)
 Da Nang Airport   (central coast)
@@ -389,7 +469,7 @@ local  &rarr; (15, 0, 30)         &larr; small &amp; precise again</pre>
 </div>
 
 <!-- ───────────────────────── 9. PASSPORT ───────────────────────── -->
-<h2 id="passport"><span class="step">9</span>The passport mental model</h2>
+<h2 id="passport"><span class="step">10</span>The passport mental model</h2>
 
 <p>Strip away every API name and the four concepts map onto something you already understand &mdash; <strong>how an address works</strong>:</p>
 
@@ -428,7 +508,8 @@ local  &rarr; (15, 0, 30)         &larr; small &amp; precise again</pre>
   <li>USD is a relative machine: it only knows <strong>parent&middot;child</strong> transforms. <code>World(C) = chain of locals.</code></li>
   <li>Earth-scale coordinates don&rsquo;t fit in a 32-bit float &rarr; jitter. <strong>That single fact forces the split</strong> between &ldquo;big where&rdquo; and &ldquo;small local.&rdquo;</li>
   <li><strong>Georeference</strong> = where the scene origin sits on Earth. For one static site, it&rsquo;s all you need.</li>
-  <li><strong>GlobeAnchor</strong> = an object&rsquo;s absolute GPS identity, independent of its parent. The source of truth; the GPU still renders a recomputed local matrix.</li>
+  <li><strong>GlobeAnchor</strong> = an object&rsquo;s absolute GPS identity, independent of its parent. It&rsquo;s a layer that <em>overwrites</em> the prim&rsquo;s <code>xformOps</code> from lat/lon &mdash; not something the prim needs in order to render.</li>
+  <li><strong>The formula:</strong> <code>xformOp:translate = cartographicToCartesian(lat,lon,h) &middot; M_ecefToUsd(origin)</code>. Left factor = anchor only; right factor = georeference. No georeference &rarr; can&rsquo;t compute &rarr; the prim <strong>falls back</strong> to its existing transform and lat/lon goes inert (the classic &ldquo;changed lat/lon, nothing moved&rdquo; bug).</li>
   <li><strong>GeoreferenceBinding</strong> = which Earth frame an object resolves against, once several coexist. Enables <strong>origin rebasing</strong> for assets moving across a large world.</li>
   <li>Passport (anchor) · current district (binding) · house number (translate). Same idea, no jargon.</li>
 </ul>
