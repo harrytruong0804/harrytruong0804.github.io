@@ -8,6 +8,14 @@ export interface Post {
 
 export const posts: Post[] = [
   {
+    slug: "enu-from-first-principles",
+    title: "ENU From First Principles: the Tangent Frame Behind Every Georeference",
+    description:
+      "The matrix that turns a planet coordinate into a stage coordinate is no black box — it's an East–North–Up frame, and ENU itself isn't a definition but a derivative. Deriving Ê, N̂, Û as the Jacobian of position, why East and North aren't unit vectors (the same cosφ that distorts Mercator), why Up misses Earth's center on an ellipsoid, and how it all collapses into the ecefToUsdTransform matrix — plus why orienting a crooked model needs control points and why two georeferences can't share a stage.",
+    date: "2026-06-16",
+    tags: ["geospatial", "cesium", "geodesy", "first-principles"],
+  },
+  {
     slug: "cesium-georeference-first-principles",
     title: "Translate, Georeference, GlobeAnchor, Binding — Cesium From First Principles",
     description:
