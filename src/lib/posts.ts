@@ -8,6 +8,14 @@ export interface Post {
 
 export const posts: Post[] = [
   {
+    slug: "cesium-georeference-first-principles",
+    title: "Translate, Georeference, GlobeAnchor, Binding — Cesium From First Principles",
+    description:
+      "Cesium's geospatial concepts look like a wall of jargon, but they're just four answers to four questions a scene graph has to ask once you put it on a real planet. Built up one at a time — relative USD transforms, the float-precision wall, georeference, globe anchors, and the multi-origin rebasing that powers nationwide digital twins — until it all collapses into a passport, a district, and a house number.",
+    date: "2026-06-16",
+    tags: ["geospatial", "cesium", "usd", "first-principles"],
+  },
+  {
     slug: "usd-composer-extension-from-scratch",
     title: "Writing a USD Composer Extension From Scratch",
     description:
