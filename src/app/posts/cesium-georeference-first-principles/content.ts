@@ -299,7 +299,7 @@ P_ecef = (X, Y, Z)</pre>
 
 <pre>P_stage = P_ecef &middot; M_ecefToUsd      (USD row-vector convention)</pre>
 
-<p><code>M_ecefToUsd</code> is the georeference&rsquo;s <code>cesium:ecefToUsdTransform</code> &mdash; derived from the origin you picked (it&rsquo;s the inverse of &ldquo;local &rarr; ECEF&rdquo;: the East-North-Up frame at the origin, possibly scaled). <strong>This is the step that needs the georeference.</strong></p>
+<p><code>M_ecefToUsd</code> is the georeference&rsquo;s <code>cesium:ecefToUsdTransform</code> &mdash; derived from the origin you picked (it&rsquo;s the inverse of &ldquo;local &rarr; ECEF&rdquo;: the East-North-Up frame at the origin, possibly scaled). <strong>This is the step that needs the georeference.</strong> <em>(That ENU matrix isn&rsquo;t magic either &mdash; the companion post <a href="/posts/enu-from-first-principles">ENU From First Principles</a> derives it as the Jacobian of position and dissects a real one.)</em></p>
 
 <div class="callout">
   <span class="title">Orientation too &mdash; not just position</span>
