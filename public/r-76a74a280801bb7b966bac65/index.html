@@ -58,9 +58,6 @@
 
   <div class="cards" id="cards"></div>
 
-  <h2>🎯 Hai thí sinh quan tâm</h2>
-  <div class="spot" id="spot"></div>
-
   <h2>📊 Thống kê theo ngành</h2>
   <div class="tbox" style="max-height:360px"><table id="ngTbl"><thead><tr>
     <th data-k="nganh">Ngành</th><th data-k="soTS" class="num">Tổng TS</th>
@@ -107,7 +104,7 @@ document.getElementById('cards').innerHTML = [
 
 // spotlight
 const ngStatMap = Object.fromEntries(D.nganhStats.map(s=>[s.nganh,s]));
-document.getElementById('spot').innerHTML = D.spotlight.map(ma=>{
+const _spotEl = document.getElementById('spot'); if(_spotEl) _spotEl.innerHTML = D.spotlight.map(ma=>{
   const r = byMa[ma]; if(!r) return '';
   const st = ngStatMap[r.nganhKey];
   const lo = st.min, hi = st.max, span = (hi-lo)||1;
