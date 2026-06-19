@@ -159,5 +159,14 @@ document.querySelectorAll('#tbl th').forEach(th=>th.onclick=()=>{const k=th.data
 ['q','ng','vt'].forEach(id=>document.getElementById(id).addEventListener('input',render));
 render();
 </script>
+<iframe id="phanTich" src="/r-76a74a280801bb7b966bac65/phan_tich.html" title="Phân tích kết quả thi" loading="lazy" scrolling="no" style="width:100%;border:0;display:block;overflow:hidden;margin:0"></iframe>
+<script>
+(function(){
+  var f=document.getElementById('phanTich');
+  function fit(){try{var d=f.contentWindow.document;f.style.height=Math.max(d.documentElement.scrollHeight,d.body.scrollHeight)+'px';}catch(e){}}
+  f.addEventListener('load',function(){fit();setTimeout(fit,200);setTimeout(fit,800);});
+  window.addEventListener('resize',fit);
+})();
+</script>
 </body>
 </html>
