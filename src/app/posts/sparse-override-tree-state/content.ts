@@ -151,7 +151,7 @@ export const styles = `
     color:var(--semi);border:1px solid var(--semi);border-radius:5px;padding:1px 5px;
     margin-left:2px;background:var(--surface);font-weight:600;
   }
-  .artifact-scope .ctrls{margin-left:auto;display:flex;gap:3px;flex:0 0 auto;}
+  .artifact-scope .ctrls{display:flex;gap:3px;flex:0 0 auto;}
   .artifact-scope .st-btn{
     width:24px;height:22px;border-radius:6px;border:1px solid var(--line);
     background:var(--surface);cursor:pointer;font-family:"IBM Plex Mono",monospace;
@@ -467,9 +467,7 @@ state = {
       label.style.opacity = OPACITY[st];
       label.innerHTML = '<span class="slash">/</span>'+labelName(n.path) + (n.hasKids?'<span class="slash">/</span>':'');
 
-      row.appendChild(dot); row.appendChild(label);
-
-      if(explicit){ const pin=document.createElement("span"); pin.className="pin"; pin.textContent="set"; row.appendChild(pin); }
+      row.appendChild(dot);
 
       const ctrls=document.createElement("div"); ctrls.className="ctrls";
       const isVis=st!=="off";
@@ -492,6 +490,8 @@ state = {
       semiB.addEventListener("click",()=>{if(st!=="off")onSet(n.path,isSemi?"on":"semi");});
       ctrls.appendChild(semiB);
       row.appendChild(ctrls);
+      row.appendChild(label);
+      if(explicit){ const pin=document.createElement("span"); pin.className="pin"; pin.textContent="set"; row.appendChild(pin); }
       treeEl.appendChild(row);
     });
   }
@@ -634,9 +634,7 @@ export const script = `
       label.style.opacity = OPACITY[st];
       label.innerHTML = '<span class="slash">/</span>'+labelName(n.path) + (n.hasKids?'<span class="slash">/</span>':'');
 
-      row.appendChild(dot); row.appendChild(label);
-
-      if(explicit){ const pin=document.createElement("span"); pin.className="pin"; pin.textContent="set"; row.appendChild(pin); }
+      row.appendChild(dot);
 
       const ctrls=document.createElement("div"); ctrls.className="ctrls";
       const isVis=st!=="off";
@@ -659,6 +657,8 @@ export const script = `
       semiB.addEventListener("click",()=>{if(st!=="off")onSet(n.path,isSemi?"on":"semi");});
       ctrls.appendChild(semiB);
       row.appendChild(ctrls);
+      row.appendChild(label);
+      if(explicit){ const pin=document.createElement("span"); pin.className="pin"; pin.textContent="set"; row.appendChild(pin); }
       treeEl.appendChild(row);
     });
   }
