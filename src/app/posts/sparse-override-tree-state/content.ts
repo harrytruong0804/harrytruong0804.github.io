@@ -159,9 +159,10 @@ export const styles = `
     justify-content:center;transition:all .12s ease;padding:0;
   }
   .artifact-scope .st-btn:hover{transform:translateY(-1px);}
-  .artifact-scope .st-btn.on.active{background:var(--on);color:#fff;border-color:var(--on);}
+  .artifact-scope .st-btn.eye.active{background:var(--on);color:#fff;border-color:var(--on);}
+  .artifact-scope .st-btn.eye.hidden-state{background:var(--off);color:#fff;border-color:var(--off);}
   .artifact-scope .st-btn.semi.active{background:var(--semi);color:#fff;border-color:var(--semi);}
-  .artifact-scope .st-btn.off.active{background:var(--off);color:#fff;border-color:var(--off);}
+  .artifact-scope .st-btn:disabled{opacity:.28;cursor:default;}
   .artifact-scope .st-btn.explicit{box-shadow:0 0 0 2px var(--semi-soft),0 0 0 3px var(--semi);}
 
   .artifact-scope /* inspector */
@@ -298,11 +299,11 @@ state = {
     </div>
     <div class="lab-body">
       <div class="tree-pane">
-        <div class="pane-label">Directory tree — click on / semi / off for each node</div>
+        <div class="pane-label">Directory tree — 👁 visibility · ◐ transparency</div>
         <div class="legend">
-          <span><i class="lg-dot" style="background:var(--on)"></i>on — visible</span>
-          <span><i class="lg-dot" style="background:var(--semi)"></i>semi — transparent</span>
-          <span><i class="lg-dot" style="background:var(--off)"></i>off — hidden</span>
+          <span><i class="lg-dot" style="background:var(--on)"></i>visible · solid</span>
+          <span><i class="lg-dot" style="background:var(--semi)"></i>visible · semi-transparent</span>
+          <span><i class="lg-dot" style="background:var(--off)"></i>hidden (server skips render)</span>
           <span><i class="pin" style="margin:0">set</i> = has override</span>
         </div>
         <div id="tree"></div>
@@ -471,13 +472,25 @@ state = {
       if(explicit){ const pin=document.createElement("span"); pin.className="pin"; pin.textContent="set"; row.appendChild(pin); }
 
       const ctrls=document.createElement("div"); ctrls.className="ctrls";
-      [["on","●"],["semi","◐"],["off","○"]].forEach(([val,gly])=>{
-        const b=document.createElement("button");
-        b.className="st-btn "+val+(st===val?" active":"")+(explicit&&overrides[n.path]===val?" explicit":"");
-        b.textContent=gly; b.title=val; b.setAttribute("aria-label",labelName(n.path)+" → "+val);
-        b.addEventListener("click",()=>onSet(n.path,val));
-        ctrls.appendChild(b);
-      });
+      const isVis=st!=="off";
+      const eyeB=document.createElement("button");
+      eyeB.className="st-btn eye"+(isVis?" active":" hidden-state")+(explicit&&overrides[n.path]!=="semi"?" explicit":"");
+      eyeB.innerHTML=isVis
+        ?'<svg width="13" height="9" viewBox="0 0 13 9" fill="none"><path d="M1 4.5C1 4.5 2.9.5 6.5.5S12 4.5 12 4.5 10.1 8.5 6.5 8.5 1 4.5 1 4.5z" stroke="currentColor" stroke-width="1.3"/><circle cx="6.5" cy="4.5" r="1.8" fill="currentColor"/></svg>'
+        :'<svg width="13" height="9" viewBox="0 0 13 9" fill="none"><path d="M1 4.5C1 4.5 2.9.5 6.5.5S12 4.5 12 4.5" stroke="currentColor" stroke-width="1.3"/><line x1="1.5" y1="8.5" x2="11.5" y2=".5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>';
+      eyeB.title=isVis?"visible — click to hide":"hidden — click to show";
+      eyeB.setAttribute("aria-label",labelName(n.path)+(isVis?" → hide":" → show"));
+      eyeB.addEventListener("click",()=>onSet(n.path,isVis?"off":"on"));
+      ctrls.appendChild(eyeB);
+      const semiB=document.createElement("button");
+      const isSemi=st==="semi";
+      semiB.className="st-btn semi"+(isSemi?" active":"")+(explicit&&overrides[n.path]==="semi"?" explicit":"");
+      semiB.disabled=st==="off";
+      semiB.textContent="◐";
+      semiB.title=st==="off"?"show node first":isSemi?"semi-transparent — click for solid":"solid — click for semi-transparent";
+      semiB.setAttribute("aria-label",labelName(n.path)+(isSemi?" → solid":" → semi"));
+      semiB.addEventListener("click",()=>{if(st!=="off")onSet(n.path,isSemi?"on":"semi");});
+      ctrls.appendChild(semiB);
       row.appendChild(ctrls);
       treeEl.appendChild(row);
     });
@@ -626,13 +639,25 @@ export const script = `
       if(explicit){ const pin=document.createElement("span"); pin.className="pin"; pin.textContent="set"; row.appendChild(pin); }
 
       const ctrls=document.createElement("div"); ctrls.className="ctrls";
-      [["on","●"],["semi","◐"],["off","○"]].forEach(([val,gly])=>{
-        const b=document.createElement("button");
-        b.className="st-btn "+val+(st===val?" active":"")+(explicit&&overrides[n.path]===val?" explicit":"");
-        b.textContent=gly; b.title=val; b.setAttribute("aria-label",labelName(n.path)+" → "+val);
-        b.addEventListener("click",()=>onSet(n.path,val));
-        ctrls.appendChild(b);
-      });
+      const isVis=st!=="off";
+      const eyeB=document.createElement("button");
+      eyeB.className="st-btn eye"+(isVis?" active":" hidden-state")+(explicit&&overrides[n.path]!=="semi"?" explicit":"");
+      eyeB.innerHTML=isVis
+        ?'<svg width="13" height="9" viewBox="0 0 13 9" fill="none"><path d="M1 4.5C1 4.5 2.9.5 6.5.5S12 4.5 12 4.5 10.1 8.5 6.5 8.5 1 4.5 1 4.5z" stroke="currentColor" stroke-width="1.3"/><circle cx="6.5" cy="4.5" r="1.8" fill="currentColor"/></svg>'
+        :'<svg width="13" height="9" viewBox="0 0 13 9" fill="none"><path d="M1 4.5C1 4.5 2.9.5 6.5.5S12 4.5 12 4.5" stroke="currentColor" stroke-width="1.3"/><line x1="1.5" y1="8.5" x2="11.5" y2=".5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>';
+      eyeB.title=isVis?"visible — click to hide":"hidden — click to show";
+      eyeB.setAttribute("aria-label",labelName(n.path)+(isVis?" → hide":" → show"));
+      eyeB.addEventListener("click",()=>onSet(n.path,isVis?"off":"on"));
+      ctrls.appendChild(eyeB);
+      const semiB=document.createElement("button");
+      const isSemi=st==="semi";
+      semiB.className="st-btn semi"+(isSemi?" active":"")+(explicit&&overrides[n.path]==="semi"?" explicit":"");
+      semiB.disabled=st==="off";
+      semiB.textContent="◐";
+      semiB.title=st==="off"?"show node first":isSemi?"semi-transparent — click for solid":"solid — click for semi-transparent";
+      semiB.setAttribute("aria-label",labelName(n.path)+(isSemi?" → solid":" → semi"));
+      semiB.addEventListener("click",()=>{if(st!=="off")onSet(n.path,isSemi?"on":"semi");});
+      ctrls.appendChild(semiB);
       row.appendChild(ctrls);
       treeEl.appendChild(row);
     });
