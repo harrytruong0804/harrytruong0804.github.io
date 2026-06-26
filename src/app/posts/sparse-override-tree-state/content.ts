@@ -252,9 +252,9 @@ export const html = `
 vis(node)  = nearest <span class="k">vis_ovr  </span><span class="up">↑</span>  to root  <span class="c">// default: visible</span>
 semi(node) = nearest <span class="k">semi_ovr </span><span class="up">↑</span>  to root  <span class="c">// default: solid</span>
 
-set_vis(<span class="st">"set"</span>)   → cascades <span class="up">↓</span>  only          <span class="c">// "set" = hidden</span>
-set_vis(<span class="st">"clear"</span>) → also walks <span class="up">↑</span>  clearing set ancestors
-set_semi              → always   <span class="up">↓</span>  only          <span class="c">// "set" = semi</span>
+set_vis(<span class="st">"hidden"</span>)  → cascades <span class="up">↓</span>  only
+set_vis(<span class="st">"visible"</span>) → also walks <span class="up">↑</span>  clearing hidden ancestors
+set_semi               → always   <span class="up">↓</span>  only
     </div>
   </header>
 
@@ -280,8 +280,8 @@ set_semi              → always   <span class="up">↓</span>  only          <s
     <p>The structure stored on the server is <strong>two independent sparse maps</strong>: one for visibility, one for transparency. Each map has its own <code class="inl">default</code> and only stores nodes that differ from their parent — but as you'll see in the algorithm section, they cascade differently when writing.</p>
     <pre><span class="cm"># two independent sparse maps — resolved identically, set differently</span>
 state = {
-  <span class="st">"vis"</span>:  { <span class="st">"default"</span>: <span class="st">"visible"</span>, <span class="st">"overrides"</span>: { <span class="st">"/Site/BuildingA"</span>: <span class="st">"set"</span> } },
-  <span class="st">"semi"</span>: { <span class="st">"default"</span>: <span class="st">"solid"</span>,   <span class="st">"overrides"</span>: { <span class="st">"/Site"</span>:             <span class="st">"set"</span> } },
+  <span class="st">"vis"</span>:  { <span class="st">"default"</span>: <span class="st">"visible"</span>, <span class="st">"overrides"</span>: { <span class="st">"/Site/BuildingA"</span>: <span class="st">"hidden"</span> } },
+  <span class="st">"semi"</span>: { <span class="st">"default"</span>: <span class="st">"solid"</span>,   <span class="st">"overrides"</span>: { <span class="st">"/Site"</span>:             <span class="st">"semi"</span>   } },
 }</pre>
     <p>The tree in the demo below has 12 nodes. Notice: the <code class="inl">overrides</code> map on the right is almost always much smaller than the node count — even when the entire tree is changing state.</p>
   </section>
@@ -358,26 +358,26 @@ state = {
         cur = <span class="fn">parent</span>(cur)
     <span class="kw">return</span> <span class="st">"visible"</span>          <span class="cm"># default</span></pre>
     <p><strong>set_semi</strong> is the same generic logic as before — purely downward:</p>
-    <pre><span class="kw">def</span> <span class="fn">set_semi</span>(path, value):               <span class="cm"># value = "set" | "clear"</span>
+    <pre><span class="kw">def</span> <span class="fn">set_semi</span>(path, value):               <span class="cm"># value = "semi" | "solid"</span>
     <span class="kw">for</span> p <span class="kw">in</span> <span class="fn">list</span>(semi_overrides):        <span class="cm"># clear self + descendants</span>
         <span class="kw">if</span> p == path <span class="kw">or</span> p.<span class="fn">startswith</span>(path + <span class="st">"/"</span>): <span class="kw">del</span> semi_overrides[p]
-    <span class="kw">if</span> value == <span class="st">"set"</span> <span class="kw">and</span> <span class="fn">resolve_semi</span>(<span class="fn">parent</span>(path)) != <span class="st">"set"</span>:  <span class="cm"># normalize</span>
-        semi_overrides[path] = <span class="st">"set"</span></pre>
-    <p><strong>set_visibility</strong> differs only when making something visible — it must also walk <em>up</em> and clear any <code class="inl">"set"</code> ancestors, because a hidden parent blocks all children regardless of their own flag:</p>
-    <pre><span class="kw">def</span> <span class="fn">set_visibility</span>(path, value):         <span class="cm"># value = "set" (hide) | "clear" (show)</span>
-    <span class="kw">if</span> value == <span class="st">"set"</span>:                    <span class="cm"># same as set_semi: purely ↓</span>
+    <span class="kw">if</span> value != <span class="fn">resolve_semi</span>(<span class="fn">parent</span>(path)):   <span class="cm"># normalize: only store if different from inherited</span>
+        semi_overrides[path] = value</pre>
+    <p><strong>set_visibility</strong> differs only when making something visible — it must also walk <em>up</em> and clear hidden ancestors, because a hidden parent blocks all children regardless of their own flag:</p>
+    <pre><span class="kw">def</span> <span class="fn">set_visibility</span>(path, value):         <span class="cm"># value = "hidden" | "visible"</span>
+    <span class="kw">if</span> value == <span class="st">"hidden"</span>:                 <span class="cm"># same as set_semi: purely ↓</span>
         <span class="kw">for</span> p <span class="kw">in</span> <span class="fn">list</span>(vis_overrides):
             <span class="kw">if</span> p == path <span class="kw">or</span> p.<span class="fn">startswith</span>(path + <span class="st">"/"</span>): <span class="kw">del</span> vis_overrides[p]
-        <span class="kw">if</span> <span class="fn">resolve_vis</span>(<span class="fn">parent</span>(path)) != <span class="st">"set"</span>: vis_overrides[path] = <span class="st">"set"</span>
-    <span class="kw">else</span>:                                <span class="cm"># "clear": must walk ↑ too</span>
+        <span class="kw">if</span> <span class="fn">resolve_vis</span>(<span class="fn">parent</span>(path)) != <span class="st">"hidden"</span>: vis_overrides[path] = <span class="st">"hidden"</span>
+    <span class="kw">else</span>:                                <span class="cm"># "visible": must walk ↑ too</span>
         cur = <span class="fn">parent</span>(path)
-        <span class="kw">while</span> cur:                       <span class="cm"># clear set overrides going up</span>
+        <span class="kw">while</span> cur:                       <span class="cm"># clear hidden overrides going up</span>
             <span class="kw">if</span> cur <span class="kw">in</span> vis_overrides: <span class="kw">del</span> vis_overrides[cur]
             cur = <span class="fn">parent</span>(cur)
         <span class="kw">for</span> p <span class="kw">in</span> <span class="fn">list</span>(vis_overrides):    <span class="cm"># clear self + descendants</span>
             <span class="kw">if</span> p == path <span class="kw">or</span> p.<span class="fn">startswith</span>(path + <span class="st">"/"</span>): <span class="kw">del</span> vis_overrides[p]
-        <span class="cm"># nothing to store — default is visible, all overrides cleared</span></pre>
-    <div class="note"><b>Why the asymmetry:</b> hiding is a downward instruction — "don't render this subtree". Showing is a <em>promise</em> — "this node will be visible" — that the renderer can only fulfil if the entire ancestor chain agrees. So <code>set_vis("clear")</code> walks up and clears any <code>"set"</code> override in the way. <code>set_semi</code> has no such obligation: a child can be semi-transparent while its parent stays solid.</div>
+        <span class="cm"># nothing to store — default is visible, ancestors now clear</span></pre>
+    <div class="note"><b>Why the asymmetry:</b> hiding is a downward instruction — "don't render this subtree". Showing is a <em>promise</em> — "this node will be visible" — that the renderer can only fulfil if the entire ancestor chain agrees. So <code>set_vis("visible")</code> walks up and clears any hidden override in the way. <code>set_semi</code> has no such obligation: a child can be semi-transparent while its parent stays solid.</div>
   </section>
 
   <section>
@@ -385,9 +385,9 @@ state = {
     <h2>Each click is an O(1) message</h2>
     <p>Because all cascade logic lives in <code class="inl">set_state</code>, the FE and server only need to exchange the <em>action</em>, not the result:</p>
     <pre><span class="cm">// FE → server, fixed size regardless of subtree depth</span>
-{ <span class="st">"op"</span>: <span class="st">"set_semi set"</span>, <span class="st">"path"</span>: <span class="st">"/Site"</span> }
-{ <span class="st">"op"</span>: <span class="st">"set_vis set"</span>,  <span class="st">"path"</span>: <span class="st">"/Site/BuildingA"</span> }   <span class="cm">// hide</span>
-{ <span class="st">"op"</span>: <span class="st">"set_vis clear"</span>, <span class="st">"path"</span>: <span class="st">"/Site/BuildingA"</span> }   <span class="cm">// show (clears ancestors)</span></pre>
+{ <span class="st">"op"</span>: <span class="st">"set_semi"</span>, <span class="st">"path"</span>: <span class="st">"/Site"</span>,        <span class="st">"value"</span>: <span class="st">"semi"</span>    }
+{ <span class="st">"op"</span>: <span class="st">"set_vis"</span>,  <span class="st">"path"</span>: <span class="st">"/Site/BuildingA"</span>, <span class="st">"value"</span>: <span class="st">"hidden"</span>  }
+{ <span class="st">"op"</span>: <span class="st">"set_vis"</span>,  <span class="st">"path"</span>: <span class="st">"/Site/BuildingA"</span>, <span class="st">"value"</span>: <span class="st">"visible"</span> }  <span class="cm">// clears ancestors</span></pre>
     <p>Operation lifecycle:</p>
     <p style="margin-left:4px;">→ FE runs <code class="inl">set_state</code> on its local <code class="inl">overrides</code> copy and <strong>renders immediately</strong> (optimistic update, no waiting for server).<br>
     → Sends the message to the server.<br>
@@ -445,21 +445,21 @@ state = {
   const ALL_PATHS=FLAT.map(n=>n.path);
   function parent(p){ const i=p.lastIndexOf("/"); return i<=0?null:p.slice(0,i); }
   const own=(o,k)=>Object.prototype.hasOwnProperty.call(o,k);
-  function resolveVis(p){ let c=p; while(c){ if(own(visOvr,c)) return "set"; c=parent(c);} return DEF_VIS; }
-  function resolveSemi(p){ let c=p; while(c){ if(own(semiOvr,c)) return "set"; c=parent(c);} return DEF_SEMI; }
-  function effective(p){ return resolveVis(p)==="set"?"off":resolveSemi(p)==="set"?"semi":"on"; }
+  function resolveVis(p){ let c=p; while(c){ if(own(visOvr,c)) return visOvr[c]; c=parent(c);} return DEF_VIS; }
+  function resolveSemi(p){ let c=p; while(c){ if(own(semiOvr,c)) return semiOvr[c]; c=parent(c);} return DEF_SEMI; }
+  function effective(p){ return resolveVis(p)==="hidden"?"off":resolveSemi(p)==="semi"?"semi":"on"; }
   function setVisibility(path,value){
-    if(value==="clear"){
+    if(value==="visible"){
       let cur=parent(path); while(cur){ if(own(visOvr,cur)) delete visOvr[cur]; cur=parent(cur); }
       Object.keys(visOvr).forEach(k=>{ if(k===path||k.startsWith(path+"/")) delete visOvr[k]; });
     } else {
       Object.keys(visOvr).forEach(k=>{ if(k===path||k.startsWith(path+"/")) delete visOvr[k]; });
-      const par=parent(path); if(resolveVis(par||"")!=="set") visOvr[path]="set";
+      const par=parent(path); if(resolveVis(par||"")!=="hidden") visOvr[path]="hidden";
     }
   }
   function setSemi(path,value){
     Object.keys(semiOvr).forEach(k=>{ if(k===path||k.startsWith(path+"/")) delete semiOvr[k]; });
-    if(value==="set"){ const par=parent(path); if(resolveSemi(par||"")!=="set") semiOvr[path]="set"; }
+    const par=parent(path); if(value!==(par?resolveSemi(par):DEF_SEMI)) semiOvr[path]=value;
   }
   const enc=new TextEncoder();
   function bytes(str){ return enc.encode(str).length; }
@@ -469,13 +469,13 @@ state = {
   const labelName=p=>p.split("/").pop();
   const OPACITY={on:1,semi:.42,off:.2};
   const COLOR={on:"var(--on)",semi:"var(--semi)",off:"var(--off)"};
-  function renderTree(){ treeEl.innerHTML=""; FLAT.forEach(n=>{ const st=effective(n.path); const explVis=own(visOvr,n.path),explSemi=own(semiOvr,n.path); const row=document.createElement("div"); row.className="row"+((explVis||explSemi)?" has-ovr":""); row.style.paddingLeft=(8+n.depth*20)+"px"; const dot=document.createElement("span"); dot.className="dot"; dot.style.background=COLOR[st]; dot.style.opacity=st==="off"?.5:1; row.appendChild(dot); const ctrls=document.createElement("div"); ctrls.className="ctrls"; const isVis=st!=="off"; const eyeB=document.createElement("button"); eyeB.className="st-btn eye"+(isVis?" active":" hidden-state")+(explVis?" explicit":""); eyeB.innerHTML=isVis?'<svg width="13" height="9" viewBox="0 0 13 9" fill="none"><path d="M1 4.5C1 4.5 2.9.5 6.5.5S12 4.5 12 4.5 10.1 8.5 6.5 8.5 1 4.5 1 4.5z" stroke="currentColor" stroke-width="1.3"/><circle cx="6.5" cy="4.5" r="1.8" fill="currentColor"/></svg>':'<svg width="13" height="9" viewBox="0 0 13 9" fill="none"><path d="M1 4.5C1 4.5 2.9.5 6.5.5S12 4.5 12 4.5" stroke="currentColor" stroke-width="1.3"/><line x1="1.5" y1="8.5" x2="11.5" y2=".5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>'; eyeB.title=isVis?"visible — click to hide":"hidden — click to show (clears ancestors)"; eyeB.addEventListener("click",()=>{ setVisibility(n.path,isVis?"set":"clear"); refresh({op:isVis?"set_vis set":"set_vis clear",path:n.path}); }); ctrls.appendChild(eyeB); const semiB=document.createElement("button"); const isSemi=st==="semi"; semiB.className="st-btn semi"+(isSemi?" active":"")+(explSemi?" explicit":""); semiB.textContent="◐"; semiB.title=isSemi?"semi-transparent — click for solid":"solid — click for semi-transparent"; semiB.addEventListener("click",()=>{ setSemi(n.path,isSemi?"clear":"set"); refresh({op:isSemi?"set_semi clear":"set_semi set",path:n.path}); }); ctrls.appendChild(semiB); row.appendChild(ctrls); const label=document.createElement("span"); label.className="label"; label.style.opacity=OPACITY[st]; label.innerHTML='<span class="slash">/</span>'+labelName(n.path)+(n.hasKids?'<span class="slash">/</span>':''); row.appendChild(label); if(explVis||explSemi){ const pin=document.createElement("span"); pin.className="pin"; pin.textContent=(explVis?"vis":"")+(explVis&&explSemi?"+":"")+(explSemi?"semi":""); row.appendChild(pin); } treeEl.appendChild(row); }); }
-  function fmtMap(elId,map,emptyMsg,valCls){ const keys=Object.keys(map); const el=document.getElementById(elId); if(keys.length===0){ el.className="json empty"; el.textContent=emptyMsg; } else { el.className="json"; let s='{\n'; keys.forEach((k,i)=>{ s+='  <span class="jk">"'+k+'"</span>: <span class="'+valCls+'">"set"</span>'+(i<keys.length-1?',':'')+'\n'; }); s+='}'; el.innerHTML=s; } return keys.length; }
+  function renderTree(){ treeEl.innerHTML=""; FLAT.forEach(n=>{ const st=effective(n.path); const explVis=own(visOvr,n.path),explSemi=own(semiOvr,n.path); const row=document.createElement("div"); row.className="row"+((explVis||explSemi)?" has-ovr":""); row.style.paddingLeft=(8+n.depth*20)+"px"; const dot=document.createElement("span"); dot.className="dot"; dot.style.background=COLOR[st]; dot.style.opacity=st==="off"?.5:1; row.appendChild(dot); const ctrls=document.createElement("div"); ctrls.className="ctrls"; const isVis=st!=="off"; const eyeB=document.createElement("button"); eyeB.className="st-btn eye"+(isVis?" active":" hidden-state")+(explVis?" explicit":""); eyeB.innerHTML=isVis?'<svg width="13" height="9" viewBox="0 0 13 9" fill="none"><path d="M1 4.5C1 4.5 2.9.5 6.5.5S12 4.5 12 4.5 10.1 8.5 6.5 8.5 1 4.5 1 4.5z" stroke="currentColor" stroke-width="1.3"/><circle cx="6.5" cy="4.5" r="1.8" fill="currentColor"/></svg>':'<svg width="13" height="9" viewBox="0 0 13 9" fill="none"><path d="M1 4.5C1 4.5 2.9.5 6.5.5S12 4.5 12 4.5" stroke="currentColor" stroke-width="1.3"/><line x1="1.5" y1="8.5" x2="11.5" y2=".5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>'; eyeB.title=isVis?"visible — click to hide":"hidden — click to show (clears ancestors)"; eyeB.addEventListener("click",()=>{ setVisibility(n.path,isVis?"hidden":"visible"); refresh({op:isVis?"set_vis hidden":"set_vis visible",path:n.path}); }); ctrls.appendChild(eyeB); const semiB=document.createElement("button"); const isSemi=st==="semi"; semiB.className="st-btn semi"+(isSemi?" active":"")+(explSemi?" explicit":""); semiB.textContent="◐"; semiB.title=isSemi?"semi-transparent — click for solid":"solid — click for semi-transparent"; semiB.addEventListener("click",()=>{ setSemi(n.path,isSemi?"solid":"semi"); refresh({op:isSemi?"set_semi solid":"set_semi semi",path:n.path}); }); ctrls.appendChild(semiB); row.appendChild(ctrls); const label=document.createElement("span"); label.className="label"; label.style.opacity=OPACITY[st]; label.innerHTML='<span class="slash">/</span>'+labelName(n.path)+(n.hasKids?'<span class="slash">/</span>':''); row.appendChild(label); if(explVis||explSemi){ const pin=document.createElement("span"); pin.className="pin"; pin.textContent=(explVis?"vis":"")+(explVis&&explSemi?"+":"")+(explSemi?"semi":""); row.appendChild(pin); } treeEl.appendChild(row); }); }
+  function fmtMap(elId,map,emptyMsg,valCls){ const keys=Object.keys(map); const el=document.getElementById(elId); if(keys.length===0){ el.className="json empty"; el.textContent=emptyMsg; } else { el.className="json"; let s='{\n'; keys.forEach((k,i)=>{ const v=map[k]; s+='  <span class="jk">"'+k+'"</span>: <span class="'+valCls+'">"'+v+'"</span>'+(i<keys.length-1?',':'')+'\n'; }); s+='}'; el.innerHTML=s; } return keys.length; }
   function fmtJSON(){ const vc=fmtMap("ovr-vis",visOvr,'{ }  // all visible',"jv-off"); const sc=fmtMap("ovr-semi",semiOvr,'{ }  // all solid',"jv-semi"); document.getElementById("vis-count").textContent=vc+(vc===1?" entry":" entries"); document.getElementById("semi-count").textContent=sc+(sc===1?" entry":" entries"); document.getElementById("s-ovr").textContent=vc+sc; }
   function renderMeters(){ const nb=bytes(naivePayload()),sb=bytes(sparsePayload()); const max=Math.max(nb,sb,1); document.getElementById("naive-b").textContent=nb+" B"; document.getElementById("sparse-b").textContent=sb+" B"; document.getElementById("naive-bar").style.width=(nb/max*100)+"%"; document.getElementById("sparse-bar").style.width=(sb/max*100)+"%"; const save=nb>0?Math.round((1-sb/nb)*100):0; const savEl=document.getElementById("savings"); if(save>0){ savEl.textContent="↓ "+save+"% smaller than storing all flags per node"; savEl.style.color="var(--on)"; savEl.style.background="var(--on-soft)"; } else { savEl.textContent="equivalent payload (tree empty)"; savEl.style.color="var(--ink-faint)"; savEl.style.background="var(--surface-2)"; } }
-  function renderWire(msg){ const w=document.getElementById("wire"); if(!msg){ w.className="json"; w.innerHTML='<span class="jc">// click a node to see the payload FE → server</span>'; document.getElementById("wire-bytes").textContent="— B"; return; } const raw='{ "op": "'+msg.op+'", "path": "'+msg.path+'" }'; const isSet=msg.op.endsWith("set"); const isVis=msg.op.startsWith("set_vis"); const opCls=isSet?(isVis?"jv-off":"jv-semi"):"jv-on"; w.className="json"; w.innerHTML='{ <span class="jk">"op"</span>: <span class="'+opCls+'">"'+msg.op+'"</span>, <span class="jk">"path"</span>: "'+msg.path+'" }'; document.getElementById("wire-bytes").textContent=bytes(raw)+" B"; }
+  function renderWire(msg){ const w=document.getElementById("wire"); if(!msg){ w.className="json"; w.innerHTML='<span class="jc">// click a node to see the payload FE → server</span>'; document.getElementById("wire-bytes").textContent="— B"; return; } const raw='{ "op": "'+msg.op+'", "path": "'+msg.path+'" }'; const isVis=msg.op.startsWith("set_vis"); const opCls=msg.op.includes("hidden")?"jv-off":msg.op.includes("semi")?"jv-semi":"jv-on"; w.className="json"; w.innerHTML='{ <span class="jk">"op"</span>: <span class="'+opCls+'">"'+msg.op+'"</span>, <span class="jk">"path"</span>: "'+msg.path+'" }'; document.getElementById("wire-bytes").textContent=bytes(raw)+" B"; }
   function refresh(wireMsg){ renderTree(); fmtJSON(); renderMeters(); renderWire(wireMsg); document.querySelectorAll(".ovr-card").forEach(c=>{ c.classList.remove("flash"); void c.offsetWidth; c.classList.add("flash"); }); }
-  document.querySelectorAll(".scn").forEach(btn=>{ btn.addEventListener("click",()=>{ const s=btn.dataset.scn; if(s==="reset"){ visOvr={}; semiOvr={}; refresh(null); return; } if(s==="dim-site"){ setSemi("/Site","set"); refresh({op:"set_semi set",path:"/Site"}); } if(s==="off-floor"){ setVisibility("/Site/BuildingA/Floor1","set"); refresh({op:"set_vis set",path:"/Site/BuildingA/Floor1"}); } if(s==="on-room"){ setVisibility("/Site/BuildingA/Floor1/Rooms/R101","clear"); refresh({op:"set_vis clear",path:"/Site/BuildingA/Floor1/Rooms/R101"}); } }); });
+  document.querySelectorAll(".scn").forEach(btn=>{ btn.addEventListener("click",()=>{ const s=btn.dataset.scn; if(s==="reset"){ visOvr={}; semiOvr={}; refresh(null); return; } if(s==="dim-site"){ setSemi("/Site","semi"); refresh({op:"set_semi semi",path:"/Site"}); } if(s==="off-floor"){ setVisibility("/Site/BuildingA/Floor1","hidden"); refresh({op:"set_vis hidden",path:"/Site/BuildingA/Floor1"}); } if(s==="on-room"){ setVisibility("/Site/BuildingA/Floor1/Rooms/R101","visible"); refresh({op:"set_vis visible",path:"/Site/BuildingA/Floor1/Rooms/R101"}); } }); });
   document.getElementById("s-nodes").textContent=FLAT.length;
   refresh(null);
 })();
@@ -517,9 +517,9 @@ export const script = `
   const own=(o,k)=>Object.prototype.hasOwnProperty.call(o,k);
 
   // resolve: walk up, return "set" if any ancestor/self overrides, else default
-  function resolveVis(p){ let c=p; while(c){ if(own(visOvr,c)) return "set"; c=parent(c);} return DEF_VIS; }
-  function resolveSemi(p){ let c=p; while(c){ if(own(semiOvr,c)) return "set"; c=parent(c);} return DEF_SEMI; }
-  function effective(p){ return resolveVis(p)==="set"?"off":resolveSemi(p)==="set"?"semi":"on"; }
+  function resolveVis(p){ let c=p; while(c){ if(own(visOvr,c)) return visOvr[c]; c=parent(c);} return DEF_VIS; }
+  function resolveSemi(p){ let c=p; while(c){ if(own(semiOvr,c)) return semiOvr[c]; c=parent(c);} return DEF_SEMI; }
+  function effective(p){ return resolveVis(p)==="hidden"?"off":resolveSemi(p)==="semi"?"semi":"on"; }
 
   // set_visibility("set") = hide ↓, set_visibility("clear") = show + walk ↑ clearing ancestors
   function setVisibility(path,value){
@@ -576,8 +576,8 @@ export const script = `
       eyeB.title=isVis?"visible — click to hide":"hidden — click to show (clears ancestors)";
       eyeB.setAttribute("aria-label",labelName(n.path)+(isVis?" → hide":" → show"));
       eyeB.addEventListener("click",()=>{
-        setVisibility(n.path,isVis?"set":"clear");
-        refresh({op:isVis?"set_vis set":"set_vis clear",path:n.path});
+        setVisibility(n.path,isVis?"hidden":"visible");
+        refresh({op:isVis?"set_vis hidden":"set_vis visible",path:n.path});
       });
       ctrls.appendChild(eyeB);
       const semiB=document.createElement("button");
@@ -587,8 +587,8 @@ export const script = `
       semiB.title=isSemi?"semi-transparent — click for solid":"solid — click for semi-transparent";
       semiB.setAttribute("aria-label",labelName(n.path)+(isSemi?" → solid":" → semi"));
       semiB.addEventListener("click",()=>{
-        setSemi(n.path,isSemi?"clear":"set");
-        refresh({op:isSemi?"set_semi clear":"set_semi set",path:n.path});
+        setSemi(n.path,isSemi?"solid":"semi");
+        refresh({op:isSemi?"set_semi solid":"set_semi semi",path:n.path});
       });
       ctrls.appendChild(semiB);
       row.appendChild(ctrls);
@@ -614,7 +614,8 @@ export const script = `
       el.className="json";
       let s='{\\n';
       keys.forEach((k,i)=>{
-        s+='  <span class="jk">"'+k+'"</span>: <span class="'+valCls+'">"set"</span>'+(i<keys.length-1?',':'')+'\\n';
+        const v=map[k];
+        s+='  <span class="jk">"'+k+'"</span>: <span class="'+valCls+'">"'+v+'"</span>'+(i<keys.length-1?',':'')+'\\n';
       });
       s+='}';
       el.innerHTML=s;
@@ -666,9 +667,9 @@ export const script = `
     btn.addEventListener("click",()=>{
       const s=btn.dataset.scn;
       if(s==="reset"){ visOvr={}; semiOvr={}; refresh(null); return; }
-      if(s==="dim-site"){ setSemi("/Site","set"); refresh({op:"set_semi set",path:"/Site"}); }
-      if(s==="off-floor"){ setVisibility("/Site/BuildingA/Floor1","set"); refresh({op:"set_vis set",path:"/Site/BuildingA/Floor1"}); }
-      if(s==="on-room"){ setVisibility("/Site/BuildingA/Floor1/Rooms/R101","clear"); refresh({op:"set_vis clear",path:"/Site/BuildingA/Floor1/Rooms/R101"}); }
+      if(s==="dim-site"){ setSemi("/Site","semi"); refresh({op:"set_semi semi",path:"/Site"}); }
+      if(s==="off-floor"){ setVisibility("/Site/BuildingA/Floor1","hidden"); refresh({op:"set_vis hidden",path:"/Site/BuildingA/Floor1"}); }
+      if(s==="on-room"){ setVisibility("/Site/BuildingA/Floor1/Rooms/R101","visible"); refresh({op:"set_vis visible",path:"/Site/BuildingA/Floor1/Rooms/R101"}); }
     });
   });
 
