@@ -516,31 +516,26 @@ export const script = `
   function parent(p){ const i=p.lastIndexOf("/"); return i<=0?null:p.slice(0,i); }
   const own=(o,k)=>Object.prototype.hasOwnProperty.call(o,k);
 
-  // resolve: walk up, return "set" if any ancestor/self overrides, else default
+  // resolve: walk up, return stored value if any ancestor/self overrides, else default
   function resolveVis(p){ let c=p; while(c){ if(own(visOvr,c)) return visOvr[c]; c=parent(c);} return DEF_VIS; }
   function resolveSemi(p){ let c=p; while(c){ if(own(semiOvr,c)) return semiOvr[c]; c=parent(c);} return DEF_SEMI; }
   function effective(p){ return resolveVis(p)==="hidden"?"off":resolveSemi(p)==="semi"?"semi":"on"; }
 
-  // set_visibility("set") = hide ↓, set_visibility("clear") = show + walk ↑ clearing ancestors
   function setVisibility(path,value){
-    if(value==="clear"){
+    if(value==="visible"){
       let cur=parent(path);
       while(cur){ if(own(visOvr,cur)) delete visOvr[cur]; cur=parent(cur); }
       Object.keys(visOvr).forEach(k=>{ if(k===path||k.startsWith(path+"/")) delete visOvr[k]; });
     } else {
       Object.keys(visOvr).forEach(k=>{ if(k===path||k.startsWith(path+"/")) delete visOvr[k]; });
       const par=parent(path);
-      if(resolveVis(par||"")!=="set") visOvr[path]="set";
+      if(resolveVis(par||"")!=="hidden") visOvr[path]="hidden";
     }
   }
 
-  // set_semi("set") = semi ↓, set_semi("clear") = solid ↓ (just delete)
   function setSemi(path,value){
     Object.keys(semiOvr).forEach(k=>{ if(k===path||k.startsWith(path+"/")) delete semiOvr[k]; });
-    if(value==="set"){
-      const par=parent(path);
-      if(resolveSemi(par||"")!=="set") semiOvr[path]="set";
-    }
+    const par=parent(path); if(value!==(par?resolveSemi(par):DEF_SEMI)) semiOvr[path]=value;
   }
 
   const enc=new TextEncoder();
