@@ -8,6 +8,14 @@ export interface Post {
 
 export const posts: Post[] = [
   {
+    slug: "sparse-override-tree-state",
+    title: "Sparse Override — Store a Whole Tree's State with Almost Nothing",
+    description:
+      "A directory tree where each node toggles visibility or transparency, children follow parents. The trick: only store nodes that disagree with their parent. Two functions, one tiny map, O(1) messages — the same model USD visibility uses.",
+    date: "2026-06-26",
+    tags: ["data-structures", "algorithms", "usd", "interactive"],
+  },
+  {
     slug: "enu-from-first-principles",
     title: "ENU From First Principles: the Tangent Frame Behind Every Georeference",
     description:
