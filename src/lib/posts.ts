@@ -10,7 +10,7 @@ export const posts: Post[] = [
   {
     slug: "adapter-vs-delegate",
     title: "Adapter vs Delegate, From First Principles",
-    description: "Adapter is a named GOF design pattern; delegation is the lower-level composition mechanism it uses internally. Untangling the two — from plain object composition, through the Adapter Pattern proper, to why OpenUSD/Hydra's HdSceneDelegate and HdRenderDelegate are actually Adapters wearing a Delegate's name.",
+    description: "Adapter is a GOF pattern with an intent; delegation is the humble mechanism underneath it. Untangling the two — plain composition, the Adapter Pattern proper, GOF's object-vs-class adapter fine print, the \"Delegate\" naming zoo (UIKit, C#, Kotlin), and why OpenUSD/Hydra's HdSceneDelegate and HdRenderDelegate are actually Adapters wearing a Delegate's name.",
     date: "2026-07-02",
     tags: ["software-design", "python", "patterns", "first-principles"],
   },
