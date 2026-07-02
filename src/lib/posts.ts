@@ -8,6 +8,13 @@ export interface Post {
 
 export const posts: Post[] = [
   {
+    slug: "adapter-vs-delegate",
+    title: "Adapter vs Delegate, From First Principles",
+    description: "Adapter is a named GOF design pattern; delegation is the lower-level composition mechanism it uses internally. Untangling the two — from plain object composition, through the Adapter Pattern proper, to why OpenUSD/Hydra's HdSceneDelegate and HdRenderDelegate are actually Adapters wearing a Delegate's name.",
+    date: "2026-07-02",
+    tags: ["software-design", "python", "patterns", "first-principles"],
+  },
+  {
     slug: "sparse-override-tree-state",
     title: "Sparse Override — Store a Whole Tree's State with Almost Nothing",
     description:
