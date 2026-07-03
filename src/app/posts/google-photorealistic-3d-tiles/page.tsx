@@ -1,15 +1,17 @@
-import type { Metadata } from "next";
-import { getPost } from "@/lib/posts";
+import { getPost, postMetadata } from "@/lib/posts";
 import ArtifactEmbed from "@/components/artifact-embed";
+import PostJsonLd from "@/components/post-jsonld";
 import { styles, html, script } from "./content";
 
 const post = getPost("google-photorealistic-3d-tiles")!;
 
-export const metadata: Metadata = {
-  title: `${post.title} | harrytruong`,
-  description: post.description,
-};
+export const metadata = postMetadata("google-photorealistic-3d-tiles");
 
 export default function GooglePhotorealistic3dTilesPage() {
-  return <ArtifactEmbed styles={styles} html={html} script={script} />;
+  return (
+    <>
+      <PostJsonLd post={post} />
+      <ArtifactEmbed styles={styles} html={html} script={script} />
+    </>
+  );
 }
