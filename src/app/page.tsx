@@ -7,6 +7,7 @@ import {
   SITE_GITHUB,
 } from "@/lib/site";
 import PostList from "@/components/post-list";
+import ThemeToggle from "@/components/theme-toggle";
 
 export default function Home() {
   const posts = getAllPosts();
@@ -27,69 +28,78 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="grain min-h-screen">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* Header */}
-      <header className="border-b-3 border-border px-4 sm:px-6 py-8">
-        <div className="mx-auto max-w-4xl">
-          <h1 className="font-pixel text-xl sm:text-2xl text-accent glow mb-3">
-            {">"} harrytruong
-          </h1>
-          <p className="font-retro text-xl sm:text-2xl text-foreground/70 cursor-blink">
-            learning artifacts & visual notes
-          </p>
-        </div>
-      </header>
-
-      {/* About */}
-      <section className="mx-auto max-w-4xl px-4 sm:px-6 pt-10 pb-6">
-        <div className="pixel-border bg-surface p-5 sm:p-6 rounded-sm">
-          <p className="font-pixel text-xs text-accent2 mb-3">// ABOUT</p>
-          <p className="font-retro text-xl leading-relaxed text-foreground/80">
-            Hi! I learn things and turn the interesting artifacts into
-            visual notes. This blog is a
-            collection of those explorations.
-          </p>
-        </div>
-      </section>
-
-      {/* Posts */}
-      <section className="mx-auto max-w-4xl px-4 sm:px-6 py-6">
-        <h2 className="font-pixel text-sm text-accent3 mb-6">
-          [{String(posts.length).padStart(2, "0")}] ARTIFACTS
-        </h2>
-
-        <PostList posts={posts} />
-      </section>
-
-      {/* Footer */}
-      <footer className="border-t-3 border-border mt-12 px-4 sm:px-6 py-8">
-        <div className="mx-auto max-w-4xl flex items-center justify-between gap-4 flex-wrap">
-          <p className="font-retro text-lg text-foreground/40">
-            noitq.hust@gmail.com
-          </p>
-          <div className="flex items-center gap-4">
-            <a
-              href="/feed.xml"
-              className="font-retro text-lg text-accent/60 hover:text-accent transition-colors"
-            >
-              rss
-            </a>
-            <a
-              href={SITE_GITHUB}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-retro text-lg text-accent/60 hover:text-accent transition-colors"
-            >
-              github
-            </a>
+      <div className="mx-auto max-w-3xl px-5 sm:px-8">
+        {/* Masthead */}
+        <header className="pt-12 sm:pt-16 pb-10">
+          <div className="flex items-center justify-between mb-12 sm:mb-16">
+            <p className="font-mono text-[11px] tracking-[0.22em] uppercase text-ink-soft">
+              <span className="text-accent">Harry Truong</span> — learning
+              artifacts
+            </p>
+            <ThemeToggle />
           </div>
-        </div>
-      </footer>
+
+          <h1 className="font-display font-semibold text-[2.6rem] sm:text-6xl leading-[1.04] tracking-tight">
+            Visual notes,
+            <br />
+            from{" "}
+            <em className="text-accent font-medium">first principles.</em>
+          </h1>
+
+          <p className="mt-6 text-lg sm:text-xl italic text-ink-soft max-w-[46ch] leading-relaxed">
+            Deep dives on graphics, USD &amp; Omniverse, geospatial 3D, and
+            software design — each one a hand-built artifact.
+          </p>
+        </header>
+
+        <div className="rule-double" />
+
+        {/* Index */}
+        <main className="pt-8 pb-4">
+          <div className="flex items-baseline justify-between mb-7">
+            <h2 className="font-mono text-[11px] tracking-[0.22em] uppercase text-ink-faint">
+              Index — {posts.length} entries
+            </h2>
+          </div>
+
+          <PostList posts={posts} />
+        </main>
+
+        {/* Footer */}
+        <footer className="mt-16 pb-16">
+          <div className="rule-double mb-7" />
+          <div className="flex items-center justify-between gap-4 flex-wrap font-mono text-[12px] text-ink-soft">
+            <a
+              href="mailto:noitq.hust@gmail.com"
+              className="hover:text-accent transition-colors"
+            >
+              noitq.hust@gmail.com
+            </a>
+            <div className="flex items-center gap-5">
+              <a
+                href="/feed.xml"
+                className="hover:text-accent transition-colors"
+              >
+                rss
+              </a>
+              <a
+                href={SITE_GITHUB}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-accent transition-colors"
+              >
+                github ↗
+              </a>
+            </div>
+          </div>
+        </footer>
+      </div>
     </div>
   );
 }
