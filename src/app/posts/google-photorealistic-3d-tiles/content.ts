@@ -1,132 +1,99 @@
 export const styles = `
   .artifact-scope{
-    --bg:#fbfbfd; --surface:#ffffff; --ink:#15171a; --ink-soft:#3a4252;
-    --muted:#6b7785; --line:#e3e6eb; --line-soft:#eef0f3;
-    --accent:#2563eb; --accent-soft:#eff6ff;
-    --good:#16a34a; --good-soft:#f0fdf4;
-    --bad:#dc2626; --bad-soft:#fef2f2;
-    --warn:#d97706; --warn-soft:#fffbeb;
-    --purple:#7c3aed; --purple-soft:#f5f3ff;
-    background:var(--bg);color:var(--ink);
-    font:17px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    font-size:17px;line-height:1.7;
     -webkit-font-smoothing:antialiased;
   }
   .artifact-scope *{box-sizing:border-box}
 
-  /* ====== Standard topbar (matches site) ====== */
-  .artifact-scope .topbar{
-    border-bottom:1px solid var(--line);padding:14px 0;
-    background:rgba(251,251,253,0.92);backdrop-filter:blur(8px);
-    position:sticky;top:0;z-index:10}
-  .artifact-scope .topbar-inner{
-    display:flex;justify-content:space-between;align-items:center;
-    max-width:880px;margin:0 auto;padding:0 24px}
-  .artifact-scope .logo{
-    font-family:"SF Mono",Menlo,Consolas,monospace;font-weight:600;font-size:14px;
-    letter-spacing:.05em;color:var(--accent)}
-  .artifact-scope .logo a{color:inherit;text-decoration:none;border:none}
-  .artifact-scope .logo a:hover{opacity:.7}
-  .artifact-scope .meta-tag{
-    background:var(--accent-soft);border:1px solid #c7dafe;border-radius:999px;
-    padding:3px 12px;font-family:"SF Mono",Menlo,Consolas,monospace;font-size:11px;
-    letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
-
   .artifact-scope article{max-width:880px;margin:0 auto;padding:56px 24px 96px}
-  .artifact-scope header.post-head{border-bottom:1px solid var(--line);padding-bottom:32px;margin-bottom:8px}
-  .artifact-scope .eyebrow{color:var(--accent);font-size:13px;letter-spacing:1.5px;text-transform:uppercase;
+  .artifact-scope header.post-head{border-bottom:1px solid var(--at-line);padding-bottom:32px;margin-bottom:8px}
+  .artifact-scope .eyebrow{color:var(--at-accent);font-family:var(--at-font-mono);font-size:13px;letter-spacing:1.5px;text-transform:uppercase;
     font-weight:700;margin-bottom:14px}
-  .artifact-scope h1{font-size:38px;line-height:1.2;letter-spacing:-.5px;margin:0 0 16px;font-weight:800}
-  .artifact-scope .lead{font-size:20px;line-height:1.55;color:var(--ink-soft);margin:0;font-weight:400}
-  .artifact-scope .byline{color:var(--muted);font-size:14px;margin-top:18px}
-  .artifact-scope h2{font-size:26px;margin:64px 0 14px;font-weight:800;letter-spacing:-.3px;
+  .artifact-scope h1{font-family:var(--at-font-display);font-size:38px;line-height:1.2;letter-spacing:-.5px;margin:0 0 16px;font-weight:800}
+  .artifact-scope .lead{font-size:20px;line-height:1.55;color:var(--at-muted);margin:0;font-weight:400}
+  .artifact-scope .byline{color:var(--at-faint);font-family:var(--at-font-mono);font-size:14px;margin-top:18px}
+  .artifact-scope h2{font-family:var(--at-font-display);font-size:26px;margin:64px 0 14px;font-weight:800;letter-spacing:-.3px;
     display:flex;align-items:center;gap:14px}
-  .artifact-scope h2 .step{flex:0 0 36px;height:36px;background:var(--accent);color:#fff;border-radius:10px;
-    display:grid;place-items:center;font-size:15px;font-weight:700}
-  .artifact-scope h3{font-size:19px;margin:32px 0 8px;font-weight:700;color:var(--ink)}
-  .artifact-scope p{margin:14px 0;color:var(--ink-soft)}
-  .artifact-scope p strong, .artifact-scope li strong{color:var(--ink);font-weight:700}
-  .artifact-scope code{background:#f1f3f5;color:#14213d;padding:2px 6px;border-radius:4px;
-    font-size:.92em;font-family:"SF Mono",Menlo,Consolas,monospace}
-  .artifact-scope pre{background:#0f172a;color:#e2e8f0;padding:18px 22px;border-radius:10px;overflow-x:auto;
-    font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13.5px;line-height:1.6;margin:18px 0}
-  .artifact-scope .figure{background:var(--surface);border:1px solid var(--line);border-radius:14px;
+  .artifact-scope h2 .step{flex:0 0 36px;height:36px;background:var(--at-accent);color:var(--at-bg);border-radius:10px;
+    display:grid;place-items:center;font-family:var(--at-font-mono);font-size:15px;font-weight:700}
+  .artifact-scope h3{font-family:var(--at-font-display);font-size:19px;margin:32px 0 8px;font-weight:700;color:var(--at-text)}
+  .artifact-scope p{margin:14px 0;color:var(--at-muted)}
+  .artifact-scope p strong, .artifact-scope li strong{color:var(--at-text);font-weight:700}
+  .artifact-scope code{background:var(--at-inset);color:var(--at-text);padding:2px 6px;border-radius:4px;
+    font-size:.92em;font-family:var(--at-font-mono)}
+  .artifact-scope pre{background:var(--at-inset);color:var(--at-text);padding:18px 22px;border-radius:10px;overflow-x:auto;
+    font-family:var(--at-font-mono);font-size:13.5px;line-height:1.6;margin:18px 0}
+  .artifact-scope .figure{background:var(--at-surface);border:1px solid var(--at-line);border-radius:14px;
     padding:28px;margin:24px 0}
-  .artifact-scope .figure-caption{color:var(--muted);font-size:13.5px;text-align:center;margin-top:16px;
+  .artifact-scope .figure-caption{color:var(--at-faint);font-size:13.5px;text-align:center;margin-top:16px;
     font-style:italic}
   .artifact-scope .callout{padding:16px 20px;border-radius:8px;margin:22px 0;
-    background:var(--accent-soft);border:1px solid #c7dafe;border-left:4px solid var(--accent)}
-  .artifact-scope .callout.warn{background:var(--warn-soft);border-color:#fcd34d;border-left-color:var(--warn)}
-  .artifact-scope .callout.good{background:var(--good-soft);border-color:#bbf7d0;border-left-color:var(--good)}
-  .artifact-scope .callout.bad{background:var(--bad-soft);border-color:#fecaca;border-left-color:var(--bad)}
+    background:var(--at-blue-soft);border:1px solid var(--at-line);border-left:4px solid var(--at-blue)}
+  .artifact-scope .callout.warn{background:var(--at-amber-soft);border-left-color:var(--at-amber)}
+  .artifact-scope .callout.good{background:var(--at-green-soft);border-left-color:var(--at-green)}
+  .artifact-scope .callout.bad{background:var(--at-accent-soft);border-left-color:var(--at-accent)}
   .artifact-scope .callout p:first-child{margin-top:0}
   .artifact-scope .callout p:last-child{margin-bottom:0}
-  .artifact-scope .callout .title{display:block;color:var(--ink);font-weight:700;margin-bottom:6px;font-size:15px}
+  .artifact-scope .callout .title{display:block;color:var(--at-text);font-weight:700;margin-bottom:6px;font-size:15px}
   .artifact-scope .grid{display:grid;gap:14px;margin:18px 0}
   .artifact-scope .g2{grid-template-columns:1fr 1fr}
   .artifact-scope .g3{grid-template-columns:1fr 1fr 1fr}
   .artifact-scope .g4{grid-template-columns:1fr 1fr 1fr 1fr}
   @media(max-width:720px){.artifact-scope .g2,.artifact-scope .g3,.artifact-scope .g4{grid-template-columns:1fr}}
-  .artifact-scope .box{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px}
-  .artifact-scope .box h4{margin:0 0 8px;font-size:15px;color:var(--ink);font-weight:700}
+  .artifact-scope .box{background:var(--at-surface);border:1px solid var(--at-line);border-radius:10px;padding:18px}
+  .artifact-scope .box h4{font-family:var(--at-font-display);margin:0 0 8px;font-size:15px;color:var(--at-text);font-weight:700}
   .artifact-scope .box p{margin:0;font-size:14.5px;line-height:1.55}
   .artifact-scope .box .icon{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;
-    color:#fff;font-weight:800;font-size:14px;margin-bottom:10px}
-  .artifact-scope .box .icon.blue{background:var(--accent)}
-  .artifact-scope .box .icon.green{background:var(--good)}
-  .artifact-scope .box .icon.red{background:var(--bad)}
-  .artifact-scope .box .icon.amber{background:var(--warn)}
-  .artifact-scope .box .icon.purple{background:var(--purple)}
-  .artifact-scope .tag{display:inline-block;font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px;
+    color:var(--at-bg);font-weight:800;font-size:14px;margin-bottom:10px}
+  .artifact-scope .box .icon.blue{background:var(--at-blue)}
+  .artifact-scope .box .icon.green{background:var(--at-green)}
+  .artifact-scope .box .icon.red{background:var(--at-accent)}
+  .artifact-scope .box .icon.amber{background:var(--at-amber)}
+  .artifact-scope .box .icon.purple{background:var(--at-violet)}
+  .artifact-scope .tag{display:inline-block;font-family:var(--at-font-mono);font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px;
     letter-spacing:.5px}
-  .artifact-scope .tag.good{background:var(--good-soft);color:var(--good);border:1px solid #bbf7d0}
-  .artifact-scope .tag.bad{background:var(--bad-soft);color:var(--bad);border:1px solid #fecaca}
-  .artifact-scope .tag.warn{background:var(--warn-soft);color:var(--warn);border:1px solid #fcd34d}
-  .artifact-scope .tag.muted{background:#f1f3f5;color:var(--muted);border:1px solid var(--line)}
+  .artifact-scope .tag.good{background:var(--at-green-soft);color:var(--at-green);border:1px solid var(--at-line)}
+  .artifact-scope .tag.bad{background:var(--at-accent-soft);color:var(--at-accent);border:1px solid var(--at-line)}
+  .artifact-scope .tag.warn{background:var(--at-amber-soft);color:var(--at-amber);border:1px solid var(--at-line)}
+  .artifact-scope .tag.muted{background:var(--at-inset);color:var(--at-faint);border:1px solid var(--at-line)}
   .artifact-scope table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14.5px}
-  .artifact-scope th,.artifact-scope td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
-  .artifact-scope th{background:#f9fafb;color:var(--ink);font-weight:700;font-size:12px;letter-spacing:.4px;
+  .artifact-scope th,.artifact-scope td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--at-line);vertical-align:top}
+  .artifact-scope th{background:var(--at-surface);color:var(--at-text);font-family:var(--at-font-mono);font-weight:700;font-size:12px;letter-spacing:.4px;
     text-transform:uppercase}
-  .artifact-scope td:first-child{font-weight:600;color:var(--ink)}
+  .artifact-scope td:first-child{font-weight:600;color:var(--at-text)}
   .artifact-scope svg.diagram{width:100%;height:auto;display:block}
-  .artifact-scope .toc{background:var(--surface);border:1px solid var(--line);border-radius:10px;
+  .artifact-scope .toc{background:var(--at-surface);border:1px solid var(--at-line);border-radius:10px;
     padding:22px 26px;margin:32px 0}
-  .artifact-scope .toc h3{margin:0 0 12px;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;
-    color:var(--muted);font-weight:700}
-  .artifact-scope .toc ol{margin:0;padding-left:22px;color:var(--ink-soft);line-height:1.9}
-  .artifact-scope .toc a{color:var(--ink);text-decoration:none;border-bottom:1px solid transparent}
-  .artifact-scope .toc a:hover{color:var(--accent);border-bottom-color:var(--accent)}
-  .artifact-scope .mono{font-family:"SF Mono",Menlo,Consolas,monospace}
-  .artifact-scope .kbd{background:#f9fafb;border:1px solid var(--line);border-radius:5px;padding:1px 6px;
-    font-family:"SF Mono",Menlo,Consolas,monospace;font-size:.85em;color:var(--ink)}
+  .artifact-scope .toc h3{font-family:var(--at-font-mono);margin:0 0 12px;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;
+    color:var(--at-faint);font-weight:700}
+  .artifact-scope .toc ol{margin:0;padding-left:22px;color:var(--at-muted);line-height:1.9}
+  .artifact-scope .toc a{color:var(--at-text);text-decoration:none;border-bottom:1px solid transparent}
+  .artifact-scope .toc a:hover{color:var(--at-accent);border-bottom-color:var(--at-accent)}
+  .artifact-scope .mono{font-family:var(--at-font-mono)}
+  .artifact-scope .kbd{background:var(--at-surface);border:1px solid var(--at-line);border-radius:5px;padding:1px 6px;
+    font-family:var(--at-font-mono);font-size:.85em;color:var(--at-text)}
   .artifact-scope ul.clean{list-style:none;padding:0;margin:14px 0}
-  .artifact-scope ul.clean li{padding:10px 0;border-bottom:1px solid var(--line-soft);color:var(--ink-soft)}
+  .artifact-scope ul.clean li{padding:10px 0;border-bottom:1px solid var(--at-line);color:var(--at-muted)}
   .artifact-scope ul.clean li:last-child{border-bottom:none}
-  .artifact-scope ul.clean li strong{color:var(--ink)}
-  .artifact-scope .kicker{font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);
+  .artifact-scope ul.clean li strong{color:var(--at-text)}
+  .artifact-scope .kicker{font-family:var(--at-font-mono);font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:var(--at-faint);
     font-weight:700;margin-bottom:6px}
-  .artifact-scope .ascii{background:#f9fafb;border:1px solid var(--line);border-radius:10px;
-    font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13px;line-height:1.55;
-    color:var(--ink);padding:18px 22px;white-space:pre;overflow-x:auto}
-  .artifact-scope .ascii .c-acc{color:var(--accent);font-weight:700}
-  .artifact-scope .ascii .c-muted{color:var(--muted)}
-  .artifact-scope .ascii .c-good{color:var(--good);font-weight:700}
-  .artifact-scope .ascii .c-bad{color:var(--bad);font-weight:700}
+  .artifact-scope .ascii{background:var(--at-inset);border:1px solid var(--at-line);border-radius:10px;
+    font-family:var(--at-font-mono);font-size:13px;line-height:1.55;
+    color:var(--at-text);padding:18px 22px;white-space:pre;overflow-x:auto}
+  .artifact-scope .ascii .c-acc{color:var(--at-accent);font-weight:700}
+  .artifact-scope .ascii .c-muted{color:var(--at-faint)}
+  .artifact-scope .ascii .c-good{color:var(--at-green);font-weight:700}
+  .artifact-scope .ascii .c-bad{color:var(--at-accent);font-weight:700}
 
   /* ====== Footer (matches site) ====== */
   .artifact-scope .footer{max-width:880px;margin:64px auto 0;padding:24px;
-    border-top:1px solid var(--line);color:var(--muted);font-size:13px;text-align:center}
-  .artifact-scope .footer p{color:var(--muted);margin:0}
-  .artifact-scope .footer .ornament{font-size:22px;color:var(--accent);margin-bottom:10px}
+    border-top:1px solid var(--at-line);color:var(--at-faint);font-size:13px;text-align:center}
+  .artifact-scope .footer p{color:var(--at-faint);margin:0}
+  .artifact-scope .footer .ornament{font-size:22px;color:var(--at-accent);margin-bottom:10px}
 `;
 
 export const html = `
-<div class="topbar">
-  <div class="topbar-inner">
-    <span class="logo"><a href="/">&#9664; harrytruong</a></span>
-    <span class="meta-tag">DEEP DIVE — GEOSPATIAL 3D</span>
-  </div>
-</div>
-
 <article>
 
 <header class="post-head">
@@ -155,7 +122,7 @@ export const html = `
 <p>Crucially: it is <strong>not</strong> a Google-only viewer. Because it&rsquo;s standard 3D Tiles, <em>any</em> compliant renderer can consume it &mdash; CesiumJS, Cesium for Unreal, and <strong>Cesium for Omniverse</strong>. That&rsquo;s the whole reason it matters here.</p>
 
 <div class="callout">
-  <span class="title">First principle</span>
+  <span class="title">The mental model</span>
   <p>&ldquo;Photorealistic 3D Tiles&rdquo; is just a normal 3D Tiles dataset (Part 2) where the payloads happen to be photogrammetry of the real Earth, and the root lives on Google&rsquo;s servers instead of yours. Everything you learned about geometric error, screen-space error, and lazy fetching applies unchanged.</p>
 </div>
 
@@ -170,27 +137,27 @@ export const html = `
 
 <div class="figure">
   <svg class="diagram" viewBox="0 0 780 250" role="img" aria-label="Google root URL feeding Cesium in Omniverse">
-    <defs><marker id="g3dt-arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#2563eb"/></marker></defs>
+    <defs><marker id="g3dt-arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="var(--at-accent)"/></marker></defs>
 
-    <rect x="20" y="90" width="180" height="70" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
-    <text x="110" y="118" fill="#15171a" font-size="12" text-anchor="middle" font-weight="700">Google Map Tiles API</text>
-    <text x="110" y="138" fill="#6b7785" font-size="10" text-anchor="middle">root.json + GLB tiles</text>
-    <text x="110" y="151" fill="#6b7785" font-size="10" text-anchor="middle">(planet-scale mesh)</text>
+    <rect x="20" y="90" width="180" height="70" rx="10" fill="var(--at-blue-soft)" stroke="var(--at-blue)" stroke-width="1.5"/>
+    <text x="110" y="118" fill="var(--at-text)" font-size="12" text-anchor="middle" font-weight="700">Google Map Tiles API</text>
+    <text x="110" y="138" fill="var(--at-faint)" font-size="10" text-anchor="middle">root.json + GLB tiles</text>
+    <text x="110" y="151" fill="var(--at-faint)" font-size="10" text-anchor="middle">(planet-scale mesh)</text>
 
-    <rect x="300" y="90" width="180" height="70" rx="10" fill="#f5f3ff" stroke="#7c3aed" stroke-width="1.5"/>
-    <text x="390" y="118" fill="#15171a" font-size="12" text-anchor="middle" font-weight="700">CesiumTileset prim</text>
-    <text x="390" y="138" fill="#6b7785" font-size="10" text-anchor="middle">Cesium Native streams</text>
-    <text x="390" y="151" fill="#6b7785" font-size="10" text-anchor="middle">via the Part 2 loop</text>
+    <rect x="300" y="90" width="180" height="70" rx="10" fill="var(--at-violet-soft)" stroke="var(--at-violet)" stroke-width="1.5"/>
+    <text x="390" y="118" fill="var(--at-text)" font-size="12" text-anchor="middle" font-weight="700">CesiumTileset prim</text>
+    <text x="390" y="138" fill="var(--at-faint)" font-size="10" text-anchor="middle">Cesium Native streams</text>
+    <text x="390" y="151" fill="var(--at-faint)" font-size="10" text-anchor="middle">via the Part 2 loop</text>
 
-    <rect x="580" y="90" width="180" height="70" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
-    <text x="670" y="118" fill="#15171a" font-size="12" text-anchor="middle" font-weight="700">Omniverse RTX</text>
-    <text x="670" y="138" fill="#6b7785" font-size="10" text-anchor="middle">your model, inside</text>
-    <text x="670" y="151" fill="#6b7785" font-size="10" text-anchor="middle">the real world</text>
+    <rect x="580" y="90" width="180" height="70" rx="10" fill="var(--at-green-soft)" stroke="var(--at-green)" stroke-width="1.5"/>
+    <text x="670" y="118" fill="var(--at-text)" font-size="12" text-anchor="middle" font-weight="700">Omniverse RTX</text>
+    <text x="670" y="138" fill="var(--at-faint)" font-size="10" text-anchor="middle">your model, inside</text>
+    <text x="670" y="151" fill="var(--at-faint)" font-size="10" text-anchor="middle">the real world</text>
 
-    <path d="M200 125 H300" stroke="#2563eb" stroke-width="2" marker-end="url(#g3dt-arrow)"/>
-    <path d="M480 125 H580" stroke="#2563eb" stroke-width="2" marker-end="url(#g3dt-arrow)"/>
-    <text x="206" y="80" fill="#6b7785" font-family="SF Mono,monospace" font-size="10">one URL + API key</text>
-    <text x="20" y="210" fill="#3a4252" font-size="12">In Omniverse you add a CesiumTileset prim, paste the Google connection, toggle it on. Done.</text>
+    <path d="M200 125 H300" stroke="var(--at-accent)" stroke-width="2" marker-end="url(#g3dt-arrow)"/>
+    <path d="M480 125 H580" stroke="var(--at-accent)" stroke-width="2" marker-end="url(#g3dt-arrow)"/>
+    <text x="206" y="80" fill="var(--at-accent)" font-family="var(--at-font-mono)" font-size="10">one URL + API key</text>
+    <text x="20" y="210" fill="var(--at-muted)" font-size="12">In Omniverse you add a CesiumTileset prim, paste the Google connection, toggle it on. Done.</text>
   </svg>
   <p class="figure-caption">Two common wiring paths: (a) direct Google API key on the tileset, or (b) via a <strong>Cesium ion</strong> &ldquo;Google Photorealistic 3D Tiles&rdquo; connection, which proxies the key and bundles attribution.</p>
 </div>

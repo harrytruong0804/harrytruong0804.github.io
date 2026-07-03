@@ -1,65 +1,9 @@
 export const styles = `
-  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
-
-  .artifact-scope {
-    --bg: #FDFAF6;
-    --text: #1a1a1a;
-    --text-muted: #5a5a5a;
-    --accent: #C0392B;
-    --accent-soft: #E74C3C;
-    --blue: #2471A3;
-    --blue-soft: #AED6F1;
-    --green: #1E8449;
-    --card-bg: #FFFFFF;
-    --card-border: #E8E0D5;
-    --code-bg: #F4F0EB;
-    --highlight-prob: #FDF2E9;
-    --highlight-like: #EBF5FB;
-    --divider: #D5C9BB;
-  }
-
   .artifact-scope, .artifact-scope * { margin: 0; padding: 0; box-sizing: border-box; }
 
   .artifact-scope a { color: inherit; text-decoration: none; }
 
-  .artifact-scope .topbar {
-    background: var(--card-bg);
-    border-bottom: 1px solid var(--card-border);
-    padding: 12px 0;
-  }
-  .artifact-scope .topbar-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 0 24px;
-  }
-  .artifact-scope .logo {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--accent);
-    letter-spacing: 0.05em;
-  }
-  .artifact-scope .logo a:hover {
-    opacity: 0.7;
-  }
-  .artifact-scope .meta-tag {
-    background: rgba(192, 57, 43, 0.08);
-    border: 1px solid var(--card-border);
-    color: var(--accent);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    padding: 3px 10px;
-    border-radius: 3px;
-    letter-spacing: 1px;
-  }
-
   .artifact-scope {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Source Sans 3', sans-serif;
     font-size: 18px;
     line-height: 1.75;
     -webkit-font-smoothing: antialiased;
@@ -82,36 +26,36 @@ export const styles = `
   .artifact-scope .header {
     margin-bottom: 56px;
     padding-bottom: 40px;
-    border-bottom: 1px solid var(--divider);
+    border-bottom: 1px solid var(--at-line);
   }
 
   .artifact-scope .tag {
     display: inline-block;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--at-font-mono);
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: var(--accent);
-    background: rgba(192, 57, 43, 0.08);
+    color: var(--at-accent);
+    background: var(--at-accent-soft);
     padding: 4px 12px;
     border-radius: 3px;
     margin-bottom: 20px;
   }
 
   .artifact-scope h1 {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--at-font-display);
     font-size: clamp(32px, 5vw, 48px);
     font-weight: 700;
     line-height: 1.15;
-    color: var(--text);
+    color: var(--at-text);
     margin-bottom: 16px;
     letter-spacing: -0.5px;
   }
 
   .artifact-scope .subtitle {
     font-size: 20px;
-    color: var(--text-muted);
+    color: var(--at-muted);
     font-weight: 300;
     line-height: 1.6;
   }
@@ -119,18 +63,18 @@ export const styles = `
   .artifact-scope .meta {
     margin-top: 24px;
     font-size: 14px;
-    color: var(--text-muted);
-    font-family: 'JetBrains Mono', monospace;
+    color: var(--at-muted);
+    font-family: var(--at-font-mono);
   }
 
   /* Prose */
   .artifact-scope h2 {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--at-font-display);
     font-size: 28px;
     font-weight: 700;
     margin-top: 56px;
     margin-bottom: 16px;
-    color: var(--text);
+    color: var(--at-text);
   }
 
   .artifact-scope h3 {
@@ -138,14 +82,14 @@ export const styles = `
     font-weight: 700;
     margin-top: 36px;
     margin-bottom: 12px;
-    color: var(--text);
+    color: var(--at-text);
   }
 
   .artifact-scope p { margin-bottom: 20px; }
 
   .artifact-scope strong { font-weight: 700; }
 
-  .artifact-scope em { font-family: 'Playfair Display', serif; font-style: italic; }
+  .artifact-scope em { font-family: var(--at-font-display); font-style: italic; }
 
   /* Callout Cards */
   .artifact-scope .callout {
@@ -157,17 +101,17 @@ export const styles = `
   }
 
   .artifact-scope .callout-prob {
-    background: var(--highlight-prob);
-    border-color: var(--accent);
+    background: var(--at-accent-soft);
+    border-color: var(--at-accent);
   }
 
   .artifact-scope .callout-like {
-    background: var(--highlight-like);
-    border-color: var(--blue);
+    background: var(--at-blue-soft);
+    border-color: var(--at-blue);
   }
 
   .artifact-scope .callout-label {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--at-font-mono);
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 2px;
@@ -175,11 +119,11 @@ export const styles = `
     margin-bottom: 10px;
   }
 
-  .artifact-scope .callout-prob .callout-label { color: var(--accent); }
-  .artifact-scope .callout-like .callout-label { color: var(--blue); }
+  .artifact-scope .callout-prob .callout-label { color: var(--at-accent); }
+  .artifact-scope .callout-like .callout-label { color: var(--at-blue); }
 
   .artifact-scope .callout .question {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--at-font-display);
     font-size: 20px;
     font-style: italic;
     line-height: 1.5;
@@ -188,12 +132,12 @@ export const styles = `
 
   /* Math blocks */
   .artifact-scope .math-block {
-    background: var(--code-bg);
-    border: 1px solid var(--card-border);
+    background: var(--at-inset);
+    border: 1px solid var(--at-line);
     border-radius: 6px;
     padding: 20px 24px;
     margin: 24px 0;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--at-font-mono);
     font-size: 15px;
     line-height: 1.8;
     overflow-x: auto;
@@ -205,12 +149,12 @@ export const styles = `
   }
 
   .artifact-scope .math-block .result {
-    color: var(--accent);
+    color: var(--at-accent);
     font-weight: 500;
   }
 
   .artifact-scope .math-block .result-blue {
-    color: var(--blue);
+    color: var(--at-blue);
     font-weight: 500;
   }
 
@@ -223,26 +167,26 @@ export const styles = `
   }
 
   .artifact-scope .comp-card {
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
+    background: var(--at-surface);
+    border: 1px solid var(--at-line);
     border-radius: 8px;
     padding: 24px;
     border-top: 3px solid;
   }
 
-  .artifact-scope .comp-card.prob { border-top-color: var(--accent); }
-  .artifact-scope .comp-card.like { border-top-color: var(--blue); }
+  .artifact-scope .comp-card.prob { border-top-color: var(--at-accent); }
+  .artifact-scope .comp-card.like { border-top-color: var(--at-blue); }
 
   .artifact-scope .comp-card h4 {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--at-font-mono);
     font-size: 13px;
     letter-spacing: 1.5px;
     text-transform: uppercase;
     margin-bottom: 12px;
   }
 
-  .artifact-scope .comp-card.prob h4 { color: var(--accent); }
-  .artifact-scope .comp-card.like h4 { color: var(--blue); }
+  .artifact-scope .comp-card.prob h4 { color: var(--at-accent); }
+  .artifact-scope .comp-card.like h4 { color: var(--at-blue); }
 
   .artifact-scope .comp-card p {
     font-size: 15px;
@@ -276,20 +220,20 @@ export const styles = `
     width: 40px; height: 40px;
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--at-font-mono);
     font-size: 13px;
     font-weight: 700;
     animation: coinDrop 0.4s ease-out both;
   }
 
   .artifact-scope .coin.heads {
-    background: var(--accent);
-    color: #fff;
+    background: var(--at-accent);
+    color: var(--at-bg);
   }
 
   .artifact-scope .coin.tails {
-    background: var(--card-border);
-    color: var(--text-muted);
+    background: var(--at-inset);
+    color: var(--at-muted);
   }
 
   @keyframes coinDrop {
@@ -310,8 +254,9 @@ export const styles = `
 
   /* Key insight box */
   .artifact-scope .insight {
-    background: var(--text);
-    color: #fff;
+    background: var(--at-accent-soft);
+    color: var(--at-text);
+    border-left: 4px solid var(--at-accent);
     border-radius: 8px;
     padding: 32px;
     margin: 40px 0;
@@ -324,26 +269,27 @@ export const styles = `
     position: absolute;
     top: -10px; right: 20px;
     font-size: 80px;
-    opacity: 0.06;
+    color: var(--at-accent);
+    opacity: 0.1;
   }
 
   .artifact-scope .insight p {
-    color: rgba(255,255,255,0.88);
+    color: var(--at-text);
     margin-bottom: 12px;
     font-size: 17px;
   }
 
   .artifact-scope .insight p:last-child { margin-bottom: 0; }
 
-  .artifact-scope .insight strong { color: #fff; }
+  .artifact-scope .insight strong { color: var(--at-accent); }
 
   /* Blockquote */
   .artifact-scope blockquote {
-    border-left: 3px solid var(--divider);
+    border-left: 3px solid var(--at-line-strong);
     padding-left: 20px;
     margin: 28px 0;
-    color: var(--text-muted);
-    font-family: 'Playfair Display', serif;
+    color: var(--at-muted);
+    font-family: var(--at-font-display);
     font-style: italic;
     font-size: 19px;
     line-height: 1.6;
@@ -353,16 +299,16 @@ export const styles = `
   .artifact-scope .footer {
     margin-top: 64px;
     padding-top: 32px;
-    border-top: 1px solid var(--divider);
+    border-top: 1px solid var(--at-line);
     font-size: 14px;
-    color: var(--text-muted);
+    color: var(--at-muted);
     text-align: center;
   }
 
   .artifact-scope code {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--at-font-mono);
     font-size: 15px;
-    background: var(--code-bg);
+    background: var(--at-inset);
     padding: 2px 6px;
     border-radius: 3px;
   }
@@ -376,12 +322,6 @@ export const styles = `
 `;
 
 export const html = `
-<div class="topbar">
-  <div class="topbar-inner">
-    <span class="logo"><a href="/">&#9664; harrytruong</a></span>
-    <span class="meta-tag">STATISTICS</span>
-  </div>
-</div>
 <div class="noise"></div>
 <div class="container">
 

@@ -1,67 +1,12 @@
 export const styles = `
-  @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap');
-
   .artifact-scope {
-    --bg: #FAF9F6;
-    --bg-surface: #F2F0EB;
-    --bg-code: #1C1C1E;
-    --text: #1A1A1A;
-    --text-secondary: #6B6B6B;
-    --text-muted: #9A9A9A;
-    --accent: #C05A2C;
-    --accent-light: #F4E8E0;
-    --teal: #1D7A5F;
-    --teal-light: #E1F5EE;
-    --purple: #5B4DC7;
-    --purple-light: #EEEDFE;
-    --blue: #2563EB;
-    --blue-light: #E6F1FB;
-    --amber: #B07318;
-    --amber-light: #FDF4E3;
-    --red: #C03030;
-    --red-light: #FCEBEB;
-    --green: #3D7A15;
-    --green-light: #EAF3DE;
-    --border: rgba(0,0,0,0.08);
-    --font-display: 'Instrument Serif', Georgia, serif;
-    --font-body: 'DM Sans', -apple-system, sans-serif;
-    --font-mono: 'JetBrains Mono', monospace;
     --max-w: 760px;
     --gutter: 24px;
 
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--font-body);
     font-size: 17px;
     line-height: 1.75;
     -webkit-font-smoothing: antialiased;
     scroll-behavior: smooth;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    .artifact-scope {
-      --bg: #141413;
-      --bg-surface: #1E1E1C;
-      --bg-code: #0D0D0D;
-      --text: #E8E6E0;
-      --text-secondary: #A0A09A;
-      --text-muted: #6B6B66;
-      --accent: #E07040;
-      --accent-light: #2A1D15;
-      --teal: #3DBE8A;
-      --teal-light: #0D2A1F;
-      --purple: #8B7BF0;
-      --purple-light: #1C1A30;
-      --blue: #5B9CF5;
-      --blue-light: #0D1A2E;
-      --amber: #E0A040;
-      --amber-light: #2A2010;
-      --red: #E05050;
-      --red-light: #2A1010;
-      --green: #6BBF35;
-      --green-light: #152A0D;
-      --border: rgba(255,255,255,0.08);
-    }
   }
 
   .artifact-scope * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -70,21 +15,21 @@ export const styles = `
 
   .artifact-scope .hero {
     padding: 80px 0 60px;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--at-line);
     margin-bottom: 48px;
   }
 
   .artifact-scope .hero-eyebrow {
-    font-family: var(--font-mono);
+    font-family: var(--at-font-mono);
     font-size: 12px;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: var(--accent);
+    color: var(--at-accent);
     margin-bottom: 16px;
   }
 
   .artifact-scope .hero h1 {
-    font-family: var(--font-display);
+    font-family: var(--at-font-display);
     font-size: clamp(36px, 6vw, 54px);
     line-height: 1.1;
     font-weight: 400;
@@ -94,7 +39,7 @@ export const styles = `
 
   .artifact-scope .hero-subtitle {
     font-size: 19px;
-    color: var(--text-secondary);
+    color: var(--at-muted);
     max-width: 600px;
     line-height: 1.6;
   }
@@ -104,23 +49,23 @@ export const styles = `
     display: flex;
     gap: 24px;
     font-size: 13px;
-    color: var(--text-muted);
-    font-family: var(--font-mono);
+    color: var(--at-faint);
+    font-family: var(--at-font-mono);
   }
 
   .artifact-scope .toc {
-    background: var(--bg-surface);
+    background: var(--at-surface);
     border-radius: 12px;
     padding: 28px 32px;
     margin-bottom: 56px;
   }
 
   .artifact-scope .toc-title {
-    font-family: var(--font-mono);
+    font-family: var(--at-font-mono);
     font-size: 11px;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: var(--text-muted);
+    color: var(--at-faint);
     margin-bottom: 16px;
   }
 
@@ -129,7 +74,7 @@ export const styles = `
   .artifact-scope .toc ol li { counter-increment: toc; margin-bottom: 8px; }
 
   .artifact-scope .toc ol li a {
-    color: var(--text-secondary);
+    color: var(--at-muted);
     text-decoration: none;
     font-size: 15px;
     transition: color 0.2s;
@@ -140,18 +85,18 @@ export const styles = `
 
   .artifact-scope .toc ol li a::before {
     content: counter(toc, decimal-leading-zero);
-    font-family: var(--font-mono);
+    font-family: var(--at-font-mono);
     font-size: 12px;
-    color: var(--accent);
+    color: var(--at-accent);
     min-width: 24px;
   }
 
-  .artifact-scope .toc ol li a:hover { color: var(--accent); }
+  .artifact-scope .toc ol li a:hover { color: var(--at-accent); }
 
   .artifact-scope section { margin-bottom: 64px; }
 
   .artifact-scope h2 {
-    font-family: var(--font-display);
+    font-family: var(--at-font-display);
     font-size: 32px;
     font-weight: 400;
     margin-bottom: 24px;
@@ -167,7 +112,7 @@ export const styles = `
 
   .artifact-scope p { margin-bottom: 20px; }
 
-  .artifact-scope a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .artifact-scope a { color: var(--at-accent); text-decoration: underline; text-underline-offset: 3px; }
 
   .artifact-scope .callout {
     border-radius: 10px;
@@ -178,7 +123,7 @@ export const styles = `
   }
 
   .artifact-scope .callout-label {
-    font-family: var(--font-mono);
+    font-family: var(--at-font-mono);
     font-size: 11px;
     letter-spacing: 1.5px;
     text-transform: uppercase;
@@ -186,75 +131,75 @@ export const styles = `
     font-weight: 600;
   }
 
-  .artifact-scope .callout.insight { background: var(--purple-light); border-left: 3px solid var(--purple); }
-  .artifact-scope .callout.insight .callout-label { color: var(--purple); }
-  .artifact-scope .callout.tip { background: var(--teal-light); border-left: 3px solid var(--teal); }
-  .artifact-scope .callout.tip .callout-label { color: var(--teal); }
-  .artifact-scope .callout.warning { background: var(--amber-light); border-left: 3px solid var(--amber); }
-  .artifact-scope .callout.warning .callout-label { color: var(--amber); }
-  .artifact-scope .callout.danger { background: var(--red-light); border-left: 3px solid var(--red); }
-  .artifact-scope .callout.danger .callout-label { color: var(--red); }
+  .artifact-scope .callout.insight { background: var(--at-violet-soft); border-left: 3px solid var(--at-violet); }
+  .artifact-scope .callout.insight .callout-label { color: var(--at-violet); }
+  .artifact-scope .callout.tip { background: var(--at-green-soft); border-left: 3px solid var(--at-green); }
+  .artifact-scope .callout.tip .callout-label { color: var(--at-green); }
+  .artifact-scope .callout.warning { background: var(--at-amber-soft); border-left: 3px solid var(--at-amber); }
+  .artifact-scope .callout.warning .callout-label { color: var(--at-amber); }
+  .artifact-scope .callout.danger { background: var(--at-accent-soft); border-left: 3px solid var(--at-accent); }
+  .artifact-scope .callout.danger .callout-label { color: var(--at-accent); }
 
   .artifact-scope pre {
-    background: var(--bg-code);
-    color: #E0E0E0;
+    background: var(--at-inset);
+    color: var(--at-text);
     border-radius: 10px;
     padding: 20px 24px;
     overflow-x: auto;
-    font-family: var(--font-mono);
+    font-family: var(--at-font-mono);
     font-size: 13.5px;
     line-height: 1.7;
     margin: 24px 0;
   }
 
   .artifact-scope code {
-    font-family: var(--font-mono);
+    font-family: var(--at-font-mono);
     font-size: 0.88em;
-    background: var(--bg-surface);
+    background: var(--at-surface);
     padding: 2px 6px;
     border-radius: 4px;
   }
 
   .artifact-scope pre code { background: none; padding: 0; font-size: inherit; }
 
-  .artifact-scope .kw { color: #C792EA; }
-  .artifact-scope .str { color: #C3E88D; }
-  .artifact-scope .cm { color: #6A737D; }
-  .artifact-scope .fn { color: #82AAFF; }
-  .artifact-scope .num { color: #F78C6C; }
-  .artifact-scope .op { color: #89DDFF; }
+  .artifact-scope .kw { color: var(--at-accent); }
+  .artifact-scope .str { color: var(--at-green); }
+  .artifact-scope .cm { color: var(--at-faint); font-style: italic; }
+  .artifact-scope .fn { color: var(--at-blue); }
+  .artifact-scope .num { color: var(--at-amber); }
+  .artifact-scope .op { color: var(--at-violet); }
 
   .artifact-scope .ref {
-    font-family: var(--font-mono);
+    font-family: var(--at-font-mono);
     font-size: 11px;
-    color: var(--blue);
+    color: var(--at-blue);
     text-decoration: none;
-    border: 1px solid var(--blue);
+    border: 1px solid var(--at-blue);
     border-radius: 4px;
     padding: 1px 6px;
     vertical-align: super;
     margin-left: 2px;
     transition: all 0.2s;
   }
-  .artifact-scope .ref:hover { background: var(--blue-light); }
+  .artifact-scope .ref:hover { background: var(--at-blue-soft); }
 
   .artifact-scope .diagram-container {
-    border: 1px solid var(--border);
+    border: 1px solid var(--at-line);
     border-radius: 12px;
     overflow: hidden;
     margin: 32px 0;
   }
 
   .artifact-scope .diagram-header {
-    background: var(--bg-surface);
+    background: var(--at-surface);
     padding: 12px 20px;
-    font-family: var(--font-mono);
+    font-family: var(--at-font-mono);
     font-size: 12px;
-    color: var(--text-muted);
+    color: var(--at-faint);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--at-line);
   }
 
   .artifact-scope .diagram-body { padding: 24px; }
@@ -267,18 +212,18 @@ export const styles = `
   }
 
   .artifact-scope .diagram-controls button {
-    font-family: var(--font-mono);
+    font-family: var(--at-font-mono);
     font-size: 12px;
     padding: 6px 14px;
-    border: 1px solid var(--border);
+    border: 1px solid var(--at-line);
     border-radius: 6px;
-    background: var(--bg);
-    color: var(--text-secondary);
+    background: var(--at-bg);
+    color: var(--at-muted);
     cursor: pointer;
     transition: all 0.15s;
   }
-  .artifact-scope .diagram-controls button:hover { border-color: var(--accent); color: var(--accent); }
-  .artifact-scope .diagram-controls button.active { background: var(--accent-light); border-color: var(--accent); color: var(--accent); font-weight: 600; }
+  .artifact-scope .diagram-controls button:hover { border-color: var(--at-accent); color: var(--at-accent); }
+  .artifact-scope .diagram-controls button.active { background: var(--at-accent-soft); border-color: var(--at-accent); color: var(--at-accent); font-weight: 600; }
 
   .artifact-scope .compare-table {
     width: 100%;
@@ -288,17 +233,17 @@ export const styles = `
   }
 
   .artifact-scope .compare-table th {
-    background: var(--bg-surface);
+    background: var(--at-surface);
     padding: 12px 16px;
     text-align: left;
     font-weight: 600;
     font-size: 13px;
-    border-bottom: 2px solid var(--border);
+    border-bottom: 2px solid var(--at-line);
   }
 
   .artifact-scope .compare-table td {
     padding: 12px 16px;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--at-line);
     vertical-align: top;
   }
 
@@ -312,15 +257,15 @@ export const styles = `
   }
 
   .artifact-scope .metric {
-    background: var(--bg-surface);
+    background: var(--at-surface);
     border-radius: 10px;
     padding: 18px 20px;
   }
 
   .artifact-scope .metric-label {
     font-size: 12px;
-    color: var(--text-muted);
-    font-family: var(--font-mono);
+    color: var(--at-faint);
+    font-family: var(--at-font-mono);
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-bottom: 6px;
@@ -332,18 +277,18 @@ export const styles = `
     line-height: 1.2;
   }
 
-  .artifact-scope .metric-value.teal { color: var(--teal); }
-  .artifact-scope .metric-value.accent { color: var(--accent); }
-  .artifact-scope .metric-value.purple { color: var(--purple); }
+  .artifact-scope .metric-value.teal { color: var(--at-green); }
+  .artifact-scope .metric-value.accent { color: var(--at-accent); }
+  .artifact-scope .metric-value.purple { color: var(--at-violet); }
 
   .artifact-scope .kv-diagram { position: relative; min-height: 320px; }
 
   .artifact-scope .kv-row { display: flex; gap: 4px; margin-bottom: 8px; align-items: center; }
 
   .artifact-scope .kv-label {
-    font-family: var(--font-mono);
+    font-family: var(--at-font-mono);
     font-size: 11px;
-    color: var(--text-muted);
+    color: var(--at-faint);
     min-width: 70px;
     text-align: right;
     padding-right: 10px;
@@ -355,9 +300,9 @@ export const styles = `
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: var(--font-mono);
+    font-family: var(--at-font-mono);
     font-size: 11px;
-    color: white;
+    color: var(--at-bg);
     flex: 1;
     max-width: 80px;
     transition: all 0.3s;
@@ -365,9 +310,9 @@ export const styles = `
     transform: translateY(4px);
   }
 
-  .artifact-scope .kv-token.cached { background: var(--teal); }
-  .artifact-scope .kv-token.new { background: var(--accent); }
-  .artifact-scope .kv-token.skip { background: var(--bg-surface); color: var(--text-muted); border: 1px dashed var(--border); }
+  .artifact-scope .kv-token.cached { background: var(--at-green); }
+  .artifact-scope .kv-token.new { background: var(--at-accent); }
+  .artifact-scope .kv-token.skip { background: var(--at-surface); color: var(--at-faint); border: 1px dashed var(--at-line); }
   .artifact-scope .kv-token.visible { opacity: 1; transform: translateY(0); }
 
   .artifact-scope .route-viz { display: flex; flex-direction: column; gap: 16px; }
@@ -375,9 +320,9 @@ export const styles = `
   .artifact-scope .route-tier { display: flex; gap: 12px; align-items: center; }
 
   .artifact-scope .route-tier-label {
-    font-family: var(--font-mono);
+    font-family: var(--at-font-mono);
     font-size: 11px;
-    color: var(--text-muted);
+    color: var(--at-faint);
     min-width: 90px;
     text-align: right;
   }
@@ -387,23 +332,23 @@ export const styles = `
     max-width: 140px;
     padding: 12px;
     border-radius: 8px;
-    border: 1px solid var(--border);
+    border: 1px solid var(--at-line);
     text-align: center;
     font-size: 12px;
     transition: all 0.3s;
   }
 
-  .artifact-scope .server-box.hit { border-color: var(--teal); background: var(--teal-light); }
-  .artifact-scope .server-box.miss { border-color: var(--red); background: var(--red-light); }
+  .artifact-scope .server-box.hit { border-color: var(--at-green); background: var(--at-green-soft); }
+  .artifact-scope .server-box.miss { border-color: var(--at-accent); background: var(--at-accent-soft); }
   .artifact-scope .server-box.idle { opacity: 0.4; }
 
   .artifact-scope .server-name { font-weight: 600; margin-bottom: 4px; }
-  .artifact-scope .server-status { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); }
+  .artifact-scope .server-status { font-family: var(--at-font-mono); font-size: 11px; color: var(--at-faint); }
 
   .artifact-scope .flow-arrow {
     width: 2px;
     height: 40px;
-    background: repeating-linear-gradient(to bottom, var(--accent) 0, var(--accent) 8px, transparent 8px, transparent 16px);
+    background: repeating-linear-gradient(to bottom, var(--at-accent) 0, var(--at-accent) 8px, transparent 8px, transparent 16px);
     margin: 0 auto;
     animation: flowDown 1s linear infinite;
   }
@@ -421,11 +366,11 @@ export const styles = `
   }
 
   .artifact-scope .price-table th {
-    background: var(--bg-surface);
+    background: var(--at-surface);
     padding: 10px 14px;
     text-align: right;
     font-weight: 600;
-    font-family: var(--font-mono);
+    font-family: var(--at-font-mono);
     font-size: 12px;
   }
 
@@ -433,23 +378,23 @@ export const styles = `
 
   .artifact-scope .price-table td {
     padding: 10px 14px;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--at-line);
     text-align: right;
-    font-family: var(--font-mono);
+    font-family: var(--at-font-mono);
     font-size: 13px;
   }
 
-  .artifact-scope .price-table td:first-child { text-align: left; font-family: var(--font-body); font-size: 14px; }
+  .artifact-scope .price-table td:first-child { text-align: left; font-family: var(--at-font-body); font-size: 14px; }
 
-  .artifact-scope .discount { color: var(--teal); font-weight: 600; }
+  .artifact-scope .discount { color: var(--at-green); font-weight: 600; }
 
   .artifact-scope .blog-footer {
-    border-top: 1px solid var(--border);
+    border-top: 1px solid var(--at-line);
     padding: 48px 0 80px;
     margin-top: 64px;
   }
 
-  .artifact-scope .references { font-size: 14px; color: var(--text-secondary); }
+  .artifact-scope .references { font-size: 14px; color: var(--at-muted); }
   .artifact-scope .references h3 { font-size: 16px; margin-bottom: 16px; }
   .artifact-scope .references ol { padding-left: 24px; }
   .artifact-scope .references li { margin-bottom: 10px; line-height: 1.5; }
@@ -478,11 +423,11 @@ export const styles = `
   .artifact-scope .sdk-card {
     border-radius: 10px;
     padding: 20px;
-    border: 1px solid var(--border);
+    border: 1px solid var(--at-line);
   }
 
   .artifact-scope .sdk-card h4 {
-    font-family: var(--font-mono);
+    font-family: var(--at-font-mono);
     font-size: 13px;
     margin-bottom: 12px;
   }
@@ -491,60 +436,14 @@ export const styles = `
 
   .artifact-scope .sdk-card li { margin-bottom: 6px; padding-left: 18px; position: relative; }
   .artifact-scope .sdk-card li::before { content: ''; position: absolute; left: 0; top: 8px; width: 8px; height: 8px; border-radius: 50%; }
-  .artifact-scope .sdk-card.yes li::before { background: var(--teal); }
-  .artifact-scope .sdk-card.no li::before { background: var(--red); }
+  .artifact-scope .sdk-card.yes li::before { background: var(--at-green); }
+  .artifact-scope .sdk-card.no li::before { background: var(--at-accent); }
 
   .artifact-scope strong { font-weight: 600; }
   .artifact-scope em { font-style: italic; }
-
-  .artifact-scope .topbar {
-    background: var(--bg-surface);
-    border-bottom: 1px solid var(--border);
-    padding: 12px 0;
-  }
-  .artifact-scope .topbar-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    max-width: var(--max-w);
-    margin: 0 auto;
-    padding: 0 var(--gutter);
-  }
-  .artifact-scope .logo {
-    font-family: var(--font-mono);
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--accent);
-    letter-spacing: 0.05em;
-  }
-  .artifact-scope .logo a { text-decoration: none; }
-  .artifact-scope .logo a:hover { opacity: 0.7; }
-  .artifact-scope .meta-tag {
-    background: rgba(192, 90, 44, 0.08);
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    padding: 3px 12px;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: var(--accent);
-  }
-
-  .artifact-scope {
-    position: relative;
-    z-index: 51;
-  }
 `;
 
 export const html = `
-<div class="topbar">
-  <div class="topbar-inner">
-    <span class="logo"><a href="/">&#9664; harrytruong</a></span>
-    <span class="meta-tag">DEEP DIVE</span>
-  </div>
-</div>
-
 <div class="page">
 
 <!-- HERO -->
@@ -650,17 +549,17 @@ export const html = `
   </div>
   <div class="diagram-body">
     <div style="margin-bottom:20px;">
-      <div style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted);margin-bottom:6px;">REQUEST 1 — Full prefill (3,000 tokens)</div>
+      <div style="font-family:var(--at-font-mono);font-size:11px;color:var(--at-faint);margin-bottom:6px;">REQUEST 1 — Full prefill (3,000 tokens)</div>
       <div style="display:flex;gap:0;border-radius:6px;overflow:hidden;">
-        <div style="flex:1;height:32px;background:var(--accent);display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-family:var(--font-mono);">Computing all 3,000 tokens — slow TTFT</div>
+        <div style="flex:1;height:32px;background:var(--at-accent);display:flex;align-items:center;justify-content:center;color:var(--at-bg);font-size:12px;font-family:var(--at-font-mono);">Computing all 3,000 tokens — slow TTFT</div>
       </div>
     </div>
-    <div style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted);text-align:center;margin:8px 0;">↓ KV tensors cached in GPU VRAM ↓</div>
+    <div style="font-family:var(--at-font-mono);font-size:11px;color:var(--at-faint);text-align:center;margin:8px 0;">↓ KV tensors cached in GPU VRAM ↓</div>
     <div style="margin-bottom:20px;">
-      <div style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted);margin-bottom:6px;">REQUEST 2 — Cache hit (3,200 tokens total, 2,816 cached)</div>
+      <div style="font-family:var(--at-font-mono);font-size:11px;color:var(--at-faint);margin-bottom:6px;">REQUEST 2 — Cache hit (3,200 tokens total, 2,816 cached)</div>
       <div style="display:flex;gap:2px;border-radius:6px;overflow:hidden;">
-        <div style="flex:88;height:32px;background:var(--teal);display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-family:var(--font-mono);">Cached: 2,816 tokens — skipped</div>
-        <div style="flex:12;height:32px;background:var(--accent);display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-family:var(--font-mono);">New: 384</div>
+        <div style="flex:88;height:32px;background:var(--at-green);display:flex;align-items:center;justify-content:center;color:var(--at-bg);font-size:12px;font-family:var(--at-font-mono);">Cached: 2,816 tokens — skipped</div>
+        <div style="flex:12;height:32px;background:var(--at-accent);display:flex;align-items:center;justify-content:center;color:var(--at-bg);font-size:12px;font-family:var(--at-font-mono);">New: 384</div>
       </div>
     </div>
     <pre style="margin:12px 0 0;font-size:12px;"><code><span class="str">"usage"</span>: {
@@ -731,7 +630,7 @@ routing_key = <span class="fn">hash</span>(first_256_tokens, prompt_cache_key)</
       <button onclick="setRouteScenario('overflow', this)">Overflow (&gt;15 RPM)</button>
     </div>
     <svg id="route-svg" width="100%" viewBox="0 0 600 300" style="display:block;"></svg>
-    <p id="route-explanation" style="font-size:13px;color:var(--text-secondary);margin-top:16px;font-family:var(--font-mono);"></p>
+    <p id="route-explanation" style="font-size:13px;color:var(--at-muted);margin-top:16px;font-family:var(--at-font-mono);"></p>
   </div>
 </div>
 
@@ -753,7 +652,7 @@ routing_key = <span class="fn">hash</span>(first_256_tokens, prompt_cache_key)</
       <td>Same as no key at all. Traffic scatters uniformly, zero cache reuse.</td>
     </tr>
     <tr>
-      <td style="color:var(--teal);font-weight:600;">Just right</td>
+      <td style="color:var(--at-green);font-weight:600;">Just right</td>
       <td>Per-conversation or user-bucket</td>
       <td>~15 RPM per key. Server builds KV cache once, subsequent requests reuse it. One customer went from 60% → 87% hit rate.</td>
     </tr>
@@ -775,7 +674,7 @@ routing_key = <span class="fn">hash</span>(first_256_tokens, prompt_cache_key)</
 
 <div class="sdk-comparison">
   <div class="sdk-card yes">
-    <h4 style="color:var(--teal);">in_memory (default)</h4>
+    <h4 style="color:var(--at-green);">in_memory (default)</h4>
     <ul>
       <li>KV tensors live only in GPU VRAM</li>
       <li>TTL: 5–10 min idle, max 1 hour</li>
@@ -784,27 +683,27 @@ routing_key = <span class="fn">hash</span>(first_256_tokens, prompt_cache_key)</
       <li>Automatic, no config needed</li>
     </ul>
   </div>
-  <div class="sdk-card no" style="border-color:var(--amber);">
-    <h4 style="color:var(--amber);">24h (extended)</h4>
+  <div class="sdk-card no" style="border-color:var(--at-amber);">
+    <h4 style="color:var(--at-amber);">24h (extended)</h4>
     <ul style="list-style:none;">
       <li style="padding-left:18px;position:relative;">
-        <span style="position:absolute;left:0;top:8px;width:8px;height:8px;border-radius:50%;background:var(--amber);"></span>
+        <span style="position:absolute;left:0;top:8px;width:8px;height:8px;border-radius:50%;background:var(--at-amber);"></span>
         VRAM + overflow to GPU-local SSD
       </li>
       <li style="padding-left:18px;position:relative;">
-        <span style="position:absolute;left:0;top:8px;width:8px;height:8px;border-radius:50%;background:var(--amber);"></span>
+        <span style="position:absolute;left:0;top:8px;width:8px;height:8px;border-radius:50%;background:var(--at-amber);"></span>
         TTL: up to 24 hours
       </li>
       <li style="padding-left:18px;position:relative;">
-        <span style="position:absolute;left:0;top:8px;width:8px;height:8px;border-radius:50%;background:var(--amber);"></span>
+        <span style="position:absolute;left:0;top:8px;width:8px;height:8px;border-radius:50%;background:var(--at-amber);"></span>
         Survives VRAM pressure
       </li>
       <li style="padding-left:18px;position:relative;">
-        <span style="position:absolute;left:0;top:8px;width:8px;height:8px;border-radius:50%;background:var(--red);"></span>
+        <span style="position:absolute;left:0;top:8px;width:8px;height:8px;border-radius:50%;background:var(--at-accent);"></span>
         KV tensors written to disk — not ZDR-eligible
       </li>
       <li style="padding-left:18px;position:relative;">
-        <span style="position:absolute;left:0;top:8px;width:8px;height:8px;border-radius:50%;background:var(--amber);"></span>
+        <span style="position:absolute;left:0;top:8px;width:8px;height:8px;border-radius:50%;background:var(--at-amber);"></span>
         Opt-in: <code>prompt_cache_retention="24h"</code>
       </li>
     </ul>
@@ -1036,10 +935,10 @@ document.querySelectorAll('.artifact-scope .fade-in').forEach(function(el) { obs
 var routeScenarios = {
   none: {
     requests: [
-      {label: 'A1', color: '#5B4DC7', x: 30},
-      {label: 'A2', color: '#5B4DC7', x: 110},
-      {label: 'B1', color: '#1D7A5F', x: 190},
-      {label: 'B2', color: '#1D7A5F', x: 270}
+      {label: 'A1', color: '--at-violet', x: 30},
+      {label: 'A2', color: '--at-violet', x: 110},
+      {label: 'B1', color: '--at-green', x: 190},
+      {label: 'B2', color: '--at-green', x: 270}
     ],
     servers: [
       {name: 'GPU 1', status: 'A1+B1 KV', cls: 'miss', x: 60},
@@ -1047,19 +946,19 @@ var routeScenarios = {
       {name: 'GPU 3', status: 'empty', cls: 'idle', x: 440}
     ],
     lines: [
-      {from: 0, to: 0, color: '#5B4DC7', dash: false},
-      {from: 1, to: 1, color: '#5B4DC7', dash: false},
-      {from: 2, to: 0, color: '#1D7A5F', dash: false},
-      {from: 3, to: 1, color: '#1D7A5F', dash: false}
+      {from: 0, to: 0, color: '--at-violet', dash: false},
+      {from: 1, to: 1, color: '--at-violet', dash: false},
+      {from: 2, to: 0, color: '--at-green', dash: false},
+      {from: 3, to: 1, color: '--at-green', dash: false}
     ],
     explanation: 'Round-robin routing scatters requests across servers. Each GPU gets a mix of prefix A and B. No KV reuse — every request computes from scratch. ~0% cache hit rate.'
   },
   good: {
     requests: [
-      {label: 'A1', color: '#5B4DC7', x: 30},
-      {label: 'A2', color: '#5B4DC7', x: 110},
-      {label: 'B1', color: '#1D7A5F', x: 190},
-      {label: 'B2', color: '#1D7A5F', x: 270}
+      {label: 'A1', color: '--at-violet', x: 30},
+      {label: 'A2', color: '--at-violet', x: 110},
+      {label: 'B1', color: '--at-green', x: 190},
+      {label: 'B2', color: '--at-green', x: 270}
     ],
     servers: [
       {name: 'GPU 1', status: 'A KV (reused!)', cls: 'hit', x: 60},
@@ -1067,19 +966,19 @@ var routeScenarios = {
       {name: 'GPU 3', status: 'empty', cls: 'idle', x: 440}
     ],
     lines: [
-      {from: 0, to: 0, color: '#5B4DC7', dash: false},
-      {from: 1, to: 0, color: '#5B4DC7', dash: false},
-      {from: 2, to: 1, color: '#1D7A5F', dash: false},
-      {from: 3, to: 1, color: '#1D7A5F', dash: false}
+      {from: 0, to: 0, color: '--at-violet', dash: false},
+      {from: 1, to: 0, color: '--at-violet', dash: false},
+      {from: 2, to: 1, color: '--at-green', dash: false},
+      {from: 3, to: 1, color: '--at-green', dash: false}
     ],
     explanation: "prompt_cache_key groups same-prefix traffic to the same server. GPU 1 reuses prefix A's KV cache for both A1 and A2. High hit rate. One customer: 60% to 87%."
   },
   overflow: {
     requests: [
-      {label: 'A1', color: '#5B4DC7', x: 30},
-      {label: 'A2', color: '#5B4DC7', x: 110},
-      {label: 'A3', color: '#C03030', x: 190},
-      {label: 'B1', color: '#1D7A5F', x: 270}
+      {label: 'A1', color: '--at-violet', x: 30},
+      {label: 'A2', color: '--at-violet', x: 110},
+      {label: 'A3', color: '--at-accent', x: 190},
+      {label: 'B1', color: '--at-green', x: 270}
     ],
     servers: [
       {name: 'GPU 1', status: 'A KV (reused)', cls: 'hit', x: 60},
@@ -1087,12 +986,12 @@ var routeScenarios = {
       {name: 'GPU 3', status: 'A KV (cold!)', cls: 'miss', x: 440}
     ],
     lines: [
-      {from: 0, to: 0, color: '#5B4DC7', dash: false},
-      {from: 1, to: 0, color: '#5B4DC7', dash: false},
-      {from: 2, to: 2, color: '#C03030', dash: true},
-      {from: 3, to: 1, color: '#1D7A5F', dash: false}
+      {from: 0, to: 0, color: '--at-violet', dash: false},
+      {from: 1, to: 0, color: '--at-violet', dash: false},
+      {from: 2, to: 2, color: '--at-accent', dash: true},
+      {from: 3, to: 1, color: '--at-green', dash: false}
     ],
-    explanation: 'Over ~15 RPM per prefix+key, A3 spills to GPU 3 — cold start, cache miss. The dashed red line shows the overflow. Fix: hash user IDs into buckets to stay near 15 RPM.'
+    explanation: 'Over ~15 RPM per prefix+key, A3 spills to GPU 3 — cold start, cache miss. The dashed line shows the overflow. Fix: hash user IDs into buckets to stay near 15 RPM.'
   }
 };
 
@@ -1102,14 +1001,15 @@ function setRouteScenario(name, btn) {
 
   var s = routeScenarios[name];
   var svg = document.getElementById('route-svg');
-  var dark = matchMedia('(prefers-color-scheme: dark)').matches;
-  var textColor = dark ? '#E8E6E0' : '#1A1A1A';
-  var mutedColor = dark ? '#A0A09A' : '#6B6B6B';
-  var borderColor = dark ? 'rgba(255,255,255,0.12)' : 'rgba(0,0,0,0.1)';
-  var hitBg = dark ? '#0D2A1F' : '#E1F5EE';
-  var hitBorder = dark ? '#3DBE8A' : '#1D7A5F';
-  var missBg = dark ? '#2A1010' : '#FCEBEB';
-  var missBorder = dark ? '#E05050' : '#C03030';
+  var cs = getComputedStyle(document.querySelector('.artifact-scope'));
+  function tok(n) { return cs.getPropertyValue(n).trim(); }
+  var textColor = tok('--at-text');
+  var mutedColor = tok('--at-muted');
+  var borderColor = tok('--at-line');
+  var hitBg = tok('--at-green-soft');
+  var hitBorder = tok('--at-green');
+  var missBg = tok('--at-accent-soft');
+  var missBorder = tok('--at-accent');
 
   var html = '';
   var reqY = 44;
@@ -1126,8 +1026,8 @@ function setRouteScenario(name, btn) {
     var x = 80 + i * 80;
     r._cx = x + reqW / 2;
     r._by = reqY + reqH;
-    html += '<rect x="' + x + '" y="' + reqY + '" width="' + reqW + '" height="' + reqH + '" rx="6" fill="' + r.color + '"/>';
-    html += '<text x="' + (x + reqW / 2) + '" y="' + (reqY + reqH / 2 + 1) + '" text-anchor="middle" dominant-baseline="central" fill="#fff" font-family="monospace" font-size="12" font-weight="600">' + r.label + '</text>';
+    html += '<rect x="' + x + '" y="' + reqY + '" width="' + reqW + '" height="' + reqH + '" rx="6" fill="' + tok(r.color) + '"/>';
+    html += '<text x="' + (x + reqW / 2) + '" y="' + (reqY + reqH / 2 + 1) + '" text-anchor="middle" dominant-baseline="central" fill="' + tok('--at-bg') + '" font-family="monospace" font-size="12" font-weight="600">' + r.label + '</text>';
   });
 
   s.servers.forEach(function(srv, i) {
@@ -1153,8 +1053,8 @@ function setRouteScenario(name, btn) {
     var y2 = srv._ty - 2;
     var mid = (y1 + y2) / 2;
     var dashAttr = line.dash ? ' stroke-dasharray="6 4"' : '';
-    html += '<path d="M' + x1 + ' ' + y1 + ' C' + x1 + ' ' + mid + ', ' + x2 + ' ' + mid + ', ' + x2 + ' ' + y2 + '" fill="none" stroke="' + line.color + '" stroke-width="2"' + dashAttr + ' opacity="0.7"/>';
-    html += '<polygon points="' + (x2 - 4) + ',' + (y2 - 8) + ' ' + (x2 + 4) + ',' + (y2 - 8) + ' ' + x2 + ',' + y2 + '" fill="' + line.color + '" opacity="0.7"/>';
+    html += '<path d="M' + x1 + ' ' + y1 + ' C' + x1 + ' ' + mid + ', ' + x2 + ' ' + mid + ', ' + x2 + ' ' + y2 + '" fill="none" stroke="' + tok(line.color) + '" stroke-width="2"' + dashAttr + ' opacity="0.7"/>';
+    html += '<polygon points="' + (x2 - 4) + ',' + (y2 - 8) + ' ' + (x2 + 4) + ',' + (y2 - 8) + ' ' + x2 + ',' + y2 + '" fill="' + tok(line.color) + '" opacity="0.7"/>';
   });
 
   svg.innerHTML = html;

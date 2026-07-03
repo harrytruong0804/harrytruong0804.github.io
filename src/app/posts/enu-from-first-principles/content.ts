@@ -1,139 +1,104 @@
 export const styles = `
-  .artifact-scope{
-    --bg:#fbfbfd; --surface:#ffffff; --ink:#15171a; --ink-soft:#3a4252;
-    --muted:#6b7785; --line:#e3e6eb; --line-soft:#eef0f3;
-    --accent:#2563eb; --accent-soft:#eff6ff;
-    --good:#16a34a; --good-soft:#f0fdf4;
-    --bad:#dc2626; --bad-soft:#fef2f2;
-    --warn:#d97706; --warn-soft:#fffbeb;
-    --purple:#7c3aed; --purple-soft:#f5f3ff;
-    background:var(--bg);color:var(--ink);
-    font:17px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-    -webkit-font-smoothing:antialiased;
-  }
   .artifact-scope *{box-sizing:border-box}
 
-  /* ====== Standard topbar (matches site) ====== */
-  .artifact-scope .topbar{
-    border-bottom:1px solid var(--line);padding:14px 0;
-    background:rgba(251,251,253,0.92);backdrop-filter:blur(8px);
-    position:sticky;top:0;z-index:10}
-  .artifact-scope .topbar-inner{
-    display:flex;justify-content:space-between;align-items:center;
-    max-width:880px;margin:0 auto;padding:0 24px}
-  .artifact-scope .logo{
-    font-family:"SF Mono",Menlo,Consolas,monospace;font-weight:600;font-size:14px;
-    letter-spacing:.05em;color:var(--accent)}
-  .artifact-scope .logo a{color:inherit;text-decoration:none;border:none}
-  .artifact-scope .logo a:hover{opacity:.7}
-  .artifact-scope .meta-tag{
-    background:var(--accent-soft);border:1px solid #c7dafe;border-radius:999px;
-    padding:3px 12px;font-family:"SF Mono",Menlo,Consolas,monospace;font-size:11px;
-    letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
-
   .artifact-scope article{max-width:880px;margin:0 auto;padding:56px 24px 96px}
-  .artifact-scope header.post-head{border-bottom:1px solid var(--line);padding-bottom:32px;margin-bottom:8px}
-  .artifact-scope .eyebrow{color:var(--accent);font-size:13px;letter-spacing:1.5px;text-transform:uppercase;
+  .artifact-scope header.post-head{border-bottom:1px solid var(--at-line);padding-bottom:32px;margin-bottom:8px}
+  .artifact-scope .eyebrow{color:var(--at-accent);font-family:var(--at-font-mono);font-size:13px;letter-spacing:1.5px;text-transform:uppercase;
     font-weight:700;margin-bottom:14px}
-  .artifact-scope h1{font-size:38px;line-height:1.2;letter-spacing:-.5px;margin:0 0 16px;font-weight:800}
-  .artifact-scope .lead{font-size:20px;line-height:1.55;color:var(--ink-soft);margin:0;font-weight:400}
-  .artifact-scope .byline{color:var(--muted);font-size:14px;margin-top:18px}
-  .artifact-scope h2{font-size:26px;margin:64px 0 14px;font-weight:800;letter-spacing:-.3px;
+  .artifact-scope h1{font-family:var(--at-font-display);font-size:38px;line-height:1.2;letter-spacing:-.5px;margin:0 0 16px;font-weight:800}
+  .artifact-scope .lead{font-size:20px;line-height:1.55;color:var(--at-muted);margin:0;font-weight:400}
+  .artifact-scope .byline{color:var(--at-faint);font-family:var(--at-font-mono);font-size:14px;margin-top:18px}
+  .artifact-scope h2{font-family:var(--at-font-display);font-size:26px;margin:64px 0 14px;font-weight:800;letter-spacing:-.3px;
     display:flex;align-items:center;gap:14px}
-  .artifact-scope h2 .step{flex:0 0 36px;height:36px;background:var(--accent);color:#fff;border-radius:10px;
-    display:grid;place-items:center;font-size:15px;font-weight:700}
-  .artifact-scope h3{font-size:19px;margin:32px 0 8px;font-weight:700;color:var(--ink)}
-  .artifact-scope p{margin:14px 0;color:var(--ink-soft)}
-  .artifact-scope p strong, .artifact-scope li strong{color:var(--ink);font-weight:700}
-  .artifact-scope code{background:#f1f3f5;color:#14213d;padding:2px 6px;border-radius:4px;
-    font-size:.92em;font-family:"SF Mono",Menlo,Consolas,monospace}
-  .artifact-scope pre{background:#0f172a;color:#e2e8f0;padding:18px 22px;border-radius:10px;overflow-x:auto;
-    font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13.5px;line-height:1.6;margin:18px 0}
-  .artifact-scope .figure{background:var(--surface);border:1px solid var(--line);border-radius:14px;
+  .artifact-scope h2 .step{flex:0 0 36px;height:36px;background:var(--at-accent);color:var(--at-bg);border-radius:10px;
+    display:grid;place-items:center;font-size:15px;font-weight:700;font-family:var(--at-font-mono)}
+  .artifact-scope h3{font-family:var(--at-font-display);font-size:19px;margin:32px 0 8px;font-weight:700;color:var(--at-text)}
+  .artifact-scope p{margin:14px 0;color:var(--at-muted)}
+  .artifact-scope p strong, .artifact-scope li strong{color:var(--at-text);font-weight:700}
+  .artifact-scope code{background:var(--at-inset);color:var(--at-text);padding:2px 6px;border-radius:4px;
+    font-size:.92em;font-family:var(--at-font-mono)}
+  .artifact-scope pre{background:var(--at-inset);color:var(--at-text);padding:18px 22px;border-radius:10px;overflow-x:auto;
+    font-family:var(--at-font-mono);font-size:13.5px;line-height:1.6;margin:18px 0}
+  .artifact-scope .figure{background:var(--at-surface);border:1px solid var(--at-line);border-radius:14px;
     padding:28px;margin:24px 0}
-  .artifact-scope .figure-caption{color:var(--muted);font-size:13.5px;text-align:center;margin-top:16px;
+  .artifact-scope .figure-caption{color:var(--at-faint);font-size:13.5px;text-align:center;margin-top:16px;
     font-style:italic}
+  .artifact-scope svg text{font-family:var(--at-font-mono)}
   .artifact-scope .callout{padding:16px 20px;border-radius:8px;margin:22px 0;
-    background:var(--accent-soft);border:1px solid #c7dafe;border-left:4px solid var(--accent)}
-  .artifact-scope .callout.warn{background:var(--warn-soft);border-color:#fcd34d;border-left-color:var(--warn)}
-  .artifact-scope .callout.good{background:var(--good-soft);border-color:#bbf7d0;border-left-color:var(--good)}
-  .artifact-scope .callout.bad{background:var(--bad-soft);border-color:#fecaca;border-left-color:var(--bad)}
+    background:var(--at-accent-soft);border:1px solid var(--at-line);border-left:4px solid var(--at-accent)}
+  .artifact-scope .callout.warn{background:var(--at-amber-soft);border-left-color:var(--at-amber)}
+  .artifact-scope .callout.good{background:var(--at-green-soft);border-left-color:var(--at-green)}
+  .artifact-scope .callout.bad{background:var(--at-violet-soft);border-left-color:var(--at-violet)}
   .artifact-scope .callout p:first-child{margin-top:0}
   .artifact-scope .callout p:last-child{margin-bottom:0}
-  .artifact-scope .callout .title{display:block;color:var(--ink);font-weight:700;margin-bottom:6px;font-size:15px}
+  .artifact-scope .callout .title{display:block;color:var(--at-text);font-weight:700;margin-bottom:6px;font-size:15px}
   .artifact-scope .grid{display:grid;gap:14px;margin:18px 0}
   .artifact-scope .g2{grid-template-columns:1fr 1fr}
   .artifact-scope .g3{grid-template-columns:1fr 1fr 1fr}
   .artifact-scope .g4{grid-template-columns:1fr 1fr 1fr 1fr}
   @media(max-width:720px){.artifact-scope .g2,.artifact-scope .g3,.artifact-scope .g4{grid-template-columns:1fr}}
-  .artifact-scope .box{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px}
-  .artifact-scope .box h4{margin:0 0 8px;font-size:15px;color:var(--ink);font-weight:700}
+  .artifact-scope .box{background:var(--at-surface);border:1px solid var(--at-line);border-radius:10px;padding:18px}
+  .artifact-scope .box h4{margin:0 0 8px;font-size:15px;color:var(--at-text);font-weight:700}
   .artifact-scope .box p{margin:0;font-size:14.5px;line-height:1.55}
   .artifact-scope .box .icon{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;
-    color:#fff;font-weight:800;font-size:14px;margin-bottom:10px}
-  .artifact-scope .box .icon.blue{background:var(--accent)}
-  .artifact-scope .box .icon.green{background:var(--good)}
-  .artifact-scope .box .icon.red{background:var(--bad)}
-  .artifact-scope .box .icon.amber{background:var(--warn)}
-  .artifact-scope .box .icon.purple{background:var(--purple)}
-  .artifact-scope .tag{display:inline-block;font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px;
+    color:var(--at-bg);font-weight:800;font-size:14px;margin-bottom:10px}
+  .artifact-scope .box .icon.blue{background:var(--at-blue)}
+  .artifact-scope .box .icon.green{background:var(--at-green)}
+  .artifact-scope .box .icon.red{background:var(--at-violet)}
+  .artifact-scope .box .icon.amber{background:var(--at-amber)}
+  .artifact-scope .box .icon.purple{background:var(--at-violet)}
+  .artifact-scope .tag{display:inline-block;font-family:var(--at-font-mono);font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px;
     letter-spacing:.5px}
-  .artifact-scope .tag.good{background:var(--good-soft);color:var(--good);border:1px solid #bbf7d0}
-  .artifact-scope .tag.bad{background:var(--bad-soft);color:var(--bad);border:1px solid #fecaca}
-  .artifact-scope .tag.warn{background:var(--warn-soft);color:var(--warn);border:1px solid #fcd34d}
-  .artifact-scope .tag.muted{background:#f1f3f5;color:var(--muted);border:1px solid var(--line)}
+  .artifact-scope .tag.blue{background:var(--at-blue-soft);color:var(--at-blue);border:1px solid var(--at-blue)}
+  .artifact-scope .tag.good{background:var(--at-green-soft);color:var(--at-green);border:1px solid var(--at-green)}
+  .artifact-scope .tag.bad{background:var(--at-violet-soft);color:var(--at-violet);border:1px solid var(--at-violet)}
+  .artifact-scope .tag.warn{background:var(--at-amber-soft);color:var(--at-amber);border:1px solid var(--at-amber)}
+  .artifact-scope .tag.muted{background:var(--at-inset);color:var(--at-muted);border:1px solid var(--at-line)}
   .artifact-scope table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14.5px}
-  .artifact-scope th,.artifact-scope td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
-  .artifact-scope th{background:#f9fafb;color:var(--ink);font-weight:700;font-size:12px;letter-spacing:.4px;
+  .artifact-scope th,.artifact-scope td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--at-line);vertical-align:top}
+  .artifact-scope th{background:var(--at-inset);color:var(--at-text);font-family:var(--at-font-mono);font-weight:700;font-size:12px;letter-spacing:.4px;
     text-transform:uppercase}
-  .artifact-scope td:first-child{font-weight:600;color:var(--ink)}
+  .artifact-scope td:first-child{font-weight:600;color:var(--at-text)}
   .artifact-scope svg.diagram{width:100%;height:auto;display:block}
-  .artifact-scope .toc{background:var(--surface);border:1px solid var(--line);border-radius:10px;
+  .artifact-scope .toc{background:var(--at-surface);border:1px solid var(--at-line);border-radius:10px;
     padding:22px 26px;margin:32px 0}
-  .artifact-scope .toc h3{margin:0 0 12px;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;
-    color:var(--muted);font-weight:700}
-  .artifact-scope .toc ol{margin:0;padding-left:22px;color:var(--ink-soft);line-height:1.9}
-  .artifact-scope .toc a{color:var(--ink);text-decoration:none;border-bottom:1px solid transparent}
-  .artifact-scope .toc a:hover{color:var(--accent);border-bottom-color:var(--accent)}
-  .artifact-scope .mono{font-family:"SF Mono",Menlo,Consolas,monospace}
-  .artifact-scope .kbd{background:#f9fafb;border:1px solid var(--line);border-radius:5px;padding:1px 6px;
-    font-family:"SF Mono",Menlo,Consolas,monospace;font-size:.85em;color:var(--ink)}
+  .artifact-scope .toc h3{margin:0 0 12px;font-family:var(--at-font-mono);font-size:12px;letter-spacing:1.2px;text-transform:uppercase;
+    color:var(--at-faint);font-weight:700}
+  .artifact-scope .toc ol{margin:0;padding-left:22px;color:var(--at-muted);line-height:1.9}
+  .artifact-scope .toc a{color:var(--at-text);text-decoration:none;border-bottom:1px solid transparent}
+  .artifact-scope .toc a:hover{color:var(--at-accent);border-bottom-color:var(--at-accent)}
+  .artifact-scope .mono{font-family:var(--at-font-mono)}
+  .artifact-scope .kbd{background:var(--at-inset);border:1px solid var(--at-line);border-radius:5px;padding:1px 6px;
+    font-family:var(--at-font-mono);font-size:.85em;color:var(--at-text)}
   .artifact-scope ul.clean{list-style:none;padding:0;margin:14px 0}
-  .artifact-scope ul.clean li{padding:10px 0;border-bottom:1px solid var(--line-soft);color:var(--ink-soft)}
+  .artifact-scope ul.clean li{padding:10px 0;border-bottom:1px solid var(--at-line);color:var(--at-muted)}
   .artifact-scope ul.clean li:last-child{border-bottom:none}
-  .artifact-scope ul.clean li strong{color:var(--ink)}
-  .artifact-scope .kicker{font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);
+  .artifact-scope ul.clean li strong{color:var(--at-text)}
+  .artifact-scope .kicker{font-family:var(--at-font-mono);font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:var(--at-faint);
     font-weight:700;margin-bottom:6px}
-  .artifact-scope .ascii{background:#f9fafb;border:1px solid var(--line);border-radius:10px;
-    font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13px;line-height:1.55;
-    color:var(--ink);padding:18px 22px;white-space:pre;overflow-x:auto}
-  .artifact-scope .ascii .c-acc{color:var(--accent);font-weight:700}
-  .artifact-scope .ascii .c-muted{color:var(--muted)}
-  .artifact-scope .ascii .c-good{color:var(--good);font-weight:700}
-  .artifact-scope .ascii .c-bad{color:var(--bad);font-weight:700}
+  .artifact-scope .ascii{background:var(--at-inset);border:1px solid var(--at-line);border-radius:10px;
+    font-family:var(--at-font-mono);font-size:13px;line-height:1.55;
+    color:var(--at-text);padding:18px 22px;white-space:pre;overflow-x:auto}
+  .artifact-scope .ascii .c-acc{color:var(--at-accent);font-weight:700}
+  .artifact-scope .ascii .c-muted{color:var(--at-muted)}
+  .artifact-scope .ascii .c-good{color:var(--at-green);font-weight:700}
+  .artifact-scope .ascii .c-bad{color:var(--at-violet);font-weight:700}
 
   /* ====== Footer (matches site) ====== */
   .artifact-scope .footer{max-width:880px;margin:64px auto 0;padding:24px;
-    border-top:1px solid var(--line);color:var(--muted);font-size:13px;text-align:center}
-  .artifact-scope .footer p{color:var(--muted);margin:0}
-  .artifact-scope .footer .ornament{font-size:22px;color:var(--accent);margin-bottom:10px}
+    border-top:1px solid var(--at-line);color:var(--at-faint);font-size:13px;text-align:center}
+  .artifact-scope .footer p{color:var(--at-faint);margin:0}
+  .artifact-scope .footer .ornament{font-size:22px;color:var(--at-accent);margin-bottom:10px}
 `;
 
 export const html = `
-<div class="topbar">
-  <div class="topbar-inner">
-    <span class="logo"><a href="/">&#9664; harrytruong</a></span>
-    <span class="meta-tag">CESIUM 101 — FIRST PRINCIPLES</span>
-  </div>
-</div>
-
 <article>
 
 <header class="post-head">
-  <div class="eyebrow">Cesium 101 · First Principles · Companion</div>
-  <h1>ENU From First Principles: the Tangent Frame Behind Every Georeference</h1>
+  <div class="eyebrow">Cesium 101 · Companion</div>
+  <h1>ENU: the Tangent Frame Behind Every Georeference</h1>
   <p class="lead">The companion post called <code>M_ecefToUsd</code> &mdash; the matrix that turns a planet coordinate into a stage coordinate &mdash; a black box. It isn&rsquo;t. Open it and you find one thing: an <strong>East&ndash;North&ndash;Up</strong> frame. And ENU itself isn&rsquo;t a definition you memorize &mdash; it&rsquo;s the <em>derivative of position</em>, falling straight out of the geometry of a round Earth. Let&rsquo;s derive it.</p>
-  <p class="byline">A from-first-principles walk · ~12 min read</p>
+  <p class="byline">A worked derivation · ~12 min read</p>
 </header>
 
 <div class="toc">
@@ -141,7 +106,7 @@ export const html = `
   <ol>
     <li><a href="#problem">The problem: a global grid vs. a flat scene</a></li>
     <li><a href="#intuition">ENU, intuitively: stand somewhere, point three ways</a></li>
-    <li><a href="#derivative">The first principle: ENU is a derivative</a></li>
+    <li><a href="#derivative">The core idea: ENU is a derivative</a></li>
     <li><a href="#units">Why East and North aren&rsquo;t unit vectors (yet)</a></li>
     <li><a href="#ellipsoid">The ellipsoid twist: why &ldquo;Up&rdquo; misses Earth&rsquo;s center</a></li>
     <li><a href="#matrix">From frame to matrix: building eastNorthUpToFixedFrame</a></li>
@@ -176,30 +141,30 @@ export const html = `
 
 <div class="figure">
   <svg class="diagram" viewBox="0 0 620 320" role="img" aria-label="ENU tangent frame at a point on the globe">
-    <circle cx="250" cy="250" r="180" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
-    <path d="M120 130 A180 180 0 0 1 400 110" stroke="#93b4f0" fill="none" stroke-dasharray="3"/>
-    <line x1="250" y1="250" x2="250" y2="50" stroke="#cbd0d8" stroke-dasharray="4"/>
-    <text x="232" y="44" fill="#6b7785" font-size="12">pole</text>
+    <circle cx="250" cy="250" r="180" fill="var(--at-blue-soft)" stroke="var(--at-blue)" stroke-width="1.5"/>
+    <path d="M120 130 A180 180 0 0 1 400 110" stroke="var(--at-blue)" fill="none" stroke-dasharray="3"/>
+    <line x1="250" y1="250" x2="250" y2="50" stroke="var(--at-line)" stroke-dasharray="4"/>
+    <text x="232" y="44" fill="var(--at-faint)" font-size="12">pole</text>
     <!-- point P at upper-right of the globe -->
-    <circle cx="377" cy="123" r="6" fill="#15171a"/>
-    <text x="388" y="118" fill="#15171a" font-size="13" font-weight="700">P</text>
+    <circle cx="377" cy="123" r="6" fill="var(--at-text)"/>
+    <text x="388" y="118" fill="var(--at-text)" font-size="13" font-weight="700">P</text>
     <!-- radial line from center to P (for Up) -->
-    <line x1="250" y1="250" x2="377" y2="123" stroke="#e3e6eb"/>
+    <line x1="250" y1="250" x2="377" y2="123" stroke="var(--at-line)"/>
     <!-- Up: along radial outward -->
-    <line x1="377" y1="123" x2="445" y2="55" stroke="#16a34a" stroke-width="3" marker-end="url(#au)"/>
-    <text x="450" y="52" fill="#16a34a" font-size="13" font-weight="700">Up</text>
+    <line x1="377" y1="123" x2="445" y2="55" stroke="var(--at-green)" stroke-width="3" marker-end="url(#au)"/>
+    <text x="450" y="52" fill="var(--at-green)" font-size="13" font-weight="700">Up</text>
     <!-- North: tangent toward pole (perp to radial, up-left) -->
-    <line x1="377" y1="123" x2="305" y2="78" stroke="#dc2626" stroke-width="3" marker-end="url(#an)"/>
-    <text x="278" y="70" fill="#dc2626" font-size="13" font-weight="700">North</text>
+    <line x1="377" y1="123" x2="305" y2="78" stroke="var(--at-violet)" stroke-width="3" marker-end="url(#an)"/>
+    <text x="278" y="70" fill="var(--at-violet)" font-size="13" font-weight="700">North</text>
     <!-- East: tangent, drawn toward lower-right as the other in-plane dir -->
-    <line x1="377" y1="123" x2="430" y2="170" stroke="#2563eb" stroke-width="3" marker-end="url(#ae)"/>
-    <text x="436" y="178" fill="#2563eb" font-size="13" font-weight="700">East</text>
+    <line x1="377" y1="123" x2="430" y2="170" stroke="var(--at-blue)" stroke-width="3" marker-end="url(#ae)"/>
+    <text x="436" y="178" fill="var(--at-blue)" font-size="13" font-weight="700">East</text>
     <defs>
-      <marker id="au" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#16a34a"/></marker>
-      <marker id="an" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#dc2626"/></marker>
-      <marker id="ae" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#2563eb"/></marker>
+      <marker id="au" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--at-green)"/></marker>
+      <marker id="an" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--at-violet)"/></marker>
+      <marker id="ae" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--at-blue)"/></marker>
     </defs>
-    <text x="250" y="300" fill="#6b7785" font-size="12" text-anchor="middle">the three axes span the tangent plane at P</text>
+    <text x="250" y="300" fill="var(--at-faint)" font-size="12" text-anchor="middle">the three axes span the tangent plane at P</text>
   </svg>
   <p class="figure-caption">ENU is just the local &ldquo;which way is east / north / up&rdquo; at one spot, made into three perpendicular unit vectors.</p>
 </div>
@@ -207,7 +172,7 @@ export const html = `
 <p>That&rsquo;s the picture. Now the question that makes it rigorous: <em>where do those three vectors actually come from?</em> They&rsquo;re not arbitrary &mdash; they&rsquo;re forced by the shape of the Earth.</p>
 
 <!-- ───────────────────────── 3. DERIVATIVE ───────────────────────── -->
-<h2 id="derivative"><span class="step">3</span>The first principle: ENU is a derivative</h2>
+<h2 id="derivative"><span class="step">3</span>The core idea: ENU is a derivative</h2>
 
 <p>Here is the core idea, and everything else is a corollary. Write the position of a point on a sphere of radius <code>R</code> as a function of latitude <code>&phi;</code> and longitude <code>&lambda;</code>, expressed in ECEF:</p>
 
@@ -253,17 +218,17 @@ export const html = `
 
 <div class="figure">
   <svg class="diagram" viewBox="0 0 620 280" role="img" aria-label="Longitude circles shrink toward the poles">
-    <ellipse cx="310" cy="140" rx="150" ry="120" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+    <ellipse cx="310" cy="140" rx="150" ry="120" fill="var(--at-blue-soft)" stroke="var(--at-blue)" stroke-width="1.5"/>
     <!-- equator -->
-    <ellipse cx="310" cy="140" rx="150" ry="34" fill="none" stroke="#dc2626" stroke-width="2"/>
-    <text x="468" y="144" fill="#dc2626" font-size="12">equator: 1 rad &asymp; R</text>
+    <ellipse cx="310" cy="140" rx="150" ry="34" fill="none" stroke="var(--at-violet)" stroke-width="2"/>
+    <text x="468" y="144" fill="var(--at-violet)" font-size="12">equator: 1 rad &asymp; R</text>
     <!-- mid latitude -->
-    <ellipse cx="310" cy="78" rx="104" ry="20" fill="none" stroke="#d97706" stroke-width="2"/>
-    <text x="420" y="74" fill="#d97706" font-size="12">mid: 1 rad &asymp; R&middot;cos&phi;</text>
+    <ellipse cx="310" cy="78" rx="104" ry="20" fill="none" stroke="var(--at-amber)" stroke-width="2"/>
+    <text x="420" y="74" fill="var(--at-amber)" font-size="12">mid: 1 rad &asymp; R&middot;cos&phi;</text>
     <!-- near pole -->
-    <ellipse cx="310" cy="40" rx="46" ry="9" fill="none" stroke="#16a34a" stroke-width="2"/>
-    <text x="360" y="34" fill="#16a34a" font-size="12">near pole: &rarr; 0</text>
-    <text x="310" y="262" fill="#6b7785" font-size="12" text-anchor="middle">a circle of constant latitude has radius R&middot;cos&phi; &mdash; it shrinks to nothing at the pole</text>
+    <ellipse cx="310" cy="40" rx="46" ry="9" fill="none" stroke="var(--at-green)" stroke-width="2"/>
+    <text x="360" y="34" fill="var(--at-green)" font-size="12">near pole: &rarr; 0</text>
+    <text x="310" y="262" fill="var(--at-faint)" font-size="12" text-anchor="middle">a circle of constant latitude has radius R&middot;cos&phi; &mdash; it shrinks to nothing at the pole</text>
   </svg>
   <p class="figure-caption">The length of &part;P/&part;&lambda; is exactly the radius of the latitude circle: <code>R&middot;cos&phi;</code>. At the equator that&rsquo;s the full <code>R</code>; near the pole it collapses to zero.</p>
 </div>
@@ -293,20 +258,20 @@ N&#770; = (&part;P/&part;&phi;) / R        = (&minus;sin&phi;cos&lambda;, &minus
 
 <div class="figure">
   <svg class="diagram" viewBox="0 0 620 300" role="img" aria-label="Geodetic normal does not pass through the ellipsoid center">
-    <ellipse cx="310" cy="150" rx="220" ry="130" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
-    <circle cx="310" cy="150" r="4" fill="#15171a"/>
-    <text x="318" y="166" fill="#6b7785" font-size="12">center</text>
+    <ellipse cx="310" cy="150" rx="220" ry="130" fill="var(--at-blue-soft)" stroke="var(--at-blue)" stroke-width="1.5"/>
+    <circle cx="310" cy="150" r="4" fill="var(--at-text)"/>
+    <text x="318" y="166" fill="var(--at-faint)" font-size="12">center</text>
     <!-- point on the ellipsoid (upper right) -->
-    <circle cx="470" cy="78" r="6" fill="#15171a"/>
-    <text x="480" y="74" fill="#15171a" font-size="13" font-weight="700">P</text>
+    <circle cx="470" cy="78" r="6" fill="var(--at-text)"/>
+    <text x="480" y="74" fill="var(--at-text)" font-size="13" font-weight="700">P</text>
     <!-- geocentric line (to center) -->
-    <line x1="470" y1="78" x2="310" y2="150" stroke="#cbd0d8" stroke-dasharray="5"/>
-    <text x="372" y="100" fill="#9aa3ad" font-size="11">line to center</text>
+    <line x1="470" y1="78" x2="310" y2="150" stroke="var(--at-line)" stroke-dasharray="5"/>
+    <text x="372" y="100" fill="var(--at-faint)" font-size="11">line to center</text>
     <!-- geodetic normal (Up): perpendicular to surface, steeper -->
-    <line x1="470" y1="78" x2="556" y2="6" stroke="#16a34a" stroke-width="3" marker-end="url(#gu)"/>
-    <text x="540" y="6" fill="#16a34a" font-size="13" font-weight="700">Up (normal)</text>
-    <defs><marker id="gu" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#16a34a"/></marker></defs>
-    <text x="310" y="284" fill="#6b7785" font-size="12" text-anchor="middle">on an ellipsoid, &ldquo;straight up&rdquo; (surface normal) and &ldquo;toward the center&rdquo; are different lines</text>
+    <line x1="470" y1="78" x2="556" y2="6" stroke="var(--at-green)" stroke-width="3" marker-end="url(#gu)"/>
+    <text x="540" y="6" fill="var(--at-green)" font-size="13" font-weight="700">Up (normal)</text>
+    <defs><marker id="gu" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--at-green)"/></marker></defs>
+    <text x="310" y="284" fill="var(--at-faint)" font-size="12" text-anchor="middle">on an ellipsoid, &ldquo;straight up&rdquo; (surface normal) and &ldquo;toward the center&rdquo; are different lines</text>
   </svg>
   <p class="figure-caption">This is why height is &ldquo;ellipsoidal&rdquo; and why Up tilts as you move across the globe. The <code>&phi;</code> in our formulas is the <strong>geodetic</strong> latitude &mdash; the angle of the normal, not the angle from the center.</p>
 </div>
@@ -344,7 +309,7 @@ N&#770; = (&part;P/&part;&phi;) / R        = (&minus;sin&phi;cos&lambda;, &minus
 
 <table>
   <tr><th>Column</th><th>Vector</th><th>Is</th></tr>
-  <tr><td>0</td><td><code>(0.13812, 0.99042, 0)</code></td><td><span class="tag" style="background:#eff6ff;color:#2563eb;border:1px solid #c7dafe">&Ecirc; &mdash; East</span></td></tr>
+  <tr><td>0</td><td><code>(0.13812, 0.99042, 0)</code></td><td><span class="tag blue">&Ecirc; &mdash; East</span></td></tr>
   <tr><td>1</td><td><code>(&minus;0.52796, 0.07363, 0.84607)</code></td><td><span class="tag bad">N&#770; &mdash; North</span></td></tr>
   <tr><td>2</td><td><code>(0.83796, &minus;0.11686, 0.53307)</code></td><td><span class="tag good">U&#770; &mdash; Up</span></td></tr>
   <tr><td>row 4</td><td><code>(0, 19277.2, &minus;6372589.8)</code></td><td><span class="tag muted">translation</span></td></tr>
@@ -443,7 +408,7 @@ stage (0,0,0)  &mdash;georef 2&mdash;&rarr;  origin&#8322;   (lat/lon/h of geore
 
 <div class="footer">
   <div class="ornament">&#10086;</div>
-  <p>harrytruong · Cesium 101 · First Principles · June 2026</p>
+  <p>harrytruong · Cesium 101 · June 2026</p>
   <p style="margin-top:8px"><a href="/posts/cesium-georeference-first-principles">&#9664; Companion → Translate, Georeference, GlobeAnchor, Binding</a></p>
 </div>
 `;

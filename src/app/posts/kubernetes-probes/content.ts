@@ -1,31 +1,9 @@
 export const styles = `
-  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=JetBrains+Mono:wght@400;500;600&family=Inter+Tight:wght@400;500;600&display=swap');
-
   .artifact-scope {
-    --bg: #F5F1E8;
-    --bg-card: #FAF7EE;
-    --bg-code: #1C1B17;
-    --ink: #1C1B17;
-    --ink-muted: #5C584D;
-    --ink-faint: #8B8678;
-    --rule: #D8D1BD;
-    --accent-amber: #C8821C;
-    --accent-teal: #1D7D5C;
-    --accent-coral: #C04828;
-    --accent-amber-bg: #F5E4C4;
-    --accent-teal-bg: #CFE9DB;
-    --accent-coral-bg: #F2D6CC;
-
-    background: var(--bg);
-    color: var(--ink);
-    font-family: 'Inter Tight', -apple-system, sans-serif;
     font-size: 17px;
     line-height: 1.65;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
-    background-image:
-      radial-gradient(circle at 1px 1px, rgba(28,27,23,0.04) 1px, transparent 0);
-    background-size: 24px 24px;
     position: relative;
     z-index: 51;
   }
@@ -36,43 +14,6 @@ export const styles = `
   .artifact-scope .wrap { max-width: 760px; margin: 0 auto; padding: 0 28px; }
   .artifact-scope .wide { max-width: 920px; margin: 0 auto; padding: 0 28px; }
 
-  /* ====== Top bar ====== */
-  .artifact-scope .topbar {
-    border-bottom: 1px solid var(--rule);
-    padding: 14px 0;
-    margin-bottom: 60px;
-    background: rgba(245, 241, 232, 0.92);
-    backdrop-filter: blur(8px);
-  }
-  .artifact-scope .topbar-inner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 760px;
-    margin: 0 auto;
-    padding: 0 28px;
-  }
-  .artifact-scope .logo {
-    font-family: 'JetBrains Mono', monospace;
-    font-weight: 500;
-    font-size: 14px;
-    letter-spacing: 0.05em;
-    color: var(--accent-coral);
-  }
-  .artifact-scope .logo a { color: inherit; text-decoration: none; border: none; }
-  .artifact-scope .logo a:hover { opacity: 0.7; background: transparent; color: var(--accent-coral); }
-  .artifact-scope .meta-tag {
-    background: rgba(192, 72, 40, 0.08);
-    border: 1px solid rgba(192, 72, 40, 0.22);
-    border-radius: 999px;
-    padding: 3px 12px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--accent-coral);
-  }
-
   /* ====== Header ====== */
   .artifact-scope header.hero { margin-bottom: 70px; }
 
@@ -81,33 +22,33 @@ export const styles = `
     font-size: 12px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--accent-coral);
+    color: var(--at-accent);
     font-weight: 600;
     margin-bottom: 24px;
     padding: 4px 0;
-    border-bottom: 1.5px solid var(--accent-coral);
+    border-bottom: 1.5px solid var(--at-accent);
   }
 
   .artifact-scope h1.title {
-    font-family: 'Fraunces', serif;
+    font-family: var(--at-font-display);
     font-weight: 500;
     font-size: clamp(38px, 6vw, 64px);
     line-height: 1.02;
     letter-spacing: -0.025em;
     margin-bottom: 28px;
-    color: var(--ink);
+    color: var(--at-text);
   }
   .artifact-scope h1.title em {
     font-style: italic;
     font-weight: 400;
-    color: var(--accent-coral);
+    color: var(--at-accent);
   }
 
   .artifact-scope .deck {
-    font-family: 'Fraunces', serif;
+    font-family: var(--at-font-display);
     font-size: 22px;
     line-height: 1.45;
-    color: var(--ink-muted);
+    color: var(--at-muted);
     font-weight: 400;
     max-width: 620px;
     margin-bottom: 40px;
@@ -117,18 +58,18 @@ export const styles = `
     display: flex;
     gap: 32px;
     padding: 18px 0;
-    border-top: 1px solid var(--rule);
-    border-bottom: 1px solid var(--rule);
+    border-top: 1px solid var(--at-line);
+    border-bottom: 1px solid var(--at-line);
     font-size: 13px;
-    color: var(--ink-muted);
+    color: var(--at-muted);
   }
-  .artifact-scope .byline strong { color: var(--ink); font-weight: 600; }
+  .artifact-scope .byline strong { color: var(--at-text); font-weight: 600; }
   .artifact-scope .byline .col-label {
     display: block;
     font-size: 10px;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: var(--ink-faint);
+    color: var(--at-faint);
     margin-bottom: 4px;
   }
 
@@ -136,7 +77,7 @@ export const styles = `
   .artifact-scope section { margin-bottom: 64px; }
 
   .artifact-scope h2 {
-    font-family: 'Fraunces', serif;
+    font-family: var(--at-font-display);
     font-weight: 500;
     font-size: 36px;
     line-height: 1.1;
@@ -146,17 +87,17 @@ export const styles = `
   }
   .artifact-scope h2 .num {
     display: block;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--at-font-mono);
     font-size: 12px;
     letter-spacing: 0.15em;
-    color: var(--accent-coral);
+    color: var(--at-accent);
     margin-bottom: 14px;
     font-weight: 500;
     font-style: normal;
   }
 
   .artifact-scope h3 {
-    font-family: 'Fraunces', serif;
+    font-family: var(--at-font-display);
     font-weight: 600;
     font-size: 22px;
     line-height: 1.2;
@@ -165,52 +106,52 @@ export const styles = `
     letter-spacing: -0.01em;
   }
 
-  .artifact-scope p { margin-bottom: 18px; color: var(--ink); }
+  .artifact-scope p { margin-bottom: 18px; color: var(--at-text); }
 
   .artifact-scope p .lead-cap {
-    font-family: 'Fraunces', serif;
+    font-family: var(--at-font-display);
     font-weight: 600;
     float: left;
     font-size: 58px;
     line-height: 0.9;
     padding: 6px 8px 0 0;
-    color: var(--accent-coral);
+    color: var(--at-accent);
   }
 
-  .artifact-scope a { color: var(--accent-coral); text-decoration: none; border-bottom: 1px solid currentColor; }
-  .artifact-scope a:hover { background: var(--accent-coral); color: var(--bg); }
+  .artifact-scope a { color: var(--at-accent); text-decoration: none; border-bottom: 1px solid currentColor; }
+  .artifact-scope a:hover { background: var(--at-accent); color: var(--at-bg); }
 
-  .artifact-scope strong { font-weight: 600; color: var(--ink); }
+  .artifact-scope strong { font-weight: 600; color: var(--at-text); }
   .artifact-scope em { font-style: italic; }
 
   .artifact-scope code {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--at-font-mono);
     font-size: 0.88em;
-    background: rgba(28, 27, 23, 0.06);
+    background: var(--at-inset);
     padding: 2px 6px;
     border-radius: 3px;
-    color: var(--ink);
+    color: var(--at-text);
   }
 
   /* ====== Pull quote ====== */
   .artifact-scope blockquote {
-    font-family: 'Fraunces', serif;
+    font-family: var(--at-font-display);
     font-size: 26px;
     line-height: 1.35;
     font-style: italic;
     font-weight: 400;
-    color: var(--ink);
-    border-left: 3px solid var(--accent-coral);
+    color: var(--at-text);
+    border-left: 3px solid var(--at-accent);
     padding: 8px 0 8px 28px;
     margin: 36px 0;
     max-width: 640px;
   }
   .artifact-scope blockquote cite {
     display: block;
-    font-family: 'Inter Tight', sans-serif;
+    font-family: var(--at-font-body);
     font-style: normal;
     font-size: 13px;
-    color: var(--ink-faint);
+    color: var(--at-faint);
     margin-top: 14px;
     letter-spacing: 0.05em;
     text-transform: uppercase;
@@ -218,13 +159,13 @@ export const styles = `
 
   /* ====== Code block ====== */
   .artifact-scope pre {
-    background: var(--bg-code);
-    color: #E8E4D6;
+    background: var(--at-inset);
+    color: var(--at-text);
     padding: 24px 28px;
     border-radius: 6px;
     overflow-x: auto;
     margin: 24px 0;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--at-font-mono);
     font-size: 14px;
     line-height: 1.65;
     position: relative;
@@ -237,12 +178,12 @@ export const styles = `
     font-size: 10px;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: rgba(232, 228, 214, 0.5);
+    color: var(--at-faint);
   }
-  .artifact-scope .tk-key { color: #E5A668; }
-  .artifact-scope .tk-str { color: #A8C490; }
-  .artifact-scope .tk-num { color: #D08C7B; }
-  .artifact-scope .tk-com { color: #6B6859; font-style: italic; }
+  .artifact-scope .tk-key { color: var(--at-accent); }
+  .artifact-scope .tk-str { color: var(--at-green); }
+  .artifact-scope .tk-num { color: var(--at-amber); }
+  .artifact-scope .tk-com { color: var(--at-faint); font-style: italic; }
 
   /* ====== Probe cards ====== */
   .artifact-scope .probe-grid {
@@ -255,52 +196,52 @@ export const styles = `
     .artifact-scope .probe-grid { grid-template-columns: 1fr; }
   }
   .artifact-scope .probe-card {
-    border: 1px solid var(--rule);
-    background: var(--bg-card);
+    border: 1px solid var(--at-line);
+    background: var(--at-surface);
     padding: 24px;
     border-radius: 4px;
     position: relative;
   }
-  .artifact-scope .probe-card.startup { border-top: 4px solid var(--accent-amber); }
-  .artifact-scope .probe-card.readiness { border-top: 4px solid var(--accent-teal); }
-  .artifact-scope .probe-card.liveness { border-top: 4px solid var(--accent-coral); }
+  .artifact-scope .probe-card.startup { border-top: 4px solid var(--at-amber); }
+  .artifact-scope .probe-card.readiness { border-top: 4px solid var(--at-green); }
+  .artifact-scope .probe-card.liveness { border-top: 4px solid var(--at-accent); }
 
   .artifact-scope .probe-card .label {
     font-size: 10px;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: var(--ink-faint);
+    color: var(--at-faint);
     margin-bottom: 8px;
     font-weight: 600;
   }
   .artifact-scope .probe-card h4 {
-    font-family: 'Fraunces', serif;
+    font-family: var(--at-font-display);
     font-size: 22px;
     font-weight: 600;
     margin-bottom: 12px;
     letter-spacing: -0.01em;
   }
-  .artifact-scope .probe-card.startup h4 { color: var(--accent-amber); }
-  .artifact-scope .probe-card.readiness h4 { color: var(--accent-teal); }
-  .artifact-scope .probe-card.liveness h4 { color: var(--accent-coral); }
+  .artifact-scope .probe-card.startup h4 { color: var(--at-amber); }
+  .artifact-scope .probe-card.readiness h4 { color: var(--at-green); }
+  .artifact-scope .probe-card.liveness h4 { color: var(--at-accent); }
 
   .artifact-scope .probe-card .question {
-    font-family: 'Fraunces', serif;
+    font-family: var(--at-font-display);
     font-style: italic;
     font-size: 16px;
-    color: var(--ink-muted);
+    color: var(--at-muted);
     margin-bottom: 16px;
     line-height: 1.4;
   }
-  .artifact-scope .probe-card p { font-size: 14px; line-height: 1.55; color: var(--ink-muted); margin-bottom: 0;}
+  .artifact-scope .probe-card p { font-size: 14px; line-height: 1.55; color: var(--at-muted); margin-bottom: 0;}
 
   /* ====== Comparison table ====== */
   .artifact-scope .table-wrap {
     margin: 32px 0;
-    border: 1px solid var(--rule);
+    border: 1px solid var(--at-line);
     border-radius: 4px;
     overflow-x: auto;
-    background: var(--bg-card);
+    background: var(--at-surface);
   }
   .artifact-scope table {
     width: 100%;
@@ -311,50 +252,53 @@ export const styles = `
   .artifact-scope table th {
     text-align: left;
     padding: 16px 18px;
-    background: var(--bg-card);
-    border-bottom: 2px solid var(--ink);
+    background: var(--at-surface);
+    border-bottom: 2px solid var(--at-line-strong);
     font-weight: 600;
     font-size: 12px;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     vertical-align: bottom;
   }
-  .artifact-scope table th.col-startup { color: var(--accent-amber); }
-  .artifact-scope table th.col-readiness { color: var(--accent-teal); }
-  .artifact-scope table th.col-liveness { color: var(--accent-coral); }
+  .artifact-scope table th.col-startup { color: var(--at-amber); }
+  .artifact-scope table th.col-readiness { color: var(--at-green); }
+  .artifact-scope table th.col-liveness { color: var(--at-accent); }
 
   .artifact-scope table td {
     padding: 14px 18px;
-    border-bottom: 1px solid var(--rule);
+    border-bottom: 1px solid var(--at-line);
     vertical-align: top;
   }
   .artifact-scope table tr:last-child td { border-bottom: none; }
-  .artifact-scope table td.row-label { font-weight: 600; color: var(--ink); background: rgba(216, 209, 189, 0.2); }
+  .artifact-scope table td.row-label { font-weight: 600; color: var(--at-text); background: var(--at-inset); }
   .artifact-scope table td code { font-size: 12px; }
 
   /* ====== Diagram caption ====== */
   .artifact-scope figure {
     margin: 40px 0;
     padding: 28px 0 0;
-    border-top: 1px solid var(--rule);
+    border-top: 1px solid var(--at-line);
   }
   .artifact-scope figure svg { display: block; width: 100%; height: auto; }
+  .artifact-scope figure svg text { font-family: var(--at-font-body); }
+  .artifact-scope figure svg text.d { font-family: var(--at-font-display); }
+  .artifact-scope figure svg text.m { font-family: var(--at-font-mono); }
   .artifact-scope figcaption {
     font-size: 13px;
-    color: var(--ink-faint);
+    color: var(--at-faint);
     text-align: left;
     margin-top: 16px;
     padding-top: 12px;
-    border-top: 1px dotted var(--rule);
+    border-top: 1px dotted var(--at-line);
     font-style: italic;
-    font-family: 'Fraunces', serif;
+    font-family: var(--at-font-display);
   }
   .artifact-scope figcaption .fig-num {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--at-font-mono);
     font-style: normal;
     font-size: 11px;
     letter-spacing: 0.1em;
-    color: var(--accent-coral);
+    color: var(--at-accent);
     text-transform: uppercase;
     margin-right: 10px;
   }
@@ -363,8 +307,10 @@ export const styles = `
   .artifact-scope .insight {
     margin: 36px 0;
     padding: 28px 32px;
-    background: var(--ink);
-    color: var(--bg);
+    background: var(--at-accent-soft);
+    color: var(--at-text);
+    border: 1px solid var(--at-line);
+    border-left: 3px solid var(--at-accent);
     border-radius: 4px;
     position: relative;
   }
@@ -375,14 +321,14 @@ export const styles = `
     left: 20px;
     font-size: 10px;
     letter-spacing: 0.18em;
-    background: var(--accent-coral);
-    color: var(--bg);
+    background: var(--at-accent);
+    color: var(--at-bg);
     padding: 4px 10px;
     border-radius: 2px;
     font-weight: 600;
   }
-  .artifact-scope .insight p { color: var(--bg); margin-bottom: 0; font-size: 17px; line-height: 1.55;}
-  .artifact-scope .insight strong { color: var(--accent-amber-bg); }
+  .artifact-scope .insight p { color: var(--at-text); margin-bottom: 0; font-size: 17px; line-height: 1.55;}
+  .artifact-scope .insight strong { color: var(--at-accent); }
 
   /* ====== Bullets ====== */
   .artifact-scope ul.numbered {
@@ -401,12 +347,12 @@ export const styles = `
     position: absolute;
     left: 0;
     top: 0;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--at-font-mono);
     font-size: 12px;
-    color: var(--accent-coral);
+    color: var(--at-accent);
     font-weight: 600;
     width: 36px;
-    border-bottom: 1px solid var(--accent-coral);
+    border-bottom: 1px solid var(--at-accent);
     padding-bottom: 4px;
   }
 
@@ -414,16 +360,16 @@ export const styles = `
   .artifact-scope .footer {
     margin-top: 100px;
     padding: 40px 0 60px;
-    border-top: 1px solid var(--rule);
+    border-top: 1px solid var(--at-line);
     font-size: 13px;
-    color: var(--ink-faint);
+    color: var(--at-faint);
     text-align: center;
   }
-  .artifact-scope .footer p { color: var(--ink-faint); }
+  .artifact-scope .footer p { color: var(--at-faint); }
   .artifact-scope .footer .ornament {
-    font-family: 'Fraunces', serif;
+    font-family: var(--at-font-display);
     font-size: 24px;
-    color: var(--accent-coral);
+    color: var(--at-accent);
     margin-bottom: 12px;
   }
 
@@ -452,19 +398,12 @@ export const styles = `
     margin-right: 6px;
     vertical-align: middle;
   }
-  .artifact-scope .swatch.amber { background: var(--accent-amber); }
-  .artifact-scope .swatch.teal { background: var(--accent-teal); }
-  .artifact-scope .swatch.coral { background: var(--accent-coral); }
+  .artifact-scope .swatch.amber { background: var(--at-amber); }
+  .artifact-scope .swatch.teal { background: var(--at-green); }
+  .artifact-scope .swatch.coral { background: var(--at-accent); }
 `;
 
 export const html = `
-<div class="topbar">
-  <div class="topbar-inner">
-    <span class="logo"><a href="/">&#9664; harrytruong</a></span>
-    <span class="meta-tag">DEEP DIVE — KUBERNETES</span>
-  </div>
-</div>
-
 <div class="wrap">
 
 <header class="hero">
@@ -557,46 +496,46 @@ export const html = `
     </marker>
   </defs>
 
-  <line x1="40" y1="100" x2="720" y2="100" stroke="#5C584D" stroke-width="1"/>
-  <circle cx="40" cy="100" r="4" fill="#1C1B17"/>
-  <circle cx="280" cy="100" r="4" fill="#1C1B17"/>
-  <circle cx="720" cy="100" r="4" fill="#1C1B17"/>
-  <text x="40" y="86" font-family="Inter Tight, sans-serif" font-size="12" fill="#5C584D">Container starts</text>
-  <text x="280" y="86" font-family="Inter Tight, sans-serif" font-size="12" fill="#5C584D" text-anchor="middle">Startup passes</text>
-  <text x="720" y="86" font-family="Inter Tight, sans-serif" font-size="12" fill="#5C584D" text-anchor="end">Container running</text>
+  <line x1="40" y1="100" x2="720" y2="100" stroke="var(--at-muted)" stroke-width="1"/>
+  <circle cx="40" cy="100" r="4" fill="var(--at-text)"/>
+  <circle cx="280" cy="100" r="4" fill="var(--at-text)"/>
+  <circle cx="720" cy="100" r="4" fill="var(--at-text)"/>
+  <text x="40" y="86" font-size="12" fill="var(--at-muted)">Container starts</text>
+  <text x="280" y="86" font-size="12" fill="var(--at-muted)" text-anchor="middle">Startup passes</text>
+  <text x="720" y="86" font-size="12" fill="var(--at-muted)" text-anchor="end">Container running</text>
 
-  <rect x="40" y="130" width="240" height="80" rx="6" fill="#F5E4C4" stroke="#C8821C" stroke-width="0.8"/>
-  <text x="160" y="160" font-family="Fraunces, serif" font-size="16" font-weight="600" fill="#7A5210" text-anchor="middle">Startup probe</text>
-  <text x="160" y="180" font-family="Inter Tight, sans-serif" font-size="12" fill="#7A5210" text-anchor="middle">"Did you finish booting?"</text>
-  <text x="160" y="196" font-family="Inter Tight, sans-serif" font-size="12" font-style="italic" fill="#7A5210" text-anchor="middle">Runs ONCE, then stops forever</text>
+  <rect x="40" y="130" width="240" height="80" rx="6" fill="var(--at-amber-soft)" stroke="var(--at-amber)" stroke-width="0.8"/>
+  <text class="d" x="160" y="160" font-size="16" font-weight="600" fill="var(--at-amber)" text-anchor="middle">Startup probe</text>
+  <text x="160" y="180" font-size="12" fill="var(--at-amber)" text-anchor="middle">"Did you finish booting?"</text>
+  <text x="160" y="196" font-size="12" font-style="italic" fill="var(--at-amber)" text-anchor="middle">Runs ONCE, then stops forever</text>
 
-  <rect x="300" y="130" width="420" height="80" rx="6" fill="#CFE9DB" stroke="#1D7D5C" stroke-width="0.8"/>
-  <text x="510" y="160" font-family="Fraunces, serif" font-size="16" font-weight="600" fill="#0E5440" text-anchor="middle">Readiness probe</text>
-  <text x="510" y="180" font-family="Inter Tight, sans-serif" font-size="12" fill="#0E5440" text-anchor="middle">"Ready to serve traffic?"</text>
-  <text x="510" y="196" font-family="Inter Tight, sans-serif" font-size="12" font-style="italic" fill="#0E5440" text-anchor="middle">Ticks continuously, every periodSeconds</text>
+  <rect x="300" y="130" width="420" height="80" rx="6" fill="var(--at-green-soft)" stroke="var(--at-green)" stroke-width="0.8"/>
+  <text class="d" x="510" y="160" font-size="16" font-weight="600" fill="var(--at-green)" text-anchor="middle">Readiness probe</text>
+  <text x="510" y="180" font-size="12" fill="var(--at-green)" text-anchor="middle">"Ready to serve traffic?"</text>
+  <text x="510" y="196" font-size="12" font-style="italic" fill="var(--at-green)" text-anchor="middle">Ticks continuously, every periodSeconds</text>
 
-  <rect x="300" y="230" width="420" height="80" rx="6" fill="#F2D6CC" stroke="#C04828" stroke-width="0.8"/>
-  <text x="510" y="260" font-family="Fraunces, serif" font-size="16" font-weight="600" fill="#8E2F18" text-anchor="middle">Liveness probe</text>
-  <text x="510" y="280" font-family="Inter Tight, sans-serif" font-size="12" fill="#8E2F18" text-anchor="middle">"Still alive, not deadlocked?"</text>
-  <text x="510" y="296" font-family="Inter Tight, sans-serif" font-size="12" font-style="italic" fill="#8E2F18" text-anchor="middle">Ticks continuously, every periodSeconds</text>
+  <rect x="300" y="230" width="420" height="80" rx="6" fill="var(--at-accent-soft)" stroke="var(--at-accent)" stroke-width="0.8"/>
+  <text class="d" x="510" y="260" font-size="16" font-weight="600" fill="var(--at-accent)" text-anchor="middle">Liveness probe</text>
+  <text x="510" y="280" font-size="12" fill="var(--at-accent)" text-anchor="middle">"Still alive, not deadlocked?"</text>
+  <text x="510" y="296" font-size="12" font-style="italic" fill="var(--at-accent)" text-anchor="middle">Ticks continuously, every periodSeconds</text>
 
-  <line x1="280" y1="170" x2="290" y2="170" stroke="#5C584D" stroke-width="1"/>
-  <line x1="290" y1="170" x2="290" y2="270" stroke="#5C584D" stroke-width="1"/>
-  <line x1="290" y1="170" x2="298" y2="170" stroke="#5C584D" stroke-width="1" marker-end="url(#ar)"/>
-  <line x1="290" y1="270" x2="298" y2="270" stroke="#5C584D" stroke-width="1" marker-end="url(#ar)"/>
-  <text x="290" y="120" font-family="Inter Tight, sans-serif" font-size="11" font-style="italic" fill="#5C584D" text-anchor="middle">Gate opens</text>
+  <line x1="280" y1="170" x2="290" y2="170" stroke="var(--at-muted)" stroke-width="1"/>
+  <line x1="290" y1="170" x2="290" y2="270" stroke="var(--at-muted)" stroke-width="1"/>
+  <line x1="290" y1="170" x2="298" y2="170" stroke="var(--at-muted)" stroke-width="1" marker-end="url(#ar)"/>
+  <line x1="290" y1="270" x2="298" y2="270" stroke="var(--at-muted)" stroke-width="1" marker-end="url(#ar)"/>
+  <text x="290" y="120" font-size="11" font-style="italic" fill="var(--at-muted)" text-anchor="middle">Gate opens</text>
 
-  <rect x="40" y="340" width="680" height="100" rx="6" fill="#FAF7EE" stroke="#D8D1BD" stroke-width="1"/>
-  <text x="60" y="365" font-family="Fraunces, serif" font-size="14" font-weight="600" fill="#1C1B17">Failure consequences (this is what really separates them):</text>
+  <rect x="40" y="340" width="680" height="100" rx="6" fill="var(--at-surface)" stroke="var(--at-line)" stroke-width="1"/>
+  <text class="d" x="60" y="365" font-size="14" font-weight="600" fill="var(--at-text)">Failure consequences (this is what really separates them):</text>
 
-  <circle cx="70" cy="390" r="4" fill="#C8821C"/>
-  <text x="84" y="394" font-family="Inter Tight, sans-serif" font-size="13" fill="#1C1B17">Startup fails &rarr; container killed and restarted (per restartPolicy)</text>
+  <circle cx="70" cy="390" r="4" fill="var(--at-amber)"/>
+  <text x="84" y="394" font-size="13" fill="var(--at-text)">Startup fails &rarr; container killed and restarted (per restartPolicy)</text>
 
-  <circle cx="70" cy="412" r="4" fill="#1D7D5C"/>
-  <text x="84" y="416" font-family="Inter Tight, sans-serif" font-size="13" fill="#1C1B17">Readiness fails &rarr; pod removed from Service endpoints. NO restart. Pod keeps running, just receives no traffic.</text>
+  <circle cx="70" cy="412" r="4" fill="var(--at-green)"/>
+  <text x="84" y="416" font-size="13" fill="var(--at-text)">Readiness fails &rarr; pod removed from Service endpoints. NO restart. Pod keeps running, just receives no traffic.</text>
 
-  <circle cx="70" cy="434" r="4" fill="#C04828"/>
-  <text x="84" y="438" font-family="Inter Tight, sans-serif" font-size="13" fill="#1C1B17">Liveness fails &rarr; container killed and restarted. This is how Kubernetes self-heals a hung app.</text>
+  <circle cx="70" cy="434" r="4" fill="var(--at-accent)"/>
+  <text x="84" y="438" font-size="13" fill="var(--at-text)">Liveness fails &rarr; container killed and restarted. This is how Kubernetes self-heals a hung app.</text>
 </svg>
 <figcaption><span class="fig-num">Fig. 01</span>Startup is a gate. Once it passes, it leaves the stage and the other two take over.</figcaption>
 </figure>
@@ -689,45 +628,45 @@ export const html = `
     </marker>
   </defs>
 
-  <text x="40" y="28" font-family="Fraunces, serif" font-size="16" font-weight="600" fill="#1C1B17">A. Without a startup probe</text>
-  <text x="40" y="46" font-family="Inter Tight, sans-serif" font-size="13" fill="#5C584D">Liveness checks an app that's still loading a model</text>
+  <text class="d" x="40" y="28" font-size="16" font-weight="600" fill="var(--at-text)">A. Without a startup probe</text>
+  <text x="40" y="46" font-size="13" fill="var(--at-muted)">Liveness checks an app that's still loading a model</text>
 
-  <line x1="60" y1="90" x2="720" y2="90" stroke="#5C584D" stroke-width="0.8"/>
-  <text x="60" y="78" font-family="JetBrains Mono, monospace" font-size="11" fill="#5C584D">0s</text>
-  <text x="225" y="78" font-family="JetBrains Mono, monospace" font-size="11" fill="#5C584D">30s</text>
-  <text x="390" y="78" font-family="JetBrains Mono, monospace" font-size="11" fill="#5C584D">60s</text>
-  <text x="555" y="78" font-family="JetBrains Mono, monospace" font-size="11" fill="#5C584D">90s</text>
-  <text x="720" y="78" font-family="JetBrains Mono, monospace" font-size="11" fill="#5C584D" text-anchor="end">120s</text>
+  <line x1="60" y1="90" x2="720" y2="90" stroke="var(--at-muted)" stroke-width="0.8"/>
+  <text class="m" x="60" y="78" font-size="11" fill="var(--at-muted)">0s</text>
+  <text class="m" x="225" y="78" font-size="11" fill="var(--at-muted)">30s</text>
+  <text class="m" x="390" y="78" font-size="11" fill="var(--at-muted)">60s</text>
+  <text class="m" x="555" y="78" font-size="11" fill="var(--at-muted)">90s</text>
+  <text class="m" x="720" y="78" font-size="11" fill="var(--at-muted)" text-anchor="end">120s</text>
 
-  <rect x="60" y="105" width="495" height="24" rx="4" fill="#F5E4C4" stroke="#C8821C" stroke-width="0.8"/>
-  <text x="307" y="121" font-family="Inter Tight, sans-serif" font-size="12" fill="#7A5210" text-anchor="middle">App is loading model, warming caches, initializing connections&hellip;</text>
+  <rect x="60" y="105" width="495" height="24" rx="4" fill="var(--at-amber-soft)" stroke="var(--at-amber)" stroke-width="0.8"/>
+  <text x="307" y="121" font-size="12" fill="var(--at-amber)" text-anchor="middle">App is loading model, warming caches, initializing connections&hellip;</text>
 
-  <text x="60" y="160" font-family="Inter Tight, sans-serif" font-size="13" fill="#1C1B17">Liveness probe (period 30s):</text>
-  <circle cx="225" cy="178" r="6" fill="#C04828"/>
-  <circle cx="390" cy="178" r="6" fill="#C04828"/>
-  <circle cx="555" cy="178" r="6" fill="#C04828"/>
-  <text x="225" y="205" font-family="JetBrains Mono, monospace" font-size="11" font-weight="600" fill="#8E2F18" text-anchor="middle">FAIL</text>
-  <text x="390" y="205" font-family="JetBrains Mono, monospace" font-size="11" font-weight="600" fill="#8E2F18" text-anchor="middle">FAIL</text>
-  <text x="555" y="205" font-family="JetBrains Mono, monospace" font-size="11" font-weight="600" fill="#8E2F18" text-anchor="middle">FAIL &rarr; KILL</text>
+  <text x="60" y="160" font-size="13" fill="var(--at-text)">Liveness probe (period 30s):</text>
+  <circle cx="225" cy="178" r="6" fill="var(--at-accent)"/>
+  <circle cx="390" cy="178" r="6" fill="var(--at-accent)"/>
+  <circle cx="555" cy="178" r="6" fill="var(--at-accent)"/>
+  <text class="m" x="225" y="205" font-size="11" font-weight="600" fill="var(--at-accent)" text-anchor="middle">FAIL</text>
+  <text class="m" x="390" y="205" font-size="11" font-weight="600" fill="var(--at-accent)" text-anchor="middle">FAIL</text>
+  <text class="m" x="555" y="205" font-size="11" font-weight="600" fill="var(--at-accent)" text-anchor="middle">FAIL &rarr; KILL</text>
 
-  <line x1="555" y1="90" x2="555" y2="220" stroke="#C04828" stroke-width="1.5" stroke-dasharray="4 4"/>
-  <text x="575" y="230" font-family="Inter Tight, sans-serif" font-size="12" font-style="italic" fill="#8E2F18">Restart loop. Pod never reaches Ready.</text>
+  <line x1="555" y1="90" x2="555" y2="220" stroke="var(--at-accent)" stroke-width="1.5" stroke-dasharray="4 4"/>
+  <text x="575" y="230" font-size="12" font-style="italic" fill="var(--at-accent)">Restart loop. Pod never reaches Ready.</text>
 
-  <line x1="40" y1="255" x2="720" y2="255" stroke="#D8D1BD" stroke-width="1"/>
+  <line x1="40" y1="255" x2="720" y2="255" stroke="var(--at-line)" stroke-width="1"/>
 
-  <text x="40" y="285" font-family="Fraunces, serif" font-size="16" font-weight="600" fill="#1C1B17">B. With a startup probe</text>
-  <text x="40" y="303" font-family="Inter Tight, sans-serif" font-size="13" fill="#5C584D">Startup gates liveness until the app is ready</text>
+  <text class="d" x="40" y="285" font-size="16" font-weight="600" fill="var(--at-text)">B. With a startup probe</text>
+  <text x="40" y="303" font-size="13" fill="var(--at-muted)">Startup gates liveness until the app is ready</text>
 
-  <line x1="60" y1="340" x2="720" y2="340" stroke="#5C584D" stroke-width="0.8"/>
+  <line x1="60" y1="340" x2="720" y2="340" stroke="var(--at-muted)" stroke-width="0.8"/>
 
-  <rect x="60" y="355" width="495" height="24" rx="4" fill="#F5E4C4" stroke="#C8821C" stroke-width="0.8"/>
-  <text x="307" y="371" font-family="Inter Tight, sans-serif" font-size="12" fill="#7A5210" text-anchor="middle">Startup probe is checking &mdash; liveness and readiness are NOT running</text>
+  <rect x="60" y="355" width="495" height="24" rx="4" fill="var(--at-amber-soft)" stroke="var(--at-amber)" stroke-width="0.8"/>
+  <text x="307" y="371" font-size="12" fill="var(--at-amber)" text-anchor="middle">Startup probe is checking &mdash; liveness and readiness are NOT running</text>
 
-  <circle cx="555" cy="367" r="9" fill="#1D7D5C"/>
-  <text x="572" y="372" font-family="JetBrains Mono, monospace" font-size="11" font-weight="600" fill="#0E5440">PASS</text>
+  <circle cx="555" cy="367" r="9" fill="var(--at-green)"/>
+  <text class="m" x="572" y="372" font-size="11" font-weight="600" fill="var(--at-green)">PASS</text>
 
-  <rect x="565" y="392" width="155" height="24" rx="4" fill="#F2D6CC" stroke="#C04828" stroke-width="0.8"/>
-  <text x="642" y="408" font-family="Inter Tight, sans-serif" font-size="12" fill="#8E2F18" text-anchor="middle">Liveness takes over &rarr;</text>
+  <rect x="565" y="392" width="155" height="24" rx="4" fill="var(--at-accent-soft)" stroke="var(--at-accent)" stroke-width="0.8"/>
+  <text x="642" y="408" font-size="12" fill="var(--at-accent)" text-anchor="middle">Liveness takes over &rarr;</text>
 </svg>
 <figcaption><span class="fig-num">Fig. 02</span>Startup buys time for slow-booting apps without forcing you to weaken liveness for the steady-state.</figcaption>
 </figure>
@@ -753,72 +692,72 @@ export const html = `
 <svg viewBox="0 0 760 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="ticking-title">
   <title id="ticking-title">Periodic ticking of all three probes</title>
 
-  <text x="40" y="28" font-family="Fraunces, serif" font-size="18" font-weight="600" fill="#1C1B17">Probe ticks once the pod is steady</text>
+  <text class="d" x="40" y="28" font-size="18" font-weight="600" fill="var(--at-text)">Probe ticks once the pod is steady</text>
 
-  <text x="80" y="60" font-family="JetBrains Mono, monospace" font-size="10" fill="#5C584D">0s</text>
-  <text x="160" y="60" font-family="JetBrains Mono, monospace" font-size="10" fill="#5C584D">30s</text>
-  <text x="240" y="60" font-family="JetBrains Mono, monospace" font-size="10" fill="#5C584D">60s</text>
-  <text x="320" y="60" font-family="JetBrains Mono, monospace" font-size="10" fill="#5C584D">90s</text>
-  <text x="400" y="60" font-family="JetBrains Mono, monospace" font-size="10" fill="#5C584D">120s</text>
-  <text x="480" y="60" font-family="JetBrains Mono, monospace" font-size="10" fill="#5C584D">150s</text>
-  <text x="560" y="60" font-family="JetBrains Mono, monospace" font-size="10" fill="#5C584D">180s</text>
-  <text x="640" y="60" font-family="JetBrains Mono, monospace" font-size="10" fill="#5C584D">210s</text>
-  <line x1="80" y1="70" x2="720" y2="70" stroke="#5C584D" stroke-width="0.5"/>
+  <text class="m" x="80" y="60" font-size="10" fill="var(--at-muted)">0s</text>
+  <text class="m" x="160" y="60" font-size="10" fill="var(--at-muted)">30s</text>
+  <text class="m" x="240" y="60" font-size="10" fill="var(--at-muted)">60s</text>
+  <text class="m" x="320" y="60" font-size="10" fill="var(--at-muted)">90s</text>
+  <text class="m" x="400" y="60" font-size="10" fill="var(--at-muted)">120s</text>
+  <text class="m" x="480" y="60" font-size="10" fill="var(--at-muted)">150s</text>
+  <text class="m" x="560" y="60" font-size="10" fill="var(--at-muted)">180s</text>
+  <text class="m" x="640" y="60" font-size="10" fill="var(--at-muted)">210s</text>
+  <line x1="80" y1="70" x2="720" y2="70" stroke="var(--at-muted)" stroke-width="0.5"/>
 
-  <text x="40" y="110" font-family="Fraunces, serif" font-size="14" font-weight="600" fill="#C8821C">Startup</text>
-  <text x="40" y="126" font-family="JetBrains Mono, monospace" font-size="10" fill="#5C584D">period 10s</text>
+  <text class="d" x="40" y="110" font-size="14" font-weight="600" fill="var(--at-amber)">Startup</text>
+  <text class="m" x="40" y="126" font-size="10" fill="var(--at-muted)">period 10s</text>
 
-  <line x1="80" y1="140" x2="80" y2="170" stroke="#C8821C" stroke-width="2"/>
-  <line x1="107" y1="140" x2="107" y2="170" stroke="#C8821C" stroke-width="2"/>
-  <line x1="134" y1="140" x2="134" y2="170" stroke="#C8821C" stroke-width="2"/>
-  <line x1="161" y1="140" x2="161" y2="170" stroke="#C8821C" stroke-width="2"/>
-  <line x1="188" y1="140" x2="188" y2="170" stroke="#C8821C" stroke-width="2"/>
-  <circle cx="215" cy="155" r="7" fill="#1D7D5C"/>
-  <text x="215" y="192" font-family="JetBrains Mono, monospace" font-size="10" font-weight="600" fill="#0E5440" text-anchor="middle">PASS</text>
+  <line x1="80" y1="140" x2="80" y2="170" stroke="var(--at-amber)" stroke-width="2"/>
+  <line x1="107" y1="140" x2="107" y2="170" stroke="var(--at-amber)" stroke-width="2"/>
+  <line x1="134" y1="140" x2="134" y2="170" stroke="var(--at-amber)" stroke-width="2"/>
+  <line x1="161" y1="140" x2="161" y2="170" stroke="var(--at-amber)" stroke-width="2"/>
+  <line x1="188" y1="140" x2="188" y2="170" stroke="var(--at-amber)" stroke-width="2"/>
+  <circle cx="215" cy="155" r="7" fill="var(--at-green)"/>
+  <text class="m" x="215" y="192" font-size="10" font-weight="600" fill="var(--at-green)" text-anchor="middle">PASS</text>
 
-  <rect x="232" y="143" width="488" height="24" fill="#EDEAE0" rx="3"/>
-  <text x="476" y="158" font-family="Inter Tight, sans-serif" font-size="12" font-style="italic" fill="#8B8678" text-anchor="middle">silent &mdash; never runs again</text>
+  <rect x="232" y="143" width="488" height="24" fill="var(--at-inset)" rx="3"/>
+  <text x="476" y="158" font-size="12" font-style="italic" fill="var(--at-faint)" text-anchor="middle">silent &mdash; never runs again</text>
 
-  <text x="40" y="235" font-family="Fraunces, serif" font-size="14" font-weight="600" fill="#1D7D5C">Readiness</text>
-  <text x="40" y="251" font-family="JetBrains Mono, monospace" font-size="10" fill="#5C584D">period 10s</text>
+  <text class="d" x="40" y="235" font-size="14" font-weight="600" fill="var(--at-green)">Readiness</text>
+  <text class="m" x="40" y="251" font-size="10" fill="var(--at-muted)">period 10s</text>
 
   <g>
-    <line x1="215" y1="265" x2="215" y2="295" stroke="#1D7D5C" stroke-width="2"/>
-    <line x1="242" y1="265" x2="242" y2="295" stroke="#1D7D5C" stroke-width="2"/>
-    <line x1="269" y1="265" x2="269" y2="295" stroke="#1D7D5C" stroke-width="2"/>
-    <line x1="296" y1="265" x2="296" y2="295" stroke="#1D7D5C" stroke-width="2"/>
-    <line x1="323" y1="265" x2="323" y2="295" stroke="#1D7D5C" stroke-width="2"/>
-    <line x1="350" y1="265" x2="350" y2="295" stroke="#1D7D5C" stroke-width="2"/>
-    <line x1="377" y1="265" x2="377" y2="295" stroke="#1D7D5C" stroke-width="2"/>
-    <line x1="404" y1="265" x2="404" y2="295" stroke="#1D7D5C" stroke-width="2"/>
-    <line x1="431" y1="265" x2="431" y2="295" stroke="#1D7D5C" stroke-width="2"/>
-    <line x1="458" y1="265" x2="458" y2="295" stroke="#1D7D5C" stroke-width="2"/>
-    <line x1="485" y1="265" x2="485" y2="295" stroke="#1D7D5C" stroke-width="2"/>
-    <line x1="512" y1="265" x2="512" y2="295" stroke="#1D7D5C" stroke-width="2"/>
-    <line x1="539" y1="265" x2="539" y2="295" stroke="#1D7D5C" stroke-width="2"/>
-    <line x1="566" y1="265" x2="566" y2="295" stroke="#1D7D5C" stroke-width="2"/>
-    <line x1="593" y1="265" x2="593" y2="295" stroke="#1D7D5C" stroke-width="2"/>
-    <line x1="620" y1="265" x2="620" y2="295" stroke="#1D7D5C" stroke-width="2"/>
-    <line x1="647" y1="265" x2="647" y2="295" stroke="#1D7D5C" stroke-width="2"/>
-    <line x1="674" y1="265" x2="674" y2="295" stroke="#1D7D5C" stroke-width="2"/>
-    <line x1="701" y1="265" x2="701" y2="295" stroke="#1D7D5C" stroke-width="2"/>
+    <line x1="215" y1="265" x2="215" y2="295" stroke="var(--at-green)" stroke-width="2"/>
+    <line x1="242" y1="265" x2="242" y2="295" stroke="var(--at-green)" stroke-width="2"/>
+    <line x1="269" y1="265" x2="269" y2="295" stroke="var(--at-green)" stroke-width="2"/>
+    <line x1="296" y1="265" x2="296" y2="295" stroke="var(--at-green)" stroke-width="2"/>
+    <line x1="323" y1="265" x2="323" y2="295" stroke="var(--at-green)" stroke-width="2"/>
+    <line x1="350" y1="265" x2="350" y2="295" stroke="var(--at-green)" stroke-width="2"/>
+    <line x1="377" y1="265" x2="377" y2="295" stroke="var(--at-green)" stroke-width="2"/>
+    <line x1="404" y1="265" x2="404" y2="295" stroke="var(--at-green)" stroke-width="2"/>
+    <line x1="431" y1="265" x2="431" y2="295" stroke="var(--at-green)" stroke-width="2"/>
+    <line x1="458" y1="265" x2="458" y2="295" stroke="var(--at-green)" stroke-width="2"/>
+    <line x1="485" y1="265" x2="485" y2="295" stroke="var(--at-green)" stroke-width="2"/>
+    <line x1="512" y1="265" x2="512" y2="295" stroke="var(--at-green)" stroke-width="2"/>
+    <line x1="539" y1="265" x2="539" y2="295" stroke="var(--at-green)" stroke-width="2"/>
+    <line x1="566" y1="265" x2="566" y2="295" stroke="var(--at-green)" stroke-width="2"/>
+    <line x1="593" y1="265" x2="593" y2="295" stroke="var(--at-green)" stroke-width="2"/>
+    <line x1="620" y1="265" x2="620" y2="295" stroke="var(--at-green)" stroke-width="2"/>
+    <line x1="647" y1="265" x2="647" y2="295" stroke="var(--at-green)" stroke-width="2"/>
+    <line x1="674" y1="265" x2="674" y2="295" stroke="var(--at-green)" stroke-width="2"/>
+    <line x1="701" y1="265" x2="701" y2="295" stroke="var(--at-green)" stroke-width="2"/>
   </g>
-  <text x="720" y="316" font-family="Inter Tight, sans-serif" font-size="11" font-style="italic" fill="#0E5440" text-anchor="end">&rarr; ticks forever, every 10s</text>
+  <text x="720" y="316" font-size="11" font-style="italic" fill="var(--at-green)" text-anchor="end">&rarr; ticks forever, every 10s</text>
 
-  <text x="40" y="360" font-family="Fraunces, serif" font-size="14" font-weight="600" fill="#C04828">Liveness</text>
-  <text x="40" y="376" font-family="JetBrains Mono, monospace" font-size="10" fill="#5C584D">period 30s</text>
+  <text class="d" x="40" y="360" font-size="14" font-weight="600" fill="var(--at-accent)">Liveness</text>
+  <text class="m" x="40" y="376" font-size="10" fill="var(--at-muted)">period 30s</text>
 
-  <line x1="215" y1="390" x2="215" y2="420" stroke="#C04828" stroke-width="2.5"/>
-  <line x1="296" y1="390" x2="296" y2="420" stroke="#C04828" stroke-width="2.5"/>
-  <line x1="377" y1="390" x2="377" y2="420" stroke="#C04828" stroke-width="2.5"/>
-  <line x1="458" y1="390" x2="458" y2="420" stroke="#C04828" stroke-width="2.5"/>
-  <line x1="539" y1="390" x2="539" y2="420" stroke="#C04828" stroke-width="2.5"/>
-  <line x1="620" y1="390" x2="620" y2="420" stroke="#C04828" stroke-width="2.5"/>
-  <line x1="701" y1="390" x2="701" y2="420" stroke="#C04828" stroke-width="2.5"/>
-  <text x="720" y="440" font-family="Inter Tight, sans-serif" font-size="11" font-style="italic" fill="#8E2F18" text-anchor="end">&rarr; ticks forever, every 30s</text>
+  <line x1="215" y1="390" x2="215" y2="420" stroke="var(--at-accent)" stroke-width="2.5"/>
+  <line x1="296" y1="390" x2="296" y2="420" stroke="var(--at-accent)" stroke-width="2.5"/>
+  <line x1="377" y1="390" x2="377" y2="420" stroke="var(--at-accent)" stroke-width="2.5"/>
+  <line x1="458" y1="390" x2="458" y2="420" stroke="var(--at-accent)" stroke-width="2.5"/>
+  <line x1="539" y1="390" x2="539" y2="420" stroke="var(--at-accent)" stroke-width="2.5"/>
+  <line x1="620" y1="390" x2="620" y2="420" stroke="var(--at-accent)" stroke-width="2.5"/>
+  <line x1="701" y1="390" x2="701" y2="420" stroke="var(--at-accent)" stroke-width="2.5"/>
+  <text x="720" y="440" font-size="11" font-style="italic" fill="var(--at-accent)" text-anchor="end">&rarr; ticks forever, every 30s</text>
 
-  <line x1="215" y1="210" x2="215" y2="430" stroke="#5C584D" stroke-width="0.5" stroke-dasharray="3 3"/>
-  <text x="215" y="465" font-family="Inter Tight, sans-serif" font-size="11" font-style="italic" fill="#8B8678" text-anchor="middle">gate opens here</text>
+  <line x1="215" y1="210" x2="215" y2="430" stroke="var(--at-muted)" stroke-width="0.5" stroke-dasharray="3 3"/>
+  <text x="215" y="465" font-size="11" font-style="italic" fill="var(--at-faint)" text-anchor="middle">gate opens here</text>
 </svg>
 <figcaption><span class="fig-num">Fig. 03</span>Startup is a one-shot. Readiness and liveness are two independent clocks ticking forever.</figcaption>
 </figure>

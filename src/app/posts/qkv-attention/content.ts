@@ -1,128 +1,13 @@
 export const styles = `
-  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap');
-
-  .artifact-scope {
-    --bg: #FAFAF8;
-    --bg-card: #FFFFFF;
-    --bg-code: #F4F3EF;
-    --text: #1A1A1A;
-    --text-muted: #6B6B6B;
-    --text-dim: #9A9A9A;
-    --border: #E8E6E1;
-    --accent: #E8593C;
-    --accent-soft: #FFF0EC;
-    --q-color: #EF9F27;
-    --q-bg: #FFF8EB;
-    --q-text: #7A5200;
-    --k-color: #1D9E75;
-    --k-bg: #EDFAF4;
-    --k-text: #0B5E45;
-    --v-color: #378ADD;
-    --v-bg: #EBF4FF;
-    --v-text: #0C447C;
-    --purple: #7F77DD;
-    --purple-bg: #F3F2FE;
-    --purple-text: #3C3489;
-    --serif: 'DM Serif Display', Georgia, serif;
-    --sans: 'Source Sans 3', -apple-system, sans-serif;
-    --mono: 'JetBrains Mono', monospace;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    .artifact-scope {
-      --bg: #141413;
-      --bg-card: #1E1E1C;
-      --bg-code: #252523;
-      --text: #EDEDEB;
-      --text-muted: #A0A09A;
-      --text-dim: #6B6B65;
-      --border: #333330;
-      --accent: #EF7553;
-      --accent-soft: #2D1A14;
-      --q-bg: #2D2210;
-      --q-text: #FAC775;
-      --k-bg: #0D2A20;
-      --k-text: #5DCAA5;
-      --v-bg: #0D1F30;
-      --v-text: #85B7EB;
-      --purple-bg: #1E1C38;
-      --purple-text: #AFA9EC;
-    }
-  }
-
   .artifact-scope, .artifact-scope * { margin: 0; padding: 0; box-sizing: border-box; }
 
   .artifact-scope {
-    font-family: var(--sans);
-    background: var(--bg);
-    color: var(--text);
     line-height: 1.75;
     font-size: 17px;
     -webkit-font-smoothing: antialiased;
-    min-height: 100vh;
   }
 
   .artifact-scope a { color: inherit; text-decoration: none; }
-
-  .artifact-scope .topbar {
-    background: var(--bg);
-    border-bottom: 1px solid var(--border);
-    padding: 12px 0;
-  }
-
-  .artifact-scope .topbar-inner {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 0 24px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .artifact-scope .topbar-left {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-  }
-
-  .artifact-scope .topbar-left a {
-    color: var(--text-muted);
-    transition: color 0.2s;
-  }
-
-  .artifact-scope .topbar-left a:hover {
-    color: var(--accent);
-  }
-
-  .artifact-scope .topbar-left .sep {
-    color: var(--text-dim);
-  }
-
-  .artifact-scope .topbar-left .current {
-    color: var(--accent);
-  }
-
-  .artifact-scope .top-bar {
-    border-bottom: 1px solid var(--border);
-    padding: 14px 0;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    text-align: center;
-    background: var(--bg);
-    position: sticky;
-    top: 0;
-    z-index: 10;
-  }
-
-  .artifact-scope .top-bar span { color: var(--accent); }
 
   .artifact-scope article {
     max-width: 720px;
@@ -132,7 +17,7 @@ export const styles = `
 
   .artifact-scope .hero {
     padding: 72px 0 48px;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--at-line);
     margin-bottom: 48px;
   }
 
@@ -141,12 +26,12 @@ export const styles = `
     font-weight: 600;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--accent);
+    color: var(--at-accent);
     margin-bottom: 20px;
   }
 
   .artifact-scope h1 {
-    font-family: var(--serif);
+    font-family: var(--at-font-display);
     font-size: clamp(36px, 5vw, 52px);
     line-height: 1.12;
     font-weight: 400;
@@ -156,7 +41,7 @@ export const styles = `
 
   .artifact-scope .subtitle {
     font-size: 20px;
-    color: var(--text-muted);
+    color: var(--at-muted);
     line-height: 1.5;
     font-weight: 300;
     max-width: 560px;
@@ -168,27 +53,27 @@ export const styles = `
     align-items: center;
     gap: 16px;
     font-size: 14px;
-    color: var(--text-dim);
+    color: var(--at-faint);
   }
 
   .artifact-scope .meta .avatar {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: var(--accent-soft);
-    border: 1px solid var(--border);
+    background: var(--at-accent-soft);
+    border: 1px solid var(--at-line);
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 600;
     font-size: 14px;
-    color: var(--accent);
+    color: var(--at-accent);
   }
 
-  .artifact-scope .meta .author-name { color: var(--text); font-weight: 500; }
+  .artifact-scope .meta .author-name { color: var(--at-text); font-weight: 500; }
 
   .artifact-scope h2 {
-    font-family: var(--serif);
+    font-family: var(--at-font-display);
     font-size: 30px;
     font-weight: 400;
     margin: 56px 0 20px;
@@ -199,28 +84,28 @@ export const styles = `
     font-size: 18px;
     font-weight: 600;
     margin: 40px 0 12px;
-    color: var(--text);
+    color: var(--at-text);
   }
 
   .artifact-scope p { margin-bottom: 20px; }
 
-  .artifact-scope .lead { font-size: 19px; color: var(--text-muted); font-weight: 300; }
+  .artifact-scope .lead { font-size: 19px; color: var(--at-muted); font-weight: 300; }
 
   .artifact-scope strong { font-weight: 600; }
 
   .artifact-scope code {
-    font-family: var(--mono);
+    font-family: var(--at-font-mono);
     font-size: 0.88em;
-    background: var(--bg-code);
+    background: var(--at-inset);
     padding: 2px 7px;
     border-radius: 4px;
-    color: var(--accent);
+    color: var(--at-accent);
   }
 
   .artifact-scope .callout {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-left: 3px solid var(--accent);
+    background: var(--at-surface);
+    border: 1px solid var(--at-line);
+    border-left: 3px solid var(--at-accent);
     border-radius: 0 8px 8px 0;
     padding: 20px 24px;
     margin: 32px 0;
@@ -232,15 +117,15 @@ export const styles = `
     font-size: 13px;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    color: var(--accent);
+    color: var(--at-accent);
     margin-bottom: 8px;
   }
 
   /* ---- INTERACTIVE DIAGRAMS ---- */
 
   .artifact-scope .diagram-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
+    background: var(--at-surface);
+    border: 1px solid var(--at-line);
     border-radius: 12px;
     margin: 36px 0;
     overflow: hidden;
@@ -251,32 +136,32 @@ export const styles = `
     font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--text-dim);
+    color: var(--at-faint);
     padding: 16px 24px 0;
   }
 
   .artifact-scope .diagram-body { padding: 8px 16px 16px; }
 
   .artifact-scope .diagram-body svg text {
-    font-family: var(--sans);
+    font-family: var(--at-font-body);
   }
 
   /* Projection diagram */
-  .artifact-scope .proj-svg .box-q { fill: var(--q-bg); stroke: var(--q-color); }
-  .artifact-scope .proj-svg .box-k { fill: var(--k-bg); stroke: var(--k-color); }
-  .artifact-scope .proj-svg .box-v { fill: var(--v-bg); stroke: var(--v-color); }
-  .artifact-scope .proj-svg .box-gray { fill: var(--bg-code); stroke: var(--border); }
-  .artifact-scope .proj-svg .box-embed { fill: var(--purple-bg); stroke: var(--purple); }
-  .artifact-scope .proj-svg .t-q { fill: var(--q-text); }
-  .artifact-scope .proj-svg .t-k { fill: var(--k-text); }
-  .artifact-scope .proj-svg .t-v { fill: var(--v-text); }
-  .artifact-scope .proj-svg .t-main { fill: var(--text); }
-  .artifact-scope .proj-svg .t-muted { fill: var(--text-muted); }
-  .artifact-scope .proj-svg .t-purple { fill: var(--purple-text); }
-  .artifact-scope .proj-svg .line-q { stroke: var(--q-color); }
-  .artifact-scope .proj-svg .line-k { stroke: var(--k-color); }
-  .artifact-scope .proj-svg .line-v { stroke: var(--v-color); }
-  .artifact-scope .proj-svg .line-gray { stroke: var(--text-dim); }
+  .artifact-scope .proj-svg .box-q { fill: var(--at-amber-soft); stroke: var(--at-amber); }
+  .artifact-scope .proj-svg .box-k { fill: var(--at-green-soft); stroke: var(--at-green); }
+  .artifact-scope .proj-svg .box-v { fill: var(--at-blue-soft); stroke: var(--at-blue); }
+  .artifact-scope .proj-svg .box-gray { fill: var(--at-inset); stroke: var(--at-line); }
+  .artifact-scope .proj-svg .box-embed { fill: var(--at-violet-soft); stroke: var(--at-violet); }
+  .artifact-scope .proj-svg .t-q { fill: var(--at-amber); }
+  .artifact-scope .proj-svg .t-k { fill: var(--at-green); }
+  .artifact-scope .proj-svg .t-v { fill: var(--at-blue); }
+  .artifact-scope .proj-svg .t-main { fill: var(--at-text); }
+  .artifact-scope .proj-svg .t-muted { fill: var(--at-muted); }
+  .artifact-scope .proj-svg .t-purple { fill: var(--at-violet); }
+  .artifact-scope .proj-svg .line-q { stroke: var(--at-amber); }
+  .artifact-scope .proj-svg .line-k { stroke: var(--at-green); }
+  .artifact-scope .proj-svg .line-v { stroke: var(--at-blue); }
+  .artifact-scope .proj-svg .line-gray { stroke: var(--at-faint); }
 
   /* Library stepper */
   .artifact-scope .stepper-pills {
@@ -292,23 +177,23 @@ export const styles = `
     font-size: 13px;
     font-weight: 500;
     cursor: pointer;
-    border: 1px solid var(--border);
-    background: var(--bg);
-    color: var(--text-muted);
+    border: 1px solid var(--at-line);
+    background: var(--at-bg);
+    color: var(--at-muted);
     transition: all 0.25s;
     user-select: none;
   }
 
   .artifact-scope .stepper-pill.active {
-    background: var(--purple-bg);
-    border-color: var(--purple);
-    color: var(--purple-text);
+    background: var(--at-violet-soft);
+    border-color: var(--at-violet);
+    color: var(--at-violet);
   }
 
   .artifact-scope .stepper-caption {
     text-align: center;
     font-size: 15px;
-    color: var(--text-muted);
+    color: var(--at-muted);
     padding: 8px 24px 16px;
     line-height: 1.5;
     min-height: 52px;
@@ -334,19 +219,19 @@ export const styles = `
     font-weight: 500;
     cursor: pointer;
     border: 2px solid transparent;
-    background: var(--bg-code);
-    color: var(--text);
+    background: var(--at-inset);
+    color: var(--at-text);
     transition: all 0.2s;
     user-select: none;
   }
 
-  .artifact-scope .attn-tok:hover { border-color: var(--border); }
-  .artifact-scope .attn-tok.active { background: var(--q-bg); border-color: var(--q-color); color: var(--q-text); }
+  .artifact-scope .attn-tok:hover { border-color: var(--at-line); }
+  .artifact-scope .attn-tok.active { background: var(--at-amber-soft); border-color: var(--at-amber); color: var(--at-amber); }
 
   .artifact-scope .attn-hint {
     text-align: center;
     font-size: 12px;
-    color: var(--text-dim);
+    color: var(--at-faint);
     margin-bottom: 8px;
   }
 
@@ -362,13 +247,13 @@ export const styles = `
     text-align: right;
     font-size: 14px;
     font-weight: 500;
-    color: var(--text-muted);
+    color: var(--at-muted);
   }
 
   .artifact-scope .bar-track {
     flex: 1;
     height: 22px;
-    background: var(--bg-code);
+    background: var(--at-inset);
     border-radius: 4px;
     overflow: hidden;
   }
@@ -382,14 +267,14 @@ export const styles = `
   .artifact-scope .bar-pct {
     width: 38px;
     font-size: 13px;
-    font-family: var(--mono);
-    color: var(--text-dim);
+    font-family: var(--at-font-mono);
+    color: var(--at-faint);
   }
 
   .artifact-scope .attn-explain {
     text-align: center;
     font-size: 14px;
-    color: var(--text-muted);
+    color: var(--at-muted);
     margin-top: 10px;
     line-height: 1.5;
     min-height: 40px;
@@ -421,19 +306,19 @@ export const styles = `
     margin-top: 2px;
   }
 
-  .artifact-scope .step-num.s0 { background: var(--bg-code); color: var(--text-muted); }
-  .artifact-scope .step-num.s1 { background: var(--q-bg); color: var(--q-text); }
-  .artifact-scope .step-num.s2 { background: var(--k-bg); color: var(--k-text); }
-  .artifact-scope .step-num.s3 { background: var(--purple-bg); color: var(--purple-text); }
-  .artifact-scope .step-num.s4 { background: var(--v-bg); color: var(--v-text); }
+  .artifact-scope .step-num.s0 { background: var(--at-inset); color: var(--at-muted); }
+  .artifact-scope .step-num.s1 { background: var(--at-amber-soft); color: var(--at-amber); }
+  .artifact-scope .step-num.s2 { background: var(--at-green-soft); color: var(--at-green); }
+  .artifact-scope .step-num.s3 { background: var(--at-violet-soft); color: var(--at-violet); }
+  .artifact-scope .step-num.s4 { background: var(--at-blue-soft); color: var(--at-blue); }
 
   .artifact-scope .step-text { font-size: 16px; line-height: 1.6; }
   .artifact-scope .step-text strong { font-weight: 600; }
 
   /* Key insight card */
   .artifact-scope .insight-card {
-    background: var(--q-bg);
-    border: 1px solid var(--q-color);
+    background: var(--at-amber-soft);
+    border: 1px solid var(--at-amber);
     border-radius: 12px;
     padding: 28px 28px;
     margin: 40px 0;
@@ -444,12 +329,12 @@ export const styles = `
     font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--q-text);
+    color: var(--at-amber);
     margin-bottom: 10px;
   }
 
   .artifact-scope .insight-card p {
-    color: var(--q-text);
+    color: var(--at-amber);
     margin-bottom: 12px;
     font-size: 16px;
   }
@@ -458,11 +343,11 @@ export const styles = `
 
   /* Footer */
   .artifact-scope .article-footer {
-    border-top: 1px solid var(--border);
+    border-top: 1px solid var(--at-line);
     margin-top: 56px;
     padding: 32px 0 72px;
     text-align: center;
-    color: var(--text-dim);
+    color: var(--at-faint);
     font-size: 14px;
   }
 
@@ -484,21 +369,11 @@ export const styles = `
 `;
 
 export const html = `
-<div class="topbar">
-  <div class="topbar-inner">
-    <div class="topbar-left">
-      <a href="/">harrytruong</a>
-      <span class="sep">/</span>
-      <span class="current">Q, K, V Attention</span>
-    </div>
-  </div>
-</div>
-
 <article>
   <div class="hero">
     <div class="tag">Deep Dive &mdash; Transformers</div>
     <h1>Q, K, V &mdash; The Heart of LLM Attention, Explained Visually</h1>
-    <p class="subtitle">Every modern LLM runs on the same mechanism: self-attention. Here's the intuition behind Query, Key, and Value &mdash; from scratch.</p>
+    <p class="subtitle">Every modern LLM runs on the same mechanism: self-attention. Here's the intuition behind Query, Key, and Value.</p>
     <div class="meta">
       <div class="avatar">HT</div>
       <div>
@@ -571,7 +446,7 @@ export const html = `
           <text class="t-q" x="125" y="110" text-anchor="middle" font-size="13" dominant-baseline="central" opacity="0.8">"I need a book</text>
           <text class="t-q" x="125" y="128" text-anchor="middle" font-size="13" dominant-baseline="central" opacity="0.8">about rivers"</text>
 
-          <rect x="280" y="30" width="360" height="190" rx="14" fill="none" stroke="var(--border)" stroke-width="1" stroke-dasharray="6 4"/>
+          <rect x="280" y="30" width="360" height="190" rx="14" fill="none" stroke="var(--at-line)" stroke-width="1" stroke-dasharray="6 4"/>
           <text class="t-muted" x="460" y="55" text-anchor="middle" font-size="13" font-weight="600" dominant-baseline="central">LIBRARY</text>
 
           <rect class="box-k" x="300" y="75" width="130" height="50" rx="8" stroke-width="1"/>
@@ -582,7 +457,7 @@ export const html = `
           <text class="t-v" x="555" y="94" text-anchor="middle" font-size="13" font-weight="600" dominant-baseline="central">Actual book</text>
           <text class="t-v" x="555" y="112" text-anchor="middle" font-size="11" dominant-baseline="central" opacity="0.7">= Value</text>
 
-          <line x1="430" y1="100" x2="488" y2="100" stroke="var(--text-dim)" stroke-width="0.5" stroke-dasharray="3 3"/>
+          <line x1="430" y1="100" x2="488" y2="100" stroke="var(--at-faint)" stroke-width="0.5" stroke-dasharray="3 3"/>
 
           <rect class="box-k" x="300" y="145" width="130" height="50" rx="8" stroke-width="1"/>
           <text class="t-k" x="365" y="164" text-anchor="middle" font-size="13" font-weight="600" dominant-baseline="central">Index card</text>
@@ -592,7 +467,7 @@ export const html = `
           <text class="t-v" x="555" y="164" text-anchor="middle" font-size="13" font-weight="600" dominant-baseline="central">Actual book</text>
           <text class="t-v" x="555" y="182" text-anchor="middle" font-size="11" dominant-baseline="central" opacity="0.7">= Value</text>
 
-          <line x1="430" y1="170" x2="488" y2="170" stroke="var(--text-dim)" stroke-width="0.5" stroke-dasharray="3 3"/>
+          <line x1="430" y1="170" x2="488" y2="170" stroke="var(--at-faint)" stroke-width="0.5" stroke-dasharray="3 3"/>
         </svg>
       </div>
 
@@ -602,9 +477,9 @@ export const html = `
           <text class="t-q" x="120" y="98" text-anchor="middle" font-size="14" font-weight="600" dominant-baseline="central">Q: "rivers"</text>
           <text class="t-q" x="120" y="120" text-anchor="middle" font-size="12" dominant-baseline="central" opacity="0.7">Your search</text>
 
-          <line x1="200" y1="95" x2="278" y2="95" stroke="var(--q-color)" stroke-width="2.5" fill="none"/>
-          <polygon points="278,90 290,95 278,100" fill="var(--q-color)"/>
-          <line x1="200" y1="118" x2="278" y2="165" stroke="var(--q-color)" stroke-width="0.8" opacity="0.3" fill="none"/>
+          <line x1="200" y1="95" x2="278" y2="95" stroke="var(--at-amber)" stroke-width="2.5" fill="none"/>
+          <polygon points="278,90 290,95 278,100" fill="var(--at-amber)"/>
+          <line x1="200" y1="118" x2="278" y2="165" stroke="var(--at-amber)" stroke-width="0.8" opacity="0.3" fill="none"/>
 
           <rect class="box-k" x="290" y="65" width="170" height="52" rx="8" stroke-width="1.5"/>
           <text class="t-k" x="375" y="84" text-anchor="middle" font-size="14" font-weight="600" dominant-baseline="central">K: "Geography"</text>
@@ -629,9 +504,9 @@ export const html = `
           <text class="t-v" x="145" y="155" text-anchor="middle" font-size="14" font-weight="600" dominant-baseline="central" opacity="0.45">V: Recipe book</text>
           <text class="t-v" x="145" y="175" text-anchor="middle" font-size="12" dominant-baseline="central" opacity="0.35">weight: 10%</text>
 
-          <line x1="240" y1="86" x2="368" y2="126" stroke="var(--v-color)" stroke-width="2.5" fill="none"/>
-          <polygon points="368,121 380,126 368,131" fill="var(--v-color)"/>
-          <line x1="240" y1="161" x2="368" y2="141" stroke="var(--v-color)" stroke-width="0.8" opacity="0.3" fill="none"/>
+          <line x1="240" y1="86" x2="368" y2="126" stroke="var(--at-blue)" stroke-width="2.5" fill="none"/>
+          <polygon points="368,121 380,126 368,131" fill="var(--at-blue)"/>
+          <line x1="240" y1="161" x2="368" y2="141" stroke="var(--at-blue)" stroke-width="0.8" opacity="0.3" fill="none"/>
 
           <rect class="box-embed" x="380" y="108" width="250" height="52" rx="10" stroke-width="1.5"/>
           <text class="t-purple" x="505" y="128" text-anchor="middle" font-size="14" font-weight="600" dominant-baseline="central">Output: 90% rivers</text>
@@ -691,7 +566,7 @@ export const html = `
 
   <div class="callout">
     <div class="callout-title">The formula</div>
-    <p style="font-family: var(--mono); font-size: 15px; margin-bottom: 0;">Attention(Q, K, V) = softmax(Q &middot; K<sup>T</sup> / &radic;d<sub>k</sub>) &middot; V</p>
+    <p style="font-family: var(--at-font-mono); font-size: 15px; margin-bottom: 0;">Attention(Q, K, V) = softmax(Q &middot; K<sup>T</sup> / &radic;d<sub>k</sub>) &middot; V</p>
   </div>
 
   <p>The <code>&radic;d_k</code> scaling factor prevents the dot products from growing too large (which would push softmax into extreme 0/1 regions). It keeps the gradients healthy during training.</p>
@@ -699,7 +574,7 @@ export const html = `
   <p>And that's it. Every GPT, Claude, Gemini, and Llama model uses this exact mechanism &mdash; stacked dozens of times across layers and attention heads &mdash; to understand language. The magic isn't in any single Q, K, or V lookup. It's in the fact that the model learns <em>what to ask</em>, <em>how to advertise</em>, and <em>what to share</em> &mdash; all from data.</p>
 
   <div class="article-footer">
-    &copy; 2026 harrytruong &middot; Visual explainer inspired by ByteByteGo style
+    &copy; 2026 harrytruong &middot; A visual explainer
   </div>
 </article>
 `;
@@ -736,7 +611,7 @@ var AE = [
   '"the" (second) attends heavily to "mat" \\u2014 determining which "the" it is.',
   '"mat" looks at "on" and "sat" to understand its role in the sentence.',
 ];
-var barColors = ['#B4B2A9', '#1D9E75', '#EF9F27', '#378ADD', '#B4B2A9', '#7F77DD'];
+var barColors = ['var(--at-faint)', 'var(--at-green)', 'var(--at-amber)', 'var(--at-blue)', 'var(--at-faint)', 'var(--at-violet)'];
 var aq = 2;
 
 function renderAttn() {
@@ -761,16 +636,16 @@ function renderAttn() {
     var tx = sx + i * sp;
     var lw = 1 + weights[i] * 8;
     var lo = Math.min(0.1 + weights[i] * 1.8, 1);
-    svg += '<line x1="' + qx + '" y1="8" x2="' + tx + '" y2="78" stroke="var(--q-color)" stroke-width="' + lw.toFixed(1) + '" opacity="' + lo.toFixed(2) + '" stroke-linecap="round"/>';
+    svg += '<line x1="' + qx + '" y1="8" x2="' + tx + '" y2="78" stroke="var(--at-amber)" stroke-width="' + lw.toFixed(1) + '" opacity="' + lo.toFixed(2) + '" stroke-linecap="round"/>';
   });
 
   AW.forEach(function(w, i) {
     var tx = sx + i * sp;
     var isQ = i === aq;
-    if (isQ) svg += '<rect x="' + (tx - 32) + '" y="0" width="64" height="24" rx="6" fill="var(--q-bg)" stroke="var(--q-color)" stroke-width="1"/>';
-    svg += '<rect x="' + (tx - 32) + '" y="76" width="64" height="24" rx="6" fill="' + (isQ ? 'var(--k-bg)' : 'var(--v-bg)') + '" stroke="' + (isQ ? 'var(--k-color)' : 'var(--v-color)') + '" stroke-width="0.5"/>';
-    if (isQ) svg += '<text x="' + tx + '" y="12" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="600" fill="var(--q-text)">Q</text>';
-    svg += '<text x="' + tx + '" y="88" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="500" fill="' + (isQ ? 'var(--k-text)' : 'var(--v-text)') + '">' + w + '</text>';
+    if (isQ) svg += '<rect x="' + (tx - 32) + '" y="0" width="64" height="24" rx="6" fill="var(--at-amber-soft)" stroke="var(--at-amber)" stroke-width="1"/>';
+    svg += '<rect x="' + (tx - 32) + '" y="76" width="64" height="24" rx="6" fill="' + (isQ ? 'var(--at-green-soft)' : 'var(--at-blue-soft)') + '" stroke="' + (isQ ? 'var(--at-green)' : 'var(--at-blue)') + '" stroke-width="0.5"/>';
+    if (isQ) svg += '<text x="' + tx + '" y="12" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="600" fill="var(--at-amber)">Q</text>';
+    svg += '<text x="' + tx + '" y="88" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="500" fill="' + (isQ ? 'var(--at-green)' : 'var(--at-blue)') + '">' + w + '</text>';
   });
 
   document.getElementById('attn-fan').innerHTML = svg;

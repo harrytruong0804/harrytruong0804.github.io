@@ -1,138 +1,105 @@
 export const styles = `
   .artifact-scope{
-    --bg:#fbfbfd; --surface:#ffffff; --ink:#15171a; --ink-soft:#3a4252;
-    --muted:#6b7785; --line:#e3e6eb; --line-soft:#eef0f3;
-    --accent:#2563eb; --accent-soft:#eff6ff;
-    --good:#16a34a; --good-soft:#f0fdf4;
-    --bad:#dc2626; --bad-soft:#fef2f2;
-    --warn:#d97706; --warn-soft:#fffbeb;
-    --purple:#7c3aed; --purple-soft:#f5f3ff;
-    background:var(--bg);color:var(--ink);
-    font:17px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    font-size:17px;line-height:1.7;
     -webkit-font-smoothing:antialiased;
   }
   .artifact-scope *{box-sizing:border-box}
 
-  /* ====== Standard topbar (matches site) ====== */
-  .artifact-scope .topbar{
-    border-bottom:1px solid var(--line);padding:14px 0;
-    background:rgba(251,251,253,0.92);backdrop-filter:blur(8px);
-    position:sticky;top:0;z-index:10}
-  .artifact-scope .topbar-inner{
-    display:flex;justify-content:space-between;align-items:center;
-    max-width:880px;margin:0 auto;padding:0 24px}
-  .artifact-scope .logo{
-    font-family:"SF Mono",Menlo,Consolas,monospace;font-weight:600;font-size:14px;
-    letter-spacing:.05em;color:var(--accent)}
-  .artifact-scope .logo a{color:inherit;text-decoration:none;border:none}
-  .artifact-scope .logo a:hover{opacity:.7}
-  .artifact-scope .meta-tag{
-    background:var(--accent-soft);border:1px solid #c7dafe;border-radius:999px;
-    padding:3px 12px;font-family:"SF Mono",Menlo,Consolas,monospace;font-size:11px;
-    letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
-
   .artifact-scope article{max-width:880px;margin:0 auto;padding:56px 24px 96px}
-  .artifact-scope header.post-head{border-bottom:1px solid var(--line);padding-bottom:32px;margin-bottom:8px}
-  .artifact-scope .eyebrow{color:var(--accent);font-size:13px;letter-spacing:1.5px;text-transform:uppercase;
+  .artifact-scope header.post-head{border-bottom:1px solid var(--at-line);padding-bottom:32px;margin-bottom:8px}
+  .artifact-scope .eyebrow{color:var(--at-accent);font-family:var(--at-font-mono);font-size:13px;letter-spacing:1.5px;text-transform:uppercase;
     font-weight:700;margin-bottom:14px}
-  .artifact-scope h1{font-size:38px;line-height:1.2;letter-spacing:-.5px;margin:0 0 16px;font-weight:800}
-  .artifact-scope .lead{font-size:20px;line-height:1.55;color:var(--ink-soft);margin:0;font-weight:400}
-  .artifact-scope .byline{color:var(--muted);font-size:14px;margin-top:18px}
-  .artifact-scope h2{font-size:26px;margin:64px 0 14px;font-weight:800;letter-spacing:-.3px;
+  .artifact-scope h1{font-family:var(--at-font-display);font-size:38px;line-height:1.2;letter-spacing:-.5px;margin:0 0 16px;font-weight:800}
+  .artifact-scope .lead{font-size:20px;line-height:1.55;color:var(--at-muted);margin:0;font-weight:400}
+  .artifact-scope .byline{color:var(--at-faint);font-family:var(--at-font-mono);font-size:14px;margin-top:18px}
+  .artifact-scope h2{font-family:var(--at-font-display);font-size:26px;margin:64px 0 14px;font-weight:800;letter-spacing:-.3px;
     display:flex;align-items:center;gap:14px}
-  .artifact-scope h2 .step{flex:0 0 36px;height:36px;background:var(--accent);color:#fff;border-radius:10px;
-    display:grid;place-items:center;font-size:15px;font-weight:700}
-  .artifact-scope h3{font-size:19px;margin:32px 0 8px;font-weight:700;color:var(--ink)}
-  .artifact-scope p{margin:14px 0;color:var(--ink-soft)}
-  .artifact-scope p strong, .artifact-scope li strong{color:var(--ink);font-weight:700}
-  .artifact-scope code{background:#f1f3f5;color:#14213d;padding:2px 6px;border-radius:4px;
-    font-size:.92em;font-family:"SF Mono",Menlo,Consolas,monospace}
-  .artifact-scope pre{background:#0f172a;color:#e2e8f0;padding:18px 22px;border-radius:10px;overflow-x:auto;
-    font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13.5px;line-height:1.6;margin:18px 0}
-  .artifact-scope .figure{background:var(--surface);border:1px solid var(--line);border-radius:14px;
+  .artifact-scope h2 .step{flex:0 0 36px;height:36px;background:var(--at-accent);color:var(--at-bg);border-radius:10px;
+    display:grid;place-items:center;font-size:15px;font-weight:700;font-family:var(--at-font-mono)}
+  .artifact-scope h3{font-family:var(--at-font-display);font-size:19px;margin:32px 0 8px;font-weight:700;color:var(--at-text)}
+  .artifact-scope p{margin:14px 0;color:var(--at-muted)}
+  .artifact-scope p strong, .artifact-scope li strong{color:var(--at-text);font-weight:700}
+  .artifact-scope code{background:var(--at-inset);color:var(--at-text);padding:2px 6px;border-radius:4px;
+    font-size:.92em;font-family:var(--at-font-mono)}
+  .artifact-scope pre{background:var(--at-inset);color:var(--at-text);padding:18px 22px;border-radius:10px;overflow-x:auto;
+    font-family:var(--at-font-mono);font-size:13.5px;line-height:1.6;margin:18px 0}
+  .artifact-scope .figure{background:var(--at-surface);border:1px solid var(--at-line);border-radius:14px;
     padding:28px;margin:24px 0}
-  .artifact-scope .figure-caption{color:var(--muted);font-size:13.5px;text-align:center;margin-top:16px;
+  .artifact-scope .figure-caption{color:var(--at-faint);font-size:13.5px;text-align:center;margin-top:16px;
     font-style:italic}
   .artifact-scope .callout{padding:16px 20px;border-radius:8px;margin:22px 0;
-    background:var(--accent-soft);border:1px solid #c7dafe;border-left:4px solid var(--accent)}
-  .artifact-scope .callout.warn{background:var(--warn-soft);border-color:#fcd34d;border-left-color:var(--warn)}
-  .artifact-scope .callout.good{background:var(--good-soft);border-color:#bbf7d0;border-left-color:var(--good)}
-  .artifact-scope .callout.bad{background:var(--bad-soft);border-color:#fecaca;border-left-color:var(--bad)}
+    background:var(--at-accent-soft);border:1px solid var(--at-line);border-left:4px solid var(--at-accent)}
+  .artifact-scope .callout.warn{background:var(--at-amber-soft);border-left-color:var(--at-amber)}
+  .artifact-scope .callout.good{background:var(--at-green-soft);border-left-color:var(--at-green)}
+  .artifact-scope .callout.bad{background:var(--at-accent-soft);border-left-color:var(--at-accent)}
   .artifact-scope .callout p:first-child{margin-top:0}
   .artifact-scope .callout p:last-child{margin-bottom:0}
-  .artifact-scope .callout .title{display:block;color:var(--ink);font-weight:700;margin-bottom:6px;font-size:15px}
+  .artifact-scope .callout .title{display:block;color:var(--at-text);font-weight:700;margin-bottom:6px;font-size:15px}
   .artifact-scope .grid{display:grid;gap:14px;margin:18px 0}
   .artifact-scope .g2{grid-template-columns:1fr 1fr}
   .artifact-scope .g3{grid-template-columns:1fr 1fr 1fr}
   .artifact-scope .g4{grid-template-columns:1fr 1fr 1fr 1fr}
   @media(max-width:720px){.artifact-scope .g2,.artifact-scope .g3,.artifact-scope .g4{grid-template-columns:1fr}}
-  .artifact-scope .box{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px}
-  .artifact-scope .box h4{margin:0 0 8px;font-size:15px;color:var(--ink);font-weight:700}
+  .artifact-scope .box{background:var(--at-surface);border:1px solid var(--at-line);border-radius:10px;padding:18px}
+  .artifact-scope .box h4{margin:0 0 8px;font-size:15px;color:var(--at-text);font-weight:700}
   .artifact-scope .box p{margin:0;font-size:14.5px;line-height:1.55}
   .artifact-scope .box .icon{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;
-    color:#fff;font-weight:800;font-size:14px;margin-bottom:10px}
-  .artifact-scope .box .icon.blue{background:var(--accent)}
-  .artifact-scope .box .icon.green{background:var(--good)}
-  .artifact-scope .box .icon.red{background:var(--bad)}
-  .artifact-scope .box .icon.amber{background:var(--warn)}
-  .artifact-scope .box .icon.purple{background:var(--purple)}
-  .artifact-scope .tag{display:inline-block;font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px;
+    color:var(--at-bg);font-weight:800;font-size:14px;margin-bottom:10px}
+  .artifact-scope .box .icon.blue{background:var(--at-blue)}
+  .artifact-scope .box .icon.green{background:var(--at-green)}
+  .artifact-scope .box .icon.red{background:var(--at-accent)}
+  .artifact-scope .box .icon.amber{background:var(--at-amber)}
+  .artifact-scope .box .icon.purple{background:var(--at-violet)}
+  .artifact-scope .tag{display:inline-block;font-family:var(--at-font-mono);font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px;
     letter-spacing:.5px}
-  .artifact-scope .tag.good{background:var(--good-soft);color:var(--good);border:1px solid #bbf7d0}
-  .artifact-scope .tag.bad{background:var(--bad-soft);color:var(--bad);border:1px solid #fecaca}
-  .artifact-scope .tag.warn{background:var(--warn-soft);color:var(--warn);border:1px solid #fcd34d}
-  .artifact-scope .tag.muted{background:#f1f3f5;color:var(--muted);border:1px solid var(--line)}
+  .artifact-scope .tag.good{background:var(--at-green-soft);color:var(--at-green);border:1px solid var(--at-green-soft)}
+  .artifact-scope .tag.bad{background:var(--at-accent-soft);color:var(--at-accent);border:1px solid var(--at-accent-soft)}
+  .artifact-scope .tag.warn{background:var(--at-amber-soft);color:var(--at-amber);border:1px solid var(--at-amber-soft)}
+  .artifact-scope .tag.muted{background:var(--at-inset);color:var(--at-faint);border:1px solid var(--at-line)}
   .artifact-scope table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14.5px}
-  .artifact-scope th,.artifact-scope td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
-  .artifact-scope th{background:#f9fafb;color:var(--ink);font-weight:700;font-size:12px;letter-spacing:.4px;
+  .artifact-scope th,.artifact-scope td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--at-line);vertical-align:top}
+  .artifact-scope th{background:var(--at-inset);color:var(--at-text);font-family:var(--at-font-mono);font-weight:700;font-size:12px;letter-spacing:.4px;
     text-transform:uppercase}
-  .artifact-scope td:first-child{font-weight:600;color:var(--ink)}
+  .artifact-scope td:first-child{font-weight:600;color:var(--at-text)}
   .artifact-scope svg.diagram{width:100%;height:auto;display:block}
-  .artifact-scope .toc{background:var(--surface);border:1px solid var(--line);border-radius:10px;
+  .artifact-scope .toc{background:var(--at-surface);border:1px solid var(--at-line);border-radius:10px;
     padding:22px 26px;margin:32px 0}
-  .artifact-scope .toc h3{margin:0 0 12px;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;
-    color:var(--muted);font-weight:700}
-  .artifact-scope .toc ol{margin:0;padding-left:22px;color:var(--ink-soft);line-height:1.9}
-  .artifact-scope .toc a{color:var(--ink);text-decoration:none;border-bottom:1px solid transparent}
-  .artifact-scope .toc a:hover{color:var(--accent);border-bottom-color:var(--accent)}
-  .artifact-scope .mono{font-family:"SF Mono",Menlo,Consolas,monospace}
-  .artifact-scope .kbd{background:#f9fafb;border:1px solid var(--line);border-radius:5px;padding:1px 6px;
-    font-family:"SF Mono",Menlo,Consolas,monospace;font-size:.85em;color:var(--ink)}
+  .artifact-scope .toc h3{margin:0 0 12px;font-family:var(--at-font-mono);font-size:12px;letter-spacing:1.2px;text-transform:uppercase;
+    color:var(--at-faint);font-weight:700}
+  .artifact-scope .toc ol{margin:0;padding-left:22px;color:var(--at-muted);line-height:1.9}
+  .artifact-scope .toc a{color:var(--at-text);text-decoration:none;border-bottom:1px solid transparent}
+  .artifact-scope .toc a:hover{color:var(--at-accent);border-bottom-color:var(--at-accent)}
+  .artifact-scope .mono{font-family:var(--at-font-mono)}
+  .artifact-scope .kbd{background:var(--at-inset);border:1px solid var(--at-line);border-radius:5px;padding:1px 6px;
+    font-family:var(--at-font-mono);font-size:.85em;color:var(--at-text)}
   .artifact-scope ul.clean{list-style:none;padding:0;margin:14px 0}
-  .artifact-scope ul.clean li{padding:10px 0;border-bottom:1px solid var(--line-soft);color:var(--ink-soft)}
+  .artifact-scope ul.clean li{padding:10px 0;border-bottom:1px solid var(--at-line);color:var(--at-muted)}
   .artifact-scope ul.clean li:last-child{border-bottom:none}
-  .artifact-scope ul.clean li strong{color:var(--ink)}
-  .artifact-scope .kicker{font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);
+  .artifact-scope ul.clean li strong{color:var(--at-text)}
+  .artifact-scope .kicker{font-family:var(--at-font-mono);font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:var(--at-faint);
     font-weight:700;margin-bottom:6px}
-  .artifact-scope .ascii{background:#f9fafb;border:1px solid var(--line);border-radius:10px;
-    font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13px;line-height:1.55;
-    color:var(--ink);padding:18px 22px;white-space:pre;overflow-x:auto}
-  .artifact-scope .ascii .c-acc{color:var(--accent);font-weight:700}
-  .artifact-scope .ascii .c-muted{color:var(--muted)}
-  .artifact-scope .ascii .c-good{color:var(--good);font-weight:700}
-  .artifact-scope .ascii .c-bad{color:var(--bad);font-weight:700}
+  .artifact-scope .ascii{background:var(--at-inset);border:1px solid var(--at-line);border-radius:10px;
+    font-family:var(--at-font-mono);font-size:13px;line-height:1.55;
+    color:var(--at-text);padding:18px 22px;white-space:pre;overflow-x:auto}
+  .artifact-scope .ascii .c-acc{color:var(--at-accent);font-weight:700}
+  .artifact-scope .ascii .c-muted{color:var(--at-faint)}
+  .artifact-scope .ascii .c-good{color:var(--at-green);font-weight:700}
+  .artifact-scope .ascii .c-bad{color:var(--at-accent);font-weight:700}
 
   /* ====== Footer (matches site) ====== */
   .artifact-scope .footer{max-width:880px;margin:64px auto 0;padding:24px;
-    border-top:1px solid var(--line);color:var(--muted);font-size:13px;text-align:center}
-  .artifact-scope .footer p{color:var(--muted);margin:0}
-  .artifact-scope .footer .ornament{font-size:22px;color:var(--accent);margin-bottom:10px}
+    border-top:1px solid var(--at-line);color:var(--at-faint);font-size:13px;text-align:center}
+  .artifact-scope .footer p{color:var(--at-faint);margin:0}
+  .artifact-scope .footer .ornament{font-size:22px;color:var(--at-accent);margin-bottom:10px}
 `;
 
 export const html = `
-<div class="topbar">
-  <div class="topbar-inner">
-    <span class="logo"><a href="/">&#9664; harrytruong</a></span>
-    <span class="meta-tag">DEEP DIVE — CROWD / USD</span>
-  </div>
-</div>
-
 <article>
 
 <header class="post-head">
   <div class="eyebrow">Crowd Simulation · USD Deep Dive</div>
   <h1>From Mesh to Crowd: How 1,583 Recorded Pedestrians Walk a USD Stage</h1>
-  <p class="lead">A first-principles tour through meshes, skeletons, skin weights, textures — and the &ldquo;baked loop&rdquo; trick that animates an entire recorded MassMotion crowd in Omniverse Kit without an animation graph.</p>
+  <p class="lead">A tour through meshes, skeletons, skin weights, and textures — and the &ldquo;baked loop&rdquo; trick that animates an entire recorded MassMotion crowd in Omniverse Kit without an animation graph.</p>
   <p class="byline">SNCF Crowd&nbsp;→&nbsp;USD pipeline · Stage 06 · ~12 min read</p>
 </header>
 
@@ -163,73 +130,73 @@ export const html = `
   <svg class="diagram" viewBox="0 0 820 200">
     <!-- CSV -->
     <g transform="translate(20,30)">
-      <rect width="180" height="140" rx="10" fill="#fff" stroke="#e3e6eb" stroke-width="1.5"/>
-      <rect width="180" height="26" rx="10" fill="#2563eb"/>
-      <rect y="16" width="180" height="10" fill="#2563eb"/>
-      <text x="14" y="18" fill="#fff" font-size="12" font-weight="700" font-family="SF Mono,monospace">xyz v2.csv</text>
-      <g font-family="SF Mono,monospace" font-size="10.5" fill="#3a4252">
+      <rect width="180" height="140" rx="10" fill="var(--at-surface)" stroke="var(--at-line)" stroke-width="1.5"/>
+      <rect width="180" height="26" rx="10" fill="var(--at-blue)"/>
+      <rect y="16" width="180" height="10" fill="var(--at-blue)"/>
+      <text x="14" y="18" fill="var(--at-bg)" font-size="12" font-weight="700" font-family="var(--at-font-mono)">xyz v2.csv</text>
+      <g font-family="var(--at-font-mono)" font-size="10.5" fill="var(--at-muted)">
         <text x="12" y="48">Frame  AgentID  X     Y    Z</text>
         <text x="12" y="64">139508 agent_3   12.4  0.0  -6.2</text>
         <text x="12" y="78">139508 agent_8   8.1   0.0  -3.4</text>
         <text x="12" y="92">139509 agent_3   12.5  0.0  -6.1</text>
         <text x="12" y="106">139509 agent_8   8.2  0.0  -3.3</text>
-        <text x="12" y="120" fill="#6b7785">… 1,541,367 rows</text>
+        <text x="12" y="120" fill="var(--at-faint)">… 1,541,367 rows</text>
       </g>
     </g>
     <!-- arrow 1 -->
     <g transform="translate(210,100)">
-      <line x1="0" y1="0" x2="60" y2="0" stroke="#6b7785" stroke-width="2"/>
-      <polygon points="60,-6 72,0 60,6" fill="#6b7785"/>
-      <text x="36" y="-12" fill="#6b7785" font-size="11" text-anchor="middle">build</text>
+      <line x1="0" y1="0" x2="60" y2="0" stroke="var(--at-faint)" stroke-width="2"/>
+      <polygon points="60,-6 72,0 60,6" fill="var(--at-faint)"/>
+      <text x="36" y="-12" fill="var(--at-faint)" font-size="11" text-anchor="middle">build</text>
     </g>
     <!-- USD -->
     <g transform="translate(295,30)">
-      <rect width="180" height="140" rx="10" fill="#fff" stroke="#e3e6eb" stroke-width="1.5"/>
-      <rect width="180" height="26" rx="10" fill="#7c3aed"/>
-      <rect y="16" width="180" height="10" fill="#7c3aed"/>
-      <text x="14" y="18" fill="#fff" font-size="12" font-weight="700" font-family="SF Mono,monospace">scenario.usd</text>
-      <g font-family="SF Mono,monospace" font-size="10.5" fill="#3a4252">
+      <rect width="180" height="140" rx="10" fill="var(--at-surface)" stroke="var(--at-line)" stroke-width="1.5"/>
+      <rect width="180" height="26" rx="10" fill="var(--at-violet)"/>
+      <rect y="16" width="180" height="10" fill="var(--at-violet)"/>
+      <text x="14" y="18" fill="var(--at-bg)" font-size="12" font-weight="700" font-family="var(--at-font-mono)">scenario.usd</text>
+      <g font-family="var(--at-font-mono)" font-size="10.5" fill="var(--at-muted)">
         <text x="12" y="48">/Crowd</text>
         <text x="24" y="62">/Anims  (looped)</text>
         <text x="24" y="76">/agent_3  Xform</text>
         <text x="36" y="90">translate.ts</text>
         <text x="36" y="104">rotateZ.ts</text>
         <text x="24" y="118">/agent_8  Xform …</text>
-        <text x="12" y="132" fill="#6b7785">… 1,583 agents</text>
+        <text x="12" y="132" fill="var(--at-faint)">… 1,583 agents</text>
       </g>
     </g>
     <!-- arrow 2 -->
     <g transform="translate(485,100)">
-      <line x1="0" y1="0" x2="60" y2="0" stroke="#6b7785" stroke-width="2"/>
-      <polygon points="60,-6 72,0 60,6" fill="#6b7785"/>
-      <text x="36" y="-12" fill="#6b7785" font-size="11" text-anchor="middle">play</text>
+      <line x1="0" y1="0" x2="60" y2="0" stroke="var(--at-faint)" stroke-width="2"/>
+      <polygon points="60,-6 72,0 60,6" fill="var(--at-faint)"/>
+      <text x="36" y="-12" fill="var(--at-faint)" font-size="11" text-anchor="middle">play</text>
     </g>
     <!-- Kit / station -->
     <g transform="translate(570,30)">
-      <rect width="230" height="140" rx="10" fill="#fff" stroke="#e3e6eb" stroke-width="1.5"/>
-      <rect width="230" height="26" rx="10" fill="#16a34a"/>
-      <rect y="16" width="230" height="10" fill="#16a34a"/>
-      <text x="14" y="18" fill="#fff" font-size="12" font-weight="700" font-family="SF Mono,monospace">Omniverse Kit</text>
+      <rect width="230" height="140" rx="10" fill="var(--at-surface)" stroke="var(--at-line)" stroke-width="1.5"/>
+      <rect width="230" height="26" rx="10" fill="var(--at-green)"/>
+      <rect y="16" width="230" height="10" fill="var(--at-green)"/>
+      <text x="14" y="18" fill="var(--at-bg)" font-size="12" font-weight="700" font-family="var(--at-font-mono)">Omniverse Kit</text>
       <!-- station floor -->
-      <rect x="14" y="100" width="200" height="22" fill="#eef0f3" stroke="#cbd0d8"/>
+      <rect x="14" y="100" width="200" height="22" fill="var(--at-inset)" stroke="var(--at-line)"/>
       <!-- columns -->
-      <rect x="32" y="58" width="6" height="42" fill="#cbd0d8"/>
-      <rect x="190" y="58" width="6" height="42" fill="#cbd0d8"/>
-      <line x1="14" y1="58" x2="220" y2="58" stroke="#cbd0d8" stroke-width="2"/>
+      <rect x="32" y="58" width="6" height="42" fill="var(--at-line)"/>
+      <rect x="190" y="58" width="6" height="42" fill="var(--at-line)"/>
+      <line x1="14" y1="58" x2="220" y2="58" stroke="var(--at-line)" stroke-width="2"/>
       <!-- agents (stick figures) -->
-      <g fill="#2563eb">
+      <g fill="var(--at-blue)">
         <circle cx="56" cy="92" r="3"/>
-        <line x1="56" y1="95" x2="56" y2="100" stroke="#2563eb" stroke-width="1.5"/>
+        <line x1="56" y1="95" x2="56" y2="100" stroke="var(--at-blue)" stroke-width="1.5"/>
         <circle cx="84" cy="92" r="3"/>
-        <line x1="84" y1="95" x2="84" y2="100" stroke="#2563eb" stroke-width="1.5"/>
+        <line x1="84" y1="95" x2="84" y2="100" stroke="var(--at-blue)" stroke-width="1.5"/>
         <circle cx="116" cy="92" r="3"/>
-        <line x1="116" y1="95" x2="116" y2="100" stroke="#2563eb" stroke-width="1.5"/>
+        <line x1="116" y1="95" x2="116" y2="100" stroke="var(--at-blue)" stroke-width="1.5"/>
         <circle cx="148" cy="92" r="3"/>
-        <line x1="148" y1="95" x2="148" y2="100" stroke="#2563eb" stroke-width="1.5"/>
+        <line x1="148" y1="95" x2="148" y2="100" stroke="var(--at-blue)" stroke-width="1.5"/>
         <circle cx="172" cy="92" r="3"/>
-        <line x1="172" y1="95" x2="172" y2="100" stroke="#2563eb" stroke-width="1.5"/>
+        <line x1="172" y1="95" x2="172" y2="100" stroke="var(--at-blue)" stroke-width="1.5"/>
       </g>
-      <text x="115" y="138" fill="#6b7785" font-size="11" text-anchor="middle" font-style="italic">1,583 agents on SNCF station</text>
+      <text x="115" y="138" fill="var(--at-faint)" font-size="11" text-anchor="middle" font-style="italic">1,583 agents on SNCF station</text>
     </g>
   </svg>
   <p class="figure-caption">The pipeline at a glance: a 1.5&nbsp;million-row CSV becomes a USD scenario, which Kit renders on the station model.</p>
@@ -262,79 +229,79 @@ export const html = `
     <!-- character on left -->
     <g transform="translate(30,40)">
       <!-- head -->
-      <circle cx="60" cy="20" r="14" fill="#fff" stroke="#15171a" stroke-width="2"/>
+      <circle cx="60" cy="20" r="14" fill="var(--at-surface)" stroke="var(--at-text)" stroke-width="2"/>
       <!-- torso -->
-      <path d="M60,34 L60,110 M40,55 L80,55 M40,55 L30,90 M80,55 L90,90 M55,110 L42,170 M65,110 L78,170" stroke="#15171a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M60,34 L60,110 M40,55 L80,55 M40,55 L30,90 M80,55 L90,90 M55,110 L42,170 M65,110 L78,170" stroke="var(--at-text)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
       <!-- mesh outline -->
-      <path d="M45,30 Q35,55 30,90 L40,175 L55,178 L60,110 L65,178 L78,176 L88,90 Q85,55 75,30 Q70,38 60,38 Q50,38 45,30 Z" fill="#dbeafe" stroke="#2563eb" stroke-width="1" opacity="0.5"/>
-      <text x="60" y="210" font-size="13" text-anchor="middle" font-weight="700" fill="#15171a">Adult2</text>
-      <text x="60" y="226" font-size="11" text-anchor="middle" fill="#6b7785">= mesh + skeleton + skin + clip</text>
+      <path d="M45,30 Q35,55 30,90 L40,175 L55,178 L60,110 L65,178 L78,176 L88,90 Q85,55 75,30 Q70,38 60,38 Q50,38 45,30 Z" fill="var(--at-blue-soft)" stroke="var(--at-blue)" stroke-width="1" opacity="0.5"/>
+      <text x="60" y="210" font-size="13" text-anchor="middle" font-weight="700" fill="var(--at-text)">Adult2</text>
+      <text x="60" y="226" font-size="11" text-anchor="middle" fill="var(--at-faint)">= mesh + skeleton + skin + clip</text>
     </g>
 
     <!-- arrow -->
     <g transform="translate(170,140)">
-      <line x1="0" y1="0" x2="40" y2="0" stroke="#6b7785" stroke-width="2"/>
-      <polygon points="40,-6 52,0 40,6" fill="#6b7785"/>
-      <text x="26" y="-10" font-size="11" fill="#6b7785" text-anchor="middle">decomposes</text>
-      <text x="26" y="22" font-size="11" fill="#6b7785" text-anchor="middle">into</text>
+      <line x1="0" y1="0" x2="40" y2="0" stroke="var(--at-faint)" stroke-width="2"/>
+      <polygon points="40,-6 52,0 40,6" fill="var(--at-faint)"/>
+      <text x="26" y="-10" font-size="11" fill="var(--at-faint)" text-anchor="middle">decomposes</text>
+      <text x="26" y="22" font-size="11" fill="var(--at-faint)" text-anchor="middle">into</text>
     </g>
 
     <!-- stacked layers on right -->
     <g transform="translate(250,30)">
       <!-- layer 4: clip -->
       <g transform="translate(0,0)">
-        <rect width="540" height="56" rx="8" fill="#f5f3ff" stroke="#7c3aed" stroke-width="1.5"/>
-        <text x="14" y="22" font-size="13" font-weight="700" fill="#7c3aed">CLIP</text>
-        <text x="14" y="40" font-size="12" fill="#3a4252">A time-series of joint poses. Frame 0 → joints here. Frame 1 → joints here. &hellip;</text>
+        <rect width="540" height="56" rx="8" fill="var(--at-violet-soft)" stroke="var(--at-violet)" stroke-width="1.5"/>
+        <text x="14" y="22" font-size="13" font-weight="700" fill="var(--at-violet)">CLIP</text>
+        <text x="14" y="40" font-size="12" fill="var(--at-muted)">A time-series of joint poses. Frame 0 → joints here. Frame 1 → joints here. &hellip;</text>
         <!-- mini timeline -->
         <g transform="translate(360,18)">
-          <line x1="0" y1="14" x2="160" y2="14" stroke="#7c3aed" stroke-width="1"/>
-          <g fill="#7c3aed">
+          <line x1="0" y1="14" x2="160" y2="14" stroke="var(--at-violet)" stroke-width="1"/>
+          <g fill="var(--at-violet)">
             <circle cx="0" cy="14" r="3"/><circle cx="32" cy="14" r="3"/>
             <circle cx="64" cy="14" r="3"/><circle cx="96" cy="14" r="3"/>
             <circle cx="128" cy="14" r="3"/><circle cx="160" cy="14" r="3"/>
           </g>
-          <text x="80" y="34" font-size="10" fill="#6b7785" text-anchor="middle">SkelAnimation samples</text>
+          <text x="80" y="34" font-size="10" fill="var(--at-faint)" text-anchor="middle">SkelAnimation samples</text>
         </g>
       </g>
       <!-- layer 3: skin -->
       <g transform="translate(0,70)">
-        <rect width="540" height="56" rx="8" fill="#fff7ed" stroke="#d97706" stroke-width="1.5"/>
-        <text x="14" y="22" font-size="13" font-weight="700" fill="#d97706">SKIN</text>
-        <text x="14" y="40" font-size="12" fill="#3a4252">Per-vertex weights: which joints pull this vertex, and how strongly.</text>
+        <rect width="540" height="56" rx="8" fill="var(--at-amber-soft)" stroke="var(--at-amber)" stroke-width="1.5"/>
+        <text x="14" y="22" font-size="13" font-weight="700" fill="var(--at-amber)">SKIN</text>
+        <text x="14" y="40" font-size="12" fill="var(--at-muted)">Per-vertex weights: which joints pull this vertex, and how strongly.</text>
         <!-- mini weight viz -->
         <g transform="translate(420,18)">
-          <rect x="0" y="6" width="100" height="14" fill="#fed7aa"/>
-          <rect x="0" y="6" width="60" height="14" fill="#fb923c"/>
-          <text x="50" y="34" font-size="10" fill="#6b7785" text-anchor="middle">jointIndices + jointWeights</text>
+          <rect x="0" y="6" width="100" height="14" fill="var(--at-amber-soft)"/>
+          <rect x="0" y="6" width="60" height="14" fill="var(--at-amber)"/>
+          <text x="50" y="34" font-size="10" fill="var(--at-faint)" text-anchor="middle">jointIndices + jointWeights</text>
         </g>
       </g>
       <!-- layer 2: skeleton -->
       <g transform="translate(0,140)">
-        <rect width="540" height="56" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
-        <text x="14" y="22" font-size="13" font-weight="700" fill="#16a34a">SKELETON</text>
-        <text x="14" y="40" font-size="12" fill="#3a4252">An invisible tree of joints with a default &ldquo;bind pose&rdquo; (usually T-pose).</text>
+        <rect width="540" height="56" rx="8" fill="var(--at-green-soft)" stroke="var(--at-green)" stroke-width="1.5"/>
+        <text x="14" y="22" font-size="13" font-weight="700" fill="var(--at-green)">SKELETON</text>
+        <text x="14" y="40" font-size="12" fill="var(--at-muted)">An invisible tree of joints with a default &ldquo;bind pose&rdquo; (usually T-pose).</text>
         <!-- mini skeleton -->
-        <g transform="translate(430,12)" stroke="#16a34a" stroke-width="1.5" fill="none">
-          <circle cx="40" cy="6" r="3" fill="#16a34a"/>
+        <g transform="translate(430,12)" stroke="var(--at-green)" stroke-width="1.5" fill="none">
+          <circle cx="40" cy="6" r="3" fill="var(--at-green)"/>
           <line x1="40" y1="9" x2="40" y2="22"/>
           <line x1="40" y1="14" x2="22" y2="22"/>
           <line x1="40" y1="14" x2="58" y2="22"/>
           <line x1="40" y1="22" x2="30" y2="38"/>
           <line x1="40" y1="22" x2="50" y2="38"/>
-          <circle cx="22" cy="22" r="2.5" fill="#16a34a"/>
-          <circle cx="58" cy="22" r="2.5" fill="#16a34a"/>
-          <circle cx="30" cy="38" r="2.5" fill="#16a34a"/>
-          <circle cx="50" cy="38" r="2.5" fill="#16a34a"/>
+          <circle cx="22" cy="22" r="2.5" fill="var(--at-green)"/>
+          <circle cx="58" cy="22" r="2.5" fill="var(--at-green)"/>
+          <circle cx="30" cy="38" r="2.5" fill="var(--at-green)"/>
+          <circle cx="50" cy="38" r="2.5" fill="var(--at-green)"/>
         </g>
       </g>
       <!-- layer 1: mesh -->
       <g transform="translate(0,210)">
-        <rect width="540" height="56" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
-        <text x="14" y="22" font-size="13" font-weight="700" fill="#2563eb">MESH</text>
-        <text x="14" y="40" font-size="12" fill="#3a4252">The visible geometry: vertices and triangles shaped like a person.</text>
+        <rect width="540" height="56" rx="8" fill="var(--at-blue-soft)" stroke="var(--at-blue)" stroke-width="1.5"/>
+        <text x="14" y="22" font-size="13" font-weight="700" fill="var(--at-blue)">MESH</text>
+        <text x="14" y="40" font-size="12" fill="var(--at-muted)">The visible geometry: vertices and triangles shaped like a person.</text>
         <!-- mini mesh -->
-        <g transform="translate(440,14)" stroke="#2563eb" stroke-width="1" fill="none">
+        <g transform="translate(440,14)" stroke="var(--at-blue)" stroke-width="1" fill="none">
           <polygon points="10,30 30,5 50,30 70,5 90,30"/>
           <polygon points="20,18 40,28 60,18 80,28"/>
         </g>
@@ -394,73 +361,73 @@ export const html = `
   <svg class="diagram" viewBox="0 0 820 280">
     <!-- arm illustration -->
     <g transform="translate(20,40)">
-      <text x="160" y="0" font-size="13" font-weight="700" fill="#15171a" text-anchor="middle">An arm bending at the elbow</text>
+      <text x="160" y="0" font-size="13" font-weight="700" fill="var(--at-text)" text-anchor="middle">An arm bending at the elbow</text>
       <!-- arm outline -->
-      <path d="M30,60 L300,60 L300,90 L30,90 Z" fill="none" stroke="#15171a" stroke-width="1.5"/>
+      <path d="M30,60 L300,60 L300,90 L30,90 Z" fill="none" stroke="var(--at-text)" stroke-width="1.5"/>
       <!-- joints -->
-      <circle cx="50" cy="75" r="8" fill="#2563eb" stroke="#fff" stroke-width="2"/>
-      <text x="50" y="40" font-size="11" font-weight="700" fill="#2563eb" text-anchor="middle">shoulder</text>
-      <circle cx="170" cy="75" r="8" fill="#d97706" stroke="#fff" stroke-width="2"/>
-      <text x="170" y="40" font-size="11" font-weight="700" fill="#d97706" text-anchor="middle">elbow</text>
-      <circle cx="290" cy="75" r="8" fill="#6b7785" stroke="#fff" stroke-width="2"/>
-      <text x="290" y="40" font-size="11" font-weight="700" fill="#6b7785" text-anchor="middle">wrist</text>
+      <circle cx="50" cy="75" r="8" fill="var(--at-blue)" stroke="var(--at-bg)" stroke-width="2"/>
+      <text x="50" y="40" font-size="11" font-weight="700" fill="var(--at-blue)" text-anchor="middle">shoulder</text>
+      <circle cx="170" cy="75" r="8" fill="var(--at-amber)" stroke="var(--at-bg)" stroke-width="2"/>
+      <text x="170" y="40" font-size="11" font-weight="700" fill="var(--at-amber)" text-anchor="middle">elbow</text>
+      <circle cx="290" cy="75" r="8" fill="var(--at-faint)" stroke="var(--at-bg)" stroke-width="2"/>
+      <text x="290" y="40" font-size="11" font-weight="700" fill="var(--at-faint)" text-anchor="middle">wrist</text>
       <!-- bone lines -->
-      <line x1="58" y1="75" x2="162" y2="75" stroke="#15171a" stroke-width="1" stroke-dasharray="3,3"/>
-      <line x1="178" y1="75" x2="282" y2="75" stroke="#15171a" stroke-width="1" stroke-dasharray="3,3"/>
+      <line x1="58" y1="75" x2="162" y2="75" stroke="var(--at-text)" stroke-width="1" stroke-dasharray="3,3"/>
+      <line x1="178" y1="75" x2="282" y2="75" stroke="var(--at-text)" stroke-width="1" stroke-dasharray="3,3"/>
       <!-- vertex dots colored by weight -->
       <g>
         <!-- v0 pure shoulder -->
-        <circle cx="50" cy="60" r="4" fill="#2563eb"/>
-        <text x="50" y="113" font-size="10" fill="#3a4252" text-anchor="middle">v0</text>
+        <circle cx="50" cy="60" r="4" fill="var(--at-blue)"/>
+        <text x="50" y="113" font-size="10" fill="var(--at-muted)" text-anchor="middle">v0</text>
         <!-- v1 -->
-        <circle cx="90" cy="60" r="4" fill="#2563eb"/>
-        <text x="90" y="113" font-size="10" fill="#3a4252" text-anchor="middle">v1</text>
+        <circle cx="90" cy="60" r="4" fill="var(--at-blue)"/>
+        <text x="90" y="113" font-size="10" fill="var(--at-muted)" text-anchor="middle">v1</text>
         <!-- v2 mix 80/20 -->
         <circle cx="130" cy="60" r="4" fill="url(#mix80)"/>
-        <text x="130" y="113" font-size="10" fill="#3a4252" text-anchor="middle">v2</text>
+        <text x="130" y="113" font-size="10" fill="var(--at-muted)" text-anchor="middle">v2</text>
         <!-- v3 elbow vertex 50/50 -->
         <circle cx="170" cy="60" r="4" fill="url(#mix50)"/>
-        <text x="170" y="113" font-size="10" fill="#3a4252" text-anchor="middle">v3</text>
+        <text x="170" y="113" font-size="10" fill="var(--at-muted)" text-anchor="middle">v3</text>
         <!-- v4 mix 20/80 -->
         <circle cx="210" cy="60" r="4" fill="url(#mix20)"/>
-        <text x="210" y="113" font-size="10" fill="#3a4252" text-anchor="middle">v4</text>
+        <text x="210" y="113" font-size="10" fill="var(--at-muted)" text-anchor="middle">v4</text>
         <!-- v5 -->
-        <circle cx="250" cy="60" r="4" fill="#d97706"/>
-        <text x="250" y="113" font-size="10" fill="#3a4252" text-anchor="middle">v5</text>
+        <circle cx="250" cy="60" r="4" fill="var(--at-amber)"/>
+        <text x="250" y="113" font-size="10" fill="var(--at-muted)" text-anchor="middle">v5</text>
         <!-- v6 -->
-        <circle cx="290" cy="60" r="4" fill="#d97706"/>
-        <text x="290" y="113" font-size="10" fill="#3a4252" text-anchor="middle">v6</text>
+        <circle cx="290" cy="60" r="4" fill="var(--at-amber)"/>
+        <text x="290" y="113" font-size="10" fill="var(--at-muted)" text-anchor="middle">v6</text>
       </g>
       <defs>
-        <linearGradient id="mix80" x1="0%" x2="100%"><stop offset="0%" stop-color="#2563eb"/><stop offset="100%" stop-color="#d97706"/></linearGradient>
-        <linearGradient id="mix50" x1="0%" x2="100%"><stop offset="0%" stop-color="#2563eb"/><stop offset="100%" stop-color="#d97706"/></linearGradient>
-        <linearGradient id="mix20" x1="0%" x2="100%"><stop offset="0%" stop-color="#2563eb"/><stop offset="100%" stop-color="#d97706"/></linearGradient>
+        <linearGradient id="mix80" x1="0%" x2="100%"><stop offset="0%" stop-color="var(--at-blue)"/><stop offset="100%" stop-color="var(--at-amber)"/></linearGradient>
+        <linearGradient id="mix50" x1="0%" x2="100%"><stop offset="0%" stop-color="var(--at-blue)"/><stop offset="100%" stop-color="var(--at-amber)"/></linearGradient>
+        <linearGradient id="mix20" x1="0%" x2="100%"><stop offset="0%" stop-color="var(--at-blue)"/><stop offset="100%" stop-color="var(--at-amber)"/></linearGradient>
       </defs>
     </g>
 
     <!-- table on right -->
     <g transform="translate(370,40)">
-      <text x="0" y="0" font-size="13" font-weight="700" fill="#15171a">Weight table for vertices v0&hellip;v6</text>
-      <g font-family="SF Mono,monospace" font-size="12" fill="#3a4252">
-        <rect x="0" y="16" width="430" height="22" fill="#f9fafb" stroke="#e3e6eb"/>
-        <text x="10" y="32" font-weight="700" fill="#15171a">vertex</text>
-        <text x="120" y="32" font-weight="700" fill="#15171a">shoulder</text>
-        <text x="240" y="32" font-weight="700" fill="#15171a">elbow</text>
-        <text x="340" y="32" font-weight="700" fill="#15171a">wrist</text>
+      <text x="0" y="0" font-size="13" font-weight="700" fill="var(--at-text)">Weight table for vertices v0&hellip;v6</text>
+      <g font-family="var(--at-font-mono)" font-size="12" fill="var(--at-muted)">
+        <rect x="0" y="16" width="430" height="22" fill="var(--at-inset)" stroke="var(--at-line)"/>
+        <text x="10" y="32" font-weight="700" fill="var(--at-text)">vertex</text>
+        <text x="120" y="32" font-weight="700" fill="var(--at-text)">shoulder</text>
+        <text x="240" y="32" font-weight="700" fill="var(--at-text)">elbow</text>
+        <text x="340" y="32" font-weight="700" fill="var(--at-text)">wrist</text>
 
-        <text x="10" y="56">v0</text><text x="120" y="56" fill="#2563eb">1.00</text><text x="240" y="56">0.00</text><text x="340" y="56">0.00</text>
-        <text x="10" y="74">v1</text><text x="120" y="74" fill="#2563eb">1.00</text><text x="240" y="74">0.00</text><text x="340" y="74">0.00</text>
-        <text x="10" y="92">v2</text><text x="120" y="92" fill="#2563eb">0.80</text><text x="240" y="92" fill="#d97706">0.20</text><text x="340" y="92">0.00</text>
-        <text x="10" y="110">v3</text><text x="120" y="110" fill="#2563eb">0.50</text><text x="240" y="110" fill="#d97706">0.50</text><text x="340" y="110">0.00</text>
-        <text x="10" y="128">v4</text><text x="120" y="128" fill="#2563eb">0.20</text><text x="240" y="128" fill="#d97706">0.80</text><text x="340" y="128">0.00</text>
-        <text x="10" y="146">v5</text><text x="120" y="146">0.00</text><text x="240" y="146" fill="#d97706">1.00</text><text x="340" y="146">0.00</text>
-        <text x="10" y="164">v6</text><text x="120" y="164">0.00</text><text x="240" y="164" fill="#d97706">0.80</text><text x="340" y="164" fill="#6b7785">0.20</text>
+        <text x="10" y="56">v0</text><text x="120" y="56" fill="var(--at-blue)">1.00</text><text x="240" y="56">0.00</text><text x="340" y="56">0.00</text>
+        <text x="10" y="74">v1</text><text x="120" y="74" fill="var(--at-blue)">1.00</text><text x="240" y="74">0.00</text><text x="340" y="74">0.00</text>
+        <text x="10" y="92">v2</text><text x="120" y="92" fill="var(--at-blue)">0.80</text><text x="240" y="92" fill="var(--at-amber)">0.20</text><text x="340" y="92">0.00</text>
+        <text x="10" y="110">v3</text><text x="120" y="110" fill="var(--at-blue)">0.50</text><text x="240" y="110" fill="var(--at-amber)">0.50</text><text x="340" y="110">0.00</text>
+        <text x="10" y="128">v4</text><text x="120" y="128" fill="var(--at-blue)">0.20</text><text x="240" y="128" fill="var(--at-amber)">0.80</text><text x="340" y="128">0.00</text>
+        <text x="10" y="146">v5</text><text x="120" y="146">0.00</text><text x="240" y="146" fill="var(--at-amber)">1.00</text><text x="340" y="146">0.00</text>
+        <text x="10" y="164">v6</text><text x="120" y="164">0.00</text><text x="240" y="164" fill="var(--at-amber)">0.80</text><text x="340" y="164" fill="var(--at-faint)">0.20</text>
       </g>
     </g>
 
     <!-- caption -->
-    <text x="410" y="240" font-size="12" fill="#6b7785" text-anchor="middle" font-style="italic">v3 is right at the elbow — 50/50 means it ends up halfway between where each joint would carry it.</text>
-    <text x="410" y="258" font-size="12" fill="#6b7785" text-anchor="middle" font-style="italic">That&rsquo;s why the elbow bends smoothly instead of folding like cardboard.</text>
+    <text x="410" y="240" font-size="12" fill="var(--at-faint)" text-anchor="middle" font-style="italic">v3 is right at the elbow — 50/50 means it ends up halfway between where each joint would carry it.</text>
+    <text x="410" y="258" font-size="12" fill="var(--at-faint)" text-anchor="middle" font-style="italic">That&rsquo;s why the elbow bends smoothly instead of folding like cardboard.</text>
   </svg>
 </div>
 
@@ -471,26 +438,26 @@ export const html = `
 
 <div class="figure">
   <svg class="diagram" viewBox="0 0 820 140">
-    <g transform="translate(20,60)" font-family="SF Mono,monospace">
-      <text x="0" y="0" font-size="17" fill="#15171a">
+    <g transform="translate(20,60)" font-family="var(--at-font-mono)">
+      <text x="0" y="0" font-size="17" fill="var(--at-text)">
         <tspan font-weight="700">final_pos(v)</tspan>
-        <tspan x="148" fill="#6b7785">=</tspan>
-        <tspan x="175" font-weight="700" fill="#7c3aed">Σ</tspan>
-        <tspan x="195" fill="#d97706">w</tspan><tspan baseline-shift="sub" font-size="10" fill="#d97706">i</tspan>
-        <tspan x="215" fill="#6b7785">·</tspan>
-        <tspan x="230" fill="#16a34a">currentJoint</tspan><tspan baseline-shift="sub" font-size="10" fill="#16a34a">i</tspan>
-        <tspan x="370" fill="#6b7785">·</tspan>
-        <tspan x="385" fill="#2563eb">bindJoint</tspan><tspan baseline-shift="sub" font-size="10" fill="#2563eb">i</tspan><tspan font-size="14" baseline-shift="super" fill="#2563eb">−1</tspan>
-        <tspan x="510" fill="#6b7785">·</tspan>
-        <tspan x="525" fill="#15171a">vertexBindPos</tspan>
+        <tspan x="148" fill="var(--at-faint)">=</tspan>
+        <tspan x="175" font-weight="700" fill="var(--at-violet)">Σ</tspan>
+        <tspan x="195" fill="var(--at-amber)">w</tspan><tspan baseline-shift="sub" font-size="10" fill="var(--at-amber)">i</tspan>
+        <tspan x="215" fill="var(--at-faint)">·</tspan>
+        <tspan x="230" fill="var(--at-green)">currentJoint</tspan><tspan baseline-shift="sub" font-size="10" fill="var(--at-green)">i</tspan>
+        <tspan x="370" fill="var(--at-faint)">·</tspan>
+        <tspan x="385" fill="var(--at-blue)">bindJoint</tspan><tspan baseline-shift="sub" font-size="10" fill="var(--at-blue)">i</tspan><tspan font-size="14" baseline-shift="super" fill="var(--at-blue)">−1</tspan>
+        <tspan x="510" fill="var(--at-faint)">·</tspan>
+        <tspan x="525" fill="var(--at-text)">vertexBindPos</tspan>
       </text>
     </g>
-    <g transform="translate(20,90)" font-size="12" fill="#6b7785">
-      <text x="195"><tspan fill="#d97706" font-weight="700">w</tspan> = weight</text>
-      <text x="230"><tspan fill="#16a34a" font-weight="700">currentJoint</tspan> = where joint is now</text>
-      <text x="385"><tspan fill="#2563eb" font-weight="700">bindJoint⁻¹</tspan> = undo bind pose</text>
+    <g transform="translate(20,90)" font-size="12" fill="var(--at-faint)">
+      <text x="195"><tspan fill="var(--at-amber)" font-weight="700">w</tspan> = weight</text>
+      <text x="230"><tspan fill="var(--at-green)" font-weight="700">currentJoint</tspan> = where joint is now</text>
+      <text x="385"><tspan fill="var(--at-blue)" font-weight="700">bindJoint⁻¹</tspan> = undo bind pose</text>
     </g>
-    <text x="20" y="124" font-size="12" fill="#3a4252" font-style="italic">In English: take the vertex&rsquo;s rest position, ask each influencing joint where it would carry the vertex now, blend by weights.</text>
+    <text x="20" y="124" font-size="12" fill="var(--at-muted)" font-style="italic">In English: take the vertex&rsquo;s rest position, ask each influencing joint where it would carry the vertex now, blend by weights.</text>
   </svg>
 </div>
 
@@ -507,15 +474,15 @@ export const html = `
   <svg class="diagram" viewBox="0 0 820 280">
     <!-- 3D head -->
     <g transform="translate(40,40)">
-      <text x="80" y="0" font-size="13" font-weight="700" fill="#15171a" text-anchor="middle">3D mesh in world</text>
-      <ellipse cx="80" cy="100" rx="55" ry="70" fill="#fde68a" stroke="#15171a" stroke-width="1.5"/>
+      <text x="80" y="0" font-size="13" font-weight="700" fill="var(--at-text)" text-anchor="middle">3D mesh in world</text>
+      <ellipse cx="80" cy="100" rx="55" ry="70" fill="var(--at-amber-soft)" stroke="var(--at-text)" stroke-width="1.5"/>
       <!-- eyes -->
-      <circle cx="62" cy="90" r="4" fill="#15171a"/>
-      <circle cx="98" cy="90" r="4" fill="#15171a"/>
+      <circle cx="62" cy="90" r="4" fill="var(--at-text)"/>
+      <circle cx="98" cy="90" r="4" fill="var(--at-text)"/>
       <!-- mouth -->
-      <path d="M62,130 Q80,140 98,130" fill="none" stroke="#15171a" stroke-width="2"/>
+      <path d="M62,130 Q80,140 98,130" fill="none" stroke="var(--at-text)" stroke-width="2"/>
       <!-- triangles -->
-      <g stroke="#2563eb" stroke-width="0.7" fill="none" opacity="0.45">
+      <g stroke="var(--at-blue)" stroke-width="0.7" fill="none" opacity="0.45">
         <line x1="30" y1="80" x2="80" y2="60"/>
         <line x1="80" y1="60" x2="130" y2="80"/>
         <line x1="30" y1="80" x2="80" y2="100"/>
@@ -528,26 +495,26 @@ export const html = `
 
     <!-- arrow -->
     <g transform="translate(220,140)">
-      <line x1="0" y1="0" x2="60" y2="0" stroke="#6b7785" stroke-width="2"/>
-      <polygon points="60,-6 72,0 60,6" fill="#6b7785"/>
-      <text x="36" y="-12" font-size="11" fill="#6b7785" text-anchor="middle">unwrap</text>
-      <text x="36" y="22" font-size="11" fill="#6b7785" text-anchor="middle">to UV space</text>
+      <line x1="0" y1="0" x2="60" y2="0" stroke="var(--at-faint)" stroke-width="2"/>
+      <polygon points="60,-6 72,0 60,6" fill="var(--at-faint)"/>
+      <text x="36" y="-12" font-size="11" fill="var(--at-faint)" text-anchor="middle">unwrap</text>
+      <text x="36" y="22" font-size="11" fill="var(--at-faint)" text-anchor="middle">to UV space</text>
     </g>
 
     <!-- UV space (flat) -->
     <g transform="translate(320,40)">
-      <text x="100" y="0" font-size="13" font-weight="700" fill="#15171a" text-anchor="middle">UV unwrap (flat 2D)</text>
-      <rect x="0" y="20" width="200" height="200" fill="#fde68a" stroke="#15171a" stroke-width="1.5"/>
-      <text x="10" y="40" font-size="11" font-family="SF Mono,monospace" fill="#3a4252">(0,1)</text>
-      <text x="170" y="40" font-size="11" font-family="SF Mono,monospace" fill="#3a4252">(1,1)</text>
-      <text x="10" y="215" font-size="11" font-family="SF Mono,monospace" fill="#3a4252">(0,0)</text>
-      <text x="170" y="215" font-size="11" font-family="SF Mono,monospace" fill="#3a4252">(1,0)</text>
+      <text x="100" y="0" font-size="13" font-weight="700" fill="var(--at-text)" text-anchor="middle">UV unwrap (flat 2D)</text>
+      <rect x="0" y="20" width="200" height="200" fill="var(--at-amber-soft)" stroke="var(--at-text)" stroke-width="1.5"/>
+      <text x="10" y="40" font-size="11" font-family="var(--at-font-mono)" fill="var(--at-muted)">(0,1)</text>
+      <text x="170" y="40" font-size="11" font-family="var(--at-font-mono)" fill="var(--at-muted)">(1,1)</text>
+      <text x="10" y="215" font-size="11" font-family="var(--at-font-mono)" fill="var(--at-muted)">(0,0)</text>
+      <text x="170" y="215" font-size="11" font-family="var(--at-font-mono)" fill="var(--at-muted)">(1,0)</text>
       <!-- features at UV positions -->
-      <circle cx="70" cy="110" r="6" fill="#15171a"/>
-      <circle cx="130" cy="110" r="6" fill="#15171a"/>
-      <path d="M70,160 Q100,175 130,160" fill="none" stroke="#15171a" stroke-width="2.5"/>
+      <circle cx="70" cy="110" r="6" fill="var(--at-text)"/>
+      <circle cx="130" cy="110" r="6" fill="var(--at-text)"/>
+      <path d="M70,160 Q100,175 130,160" fill="none" stroke="var(--at-text)" stroke-width="2.5"/>
       <!-- triangles -->
-      <g stroke="#2563eb" stroke-width="0.7" fill="none" opacity="0.45">
+      <g stroke="var(--at-blue)" stroke-width="0.7" fill="none" opacity="0.45">
         <line x1="20" y1="80" x2="100" y2="55"/>
         <line x1="100" y1="55" x2="180" y2="80"/>
         <line x1="20" y1="80" x2="100" y2="120"/>
@@ -560,23 +527,23 @@ export const html = `
 
     <!-- arrow -->
     <g transform="translate(540,140)">
-      <line x1="0" y1="0" x2="40" y2="0" stroke="#6b7785" stroke-width="2"/>
-      <polygon points="40,-6 52,0 40,6" fill="#6b7785"/>
-      <text x="26" y="-10" font-size="11" fill="#6b7785" text-anchor="middle">sample</text>
+      <line x1="0" y1="0" x2="40" y2="0" stroke="var(--at-faint)" stroke-width="2"/>
+      <polygon points="40,-6 52,0 40,6" fill="var(--at-faint)"/>
+      <text x="26" y="-10" font-size="11" fill="var(--at-faint)" text-anchor="middle">sample</text>
     </g>
 
     <!-- texture image -->
     <g transform="translate(610,40)">
-      <text x="90" y="0" font-size="13" font-weight="700" fill="#15171a" text-anchor="middle">texture.png</text>
-      <rect x="0" y="20" width="180" height="180" fill="url(#tex)" stroke="#15171a" stroke-width="1.5"/>
+      <text x="90" y="0" font-size="13" font-weight="700" fill="var(--at-text)" text-anchor="middle">texture.png</text>
+      <rect x="0" y="20" width="180" height="180" fill="url(#tex)" stroke="var(--at-text)" stroke-width="1.5"/>
       <defs>
         <pattern id="tex" patternUnits="userSpaceOnUse" width="180" height="180">
-          <rect width="180" height="180" fill="#fde68a"/>
-          <circle cx="60" cy="80" r="6" fill="#15171a"/>
-          <circle cx="120" cy="80" r="6" fill="#15171a"/>
-          <path d="M60,130 Q90,145 120,130" fill="none" stroke="#15171a" stroke-width="2.5"/>
-          <circle cx="40" cy="40" r="3" fill="#dc2626" opacity="0.4"/>
-          <circle cx="140" cy="160" r="3" fill="#dc2626" opacity="0.4"/>
+          <rect width="180" height="180" fill="var(--at-amber-soft)"/>
+          <circle cx="60" cy="80" r="6" fill="var(--at-text)"/>
+          <circle cx="120" cy="80" r="6" fill="var(--at-text)"/>
+          <path d="M60,130 Q90,145 120,130" fill="none" stroke="var(--at-text)" stroke-width="2.5"/>
+          <circle cx="40" cy="40" r="3" fill="var(--at-accent)" opacity="0.4"/>
+          <circle cx="140" cy="160" r="3" fill="var(--at-accent)" opacity="0.4"/>
         </pattern>
       </defs>
     </g>
@@ -619,28 +586,28 @@ export const html = `
 <p>We want a crowd that <strong>walks</strong> and <strong>follows the exact MassMotion path</strong>. Four obvious approaches; three are dead ends in <em>this</em> Kit. The baked loop is what&rsquo;s left.</p>
 
 <div class="grid g2">
-  <div class="box" style="border-left:4px solid var(--bad)">
+  <div class="box" style="border-left:4px solid var(--at-accent)">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
       <h4 style="margin:0">✗ Instance the rigs</h4>
       <span class="tag bad">T-POSE</span>
     </div>
     <p>A <code>PointInstancer</code> or <code>instanceable</code> skinned <code>UsdSkel</code> renders at its bind pose. Proven four ways (static index, SkelRoot-direct, visibility-gated, switching <code>protoIndices</code>). Hydra doesn&rsquo;t skin instanced masters here.</p>
   </div>
-  <div class="box" style="border-left:4px solid var(--bad)">
+  <div class="box" style="border-left:4px solid var(--at-accent)">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
       <h4 style="margin:0">✗ Drive with an Animation Graph</h4>
       <span class="tag bad">PATH DRIFT</span>
     </div>
     <p>The graph injects the clip&rsquo;s <em>root motion</em>, which fights the CSV-driven <code>translate</code>. Agents slide off their real tracks. The replay path is the whole point of the simulation, so the graph is banned.</p>
   </div>
-  <div class="box" style="border-left:4px solid var(--bad)">
+  <div class="box" style="border-left:4px solid var(--at-accent)">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
       <h4 style="margin:0">✗ Bind the raw clip directly</h4>
       <span class="tag bad">FREEZE</span>
     </div>
     <p>A clip spans ~6 timecodes; the scenario runs ~6,000. With no graph to re-trigger it, <code>skel:animationSource</code> clamps past the last sample → the character walks for ~1&nbsp;second then freezes.</p>
   </div>
-  <div class="box" style="border-left:4px solid var(--good)">
+  <div class="box" style="border-left:4px solid var(--at-green)">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
       <h4 style="margin:0">✓ Baked Loop</h4>
       <span class="tag good">WALKS + ON-PATH</span>
@@ -654,24 +621,24 @@ export const html = `
 
 <p>The trick is to do the looping <em>at author time</em>, in the data, instead of asking the engine to loop at runtime. We take the 6-frame walk cycle and rewrite it as a 6,000-frame clip whose samples are the original cycle copy-pasted end to end:</p>
 
-<pre>pose[F] = clipPose[ (F % cycle) / cycle · N ]   <span style="color:#94a3b8"># for every F in [0, timelineEnd]</span></pre>
+<pre>pose[F] = clipPose[ (F % cycle) / cycle · N ]   <span style="color:var(--at-faint)"># for every F in [0, timelineEnd]</span></pre>
 
 <p>Now <code>skel:animationSource</code> has nothing to clamp <em>past</em> — there&rsquo;s a sample for every frame the timeline reaches.</p>
 
 <div class="figure">
   <svg class="diagram" viewBox="0 0 820 240">
     <!-- raw clip -->
-    <text x="0" y="20" fill="#dc2626" font-size="13" font-weight="700">RAW CLIP — bound directly, no graph (samples 0…6)</text>
-    <rect x="0" y="32" width="800" height="38" rx="6" fill="#fff" stroke="#e3e6eb"/>
-    <rect x="2" y="34" width="60" height="34" rx="4" fill="#dcfce7" stroke="#16a34a"/>
-    <text x="32" y="56" fill="#16a34a" font-size="11" text-anchor="middle" font-weight="700">0–6</text>
-    <rect x="64" y="34" width="734" height="34" rx="4" fill="#fef2f2"/>
-    <text x="430" y="56" fill="#dc2626" font-size="12" text-anchor="middle" font-weight="700">▮ FROZEN (held last pose) — frames 7 … 5946</text>
+    <text x="0" y="20" fill="var(--at-accent)" font-size="13" font-weight="700">RAW CLIP — bound directly, no graph (samples 0…6)</text>
+    <rect x="0" y="32" width="800" height="38" rx="6" fill="var(--at-surface)" stroke="var(--at-line)"/>
+    <rect x="2" y="34" width="60" height="34" rx="4" fill="var(--at-green-soft)" stroke="var(--at-green)"/>
+    <text x="32" y="56" fill="var(--at-green)" font-size="11" text-anchor="middle" font-weight="700">0–6</text>
+    <rect x="64" y="34" width="734" height="34" rx="4" fill="var(--at-accent-soft)"/>
+    <text x="430" y="56" fill="var(--at-accent)" font-size="12" text-anchor="middle" font-weight="700">▮ FROZEN (held last pose) — frames 7 … 5946</text>
 
     <!-- baked loop -->
-    <text x="0" y="118" fill="#16a34a" font-size="13" font-weight="700">BAKED LOOP — samples authored 0…end, cycle repeated</text>
-    <rect x="0" y="130" width="800" height="38" rx="6" fill="#fff" stroke="#e3e6eb"/>
-    <g fill="#dbeafe" stroke="#2563eb">
+    <text x="0" y="118" fill="var(--at-green)" font-size="13" font-weight="700">BAKED LOOP — samples authored 0…end, cycle repeated</text>
+    <rect x="0" y="130" width="800" height="38" rx="6" fill="var(--at-surface)" stroke="var(--at-line)"/>
+    <g fill="var(--at-blue-soft)" stroke="var(--at-blue)">
       <rect x="2"   y="132" width="48" height="34" rx="4"/>
       <rect x="52"  y="132" width="48" height="34" rx="4"/>
       <rect x="102" y="132" width="48" height="34" rx="4"/>
@@ -689,10 +656,10 @@ export const html = `
       <rect x="702" y="132" width="48" height="34" rx="4"/>
       <rect x="752" y="132" width="46" height="34" rx="4"/>
     </g>
-    <text x="400" y="154" fill="#2563eb" font-size="12" text-anchor="middle" font-weight="700">↻ one stride every 12 timecodes, repeated to the end</text>
+    <text x="400" y="154" fill="var(--at-blue)" font-size="12" text-anchor="middle" font-weight="700">↻ one stride every 12 timecodes, repeated to the end</text>
 
-    <text x="0" y="200" fill="#6b7785" font-size="12">Timeline (TCPS = 5)  ────────────────────────────────────────────────▶ frame 5946</text>
-    <text x="0" y="220" fill="#6b7785" font-size="12">Bonus trick: a Default() value too, so the rig never accidentally reads the bind pose.</text>
+    <text x="0" y="200" fill="var(--at-faint)" font-size="12">Timeline (TCPS = 5)  ────────────────────────────────────────────────▶ frame 5946</text>
+    <text x="0" y="220" fill="var(--at-faint)" font-size="12">Bonus trick: a Default() value too, so the rig never accidentally reads the bind pose.</text>
   </svg>
 </div>
 
@@ -731,15 +698,15 @@ export const html = `
 <div class="figure">
   <svg class="diagram" viewBox="0 0 820 320">
     <!-- timeline ruler -->
-    <line x1="40" y1="40" x2="780" y2="40" stroke="#6b7785" stroke-width="1"/>
-    <g font-size="11" fill="#6b7785" font-family="SF Mono,monospace">
+    <line x1="40" y1="40" x2="780" y2="40" stroke="var(--at-faint)" stroke-width="1"/>
+    <g font-size="11" fill="var(--at-faint)" font-family="var(--at-font-mono)">
       <text x="40" y="32" text-anchor="middle">F100</text>
       <text x="225" y="32" text-anchor="middle">F200</text>
       <text x="410" y="32" text-anchor="middle">F350</text>
       <text x="595" y="32" text-anchor="middle">F500</text>
       <text x="780" y="32" text-anchor="middle">F600</text>
     </g>
-    <g stroke="#6b7785" stroke-width="1">
+    <g stroke="var(--at-faint)" stroke-width="1">
       <line x1="40" y1="38" x2="40" y2="44"/>
       <line x1="225" y1="38" x2="225" y2="44"/>
       <line x1="410" y1="38" x2="410" y2="44"/>
@@ -748,43 +715,43 @@ export const html = `
     </g>
 
     <!-- /walk track -->
-    <text x="0" y="80" font-size="13" font-weight="700" fill="#2563eb">/walk</text>
-    <rect x="40" y="60" width="740" height="40" rx="6" fill="#fff" stroke="#e3e6eb"/>
+    <text x="0" y="80" font-size="13" font-weight="700" fill="var(--at-blue)">/walk</text>
+    <rect x="40" y="60" width="740" height="40" rx="6" fill="var(--at-surface)" stroke="var(--at-line)"/>
     <!-- visible segments -->
-    <rect x="42" y="62" width="368" height="36" rx="4" fill="#dbeafe" stroke="#2563eb"/>
-    <text x="226" y="84" font-size="11" text-anchor="middle" fill="#2563eb" font-weight="700">VISIBLE — running walk loop</text>
-    <rect x="412" y="62" width="184" height="36" rx="4" fill="#f1f3f5" stroke="#cbd0d8" stroke-dasharray="3,3"/>
-    <text x="504" y="84" font-size="11" text-anchor="middle" fill="#6b7785">invisible (still ticking)</text>
-    <rect x="598" y="62" width="180" height="36" rx="4" fill="#dbeafe" stroke="#2563eb"/>
-    <text x="688" y="84" font-size="11" text-anchor="middle" fill="#2563eb" font-weight="700">VISIBLE</text>
+    <rect x="42" y="62" width="368" height="36" rx="4" fill="var(--at-blue-soft)" stroke="var(--at-blue)"/>
+    <text x="226" y="84" font-size="11" text-anchor="middle" fill="var(--at-blue)" font-weight="700">VISIBLE — running walk loop</text>
+    <rect x="412" y="62" width="184" height="36" rx="4" fill="var(--at-inset)" stroke="var(--at-line)" stroke-dasharray="3,3"/>
+    <text x="504" y="84" font-size="11" text-anchor="middle" fill="var(--at-faint)">invisible (still ticking)</text>
+    <rect x="598" y="62" width="180" height="36" rx="4" fill="var(--at-blue-soft)" stroke="var(--at-blue)"/>
+    <text x="688" y="84" font-size="11" text-anchor="middle" fill="var(--at-blue)" font-weight="700">VISIBLE</text>
 
     <!-- /idle track -->
-    <text x="0" y="140" font-size="13" font-weight="700" fill="#d97706">/idle</text>
-    <rect x="40" y="120" width="740" height="40" rx="6" fill="#fff" stroke="#e3e6eb"/>
-    <rect x="42" y="122" width="368" height="36" rx="4" fill="#f1f3f5" stroke="#cbd0d8" stroke-dasharray="3,3"/>
-    <text x="226" y="144" font-size="11" text-anchor="middle" fill="#6b7785">invisible (still ticking)</text>
-    <rect x="412" y="122" width="184" height="36" rx="4" fill="#fed7aa" stroke="#d97706"/>
-    <text x="504" y="144" font-size="11" text-anchor="middle" fill="#d97706" font-weight="700">VISIBLE — running idle loop</text>
-    <rect x="598" y="122" width="180" height="36" rx="4" fill="#f1f3f5" stroke="#cbd0d8" stroke-dasharray="3,3"/>
-    <text x="688" y="144" font-size="11" text-anchor="middle" fill="#6b7785">invisible</text>
+    <text x="0" y="140" font-size="13" font-weight="700" fill="var(--at-amber)">/idle</text>
+    <rect x="40" y="120" width="740" height="40" rx="6" fill="var(--at-surface)" stroke="var(--at-line)"/>
+    <rect x="42" y="122" width="368" height="36" rx="4" fill="var(--at-inset)" stroke="var(--at-line)" stroke-dasharray="3,3"/>
+    <text x="226" y="144" font-size="11" text-anchor="middle" fill="var(--at-faint)">invisible (still ticking)</text>
+    <rect x="412" y="122" width="184" height="36" rx="4" fill="var(--at-amber-soft)" stroke="var(--at-amber)"/>
+    <text x="504" y="144" font-size="11" text-anchor="middle" fill="var(--at-amber)" font-weight="700">VISIBLE — running idle loop</text>
+    <rect x="598" y="122" width="180" height="36" rx="4" fill="var(--at-inset)" stroke="var(--at-line)" stroke-dasharray="3,3"/>
+    <text x="688" y="144" font-size="11" text-anchor="middle" fill="var(--at-faint)">invisible</text>
 
     <!-- MoveState row -->
-    <text x="0" y="200" font-size="13" font-weight="700" fill="#15171a">MoveState</text>
-    <g font-family="SF Mono,monospace" font-size="12" fill="#15171a">
-      <text x="226" y="200" text-anchor="middle"><tspan fill="#2563eb" font-weight="700">1 (walk)</tspan></text>
-      <text x="504" y="200" text-anchor="middle"><tspan fill="#d97706" font-weight="700">2 (idle)</tspan></text>
-      <text x="688" y="200" text-anchor="middle"><tspan fill="#2563eb" font-weight="700">1 (walk)</tspan></text>
+    <text x="0" y="200" font-size="13" font-weight="700" fill="var(--at-text)">MoveState</text>
+    <g font-family="var(--at-font-mono)" font-size="12" fill="var(--at-text)">
+      <text x="226" y="200" text-anchor="middle"><tspan fill="var(--at-blue)" font-weight="700">1 (walk)</tspan></text>
+      <text x="504" y="200" text-anchor="middle"><tspan fill="var(--at-amber)" font-weight="700">2 (idle)</tspan></text>
+      <text x="688" y="200" text-anchor="middle"><tspan fill="var(--at-blue)" font-weight="700">1 (walk)</tspan></text>
     </g>
-    <line x1="410" y1="180" x2="410" y2="220" stroke="#15171a" stroke-width="1" stroke-dasharray="3,3"/>
-    <line x1="595" y1="180" x2="595" y2="220" stroke="#15171a" stroke-width="1" stroke-dasharray="3,3"/>
-    <text x="410" y="235" font-size="10.5" text-anchor="middle" fill="#6b7785">switch point</text>
-    <text x="595" y="235" font-size="10.5" text-anchor="middle" fill="#6b7785">switch point</text>
+    <line x1="410" y1="180" x2="410" y2="220" stroke="var(--at-text)" stroke-width="1" stroke-dasharray="3,3"/>
+    <line x1="595" y1="180" x2="595" y2="220" stroke="var(--at-text)" stroke-width="1" stroke-dasharray="3,3"/>
+    <text x="410" y="235" font-size="10.5" text-anchor="middle" fill="var(--at-faint)">switch point</text>
+    <text x="595" y="235" font-size="10.5" text-anchor="middle" fill="var(--at-faint)">switch point</text>
 
     <!-- bottom note -->
     <g transform="translate(40,265)">
-      <rect width="740" height="48" rx="8" fill="#eff6ff" stroke="#c7dafe"/>
-      <text x="370" y="20" text-anchor="middle" font-size="12.5" fill="#15171a"><tspan font-weight="700">Both clips are always running.</tspan> Visibility is the only thing that changes.</text>
-      <text x="370" y="37" text-anchor="middle" font-size="11.5" fill="#3a4252">USD evaluates both rigs every frame; Hydra only draws the visible one. Switch = hard cut, no blend, but reads as a state change.</text>
+      <rect width="740" height="48" rx="8" fill="var(--at-blue-soft)" stroke="var(--at-blue-soft)"/>
+      <text x="370" y="20" text-anchor="middle" font-size="12.5" fill="var(--at-text)"><tspan font-weight="700">Both clips are always running.</tspan> Visibility is the only thing that changes.</text>
+      <text x="370" y="37" text-anchor="middle" font-size="11.5" fill="var(--at-muted)">USD evaluates both rigs every frame; Hydra only draws the visible one. Switch = hard cut, no blend, but reads as a state change.</text>
     </g>
   </svg>
   <p class="figure-caption">Animation switching by visibility. The CSV&rsquo;s <code>MoveState</code> column dictates which child is <code>inherited</code> at each frame.</p>
@@ -870,9 +837,9 @@ export const html = `
   </tr>
   <tr>
     <td>Use it for</td>
-    <td style="color:var(--muted)">— banned (path drift) —</td>
+    <td style="color:var(--at-faint)">— banned (path drift) —</td>
     <td>full-crowd background density</td>
-    <td><strong style="color:var(--good)">animated foreground crowd, on-path</strong></td>
+    <td><strong style="color:var(--at-green)">animated foreground crowd, on-path</strong></td>
   </tr>
 </table>
 
@@ -893,7 +860,7 @@ export const html = `
 <div class="footer">
   <div class="ornament">&#10086;</div>
   <p>harrytruong &middot; SNCF crowd → USD pipeline · Stage 06 (Baked Loop) &middot; May 2026</p>
-  <p style="margin-top:8px">Filed under: crowd simulation, USD, Omniverse</p>
+  <p style="margin-top:8px">The takeaway: crowd simulation, USD, Omniverse</p>
 </div>
 `;
 

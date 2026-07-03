@@ -1,25 +1,5 @@
 export const styles = `
-  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=JetBrains+Mono:wght@400;500;600&family=Inter+Tight:wght@400;500;600&display=swap');
-
   .artifact-scope {
-    --ink: #1a1814;
-    --paper: #faf7f2;
-    --paper-warm: #f3eee2;
-    --rule: #d8d2c5;
-    --muted: #6a6358;
-    --accent: #b3431a;
-    --accent-coral: #b3431a;
-    --accent-soft: #f3e2d6;
-    --code-bg: #f0ebe0;
-    --code-ink: #2b2620;
-    --aside-bg: #eee7d8;
-    --bone: #4a3f2e;
-    --joint: #b3431a;
-    --mesh: #5a8a6f;
-
-    background: var(--paper);
-    color: var(--ink);
-    font-family: 'Fraunces', "Iowan Old Style", "Charter", Georgia, serif;
     font-size: 17px;
     line-height: 1.65;
     font-feature-settings: "kern", "liga", "onum";
@@ -32,43 +12,6 @@ export const styles = `
   .artifact-scope * { box-sizing: border-box; }
   .artifact-scope h1, .artifact-scope h2, .artifact-scope h3, .artifact-scope h4, .artifact-scope p, .artifact-scope ul, .artifact-scope ol, .artifact-scope dl { margin: 0; padding: 0; }
 
-  /* ====== Standard topbar (matches site) ====== */
-  .artifact-scope .topbar {
-    border-bottom: 1px solid var(--rule);
-    padding: 14px 0;
-    margin-bottom: 0;
-    background: rgba(250, 247, 242, 0.92);
-    backdrop-filter: blur(8px);
-  }
-  .artifact-scope .topbar-inner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 760px;
-    margin: 0 auto;
-    padding: 0 28px;
-  }
-  .artifact-scope .logo {
-    font-family: 'JetBrains Mono', monospace;
-    font-weight: 500;
-    font-size: 14px;
-    letter-spacing: 0.05em;
-    color: var(--accent-coral);
-  }
-  .artifact-scope .logo a { color: inherit; text-decoration: none; border: none; }
-  .artifact-scope .logo a:hover { opacity: 0.7; background: transparent; color: var(--accent-coral); }
-  .artifact-scope .meta-tag {
-    background: rgba(179, 67, 26, 0.08);
-    border: 1px solid rgba(179, 67, 26, 0.22);
-    border-radius: 999px;
-    padding: 3px 12px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--accent-coral);
-  }
-
   /* ====== Page wrap ====== */
   .artifact-scope .page {
     max-width: 760px;
@@ -80,39 +23,39 @@ export const styles = `
   .artifact-scope header.hero {
     margin-bottom: 60px;
     padding-bottom: 28px;
-    border-bottom: 2px solid var(--ink);
+    border-bottom: 2px solid var(--at-line-strong);
   }
   .artifact-scope .eyebrow {
     display: inline-block;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--at-font-mono);
     font-size: 12px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--accent-coral);
+    color: var(--at-accent);
     font-weight: 500;
     margin-bottom: 24px;
     padding: 4px 0;
-    border-bottom: 1.5px solid var(--accent-coral);
+    border-bottom: 1.5px solid var(--at-accent);
   }
   .artifact-scope h1.title {
-    font-family: 'Fraunces', serif;
+    font-family: var(--at-font-display);
     font-weight: 700;
     font-size: clamp(34px, 5.6vw, 52px);
     line-height: 1.05;
     letter-spacing: -0.02em;
     margin-bottom: 20px;
-    color: var(--ink);
+    color: var(--at-text);
   }
   .artifact-scope h1.title em {
     font-style: italic;
     font-weight: 500;
-    color: var(--accent-coral);
+    color: var(--at-accent);
   }
   .artifact-scope .deck {
-    font-family: 'Fraunces', serif;
+    font-family: var(--at-font-display);
     font-size: 20px;
     line-height: 1.45;
-    color: var(--muted);
+    color: var(--at-muted);
     font-weight: 400;
     font-style: italic;
     max-width: 620px;
@@ -120,76 +63,76 @@ export const styles = `
   }
   .artifact-scope .deck code {
     font-style: normal;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--at-font-mono);
     font-size: 0.82em;
-    background: var(--code-bg);
+    background: var(--at-inset);
     padding: 0.08em 0.35em;
     border-radius: 3px;
-    color: var(--code-ink);
+    color: var(--at-text);
   }
   .artifact-scope .byline {
     display: flex;
     gap: 32px;
     padding: 18px 0 0;
-    border-top: 1px solid var(--rule);
+    border-top: 1px solid var(--at-line);
     font-size: 13px;
-    color: var(--muted);
-    font-family: 'Inter Tight', sans-serif;
+    color: var(--at-muted);
+    font-family: var(--at-font-body);
     flex-wrap: wrap;
   }
-  .artifact-scope .byline strong { color: var(--ink); font-weight: 600; }
+  .artifact-scope .byline strong { color: var(--at-text); font-weight: 600; }
   .artifact-scope .byline .col-label {
     display: block;
     font-size: 10px;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: var(--muted);
+    color: var(--at-muted);
     margin-bottom: 4px;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--at-font-mono);
   }
 
   /* ====== TOC ====== */
   .artifact-scope nav.toc {
-    background: var(--aside-bg);
-    border-left: 3px solid var(--accent);
+    background: var(--at-surface);
+    border-left: 3px solid var(--at-accent);
     padding: 18px 24px 22px;
     margin: 0 0 48px;
     font-size: 15px;
   }
   .artifact-scope nav.toc .toc-title {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--at-font-mono);
     text-transform: uppercase;
     letter-spacing: 0.12em;
     font-size: 11px;
-    color: var(--muted);
+    color: var(--at-muted);
     margin-bottom: 10px;
   }
   .artifact-scope nav.toc ol { margin: 0; padding-left: 22px; }
   .artifact-scope nav.toc li { margin: 4px 0; }
-  .artifact-scope nav.toc a { color: var(--ink); text-decoration: none; border-bottom: 1px dotted var(--rule); }
-  .artifact-scope nav.toc a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+  .artifact-scope nav.toc a { color: var(--at-text); text-decoration: none; border-bottom: 1px dotted var(--at-line); }
+  .artifact-scope nav.toc a:hover { color: var(--at-accent); border-bottom-color: var(--at-accent); }
 
   /* ====== Body ====== */
   .artifact-scope h2 {
-    font-family: 'Fraunces', serif;
+    font-family: var(--at-font-display);
     font-size: 28px;
     margin: 60px 0 16px;
     line-height: 1.2;
     letter-spacing: -0.005em;
     padding-top: 8px;
-    border-top: 1px solid var(--rule);
+    border-top: 1px solid var(--at-line);
     font-weight: 700;
   }
   .artifact-scope h2 .secnum {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--at-font-mono);
     font-size: 14px;
-    color: var(--accent);
+    color: var(--at-accent);
     margin-right: 10px;
     font-weight: 500;
     letter-spacing: 0.05em;
   }
   .artifact-scope h3 {
-    font-family: 'Fraunces', serif;
+    font-family: var(--at-font-display);
     font-size: 20px;
     margin: 30px 0 10px;
     font-weight: 700;
@@ -197,37 +140,37 @@ export const styles = `
   .artifact-scope h4 {
     font-size: 14px;
     margin: 24px 0 6px;
-    font-family: 'JetBrains Mono', monospace;
-    color: var(--muted);
+    font-family: var(--at-font-mono);
+    color: var(--at-muted);
     text-transform: uppercase;
     letter-spacing: 0.08em;
     font-weight: 600;
   }
-  .artifact-scope p { margin-bottom: 16px; color: var(--ink); }
+  .artifact-scope p { margin-bottom: 16px; color: var(--at-text); }
   .artifact-scope ul, .artifact-scope ol { margin: 0 0 16px 22px; }
   .artifact-scope li { margin-bottom: 6px; }
 
-  .artifact-scope strong { font-weight: 700; color: var(--ink); }
+  .artifact-scope strong { font-weight: 700; color: var(--at-text); }
   .artifact-scope em { font-style: italic; }
 
-  .artifact-scope a { color: var(--accent-coral); text-decoration: none; border-bottom: 1px solid currentColor; }
-  .artifact-scope a:hover { background: var(--accent-coral); color: var(--paper); }
+  .artifact-scope a { color: var(--at-accent); text-decoration: none; border-bottom: 1px solid currentColor; }
+  .artifact-scope a:hover { background: var(--at-accent); color: var(--at-bg); }
 
   .artifact-scope code {
-    font-family: 'JetBrains Mono', monospace;
-    background: var(--code-bg);
+    font-family: var(--at-font-mono);
+    background: var(--at-inset);
     padding: 0.08em 0.35em;
     border-radius: 3px;
     font-size: 0.86em;
-    color: var(--code-ink);
+    color: var(--at-text);
   }
   .artifact-scope pre {
-    background: var(--code-bg);
-    color: var(--code-ink);
+    background: var(--at-inset);
+    color: var(--at-text);
     padding: 16px 20px;
     overflow-x: auto;
-    border-left: 3px solid var(--rule);
-    font-family: 'JetBrains Mono', monospace;
+    border-left: 3px solid var(--at-line);
+    font-family: var(--at-font-mono);
     font-size: 13px;
     line-height: 1.55;
     margin: 16px 0;
@@ -237,18 +180,18 @@ export const styles = `
 
   /* ====== Aside / note callouts ====== */
   .artifact-scope aside.note {
-    background: var(--aside-bg);
-    border-left: 3px solid var(--accent);
+    background: var(--at-surface);
+    border-left: 3px solid var(--at-accent);
     padding: 14px 20px;
     margin: 22px 0;
     font-size: 15px;
   }
   .artifact-scope aside.note .label {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--at-font-mono);
     text-transform: uppercase;
     letter-spacing: 0.12em;
     font-size: 11px;
-    color: var(--accent);
+    color: var(--at-accent);
     margin-bottom: 6px;
     display: block;
     font-weight: 600;
@@ -261,8 +204,8 @@ export const styles = `
   .artifact-scope .figure {
     margin: 30px -8px;
     padding: 22px 16px;
-    background: var(--paper);
-    border: 1px solid var(--rule);
+    background: var(--at-bg);
+    border: 1px solid var(--at-line);
     border-radius: 4px;
     text-align: center;
   }
@@ -270,7 +213,7 @@ export const styles = `
   .artifact-scope .figure figcaption {
     margin-top: 12px;
     font-size: 13px;
-    color: var(--muted);
+    color: var(--at-muted);
     font-style: italic;
     text-align: left;
     padding: 0 8px;
@@ -284,33 +227,33 @@ export const styles = `
     font-size: 14px;
   }
   .artifact-scope table.compare th, .artifact-scope table.compare td {
-    border-bottom: 1px solid var(--rule);
+    border-bottom: 1px solid var(--at-line);
     padding: 10px 12px;
     text-align: left;
     vertical-align: top;
   }
   .artifact-scope table.compare th {
-    background: var(--code-bg);
+    background: var(--at-inset);
     font-weight: 700;
     font-size: 12px;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--at-font-mono);
   }
   .artifact-scope table.compare td code { font-size: 0.85em; }
 
   /* ====== Glossary ====== */
   .artifact-scope .terms {
-    background: var(--aside-bg);
-    border: 1px solid var(--rule);
+    background: var(--at-surface);
+    border: 1px solid var(--at-line);
     border-radius: 4px;
     padding: 18px 22px;
     margin: 28px 0;
   }
   .artifact-scope .terms dt {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--at-font-mono);
     font-weight: 700;
-    color: var(--accent);
+    color: var(--at-accent);
     margin-top: 12px;
     font-size: 14px;
   }
@@ -322,7 +265,7 @@ export const styles = `
 
   .artifact-scope hr.section-break {
     border: none;
-    border-top: 1px solid var(--rule);
+    border-top: 1px solid var(--at-line);
     margin: 40px 0;
     text-align: center;
   }
@@ -330,9 +273,9 @@ export const styles = `
     content: "\\2726 \\2726 \\2726";
     display: inline-block;
     transform: translateY(-0.7em);
-    background: var(--paper);
+    background: var(--at-bg);
     padding: 0 14px;
-    color: var(--muted);
+    color: var(--at-muted);
     letter-spacing: 0.5em;
     font-size: 10px;
   }
@@ -342,23 +285,22 @@ export const styles = `
     max-width: 760px;
     margin: 80px auto 0;
     padding: 36px 28px 56px;
-    border-top: 1px solid var(--rule);
+    border-top: 1px solid var(--at-line);
     font-size: 13px;
-    color: var(--muted);
+    color: var(--at-muted);
     text-align: center;
   }
-  .artifact-scope .footer p { color: var(--muted); margin-bottom: 0; }
+  .artifact-scope .footer p { color: var(--at-muted); margin-bottom: 0; }
   .artifact-scope .footer .ornament {
-    font-family: 'Fraunces', serif;
+    font-family: var(--at-font-display);
     font-size: 22px;
-    color: var(--accent-coral);
+    color: var(--at-accent);
     margin-bottom: 10px;
   }
 
   @media (max-width: 600px) {
     .artifact-scope { font-size: 16px; }
     .artifact-scope .page { padding: 36px 18px 0; }
-    .artifact-scope .topbar-inner { padding: 0 18px; }
     .artifact-scope h1.title { font-size: 30px; }
     .artifact-scope h2 { font-size: 22px; }
     .artifact-scope .figure { margin: 22px -4px; padding: 16px 10px; }
@@ -366,13 +308,6 @@ export const styles = `
 `;
 
 export const html = `
-<div class="topbar">
-  <div class="topbar-inner">
-    <span class="logo"><a href="/">&#9664; harrytruong</a></span>
-    <span class="meta-tag">DEEP DIVE — USD / OMNIVERSE</span>
-  </div>
-</div>
-
 <div class="page">
 
 <header class="hero">
@@ -417,7 +352,7 @@ export const html = `
 
 <p>When you open a USD file with <code>pxr.Usd</code> and see prim types like <code>SkelRoot</code>, <code>Skeleton</code>, <code>SkelAnimation</code>, <code>AnimationGraph</code>, <code>AnimationClip</code> &mdash; those aren't random Omniverse buzzwords. Each one is a discrete piece of a specific problem: <em>how do you represent a moving humanoid character efficiently and composably?</em></p>
 
-<p>This article doesn't teach you the API. The goal is to build <strong>a mental model</strong> from the ground up &mdash; from "what is a 3D model?" to "why does USD store animation that way?". Once that model is in your head, reading the spec or the Omniverse extension source becomes straightforward.</p>
+<p>This article doesn't teach you the API. The goal is to build <strong>a mental model</strong> &mdash; from "what is a 3D model?" to "why does USD store animation that way?". Once that model is in your head, reading the spec or the Omniverse extension source becomes straightforward.</p>
 
 <h2 id="s2"><span class="secnum">&sect;2</span>What a 3D model actually is</h2>
 
@@ -432,30 +367,30 @@ export const html = `
 
 <div class="figure">
 <svg viewBox="0 0 520 200" xmlns="http://www.w3.org/2000/svg">
-  <g font-family="JetBrains Mono, monospace" font-size="11" fill="#1a1814">
+  <g font-family="var(--at-font-mono)" font-size="11" fill="var(--at-text)">
     <text x="20" y="20" font-weight="700">Vertices (points)</text>
-    <circle cx="60" cy="50" r="3" fill="#b3431a"></circle><text x="68" y="54">v0 (0,0,0)</text>
-    <circle cx="60" cy="70" r="3" fill="#b3431a"></circle><text x="68" y="74">v1 (1,0,0)</text>
-    <circle cx="60" cy="90" r="3" fill="#b3431a"></circle><text x="68" y="94">v2 (1,1,0)</text>
-    <circle cx="60" cy="110" r="3" fill="#b3431a"></circle><text x="68" y="114">v3 (0,1,0)</text>
+    <circle cx="60" cy="50" r="3" fill="var(--at-accent)"></circle><text x="68" y="54">v0 (0,0,0)</text>
+    <circle cx="60" cy="70" r="3" fill="var(--at-accent)"></circle><text x="68" y="74">v1 (1,0,0)</text>
+    <circle cx="60" cy="90" r="3" fill="var(--at-accent)"></circle><text x="68" y="94">v2 (1,1,0)</text>
+    <circle cx="60" cy="110" r="3" fill="var(--at-accent)"></circle><text x="68" y="114">v3 (0,1,0)</text>
 
     <text x="20" y="150" font-weight="700">Topology (indices)</text>
     <text x="20" y="170">faceVertexCounts = [3, 3]</text>
     <text x="20" y="185">faceVertexIndices = [0,1,2, 0,2,3]</text>
 
     <g transform="translate(330, 30)">
-      <polygon points="0,100 100,100 100,0" fill="#f3e2d6" stroke="#1a1814" stroke-width="1.2"></polygon>
-      <polygon points="0,100 100,0 0,0" fill="#eee7d8" stroke="#1a1814" stroke-width="1.2"></polygon>
-      <circle cx="0" cy="100" r="4" fill="#b3431a"></circle>
-      <circle cx="100" cy="100" r="4" fill="#b3431a"></circle>
-      <circle cx="100" cy="0" r="4" fill="#b3431a"></circle>
-      <circle cx="0" cy="0" r="4" fill="#b3431a"></circle>
+      <polygon points="0,100 100,100 100,0" fill="var(--at-accent-soft)" stroke="var(--at-text)" stroke-width="1.2"></polygon>
+      <polygon points="0,100 100,0 0,0" fill="var(--at-surface)" stroke="var(--at-text)" stroke-width="1.2"></polygon>
+      <circle cx="0" cy="100" r="4" fill="var(--at-accent)"></circle>
+      <circle cx="100" cy="100" r="4" fill="var(--at-accent)"></circle>
+      <circle cx="100" cy="0" r="4" fill="var(--at-accent)"></circle>
+      <circle cx="0" cy="0" r="4" fill="var(--at-accent)"></circle>
       <text x="-15" y="105" font-size="10">v0</text>
       <text x="105" y="105" font-size="10">v1</text>
       <text x="105" y="-3" font-size="10">v2</text>
       <text x="-15" y="-3" font-size="10">v3</text>
-      <text x="30" y="60" font-size="10" fill="#6a6358">tri 1</text>
-      <text x="20" y="35" font-size="10" fill="#6a6358">tri 0</text>
+      <text x="30" y="60" font-size="10" fill="var(--at-muted)">tri 1</text>
+      <text x="20" y="35" font-size="10" fill="var(--at-muted)">tri 0</text>
     </g>
   </g>
 </svg>
@@ -519,45 +454,45 @@ export const html = `
 
 <div class="figure">
 <svg viewBox="0 0 560 260" xmlns="http://www.w3.org/2000/svg">
-  <g font-family="JetBrains Mono, monospace" font-size="10" fill="#1a1814">
+  <g font-family="var(--at-font-mono)" font-size="10" fill="var(--at-text)">
     <text x="20" y="18" font-weight="700" font-size="11">Skeleton (joint hierarchy)</text>
 
-    <line x1="80" y1="40" x2="80" y2="220" stroke="#4a3f2e" stroke-width="3"></line>
-    <line x1="80" y1="80" x2="50" y2="120" stroke="#4a3f2e" stroke-width="2.5"></line>
-    <line x1="50" y1="120" x2="40" y2="170" stroke="#4a3f2e" stroke-width="2.5"></line>
-    <line x1="80" y1="80" x2="110" y2="120" stroke="#4a3f2e" stroke-width="2.5"></line>
-    <line x1="110" y1="120" x2="120" y2="170" stroke="#4a3f2e" stroke-width="2.5"></line>
-    <line x1="80" y1="160" x2="65" y2="220" stroke="#4a3f2e" stroke-width="2.5"></line>
-    <line x1="80" y1="160" x2="95" y2="220" stroke="#4a3f2e" stroke-width="2.5"></line>
+    <line x1="80" y1="40" x2="80" y2="220" stroke="var(--at-violet)" stroke-width="3"></line>
+    <line x1="80" y1="80" x2="50" y2="120" stroke="var(--at-violet)" stroke-width="2.5"></line>
+    <line x1="50" y1="120" x2="40" y2="170" stroke="var(--at-violet)" stroke-width="2.5"></line>
+    <line x1="80" y1="80" x2="110" y2="120" stroke="var(--at-violet)" stroke-width="2.5"></line>
+    <line x1="110" y1="120" x2="120" y2="170" stroke="var(--at-violet)" stroke-width="2.5"></line>
+    <line x1="80" y1="160" x2="65" y2="220" stroke="var(--at-violet)" stroke-width="2.5"></line>
+    <line x1="80" y1="160" x2="95" y2="220" stroke="var(--at-violet)" stroke-width="2.5"></line>
 
-    <circle cx="80" cy="40" r="5" fill="#b3431a"></circle><text x="90" y="44">Head</text>
-    <circle cx="80" cy="80" r="5" fill="#b3431a"></circle><text x="90" y="84">Chest</text>
-    <circle cx="50" cy="120" r="5" fill="#b3431a"></circle><text x="15" y="124">L.Arm</text>
-    <circle cx="40" cy="170" r="5" fill="#b3431a"></circle><text x="3" y="174">L.Hand</text>
-    <circle cx="110" cy="120" r="5" fill="#b3431a"></circle><text x="118" y="124">R.Arm</text>
-    <circle cx="120" cy="170" r="5" fill="#b3431a"></circle><text x="128" y="174">R.Hand</text>
-    <circle cx="80" cy="160" r="5" fill="#b3431a"></circle><text x="90" y="164">Hips</text>
-    <circle cx="65" cy="220" r="5" fill="#b3431a"></circle><text x="20" y="224">L.Foot</text>
-    <circle cx="95" cy="220" r="5" fill="#b3431a"></circle><text x="105" y="224">R.Foot</text>
+    <circle cx="80" cy="40" r="5" fill="var(--at-accent)"></circle><text x="90" y="44">Head</text>
+    <circle cx="80" cy="80" r="5" fill="var(--at-accent)"></circle><text x="90" y="84">Chest</text>
+    <circle cx="50" cy="120" r="5" fill="var(--at-accent)"></circle><text x="15" y="124">L.Arm</text>
+    <circle cx="40" cy="170" r="5" fill="var(--at-accent)"></circle><text x="3" y="174">L.Hand</text>
+    <circle cx="110" cy="120" r="5" fill="var(--at-accent)"></circle><text x="118" y="124">R.Arm</text>
+    <circle cx="120" cy="170" r="5" fill="var(--at-accent)"></circle><text x="128" y="174">R.Hand</text>
+    <circle cx="80" cy="160" r="5" fill="var(--at-accent)"></circle><text x="90" y="164">Hips</text>
+    <circle cx="65" cy="220" r="5" fill="var(--at-accent)"></circle><text x="20" y="224">L.Foot</text>
+    <circle cx="95" cy="220" r="5" fill="var(--at-accent)"></circle><text x="105" y="224">R.Foot</text>
 
     <text x="250" y="18" font-weight="700" font-size="11">Mesh + Skinning weights</text>
 
     <g transform="translate(280,30)">
-      <ellipse cx="60" cy="15" rx="14" ry="14" fill="#eef0e8" stroke="#5a8a6f" stroke-width="1.2"></ellipse>
-      <rect x="40" y="30" width="40" height="65" fill="#eef0e8" stroke="#5a8a6f" stroke-width="1.2"></rect>
-      <rect x="20" y="35" width="18" height="55" fill="#eef0e8" stroke="#5a8a6f" stroke-width="1.2"></rect>
-      <rect x="82" y="35" width="18" height="55" fill="#eef0e8" stroke="#5a8a6f" stroke-width="1.2"></rect>
-      <rect x="42" y="95" width="16" height="65" fill="#eef0e8" stroke="#5a8a6f" stroke-width="1.2"></rect>
-      <rect x="62" y="95" width="16" height="65" fill="#eef0e8" stroke="#5a8a6f" stroke-width="1.2"></rect>
+      <ellipse cx="60" cy="15" rx="14" ry="14" fill="var(--at-green-soft)" stroke="var(--at-green)" stroke-width="1.2"></ellipse>
+      <rect x="40" y="30" width="40" height="65" fill="var(--at-green-soft)" stroke="var(--at-green)" stroke-width="1.2"></rect>
+      <rect x="20" y="35" width="18" height="55" fill="var(--at-green-soft)" stroke="var(--at-green)" stroke-width="1.2"></rect>
+      <rect x="82" y="35" width="18" height="55" fill="var(--at-green-soft)" stroke="var(--at-green)" stroke-width="1.2"></rect>
+      <rect x="42" y="95" width="16" height="65" fill="var(--at-green-soft)" stroke="var(--at-green)" stroke-width="1.2"></rect>
+      <rect x="62" y="95" width="16" height="65" fill="var(--at-green-soft)" stroke="var(--at-green)" stroke-width="1.2"></rect>
 
-      <circle cx="35" cy="42" r="2.5" fill="#b3431a"></circle>
-      <circle cx="35" cy="60" r="2.5" fill="#b3431a"></circle>
-      <circle cx="60" cy="50" r="2.5" fill="#b3431a"></circle>
-      <circle cx="90" cy="80" r="2.5" fill="#b3431a"></circle>
+      <circle cx="35" cy="42" r="2.5" fill="var(--at-accent)"></circle>
+      <circle cx="35" cy="60" r="2.5" fill="var(--at-accent)"></circle>
+      <circle cx="60" cy="50" r="2.5" fill="var(--at-accent)"></circle>
+      <circle cx="90" cy="80" r="2.5" fill="var(--at-accent)"></circle>
       <text x="180" y="50" font-size="9">vertex i:</text>
       <text x="180" y="65" font-size="9">  jointIndices = [L.Arm, Chest]</text>
       <text x="180" y="80" font-size="9">  jointWeights = [0.7, 0.3]</text>
-      <line x1="170" y1="48" x2="35" y2="42" stroke="#b3431a" stroke-width="0.5" stroke-dasharray="2,2"></line>
+      <line x1="170" y1="48" x2="35" y2="42" stroke="var(--at-accent)" stroke-width="0.5" stroke-dasharray="2,2"></line>
     </g>
   </g>
 </svg>
@@ -620,50 +555,50 @@ export const html = `
 <svg viewBox="0 0 560 280" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
-      <path d="M0,0 L6,4 L0,8 Z" fill="#b3431a"></path>
+      <path d="M0,0 L6,4 L0,8 Z" fill="var(--at-accent)"></path>
     </marker>
   </defs>
-  <g font-family="JetBrains Mono, monospace" font-size="10" fill="#1a1814">
-    <rect x="180" y="10" width="200" height="40" rx="4" fill="#f3e2d6" stroke="#b3431a" stroke-width="1.5"></rect>
+  <g font-family="var(--at-font-mono)" font-size="10" fill="var(--at-text)">
+    <rect x="180" y="10" width="200" height="40" rx="4" fill="var(--at-accent-soft)" stroke="var(--at-accent)" stroke-width="1.5"></rect>
     <text x="280" y="28" text-anchor="middle" font-weight="700">SkelRoot</text>
-    <text x="280" y="42" text-anchor="middle" font-size="9" fill="#6a6358">"this is a skinned asset"</text>
+    <text x="280" y="42" text-anchor="middle" font-size="9" fill="var(--at-muted)">"this is a skinned asset"</text>
 
-    <line x1="220" y1="50" x2="120" y2="90" stroke="#1a1814" stroke-width="1"></line>
-    <line x1="280" y1="50" x2="280" y2="90" stroke="#1a1814" stroke-width="1"></line>
-    <line x1="340" y1="50" x2="440" y2="90" stroke="#1a1814" stroke-width="1"></line>
+    <line x1="220" y1="50" x2="120" y2="90" stroke="var(--at-line-strong)" stroke-width="1"></line>
+    <line x1="280" y1="50" x2="280" y2="90" stroke="var(--at-line-strong)" stroke-width="1"></line>
+    <line x1="340" y1="50" x2="440" y2="90" stroke="var(--at-line-strong)" stroke-width="1"></line>
 
-    <rect x="40" y="90" width="160" height="80" rx="4" fill="#eef0e8" stroke="#5a8a6f" stroke-width="1.5"></rect>
+    <rect x="40" y="90" width="160" height="80" rx="4" fill="var(--at-green-soft)" stroke="var(--at-green)" stroke-width="1.5"></rect>
     <text x="120" y="108" text-anchor="middle" font-weight="700">Skeleton</text>
     <text x="120" y="124" text-anchor="middle" font-size="9">joints: ["Hips", "Chest", ...]</text>
     <text x="120" y="138" text-anchor="middle" font-size="9">bindTransforms: [...]</text>
     <text x="120" y="152" text-anchor="middle" font-size="9">restTransforms: [...]</text>
-    <text x="120" y="166" text-anchor="middle" font-size="9" fill="#6a6358">&rarr; skel:animationSource</text>
+    <text x="120" y="166" text-anchor="middle" font-size="9" fill="var(--at-muted)">&rarr; skel:animationSource</text>
 
-    <rect x="220" y="90" width="120" height="80" rx="4" fill="#eef0e8" stroke="#5a8a6f" stroke-width="1.5"></rect>
+    <rect x="220" y="90" width="120" height="80" rx="4" fill="var(--at-green-soft)" stroke="var(--at-green)" stroke-width="1.5"></rect>
     <text x="280" y="108" text-anchor="middle" font-weight="700">Mesh</text>
     <text x="280" y="122" text-anchor="middle" font-size="9">points = [...]</text>
-    <text x="280" y="136" text-anchor="middle" font-size="9" fill="#6a6358">+ SkelBindingAPI:</text>
+    <text x="280" y="136" text-anchor="middle" font-size="9" fill="var(--at-muted)">+ SkelBindingAPI:</text>
     <text x="280" y="148" text-anchor="middle" font-size="9">jointIndices, jointWeights</text>
-    <text x="280" y="160" text-anchor="middle" font-size="9" fill="#6a6358">&rarr; rel skel:skeleton</text>
+    <text x="280" y="160" text-anchor="middle" font-size="9" fill="var(--at-muted)">&rarr; rel skel:skeleton</text>
 
-    <rect x="360" y="90" width="160" height="80" rx="4" fill="#eef0e8" stroke="#5a8a6f" stroke-width="1.5"></rect>
+    <rect x="360" y="90" width="160" height="80" rx="4" fill="var(--at-green-soft)" stroke="var(--at-green)" stroke-width="1.5"></rect>
     <text x="440" y="108" text-anchor="middle" font-weight="700">SkelAnimation</text>
     <text x="440" y="124" text-anchor="middle" font-size="9">joints: [...]</text>
     <text x="440" y="138" text-anchor="middle" font-size="9">rotations.timeSamples</text>
     <text x="440" y="152" text-anchor="middle" font-size="9">translations.timeSamples</text>
     <text x="440" y="166" text-anchor="middle" font-size="9">scales.timeSamples</text>
 
-    <line x1="200" y1="166" x2="360" y2="135" stroke="#b3431a" stroke-width="1" stroke-dasharray="3,3" marker-end="url(#arr)"></line>
-    <line x1="280" y1="156" x2="200" y2="138" stroke="#b3431a" stroke-width="1" stroke-dasharray="3,3" marker-end="url(#arr)"></line>
+    <line x1="200" y1="166" x2="360" y2="135" stroke="var(--at-accent)" stroke-width="1" stroke-dasharray="3,3" marker-end="url(#arr)"></line>
+    <line x1="280" y1="156" x2="200" y2="138" stroke="var(--at-accent)" stroke-width="1" stroke-dasharray="3,3" marker-end="url(#arr)"></line>
 
-    <text x="280" y="200" text-anchor="middle" font-size="9" fill="#6a6358">At render time:</text>
+    <text x="280" y="200" text-anchor="middle" font-size="9" fill="var(--at-muted)">At render time:</text>
     <text x="280" y="215" text-anchor="middle" font-size="9">SkelAnimation supplies joint transforms at time t</text>
     <text x="280" y="229" text-anchor="middle" font-size="9">&rarr; Skeleton computes world-space joint matrices</text>
     <text x="280" y="243" text-anchor="middle" font-size="9">&rarr; Mesh deforms points using weighted joint transforms</text>
-    <text x="280" y="257" text-anchor="middle" font-size="9" fill="#b3431a" font-weight="700">&rarr; vertices land at their final positions</text>
+    <text x="280" y="257" text-anchor="middle" font-size="9" fill="var(--at-accent)" font-weight="700">&rarr; vertices land at their final positions</text>
   </g>
 </svg>
-<figcaption>Figure 3 &mdash; The four UsdSkel components and how they relate. SkelRoot is the container; Skeleton, Mesh, and SkelAnimation are three "sibling" prims inside it; SkelBindingAPI is a thin schema applied to the Mesh. The orange arrows are USD relationship arcs (<code>rel skel:skeleton</code>, <code>rel skel:animationSource</code>).</figcaption>
+<figcaption>Figure 3 &mdash; The four UsdSkel components and how they relate. SkelRoot is the container; Skeleton, Mesh, and SkelAnimation are three "sibling" prims inside it; SkelBindingAPI is a thin schema applied to the Mesh. The accent arrows are USD relationship arcs (<code>rel skel:skeleton</code>, <code>rel skel:animationSource</code>).</figcaption>
 </div>
 
 <h2 id="s8"><span class="secnum">&sect;8</span>What a character USD file looks like</h2>

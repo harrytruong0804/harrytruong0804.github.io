@@ -1,67 +1,10 @@
 export const styles = `
-  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,300&display=swap');
-
-  .artifact-scope {
-    --bg: #0f1117;
-    --surface: #161b27;
-    --surface2: #1e2535;
-    --border: #2a3347;
-    --accent: #f5a623;
-    --accent2: #4fc3f7;
-    --accent3: #81c784;
-    --red: #ef5350;
-    --text: #e2e8f0;
-    --muted:  #8892a4; 
-    --tag-bg: #1e2a3a;
-  }
-
   .artifact-scope, .artifact-scope * { margin: 0; padding: 0; box-sizing: border-box; }
 
   .artifact-scope {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'IBM Plex Sans', sans-serif;
+    font-family: var(--at-font-body);
     line-height: 1.7;
     font-size: 16px;
-  }
-
-  .artifact-scope .topbar {
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
-    padding: 12px 0;
-    text-align: center;
-  }
-  .artifact-scope .topbar-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    max-width: 780px;
-    margin: 0 auto;
-    padding: 0 24px;
-  }
-  .artifact-scope .logo {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--accent);
-    letter-spacing: 0.05em;
-  }
-  .artifact-scope .logo a {
-    color: inherit;
-    text-decoration: none;
-  }
-  .artifact-scope .logo a:hover {
-    opacity: 0.8;
-  }
-  .artifact-scope .meta-tag {
-    background: var(--tag-bg);
-    border: 1px solid var(--border);
-    color: var(--accent2);
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 11px;
-    padding: 3px 10px;
-    border-radius: 3px;
-    letter-spacing: 0.08em;
   }
 
   .artifact-scope .hero {
@@ -71,9 +14,9 @@ export const styles = `
   }
 
   .artifact-scope .issue-line {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: var(--at-font-mono);
     font-size: 11px;
-    color: var(--muted);
+    color: var(--at-muted);
     letter-spacing: 0.12em;
     text-transform: uppercase;
     margin-bottom: 20px;
@@ -85,30 +28,30 @@ export const styles = `
     content: '';
     flex: 1;
     height: 1px;
-    background: var(--border);
+    background: var(--at-line);
   }
 
   .artifact-scope h1 {
-    font-family: 'Fraunces', serif;
+    font-family: var(--at-font-display);
     font-size: clamp(28px, 5vw, 44px);
     font-weight: 300;
     line-height: 1.2;
-    color: #fff;
+    color: var(--at-text);
     margin-bottom: 20px;
     letter-spacing: -0.02em;
   }
   .artifact-scope h1 em {
-    color: var(--accent);
+    color: var(--at-accent);
     font-style: italic;
   }
 
   .artifact-scope .subtitle {
     font-size: 17px;
-    color: var(--muted);
+    color: var(--at-muted);
     font-weight: 300;
     max-width: 620px;
     margin-bottom: 32px;
-    border-left: 3px solid var(--accent);
+    border-left: 3px solid var(--at-accent);
     padding-left: 16px;
     line-height: 1.6;
   }
@@ -118,29 +61,29 @@ export const styles = `
     align-items: center;
     gap: 14px;
     padding: 16px 0 40px;
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
+    border-top: 1px solid var(--at-line);
+    border-bottom: 1px solid var(--at-line);
   }
   .artifact-scope .avatar {
     width: 36px; height: 36px;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--accent), #e06b00);
+    background: linear-gradient(135deg, var(--at-accent), var(--at-amber));
     display: flex; align-items: center; justify-content: center;
-    font-weight: 700; font-size: 14px; color: #000;
+    font-weight: 700; font-size: 14px; color: var(--at-bg);
     flex-shrink: 0;
   }
   .artifact-scope .author-info { font-size: 13px; }
-  .artifact-scope .author-name { color: var(--text); font-weight: 500; }
-  .artifact-scope .author-date { color: var(--muted); }
+  .artifact-scope .author-name { color: var(--at-text); font-weight: 500; }
+  .artifact-scope .author-date { color: var(--at-muted); }
   .artifact-scope .read-time {
     margin-left: auto;
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: var(--at-font-mono);
     font-size: 11px;
-    color: var(--muted);
-    background: var(--surface2);
+    color: var(--at-muted);
+    background: var(--at-inset);
     padding: 4px 10px;
     border-radius: 3px;
-    border: 1px solid var(--border);
+    border: 1px solid var(--at-line);
   }
 
   .artifact-scope .content {
@@ -150,8 +93,8 @@ export const styles = `
   }
 
   .artifact-scope .diagram {
-    background: var(--surface);
-    border: 1px solid var(--border);
+    background: var(--at-surface);
+    border: 1px solid var(--at-line);
     border-radius: 8px;
     padding: 28px;
     margin: 40px 0;
@@ -163,13 +106,13 @@ export const styles = `
     position: absolute;
     top: 0; left: 0; right: 0;
     height: 3px;
-    background: linear-gradient(90deg, var(--accent), var(--accent2), var(--accent3));
+    background: linear-gradient(90deg, var(--at-accent), var(--at-blue), var(--at-green));
   }
   .artifact-scope .diagram-title {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: var(--at-font-mono);
     font-size: 10px;
     letter-spacing: 0.15em;
-    color: var(--muted);
+    color: var(--at-muted);
     text-transform: uppercase;
     margin-bottom: 20px;
   }
@@ -186,23 +129,23 @@ export const styles = `
   }
   .artifact-scope .flow-node {
     flex: 1;
-    background: var(--surface2);
-    border: 1px solid var(--border);
+    background: var(--at-inset);
+    border: 1px solid var(--at-line);
     border-radius: 6px;
     padding: 14px 16px;
     position: relative;
   }
   .artifact-scope .flow-node .node-label {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: var(--at-font-mono);
     font-size: 10px;
-    color: var(--accent);
+    color: var(--at-accent);
     text-transform: uppercase;
     letter-spacing: 0.1em;
     margin-bottom: 6px;
   }
   .artifact-scope .flow-node .node-text {
     font-size: 13px;
-    color: var(--text);
+    color: var(--at-text);
     line-height: 1.5;
   }
   .artifact-scope .flow-arrow {
@@ -210,7 +153,7 @@ export const styles = `
     justify-content: center;
     align-items: center;
     padding: 8px 0;
-    color: var(--muted);
+    color: var(--at-muted);
     font-size: 18px;
   }
 
@@ -221,50 +164,50 @@ export const styles = `
     margin: 20px 0;
   }
   .artifact-scope .compare-table th {
-    background: var(--surface2);
-    color: var(--accent);
-    font-family: 'IBM Plex Mono', monospace;
+    background: var(--at-inset);
+    color: var(--at-accent);
+    font-family: var(--at-font-mono);
     font-size: 11px;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     padding: 12px 16px;
     text-align: left;
-    border: 1px solid var(--border);
+    border: 1px solid var(--at-line);
   }
   .artifact-scope .compare-table td {
     padding: 11px 16px;
-    border: 1px solid var(--border);
-    color: var(--text);
+    border: 1px solid var(--at-line);
+    color: var(--at-text);
     vertical-align: top;
     line-height: 1.5;
   }
   .artifact-scope .compare-table tr:hover td {
-    background: var(--surface2);
+    background: var(--at-inset);
   }
-  .artifact-scope .tag-bad { color: var(--red); font-size: 12px; font-family: monospace; }
-  .artifact-scope .tag-good { color: var(--accent3); font-size: 12px; font-family: monospace; }
+  .artifact-scope .tag-bad { color: var(--at-amber); font-size: 12px; font-family: var(--at-font-mono); }
+  .artifact-scope .tag-good { color: var(--at-green); font-size: 12px; font-family: var(--at-font-mono); }
 
   .artifact-scope .callout {
-    border: 1px solid var(--border);
-    border-left: 4px solid var(--accent);
-    background: var(--surface);
+    border: 1px solid var(--at-line);
+    border-left: 4px solid var(--at-accent);
+    background: var(--at-surface);
     padding: 18px 20px;
     border-radius: 0 6px 6px 0;
     margin: 28px 0;
     font-size: 15px;
   }
-  .artifact-scope .callout.blue { border-left-color: var(--accent2); }
-  .artifact-scope .callout.green { border-left-color: var(--accent3); }
+  .artifact-scope .callout.blue { border-left-color: var(--at-blue); }
+  .artifact-scope .callout.green { border-left-color: var(--at-green); }
   .artifact-scope .callout-label {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: var(--at-font-mono);
     font-size: 10px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     margin-bottom: 8px;
   }
-  .artifact-scope .callout-label.yellow { color: var(--accent); }
-  .artifact-scope .callout-label.blue { color: var(--accent2); }
-  .artifact-scope .callout-label.green { color: var(--accent3); }
+  .artifact-scope .callout-label.yellow { color: var(--at-accent); }
+  .artifact-scope .callout-label.blue { color: var(--at-blue); }
+  .artifact-scope .callout-label.green { color: var(--at-green); }
 
   .artifact-scope .steps { margin: 28px 0; }
   .artifact-scope .step {
@@ -273,69 +216,69 @@ export const styles = `
     gap: 16px;
     margin-bottom: 20px;
     padding-bottom: 20px;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--at-line);
   }
   .artifact-scope .step:last-child { border-bottom: none; }
   .artifact-scope .step-num {
     width: 36px; height: 36px;
     border-radius: 50%;
-    border: 2px solid var(--accent);
+    border: 2px solid var(--at-accent);
     display: flex; align-items: center; justify-content: center;
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: var(--at-font-mono);
     font-weight: 600;
     font-size: 14px;
-    color: var(--accent);
+    color: var(--at-accent);
     flex-shrink: 0;
     margin-top: 2px;
   }
   .artifact-scope .step-content h4 {
     font-size: 15px;
     font-weight: 600;
-    color: #fff;
+    color: var(--at-text);
     margin-bottom: 6px;
   }
-  .artifact-scope .step-content p { font-size: 14px; color: var(--muted); }
+  .artifact-scope .step-content p { font-size: 14px; color: var(--at-muted); }
   .artifact-scope .step-content .example {
     margin-top: 10px;
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-left: 3px solid var(--accent2);
+    background: var(--at-inset);
+    border: 1px solid var(--at-line);
+    border-left: 3px solid var(--at-blue);
     padding: 10px 14px;
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: var(--at-font-mono);
     font-size: 12px;
-    color: var(--accent2);
+    color: var(--at-blue);
     line-height: 1.6;
     border-radius: 0 4px 4px 0;
   }
 
   .artifact-scope .section-label {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: var(--at-font-mono);
     font-size: 10px;
-    color: var(--accent);
+    color: var(--at-accent);
     letter-spacing: 0.2em;
     text-transform: uppercase;
     margin: 52px 0 8px;
   }
   .artifact-scope h2 {
-    font-family: 'Fraunces', serif;
+    font-family: var(--at-font-display);
     font-size: clamp(22px, 3.5vw, 30px);
     font-weight: 300;
-    color: #fff;
+    color: var(--at-text);
     margin-bottom: 16px;
     line-height: 1.25;
   }
   .artifact-scope h3 {
     font-size: 17px;
     font-weight: 600;
-    color: var(--text);
+    color: var(--at-text);
     margin: 28px 0 10px;
   }
   .artifact-scope p {
-    color: var(--muted);
+    color: var(--at-muted);
     margin-bottom: 16px;
     font-size: 15px;
   }
-  .artifact-scope strong { color: var(--text); font-weight: 600; }
+  .artifact-scope strong { color: var(--at-text); font-weight: 600; }
 
   .artifact-scope .q-grid {
     display: grid;
@@ -345,8 +288,8 @@ export const styles = `
   }
   @media (max-width: 600px) { .artifact-scope .q-grid { grid-template-columns: 1fr; } }
   .artifact-scope .q-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
+    background: var(--at-surface);
+    border: 1px solid var(--at-line);
     border-radius: 6px;
     padding: 16px;
     position: relative;
@@ -357,42 +300,42 @@ export const styles = `
     position: absolute;
     bottom: 0; left: 0; right: 0;
     height: 2px;
-    background: var(--accent);
+    background: var(--at-accent);
     opacity: 0.4;
   }
-  .artifact-scope .q-card.blue::after { background: var(--accent2); }
-  .artifact-scope .q-card.green::after { background: var(--accent3); }
-  .artifact-scope .q-card.red::after { background: var(--red); }
+  .artifact-scope .q-card.blue::after { background: var(--at-blue); }
+  .artifact-scope .q-card.green::after { background: var(--at-green); }
+  .artifact-scope .q-card.red::after { background: var(--at-amber); }
   .artifact-scope .q-type {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: var(--at-font-mono);
     font-size: 9px;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: var(--accent);
+    color: var(--at-accent);
     margin-bottom: 8px;
   }
-  .artifact-scope .q-card.blue .q-type { color: var(--accent2); }
-  .artifact-scope .q-card.green .q-type { color: var(--accent3); }
-  .artifact-scope .q-card.red .q-type { color: var(--red); }
+  .artifact-scope .q-card.blue .q-type { color: var(--at-blue); }
+  .artifact-scope .q-card.green .q-type { color: var(--at-green); }
+  .artifact-scope .q-card.red .q-type { color: var(--at-amber); }
   .artifact-scope .q-text {
     font-size: 13px;
-    color: var(--text);
+    color: var(--at-text);
     line-height: 1.55;
     font-style: italic;
   }
 
   .artifact-scope .summary-box {
-    background: var(--surface);
-    border: 1px solid var(--accent);
+    background: var(--at-surface);
+    border: 1px solid var(--at-accent);
     border-radius: 8px;
     padding: 28px;
     margin: 48px 0 0;
   }
   .artifact-scope .summary-box h3 {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: var(--at-font-mono);
     font-size: 11px;
     letter-spacing: 0.15em;
-    color: var(--accent);
+    color: var(--at-accent);
     text-transform: uppercase;
     margin: 0 0 16px;
   }
@@ -402,12 +345,12 @@ export const styles = `
     gap: 12px;
     margin-bottom: 12px;
     font-size: 14px;
-    color: var(--muted);
+    color: var(--at-muted);
   }
   .artifact-scope .summary-dot {
     width: 6px; height: 6px;
     border-radius: 50%;
-    background: var(--accent);
+    background: var(--at-accent);
     flex-shrink: 0;
     margin-top: 7px;
   }
@@ -419,27 +362,27 @@ export const styles = `
     margin-bottom: 10px;
   }
   .artifact-scope .keyword-num {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: var(--at-font-mono);
     font-size: 12px;
-    color: var(--muted);
+    color: var(--at-muted);
     width: 20px;
     flex-shrink: 0;
   }
   .artifact-scope .keyword-label {
     font-size: 13px;
-    color: var(--muted);
+    color: var(--at-muted);
   }
   .artifact-scope .keyword-arrow {
-    color: var(--muted);
+    color: var(--at-muted);
     font-size: 12px;
   }
   .artifact-scope .keyword-word {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: var(--at-font-mono);
     font-size: 14px;
     font-weight: 600;
-    color: var(--accent);
-    background: var(--surface2);
-    border: 1px solid var(--border);
+    color: var(--at-accent);
+    background: var(--at-inset);
+    border: 1px solid var(--at-line);
     padding: 2px 10px;
     border-radius: 4px;
   }
@@ -448,14 +391,14 @@ export const styles = `
     margin: 28px 0;
   }
   .artifact-scope .qlist-block {
-    background: var(--surface);
-    border: 1px solid var(--border);
+    background: var(--at-surface);
+    border: 1px solid var(--at-line);
     border-radius: 6px;
     padding: 18px 20px;
     margin-bottom: 12px;
   }
   .artifact-scope .qlist-header {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: var(--at-font-mono);
     font-size: 11px;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -464,8 +407,8 @@ export const styles = `
     align-items: center;
     gap: 8px;
   }
-  .artifact-scope .qlist-header .qh-num { color: var(--muted); }
-  .artifact-scope .qlist-header .qh-name { color: var(--accent); }
+  .artifact-scope .qlist-header .qh-num { color: var(--at-muted); }
+  .artifact-scope .qlist-header .qh-name { color: var(--at-accent); }
   .artifact-scope .qlist-items {
     list-style: none;
     padding: 0;
@@ -473,7 +416,7 @@ export const styles = `
   }
   .artifact-scope .qlist-items li {
     font-size: 13px;
-    color: var(--text);
+    color: var(--at-text);
     padding: 5px 0;
     padding-left: 16px;
     position: relative;
@@ -483,29 +426,22 @@ export const styles = `
     content: '>';
     position: absolute;
     left: 0;
-    color: var(--accent2);
-    font-family: 'IBM Plex Mono', monospace;
+    color: var(--at-blue);
+    font-family: var(--at-font-mono);
     font-size: 12px;
   }
 
   .artifact-scope .footnote {
     margin-top: 60px;
     padding-top: 24px;
-    border-top: 1px solid var(--border);
+    border-top: 1px solid var(--at-line);
     font-size: 12px;
-    color: var(--muted);
-    font-family: 'IBM Plex Mono', monospace;
+    color: var(--at-muted);
+    font-family: var(--at-font-mono);
   }
 `;
 
 export const html = `
-<div class="topbar">
-  <div class="topbar-inner">
-    <span class="logo"><a href="/">&#9664; harrytruong</a></span>
-    <span class="meta-tag">SOFT SKILLS × ENGINEERING</span>
-  </div>
-</div>
-
 <div class="hero">
   <div class="issue-line">Career Growth</div>
   <h1>How to Extract <em>Maximum Value</em> from Any Tech Talk</h1>
@@ -539,9 +475,9 @@ export const html = `
   <div class="diagram">
     <div class="diagram-title">// Two Listening Modes</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-      <div style="background:#1a1f2e;border:1px solid #2a3347;border-top:3px solid #ef5350;border-radius:6px;padding:16px;">
-        <div style="font-family:monospace;font-size:10px;color:#ef5350;letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px;">PASSIVE MODE &#10007;</div>
-        <div style="font-size:13px;color:#8892a4;line-height:1.7;">
+      <div style="background:var(--at-inset);border:1px solid var(--at-line);border-top:3px solid var(--at-amber);border-radius:6px;padding:16px;">
+        <div style="font-family:var(--at-font-mono);font-size:10px;color:var(--at-amber);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px;">PASSIVE MODE &#10007;</div>
+        <div style="font-size:13px;color:var(--at-muted);line-height:1.7;">
           &#8594; Wait to understand<br>
           &#8594; Avoid questions (fear of looking dumb)<br>
           &#8594; Store raw audio in short-term memory<br>
@@ -549,9 +485,9 @@ export const html = `
           &#8594; Leave with 0 takeaways
         </div>
       </div>
-      <div style="background:#1a1f2e;border:1px solid #2a3347;border-top:3px solid #81c784;border-radius:6px;padding:16px;">
-        <div style="font-family:monospace;font-size:10px;color:#81c784;letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px;">ACTIVE MODE &#10003;</div>
-        <div style="font-size:13px;color:#8892a4;line-height:1.7;">
+      <div style="background:var(--at-inset);border:1px solid var(--at-line);border-top:3px solid var(--at-green);border-radius:6px;padding:16px;">
+        <div style="font-family:var(--at-font-mono);font-size:10px;color:var(--at-green);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px;">ACTIVE MODE &#10003;</div>
+        <div style="font-size:13px;color:var(--at-muted);line-height:1.7;">
           &#8594; Hunt for structure<br>
           &#8594; Ask to clarify, not impress<br>
           &#8594; Build a mental map in real time<br>
