@@ -1,134 +1,96 @@
 export const styles = `
   .artifact-scope{
-    --bg: #16181d;
-    --panel: #1e2128;
-    --panel2: #242832;
-    --border: #353b47;
-    --text: #d7dce3;
-    --dim: #8b93a1;
-    --accent: #6cb86c;
-    --accent2: #76b9ed;
-    --warn: #e0a458;
-    --code-bg: #14161b;
-    --kbd: #2d323d;
-    background: var(--bg); color: var(--text);
-    font-family: "Segoe UI", system-ui, sans-serif;
+    font-family: var(--at-font-body);
     font-size: 15px; line-height: 1.65;
   }
   .artifact-scope *, .artifact-scope *::before, .artifact-scope *::after { box-sizing: border-box; }
 
-  /* ---- topbar (site nav, dark theme) ---- */
-  .artifact-scope .topbar{
-    border-bottom: 1px solid var(--border); padding: 14px 0;
-    background: var(--bg); position: sticky; top: 0; z-index: 10;
-  }
-  .artifact-scope .topbar-inner{
-    display: flex; justify-content: space-between; align-items: center;
-    max-width: 980px; margin: 0 auto; padding: 0 28px;
-  }
-  .artifact-scope .topbar .logo{
-    font-family: Consolas, monospace; font-weight: 700; font-size: 13px;
-    letter-spacing: .05em; color: var(--accent2);
-  }
-  .artifact-scope .topbar .logo a{color: inherit; text-decoration: none;}
-  .artifact-scope .topbar .logo a:hover{opacity: .7;}
-  .artifact-scope .topbar .meta-tag{
-    font-family: Consolas, monospace; font-size: 11px; letter-spacing: .18em;
-    text-transform: uppercase; color: var(--warn); font-weight: 700;
-  }
-
   .artifact-scope .wrap { max-width: 980px; margin: 0 auto; padding: 32px 28px 80px; }
-  .artifact-scope header.post { border-bottom: 1px solid var(--border); padding-bottom: 18px; margin-bottom: 28px; }
-  .artifact-scope h1 { font-size: 27px; margin: 0 0 6px; color: #fff; }
-  .artifact-scope .meta { color: var(--dim); font-size: 13px; }
+  .artifact-scope header.post { border-bottom: 1px solid var(--at-line); padding-bottom: 18px; margin-bottom: 28px; }
+  .artifact-scope h1 { font-family: var(--at-font-display); font-size: 27px; margin: 0 0 6px; color: var(--at-text); }
+  .artifact-scope .meta { color: var(--at-muted); font-size: 13px; }
   .artifact-scope .meta code { font-size: 12px; }
   .artifact-scope h2 {
-    font-size: 21px; color: var(--accent2); margin-top: 46px;
-    border-bottom: 1px solid var(--border); padding-bottom: 6px;
+    font-family: var(--at-font-display);
+    font-size: 21px; color: var(--at-text); margin-top: 46px;
+    border-bottom: 1px solid var(--at-line); padding-bottom: 6px;
   }
-  .artifact-scope h2 .num { color: var(--dim); margin-right: 8px; }
-  .artifact-scope h3 { font-size: 16.5px; color: #e8ebf0; margin-top: 28px; }
-  .artifact-scope a { color: var(--accent2); text-decoration: none; }
+  .artifact-scope h2 .num { color: var(--at-muted); margin-right: 8px; }
+  .artifact-scope h3 { font-family: var(--at-font-display); font-size: 16.5px; color: var(--at-text); margin-top: 28px; }
+  .artifact-scope a { color: var(--at-accent); text-decoration: none; }
   .artifact-scope a:hover { text-decoration: underline; }
   .artifact-scope code {
-    font-family: "Cascadia Code", Consolas, monospace;
-    font-size: 13px; background: var(--kbd);
-    padding: 1px 5px; border-radius: 4px; color: #e3e8ef;
+    font-family: var(--at-font-mono);
+    font-size: 13px; background: var(--at-inset);
+    padding: 1px 5px; border-radius: 4px; color: var(--at-text);
   }
   .artifact-scope pre {
-    background: var(--code-bg); border: 1px solid var(--border);
+    background: var(--at-inset); border: 1px solid var(--at-line);
     border-radius: 8px; padding: 14px 16px; overflow-x: auto;
     line-height: 1.5;
   }
   .artifact-scope pre code { background: none; padding: 0; font-size: 12.5px; }
   .artifact-scope .file {
-    display: block; font-size: 11.5px; color: var(--dim);
+    display: block; font-size: 11.5px; color: var(--at-muted);
     margin-bottom: -8px; margin-top: 16px;
-    font-family: Consolas, monospace;
+    font-family: var(--at-font-mono);
   }
-  .artifact-scope .comment { color: #6a9955; }
-  .artifact-scope .kw { color: #c586c0; }
-  .artifact-scope .str { color: #ce9178; }
-  .artifact-scope .fn { color: #dcdcaa; }
-  .artifact-scope .cls { color: #4ec9b0; }
+  .artifact-scope .comment { color: var(--at-faint); font-style: italic; }
+  .artifact-scope .kw { color: var(--at-accent); }
+  .artifact-scope .str { color: var(--at-green); }
+  .artifact-scope .fn { color: var(--at-blue); }
+  .artifact-scope .cls { color: var(--at-violet); }
   .artifact-scope table { border-collapse: collapse; width: 100%; margin: 14px 0; font-size: 13.5px; }
-  .artifact-scope th, .artifact-scope td { border: 1px solid var(--border); padding: 7px 11px; text-align: left; vertical-align: top; }
-  .artifact-scope th { background: var(--panel2); color: #fff; }
+  .artifact-scope th, .artifact-scope td { border: 1px solid var(--at-line); padding: 7px 11px; text-align: left; vertical-align: top; }
+  .artifact-scope th { background: var(--at-inset); color: var(--at-text); }
   .artifact-scope td code { white-space: nowrap; }
   .artifact-scope .box {
-    background: var(--panel); border: 1px solid var(--border);
-    border-left: 4px solid var(--accent); border-radius: 6px;
+    background: var(--at-surface); border: 1px solid var(--at-line);
+    border-left: 4px solid var(--at-green); border-radius: 6px;
     padding: 12px 16px; margin: 18px 0;
   }
-  .artifact-scope .box.warn { border-left-color: var(--warn); }
-  .artifact-scope .box.info { border-left-color: var(--accent2); }
-  .artifact-scope .box b:first-child { color: #fff; }
-  .artifact-scope .toc { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 16px 24px; }
+  .artifact-scope .box.warn { border-left-color: var(--at-amber); }
+  .artifact-scope .box.info { border-left-color: var(--at-blue); }
+  .artifact-scope .box b:first-child { color: var(--at-text); }
+  .artifact-scope .toc { background: var(--at-surface); border: 1px solid var(--at-line); border-radius: 8px; padding: 16px 24px; }
   .artifact-scope .toc ol { margin: 6px 0; padding-left: 22px; }
   .artifact-scope .toc li { margin: 3px 0; }
   .artifact-scope .tree {
-    font-family: Consolas, monospace; font-size: 12.5px;
-    background: var(--code-bg); border: 1px solid var(--border);
+    font-family: var(--at-font-mono); font-size: 12.5px;
+    background: var(--at-inset); border: 1px solid var(--at-line);
     border-radius: 8px; padding: 14px 16px; white-space: pre; overflow-x: auto;
     line-height: 1.45;
   }
-  .artifact-scope .tree .d { color: var(--accent2); }
-  .artifact-scope .tree .n { color: var(--dim); }
+  .artifact-scope .tree .d { color: var(--at-blue); }
+  .artifact-scope .tree .n { color: var(--at-muted); }
   .artifact-scope .flow {
-    font-family: Consolas, monospace; font-size: 12.5px; white-space: pre;
-    background: var(--code-bg); border: 1px solid var(--border);
+    font-family: var(--at-font-mono); font-size: 12.5px; white-space: pre;
+    background: var(--at-inset); border: 1px solid var(--at-line);
     border-radius: 8px; padding: 14px 16px; overflow-x: auto; line-height: 1.5;
   }
   .artifact-scope .pill {
-    display: inline-block; background: var(--kbd); border: 1px solid var(--border);
-    border-radius: 99px; font-size: 11.5px; padding: 1px 10px; color: var(--dim);
+    display: inline-block; background: var(--at-inset); border: 1px solid var(--at-line);
+    border-radius: 99px; font-size: 11.5px; padding: 1px 10px; color: var(--at-muted);
     margin-right: 6px;
   }
   .artifact-scope footer {
-    margin-top: 40px; color: var(--dim); font-size: 12.5px;
-    border-top: 1px solid var(--border); padding-top: 14px;
+    margin-top: 40px; color: var(--at-muted); font-size: 12.5px;
+    border-top: 1px solid var(--at-line); padding-top: 14px;
   }
   .artifact-scope footer .tag {
-    font-family: Consolas, monospace; font-size: 11px; letter-spacing: .12em;
-    text-transform: uppercase; color: var(--warn);
+    font-family: var(--at-font-mono); font-size: 11px; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--at-amber);
   }
-  .artifact-scope ::selection { background: var(--accent2); color: #14161b; }
+  .artifact-scope ::selection { background: var(--at-accent); color: var(--at-bg); }
 `;
 
 export const html = `
-<div class="topbar">
-  <div class="topbar-inner">
-    <span class="logo"><a href="/">&#9664; harrytruong</a></span>
-    <span class="meta-tag">OMNIVERSE KIT &mdash; FIRST PRINCIPLES</span>
-  </div>
-</div>
-
 <div class="wrap">
 
 <header class="post">
   <h1>Writing a USD Composer Extension From Scratch</h1>
   <div class="meta">
-    First-principles guide: UI + logic, end to end.<br>
+    A complete guide: UI + logic, end to end.<br>
     Running example: a geo-integration tool &mdash; compute a model's ground footprint and
     assign it as a Cesium tileset's clipping boundary, so the world tiles are cut away
     where the model sits. Referred to below as <code>acme.geo_integration</code>.
@@ -138,12 +100,12 @@ export const html = `
 <div class="toc">
   <b>Contents</b>
   <ol>
-    <li><a href="#principles">First principles &mdash; what an extension actually is</a></li>
+    <li><a href="#principles">What an extension actually is</a></li>
     <li><a href="#reference">The running example: a geo clipping tool at a glance</a></li>
     <li><a href="#anatomy">Anatomy: the folder contract</a></li>
     <li><a href="#manifest">The manifest &mdash; extension.toml</a></li>
     <li><a href="#lifecycle">Lifecycle &mdash; IExt, startup, shutdown</a></li>
-    <li><a href="#ui">UI from first principles &mdash; omni.ui</a></li>
+    <li><a href="#ui">UI foundations &mdash; omni.ui</a></li>
     <li><a href="#architecture">Logic architecture &mdash; the UI / core split</a></li>
     <li><a href="#kit-services">Talking to Kit &mdash; stage, selection, events, notifications</a></li>
     <li><a href="#wiring">Wiring it into the app &mdash; build &amp; registration</a></li>
@@ -153,7 +115,7 @@ export const html = `
 </div>
 
 <!-- ================================================================ -->
-<h2 id="principles"><span class="num">1.</span>First principles &mdash; what an extension actually is</h2>
+<h2 id="principles"><span class="num">1.</span>What an extension actually is</h2>
 
 <p>USD Composer is not a monolithic application. It is an instance of <b>Omniverse Kit</b>:
 a tiny C++ core that does almost nothing by itself except <em>load extensions</em>.
@@ -350,7 +312,7 @@ Two methods are the whole lifecycle. This is the example's <em>entire</em> entry
 </ul>
 
 <!-- ================================================================ -->
-<h2 id="ui"><span class="num">6.</span>UI from first principles &mdash; omni.ui</h2>
+<h2 id="ui"><span class="num">6.</span>UI foundations &mdash; omni.ui</h2>
 
 <h3>6.1 The mental model</h3>
 <p><code>omni.ui</code> is a <b>retained-mode</b>, GPU-drawn widget toolkit (it renders inside

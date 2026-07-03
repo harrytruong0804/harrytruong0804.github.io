@@ -1,235 +1,214 @@
 export const styles = `
 
   .artifact-scope{
-    --paper:#E7EBED;
-    --surface:#FCFDFD;
-    --surface-2:#F2F5F6;
-    --ink:#152226;
-    --ink-soft:#5a6b72;
-    --ink-faint:#8b989e;
-    --line:#d2dadd;
-    --line-soft:#e2e8ea;
-    --semi:#6B4FE6;
-    --semi-soft:#ece8fc;
-    --on:#0E8E83;
-    --on-soft:#dcefec;
-    --off:#7c8a93;
-    --off-soft:#e6eaec;
-    --warn:#cf5d36;
-    --shadow:0 1px 2px rgba(20,40,46,.04),0 8px 28px rgba(20,40,46,.07);
     --radius:14px;
+    --shadow:0 1px 2px rgba(20,40,46,.04),0 8px 28px rgba(20,40,46,.07);
   }
   .artifact-scope *{box-sizing:border-box;}
   .artifact-scope{-webkit-text-size-adjust:100%;}
   .artifact-scope{
-    margin:0;
-    background:var(--paper);
-    color:var(--ink);
-    font-family:"Newsreader",Georgia,serif;
     font-size:19px;
     line-height:1.62;
     -webkit-font-smoothing:antialiased;
-    background-image:radial-gradient(circle at 12% -5%, #eef1f2 0%, transparent 42%),
-                     radial-gradient(circle at 95% 0%, #e3e9 50 0%, transparent 38%);
   }
   .artifact-scope .wrap{max-width:920px;margin:0 auto;padding:0 22px;}
 
   .artifact-scope /* ---------- HERO ---------- */
   header.hero{padding:74px 0 26px;}
   .artifact-scope .eyebrow{
-    font-family:"IBM Plex Mono",monospace;
+    font-family:var(--at-font-mono);
     font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;
-    color:var(--semi);font-weight:500;margin:0 0 22px;
+    color:var(--at-accent);font-weight:500;margin:0 0 22px;
     display:flex;align-items:center;gap:10px;
   }
-  .artifact-scope .eyebrow::before{content:"";width:26px;height:1.5px;background:var(--semi);display:inline-block;}
+  .artifact-scope .eyebrow::before{content:"";width:26px;height:1.5px;background:var(--at-accent);display:inline-block;}
   .artifact-scope h1{
-    font-family:"Bricolage Grotesque",sans-serif;
+    font-family:var(--at-font-display);
     font-weight:800;font-size:clamp(38px,6.4vw,68px);line-height:1.02;
-    letter-spacing:-.02em;margin:0 0 26px;color:var(--ink);
+    letter-spacing:-.02em;margin:0 0 26px;color:var(--at-text);
   }
-  .artifact-scope h1 .glow{color:var(--semi);}
-  .artifact-scope .lede{font-size:clamp(20px,2.6vw,25px);line-height:1.5;color:var(--ink-soft);max-width:42ch;margin:0;}
-  .artifact-scope .lede em{color:var(--ink);font-style:italic;}
+  .artifact-scope h1 .glow{color:var(--at-accent);}
+  .artifact-scope .lede{font-size:clamp(20px,2.6vw,25px);line-height:1.5;color:var(--at-muted);max-width:42ch;margin:0;}
+  .artifact-scope .lede em{color:var(--at-text);font-style:italic;}
 
   .artifact-scope .equation{
-    margin:40px 0 8px;padding:22px 24px;background:var(--surface);
-    border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);
-    font-family:"IBM Plex Mono",monospace;font-size:15px;line-height:1.9;color:var(--ink);
+    margin:40px 0 8px;padding:22px 24px;background:var(--at-surface);
+    border:1px solid var(--at-line);border-radius:var(--radius);box-shadow:var(--shadow);
+    font-family:var(--at-font-mono);font-size:15px;line-height:1.9;color:var(--at-text);
     overflow-x:auto;
   }
-  .artifact-scope .equation .k{color:var(--semi);font-weight:600;}
-  .artifact-scope .equation .c{color:var(--ink-faint);}
-  .artifact-scope .equation .up{color:var(--on);font-weight:600;}
+  .artifact-scope .equation .k{color:var(--at-accent);font-weight:600;}
+  .artifact-scope .equation .c{color:var(--at-faint);}
+  .artifact-scope .equation .up{color:var(--at-green);font-weight:600;}
 
   .artifact-scope /* ---------- SECTIONS ---------- */
   section{padding:30px 0;}
   .artifact-scope .sec-num{
-    font-family:"IBM Plex Mono",monospace;font-size:12.5px;letter-spacing:.16em;
-    color:var(--semi);text-transform:uppercase;font-weight:500;margin:0 0 6px;
+    font-family:var(--at-font-mono);font-size:12.5px;letter-spacing:.16em;
+    color:var(--at-accent);text-transform:uppercase;font-weight:500;margin:0 0 6px;
   }
   .artifact-scope h2{
-    font-family:"Bricolage Grotesque",sans-serif;font-weight:700;
+    font-family:var(--at-font-display);font-weight:700;
     font-size:clamp(26px,3.6vw,36px);line-height:1.1;letter-spacing:-.018em;
-    margin:0 0 18px;color:var(--ink);
+    margin:0 0 18px;color:var(--at-text);
   }
   .artifact-scope h3{
-    font-family:"Bricolage Grotesque",sans-serif;font-weight:600;
+    font-family:var(--at-font-display);font-weight:600;
     font-size:20px;margin:30px 0 10px;letter-spacing:-.01em;
   }
   .artifact-scope p{margin:0 0 18px;}
   .artifact-scope p strong{font-weight:600;}
-  .artifact-scope a{color:var(--semi);}
+  .artifact-scope a{color:var(--at-accent);}
   .artifact-scope .note{
-    border-left:3px solid var(--semi);background:var(--semi-soft);
+    border-left:3px solid var(--at-accent);background:var(--at-accent-soft);
     padding:14px 20px;border-radius:0 10px 10px 0;margin:24px 0;
-    font-size:17px;color:#3a3360;
+    font-size:17px;color:var(--at-text);
   }
-  .artifact-scope .note b{color:var(--semi);}
+  .artifact-scope .note b{color:var(--at-accent);}
 
   .artifact-scope /* ---------- CODE ---------- */
   pre{
-    background:#142128;color:#dfe9ec;border-radius:12px;padding:20px 22px;margin:22px 0;
-    overflow-x:auto;font-family:"IBM Plex Mono",monospace;font-size:14px;line-height:1.7;
-    border:1px solid #0c171c;box-shadow:var(--shadow);
+    background:var(--at-inset);color:var(--at-text);border-radius:12px;padding:20px 22px;margin:22px 0;
+    overflow-x:auto;font-family:var(--at-font-mono);font-size:14px;line-height:1.7;
+    border:1px solid var(--at-line);box-shadow:var(--shadow);
   }
-  .artifact-scope pre .cm{color:#7d97a1;font-style:italic;}
-  .artifact-scope pre .kw{color:#c9b6ff;}
-  .artifact-scope pre .fn{color:#6fd6c7;}
-  .artifact-scope pre .st{color:#f0b78a;}
-  .artifact-scope pre .nm{color:#f4f7f8;}
+  .artifact-scope pre .cm{color:var(--at-faint);font-style:italic;}
+  .artifact-scope pre .kw{color:var(--at-accent);}
+  .artifact-scope pre .fn{color:var(--at-blue);}
+  .artifact-scope pre .st{color:var(--at-green);}
+  .artifact-scope pre .nm{color:var(--at-text);}
   .artifact-scope code.inl{
-    font-family:"IBM Plex Mono",monospace;font-size:.85em;
-    background:var(--surface-2);border:1px solid var(--line-soft);
-    padding:1px 6px;border-radius:5px;color:#33484f;
+    font-family:var(--at-font-mono);font-size:.85em;
+    background:var(--at-inset);border:1px solid var(--at-line);
+    padding:1px 6px;border-radius:5px;color:var(--at-text);
   }
 
   .artifact-scope /* ---------- LAB (interactive) ---------- */
   .lab{
-    background:var(--surface);border:1px solid var(--line);border-radius:18px;
+    background:var(--at-surface);border:1px solid var(--at-line);border-radius:18px;
     box-shadow:var(--shadow);padding:0;margin:14px 0 8px;overflow:hidden;
   }
   .artifact-scope .lab-head{
-    padding:18px 22px;border-bottom:1px solid var(--line-soft);
+    padding:18px 22px;border-bottom:1px solid var(--at-line);
     display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;
-    background:linear-gradient(180deg,#fbfcfc,#f6f8f8);
+    background:var(--at-surface);
   }
-  .artifact-scope .lab-title{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:17px;letter-spacing:-.01em;}
+  .artifact-scope .lab-title{font-family:var(--at-font-display);font-weight:700;font-size:17px;letter-spacing:-.01em;}
   .artifact-scope .scenarios{display:flex;gap:8px;flex-wrap:wrap;}
   .artifact-scope .scn{
-    font-family:"IBM Plex Mono",monospace;font-size:12px;border:1px solid var(--line);
-    background:var(--surface);color:var(--ink);padding:7px 11px;border-radius:8px;cursor:pointer;
+    font-family:var(--at-font-mono);font-size:12px;border:1px solid var(--at-line);
+    background:var(--at-surface);color:var(--at-text);padding:7px 11px;border-radius:8px;cursor:pointer;
     transition:all .15s ease;white-space:nowrap;
   }
-  .artifact-scope .scn:hover{border-color:var(--semi);color:var(--semi);background:var(--semi-soft);}
-  .artifact-scope .scn.reset:hover{border-color:var(--warn);color:var(--warn);background:#f8e9e2;}
+  .artifact-scope .scn:hover{border-color:var(--at-accent);color:var(--at-accent);background:var(--at-accent-soft);}
+  .artifact-scope .scn.reset:hover{border-color:var(--at-amber);color:var(--at-amber);background:var(--at-amber-soft);}
 
   .artifact-scope .lab-body{display:grid;grid-template-columns:1.15fr .95fr;gap:0;}
-  .artifact-scope .tree-pane{padding:18px 16px 22px;border-right:1px solid var(--line-soft);}
+  .artifact-scope .tree-pane{padding:18px 16px 22px;border-right:1px solid var(--at-line);}
   .artifact-scope .pane-label{
-    font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.15em;text-transform:uppercase;
-    color:var(--ink-faint);margin:2px 6px 12px;font-weight:500;
+    font-family:var(--at-font-mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;
+    color:var(--at-faint);margin:2px 6px 12px;font-weight:500;
   }
 
   .artifact-scope /* tree rows */
-  #tree{font-family:"IBM Plex Mono",monospace;}
+  #tree{font-family:var(--at-font-mono);}
   .artifact-scope .row{
     display:flex;align-items:center;gap:8px;padding:5px 8px;border-radius:9px;
     position:relative;transition:background .15s ease;
   }
-  .artifact-scope .row:hover{background:var(--surface-2);}
-  .artifact-scope .row.has-ovr{background:linear-gradient(90deg,var(--semi-soft),transparent 70%);}
-  .artifact-scope .row.has-ovr:hover{background:linear-gradient(90deg,#e4def9,transparent 70%);}
+  .artifact-scope .row:hover{background:var(--at-inset);}
+  .artifact-scope .row.has-ovr{background:linear-gradient(90deg,var(--at-accent-soft),transparent 70%);}
+  .artifact-scope .row.has-ovr:hover{background:linear-gradient(90deg,var(--at-accent-soft),transparent 60%);}
   .artifact-scope .dot{width:9px;height:9px;border-radius:50%;flex:0 0 auto;}
   .artifact-scope .label{
-    font-size:14px;font-weight:500;color:var(--ink);white-space:nowrap;
+    font-size:14px;font-weight:500;color:var(--at-text);white-space:nowrap;
     transition:opacity .25s ease;
   }
-  .artifact-scope .label .slash{color:var(--ink-faint);}
+  .artifact-scope .label .slash{color:var(--at-faint);}
   .artifact-scope .pin{
-    font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.06em;
-    color:var(--semi);border:1px solid var(--semi);border-radius:5px;padding:1px 5px;
-    margin-left:2px;background:var(--surface);font-weight:600;
+    font-family:var(--at-font-mono);font-size:9.5px;letter-spacing:.06em;
+    color:var(--at-accent);border:1px solid var(--at-accent);border-radius:5px;padding:1px 5px;
+    margin-left:2px;background:var(--at-surface);font-weight:600;
   }
   .artifact-scope .ctrls{display:flex;gap:3px;flex:0 0 auto;}
   .artifact-scope .st-btn{
-    width:24px;height:22px;border-radius:6px;border:1px solid var(--line);
-    background:var(--surface);cursor:pointer;font-family:"IBM Plex Mono",monospace;
-    font-size:11px;font-weight:600;color:var(--ink-faint);display:flex;align-items:center;
+    width:24px;height:22px;border-radius:6px;border:1px solid var(--at-line);
+    background:var(--at-surface);cursor:pointer;font-family:var(--at-font-mono);
+    font-size:11px;font-weight:600;color:var(--at-faint);display:flex;align-items:center;
     justify-content:center;transition:all .12s ease;padding:0;
   }
   .artifact-scope .st-btn:hover{transform:translateY(-1px);}
-  .artifact-scope .st-btn.eye.active{background:var(--on);color:#fff;border-color:var(--on);}
-  .artifact-scope .st-btn.eye.hidden-state{background:var(--off);color:#fff;border-color:var(--off);}
-  .artifact-scope .st-btn.semi.active{background:var(--semi);color:#fff;border-color:var(--semi);}
+  .artifact-scope .st-btn.eye.active{background:var(--at-green);color:var(--at-bg);border-color:var(--at-green);}
+  .artifact-scope .st-btn.eye.hidden-state{background:var(--at-muted);color:var(--at-bg);border-color:var(--at-muted);}
+  .artifact-scope .st-btn.semi.active{background:var(--at-violet);color:var(--at-bg);border-color:var(--at-violet);}
   .artifact-scope .st-btn:disabled{opacity:.28;cursor:default;}
-  .artifact-scope .st-btn.explicit{box-shadow:0 0 0 2px var(--semi-soft),0 0 0 3px var(--semi);}
+  .artifact-scope .st-btn.explicit{box-shadow:0 0 0 2px var(--at-accent-soft),0 0 0 3px var(--at-accent);}
 
   .artifact-scope /* inspector */
-  .insp{padding:18px 18px 22px;display:flex;flex-direction:column;gap:18px;background:var(--surface-2);}
-  .artifact-scope .card{background:var(--surface);border:1px solid var(--line-soft);border-radius:12px;padding:14px 15px;}
+  .insp{padding:18px 18px 22px;display:flex;flex-direction:column;gap:18px;background:var(--at-inset);}
+  .artifact-scope .card{background:var(--at-surface);border:1px solid var(--at-line);border-radius:12px;padding:14px 15px;}
   .artifact-scope .card h4{
-    margin:0 0 9px;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.13em;
-    text-transform:uppercase;color:var(--ink-faint);font-weight:500;
+    margin:0 0 9px;font-family:var(--at-font-mono);font-size:11px;letter-spacing:.13em;
+    text-transform:uppercase;color:var(--at-faint);font-weight:500;
     display:flex;justify-content:space-between;align-items:center;
   }
   .artifact-scope .badge{
-    font-family:"IBM Plex Mono",monospace;font-size:11px;background:var(--semi-soft);
-    color:var(--semi);padding:2px 8px;border-radius:20px;font-weight:600;letter-spacing:0;
+    font-family:var(--at-font-mono);font-size:11px;background:var(--at-accent-soft);
+    color:var(--at-accent);padding:2px 8px;border-radius:20px;font-weight:600;letter-spacing:0;
   }
   .artifact-scope .json{
-    font-family:"IBM Plex Mono",monospace;font-size:12.5px;line-height:1.65;
-    white-space:pre;overflow-x:auto;color:var(--ink);margin:0;min-height:20px;
+    font-family:var(--at-font-mono);font-size:12.5px;line-height:1.65;
+    white-space:pre;overflow-x:auto;color:var(--at-text);margin:0;min-height:20px;
   }
-  .artifact-scope .json .jk{color:var(--semi);}
-  .artifact-scope .json .jv-on{color:var(--on);}
-  .artifact-scope .json .jv-semi{color:var(--semi);font-weight:600;}
-  .artifact-scope .json .jv-off{color:var(--off);}
-  .artifact-scope .json .jc{color:var(--ink-faint);}
-  .artifact-scope .json.empty{color:var(--ink-faint);font-style:italic;}
+  .artifact-scope .json .jk{color:var(--at-accent);}
+  .artifact-scope .json .jv-on{color:var(--at-green);}
+  .artifact-scope .json .jv-semi{color:var(--at-violet);font-weight:600;}
+  .artifact-scope .json .jv-off{color:var(--at-muted);}
+  .artifact-scope .json .jc{color:var(--at-faint);}
+  .artifact-scope .json.empty{color:var(--at-faint);font-style:italic;}
   .artifact-scope .flash{animation:flash .6s ease;}
-  @keyframes flash{0%{background:var(--semi-soft);}100%{background:transparent;}}
+  @keyframes flash{0%{background:var(--at-accent-soft);}100%{background:transparent;}}
 
   .artifact-scope /* byte meter */
   .meter-row{margin-bottom:11px;}
   .artifact-scope .meter-row:last-child{margin-bottom:0;}
   .artifact-scope .meter-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px;}
-  .artifact-scope .meter-name{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--ink-soft);}
-  .artifact-scope .meter-val{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:600;}
-  .artifact-scope .meter-track{height:8px;background:var(--surface-2);border-radius:5px;overflow:hidden;border:1px solid var(--line-soft);}
+  .artifact-scope .meter-name{font-family:var(--at-font-mono);font-size:12px;color:var(--at-muted);}
+  .artifact-scope .meter-val{font-family:var(--at-font-mono);font-size:13px;font-weight:600;}
+  .artifact-scope .meter-track{height:8px;background:var(--at-inset);border-radius:5px;overflow:hidden;border:1px solid var(--at-line);}
   .artifact-scope .meter-fill{height:100%;border-radius:5px;transition:width .4s cubic-bezier(.4,0,.2,1);}
-  .artifact-scope .fill-naive{background:var(--off);}
-  .artifact-scope .fill-sparse{background:var(--semi);}
+  .artifact-scope .fill-naive{background:var(--at-muted);}
+  .artifact-scope .fill-sparse{background:var(--at-accent);}
   .artifact-scope .savings{
-    margin-top:11px;text-align:center;font-family:"IBM Plex Mono",monospace;font-size:12.5px;
-    color:var(--on);font-weight:600;background:var(--on-soft);padding:7px;border-radius:8px;
+    margin-top:11px;text-align:center;font-family:var(--at-font-mono);font-size:12.5px;
+    color:var(--at-green);font-weight:600;background:var(--at-green-soft);padding:7px;border-radius:8px;
   }
 
   .artifact-scope .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
-  .artifact-scope .stat{background:var(--surface);border:1px solid var(--line-soft);border-radius:10px;padding:10px 12px;}
-  .artifact-scope .stat .n{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:24px;color:var(--ink);line-height:1;}
-  .artifact-scope .stat .l{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.04em;color:var(--ink-faint);margin-top:4px;text-transform:uppercase;}
+  .artifact-scope .stat{background:var(--at-surface);border:1px solid var(--at-line);border-radius:10px;padding:10px 12px;}
+  .artifact-scope .stat .n{font-family:var(--at-font-display);font-weight:700;font-size:24px;color:var(--at-text);line-height:1;}
+  .artifact-scope .stat .l{font-family:var(--at-font-mono);font-size:10.5px;letter-spacing:.04em;color:var(--at-faint);margin-top:4px;text-transform:uppercase;}
 
-  .artifact-scope .legend{display:flex;gap:16px;flex-wrap:wrap;margin:4px 6px 14px;font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--ink-soft);}
+  .artifact-scope .legend{display:flex;gap:16px;flex-wrap:wrap;margin:4px 6px 14px;font-family:var(--at-font-mono);font-size:11.5px;color:var(--at-muted);}
   .artifact-scope .legend span{display:flex;align-items:center;gap:6px;}
   .artifact-scope .lg-dot{width:9px;height:9px;border-radius:50%;}
 
   .artifact-scope /* compare table */
-  .cmp{width:100%;border-collapse:collapse;margin:20px 0;font-family:"IBM Plex Mono",monospace;font-size:13.5px;background:var(--surface);border-radius:12px;overflow:hidden;box-shadow:var(--shadow);}
+  .cmp{width:100%;border-collapse:collapse;margin:20px 0;font-family:var(--at-font-mono);font-size:13.5px;background:var(--at-surface);border-radius:12px;overflow:hidden;box-shadow:var(--shadow);}
   .artifact-scope .cmp th,
-.artifact-scope .cmp td{padding:13px 16px;text-align:left;border-bottom:1px solid var(--line-soft);}
-  .artifact-scope .cmp th{background:var(--surface-2);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);font-weight:500;}
+.artifact-scope .cmp td{padding:13px 16px;text-align:left;border-bottom:1px solid var(--at-line);}
+  .artifact-scope .cmp th{background:var(--at-inset);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--at-faint);font-weight:500;}
   .artifact-scope .cmp tr:last-child td{border-bottom:none;}
-  .artifact-scope .cmp .bad{color:var(--warn);}
-  .artifact-scope .cmp .good{color:var(--on);}
-  .artifact-scope .cmp .feat{color:var(--ink-soft);}
+  .artifact-scope .cmp .bad{color:var(--at-amber);}
+  .artifact-scope .cmp .good{color:var(--at-green);}
+  .artifact-scope .cmp .feat{color:var(--at-muted);}
 
-  .artifact-scope footer{padding:40px 0 70px;color:var(--ink-faint);font-size:14px;font-family:"IBM Plex Mono",monospace;border-top:1px solid var(--line);margin-top:30px;}
+  .artifact-scope footer{padding:40px 0 70px;color:var(--at-faint);font-size:14px;font-family:var(--at-font-mono);border-top:1px solid var(--at-line);margin-top:30px;}
 
   @media (max-width:760px){
     .artifact-scope{font-size:18px;}
     .artifact-scope .lab-body{grid-template-columns:1fr;}
-    .artifact-scope .tree-pane{border-right:none;border-bottom:1px solid var(--line-soft);}
+    .artifact-scope .tree-pane{border-right:none;border-bottom:1px solid var(--at-line);}
     .artifact-scope header.hero{padding:48px 0 18px;}
   }
   @media (prefers-reduced-motion:reduce){
@@ -301,9 +280,9 @@ state = {
       <div class="tree-pane">
         <div class="pane-label">Directory tree — 👁 visibility · ◐ transparency</div>
         <div class="legend">
-          <span><i class="lg-dot" style="background:var(--on)"></i>visible · solid</span>
-          <span><i class="lg-dot" style="background:var(--semi)"></i>visible · semi-transparent</span>
-          <span><i class="lg-dot" style="background:var(--off)"></i>hidden (server skips render)</span>
+          <span><i class="lg-dot" style="background:var(--at-green)"></i>visible · solid</span>
+          <span><i class="lg-dot" style="background:var(--at-violet)"></i>visible · semi-transparent</span>
+          <span><i class="lg-dot" style="background:var(--at-muted)"></i>hidden (server skips render)</span>
           <span><i class="pin" style="margin:0">set</i> = has override</span>
         </div>
         <div id="tree"></div>
@@ -328,11 +307,11 @@ state = {
         <div class="card">
           <h4>Payload if syncing full tree</h4>
           <div class="meter-row">
-            <div class="meter-top"><span class="meter-name">Store flag per node</span><span class="meter-val" id="naive-b" style="color:var(--off)">0 B</span></div>
+            <div class="meter-top"><span class="meter-name">Store flag per node</span><span class="meter-val" id="naive-b" style="color:var(--at-muted)">0 B</span></div>
             <div class="meter-track"><div class="meter-fill fill-naive" id="naive-bar" style="width:100%"></div></div>
           </div>
           <div class="meter-row">
-            <div class="meter-top"><span class="meter-name">Sparse override</span><span class="meter-val" id="sparse-b" style="color:var(--semi)">0 B</span></div>
+            <div class="meter-top"><span class="meter-name">Sparse override</span><span class="meter-val" id="sparse-b" style="color:var(--at-accent)">0 B</span></div>
             <div class="meter-track"><div class="meter-fill fill-sparse" id="sparse-bar" style="width:20%"></div></div>
           </div>
           <div class="savings" id="savings">savings —%</div>
@@ -345,7 +324,7 @@ state = {
       </div>
     </div>
   </div>
-  <p style="font-size:15px;color:var(--ink-soft);font-style:italic;margin-top:14px;">Try clicking <b>Dim entire site</b>: 12 nodes change state but <code class="inl">overrides</code> has exactly 1 line. Then turn on a single room inside and watch the map grow.</p>
+  <p style="font-size:15px;color:var(--at-muted);font-style:italic;margin-top:14px;">Try clicking <b>Dim entire site</b>: 12 nodes change state but <code class="inl">overrides</code> has exactly 1 line. Then turn on a single room inside and watch the map grow.</p>
 
   <section>
     <p class="sec-num">03 — The Algorithm</p>
@@ -409,7 +388,7 @@ state = {
   </section>
 
   <footer>
-    Sparse override tree state — inherit downward, store differences, transmit actions not results. The same model USD <code style="color:var(--semi)">visibility</code> uses.
+    Sparse override tree state — inherit downward, store differences, transmit actions not results. The same model USD <code style="color:var(--at-accent)">visibility</code> uses.
   </footer>
 
 </div>
@@ -468,11 +447,11 @@ state = {
   const treeEl=document.getElementById("tree");
   const labelName=p=>p.split("/").pop();
   const OPACITY={on:1,semi:.42,off:.2};
-  const COLOR={on:"var(--on)",semi:"var(--semi)",off:"var(--off)"};
+  const COLOR={on:"var(--at-green)",semi:"var(--at-violet)",off:"var(--at-muted)"};
   function renderTree(){ treeEl.innerHTML=""; FLAT.forEach(n=>{ const st=effective(n.path); const explVis=own(visOvr,n.path),explSemi=own(semiOvr,n.path); const row=document.createElement("div"); row.className="row"+((explVis||explSemi)?" has-ovr":""); row.style.paddingLeft=(8+n.depth*20)+"px"; const dot=document.createElement("span"); dot.className="dot"; dot.style.background=COLOR[st]; dot.style.opacity=st==="off"?.5:1; row.appendChild(dot); const ctrls=document.createElement("div"); ctrls.className="ctrls"; const isVis=st!=="off"; const eyeB=document.createElement("button"); eyeB.className="st-btn eye"+(isVis?" active":" hidden-state")+(explVis?" explicit":""); eyeB.innerHTML=isVis?'<svg width="13" height="9" viewBox="0 0 13 9" fill="none"><path d="M1 4.5C1 4.5 2.9.5 6.5.5S12 4.5 12 4.5 10.1 8.5 6.5 8.5 1 4.5 1 4.5z" stroke="currentColor" stroke-width="1.3"/><circle cx="6.5" cy="4.5" r="1.8" fill="currentColor"/></svg>':'<svg width="13" height="9" viewBox="0 0 13 9" fill="none"><path d="M1 4.5C1 4.5 2.9.5 6.5.5S12 4.5 12 4.5" stroke="currentColor" stroke-width="1.3"/><line x1="1.5" y1="8.5" x2="11.5" y2=".5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>'; eyeB.title=isVis?"visible — click to hide":"hidden — click to show (clears ancestors)"; eyeB.addEventListener("click",()=>{ setVisibility(n.path,isVis?"hidden":"visible"); refresh({op:isVis?"set_vis hidden":"set_vis visible",path:n.path}); }); ctrls.appendChild(eyeB); const semiB=document.createElement("button"); const isSemi=st==="semi"; semiB.className="st-btn semi"+(isSemi?" active":"")+(explSemi?" explicit":""); semiB.textContent="◐"; semiB.title=isSemi?"semi-transparent — click for solid":"solid — click for semi-transparent"; semiB.addEventListener("click",()=>{ setSemi(n.path,isSemi?"solid":"semi"); refresh({op:isSemi?"set_semi solid":"set_semi semi",path:n.path}); }); ctrls.appendChild(semiB); row.appendChild(ctrls); const label=document.createElement("span"); label.className="label"; label.style.opacity=OPACITY[st]; label.innerHTML='<span class="slash">/</span>'+labelName(n.path)+(n.hasKids?'<span class="slash">/</span>':''); row.appendChild(label); if(explVis||explSemi){ const pin=document.createElement("span"); pin.className="pin"; pin.textContent=(explVis?"vis":"")+(explVis&&explSemi?"+":"")+(explSemi?"semi":""); row.appendChild(pin); } treeEl.appendChild(row); }); }
   function fmtMap(elId,map,emptyMsg,valCls){ const keys=Object.keys(map); const el=document.getElementById(elId); if(keys.length===0){ el.className="json empty"; el.textContent=emptyMsg; } else { el.className="json"; let s='{\n'; keys.forEach((k,i)=>{ const v=map[k]; s+='  <span class="jk">"'+k+'"</span>: <span class="'+valCls+'">"'+v+'"</span>'+(i<keys.length-1?',':'')+'\n'; }); s+='}'; el.innerHTML=s; } return keys.length; }
   function fmtJSON(){ const vc=fmtMap("ovr-vis",visOvr,'{ }  // all visible',"jv-off"); const sc=fmtMap("ovr-semi",semiOvr,'{ }  // all solid',"jv-semi"); document.getElementById("vis-count").textContent=vc+(vc===1?" entry":" entries"); document.getElementById("semi-count").textContent=sc+(sc===1?" entry":" entries"); document.getElementById("s-ovr").textContent=vc+sc; }
-  function renderMeters(){ const nb=bytes(naivePayload()),sb=bytes(sparsePayload()); const max=Math.max(nb,sb,1); document.getElementById("naive-b").textContent=nb+" B"; document.getElementById("sparse-b").textContent=sb+" B"; document.getElementById("naive-bar").style.width=(nb/max*100)+"%"; document.getElementById("sparse-bar").style.width=(sb/max*100)+"%"; const save=nb>0?Math.round((1-sb/nb)*100):0; const savEl=document.getElementById("savings"); if(save>0){ savEl.textContent="↓ "+save+"% smaller than storing all flags per node"; savEl.style.color="var(--on)"; savEl.style.background="var(--on-soft)"; } else { savEl.textContent="equivalent payload (tree empty)"; savEl.style.color="var(--ink-faint)"; savEl.style.background="var(--surface-2)"; } }
+  function renderMeters(){ const nb=bytes(naivePayload()),sb=bytes(sparsePayload()); const max=Math.max(nb,sb,1); document.getElementById("naive-b").textContent=nb+" B"; document.getElementById("sparse-b").textContent=sb+" B"; document.getElementById("naive-bar").style.width=(nb/max*100)+"%"; document.getElementById("sparse-bar").style.width=(sb/max*100)+"%"; const save=nb>0?Math.round((1-sb/nb)*100):0; const savEl=document.getElementById("savings"); if(save>0){ savEl.textContent="↓ "+save+"% smaller than storing all flags per node"; savEl.style.color="var(--at-green)"; savEl.style.background="var(--at-green-soft)"; } else { savEl.textContent="equivalent payload (tree empty)"; savEl.style.color="var(--at-faint)"; savEl.style.background="var(--at-inset)"; } }
   function renderWire(msg){ const w=document.getElementById("wire"); if(!msg){ w.className="json"; w.innerHTML='<span class="jc">// click a node to see the payload FE → server</span>'; document.getElementById("wire-bytes").textContent="— B"; return; } const raw='{ "op": "'+msg.op+'", "path": "'+msg.path+'" }'; const isVis=msg.op.startsWith("set_vis"); const opCls=msg.op.includes("hidden")?"jv-off":msg.op.includes("semi")?"jv-semi":"jv-on"; w.className="json"; w.innerHTML='{ <span class="jk">"op"</span>: <span class="'+opCls+'">"'+msg.op+'"</span>, <span class="jk">"path"</span>: "'+msg.path+'" }'; document.getElementById("wire-bytes").textContent=bytes(raw)+" B"; }
   function refresh(wireMsg){ renderTree(); fmtJSON(); renderMeters(); renderWire(wireMsg); document.querySelectorAll(".ovr-card").forEach(c=>{ c.classList.remove("flash"); void c.offsetWidth; c.classList.add("flash"); }); }
   document.querySelectorAll(".scn").forEach(btn=>{ btn.addEventListener("click",()=>{ const s=btn.dataset.scn; if(s==="reset"){ visOvr={}; semiOvr={}; refresh(null); return; } if(s==="dim-site"){ setSemi("/Site","semi"); refresh({op:"set_semi semi",path:"/Site"}); } if(s==="off-floor"){ setVisibility("/Site/BuildingA/Floor1","hidden"); refresh({op:"set_vis hidden",path:"/Site/BuildingA/Floor1"}); } if(s==="on-room"){ setVisibility("/Site/BuildingA/Floor1/Rooms/R101","visible"); refresh({op:"set_vis visible",path:"/Site/BuildingA/Floor1/Rooms/R101"}); } }); });
@@ -548,7 +527,7 @@ export const script = `
   const treeEl=document.getElementById("tree");
   const labelName=p=>p.split("/").pop();
   const OPACITY={on:1,semi:.42,off:.2};
-  const COLOR={on:"var(--on)",semi:"var(--semi)",off:"var(--off)"};
+  const COLOR={on:"var(--at-green)",semi:"var(--at-violet)",off:"var(--at-muted)"};
 
   function renderTree(){
     treeEl.innerHTML="";
@@ -635,8 +614,8 @@ export const script = `
     document.getElementById("sparse-bar").style.width=(sb/max*100)+"%";
     const save=nb>0?Math.round((1-sb/nb)*100):0;
     const savEl=document.getElementById("savings");
-    if(save>0){ savEl.textContent="↓ "+save+"% smaller than storing all flags per node"; savEl.style.color="var(--on)"; savEl.style.background="var(--on-soft)"; }
-    else { savEl.textContent="equivalent payload (tree empty)"; savEl.style.color="var(--ink-faint)"; savEl.style.background="var(--surface-2)"; }
+    if(save>0){ savEl.textContent="↓ "+save+"% smaller than storing all flags per node"; savEl.style.color="var(--at-green)"; savEl.style.background="var(--at-green-soft)"; }
+    else { savEl.textContent="equivalent payload (tree empty)"; savEl.style.color="var(--at-faint)"; savEl.style.background="var(--at-inset)"; }
   }
 
   function renderWire(msg){

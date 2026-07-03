@@ -1,29 +1,5 @@
 export const styles = `
-  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,400&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap');
-
   .artifact-scope {
-    --bg: #0F1117;
-    --bg-card: #181B25;
-    --bg-card-alt: #1E2230;
-    --text: #E2E4EA;
-    --text-muted: #9498A8;
-    --text-dim: #5E6275;
-    --accent-orange: #F28C38;
-    --accent-teal: #3CC8A0;
-    --accent-purple: #9B8AFF;
-    --accent-coral: #F0715A;
-    --accent-blue: #5B9CF5;
-    --accent-amber: #F5C24C;
-    --accent-pink: #E87BAF;
-    --border: #282C3A;
-    --border-light: #333849;
-    --font-display: 'Fraunces', Georgia, serif;
-    --font-body: 'DM Sans', system-ui, sans-serif;
-    --font-mono: 'JetBrains Mono', monospace;
-
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--font-body);
     font-size: 17px;
     line-height: 1.75;
     -webkit-font-smoothing: antialiased;
@@ -32,40 +8,6 @@ export const styles = `
   }
 
   .artifact-scope * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  .artifact-scope .topbar {
-    background: var(--bg-card);
-    border-bottom: 1px solid var(--border);
-    padding: 12px 0;
-  }
-  .artifact-scope .topbar-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    max-width: 820px;
-    margin: 0 auto;
-    padding: 0 24px;
-  }
-  .artifact-scope .logo {
-    font-family: var(--font-mono);
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--accent-orange);
-    letter-spacing: 0.05em;
-  }
-  .artifact-scope .logo a { color: inherit; text-decoration: none; }
-  .artifact-scope .logo a:hover { opacity: 0.7; }
-  .artifact-scope .meta-tag {
-    background: rgba(242,140,56,0.1);
-    border: 1px solid rgba(242,140,56,0.2);
-    border-radius: 999px;
-    padding: 3px 12px;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: var(--accent-orange);
-  }
 
   .artifact-scope .page-wrapper {
     max-width: 820px;
@@ -83,26 +25,26 @@ export const styles = `
     position: absolute;
     top: -80px; left: 50%; transform: translateX(-50%);
     width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(242,140,56,0.06) 0%, transparent 70%);
+    background: radial-gradient(circle, var(--at-accent-soft) 0%, transparent 70%);
     pointer-events: none;
   }
   .artifact-scope .hero-badge {
     display: inline-flex; align-items: center; gap: 8px;
-    background: rgba(242,140,56,0.1);
-    color: var(--accent-orange);
-    font-family: var(--font-mono);
+    background: var(--at-accent-soft);
+    color: var(--at-accent);
+    font-family: var(--at-font-mono);
     font-size: 12px; font-weight: 500;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     padding: 6px 16px;
     border-radius: 100px;
-    border: 1px solid rgba(242,140,56,0.2);
+    border: 1px solid var(--at-accent-soft);
     margin-bottom: 28px;
   }
   .artifact-scope .hero-badge::before {
     content: '';
     width: 6px; height: 6px;
-    background: var(--accent-orange);
+    background: var(--at-accent);
     border-radius: 50%;
     animation: harness-pulse-dot 2s ease-in-out infinite;
   }
@@ -110,23 +52,23 @@ export const styles = `
     0%,100% { opacity:1; } 50% { opacity:0.3; }
   }
   .artifact-scope .hero h1 {
-    font-family: var(--font-display);
+    font-family: var(--at-font-display);
     font-size: clamp(36px, 6vw, 56px);
     font-weight: 700;
     line-height: 1.1;
     letter-spacing: -0.02em;
-    color: #fff;
+    color: var(--at-text);
     margin-bottom: 20px;
   }
   .artifact-scope .hero h1 span {
-    background: linear-gradient(135deg, var(--accent-orange), var(--accent-coral));
+    background: linear-gradient(135deg, var(--at-accent), var(--at-accent));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
   .artifact-scope .hero-sub {
     font-size: 19px;
-    color: var(--text-muted);
+    color: var(--at-muted);
     max-width: 560px;
     margin: 0 auto;
     line-height: 1.6;
@@ -134,7 +76,7 @@ export const styles = `
 
   .artifact-scope .section-label {
     display: inline-flex; align-items: center; gap: 10px;
-    font-family: var(--font-mono);
+    font-family: var(--at-font-mono);
     font-size: 12px; font-weight: 500;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -145,25 +87,25 @@ export const styles = `
     width: 24px; height: 2px;
     border-radius: 1px;
   }
-  .artifact-scope .section-label.orange { color: var(--accent-orange); }
-  .artifact-scope .section-label.orange::before { background: var(--accent-orange); }
-  .artifact-scope .section-label.teal { color: var(--accent-teal); }
-  .artifact-scope .section-label.teal::before { background: var(--accent-teal); }
-  .artifact-scope .section-label.purple { color: var(--accent-purple); }
-  .artifact-scope .section-label.purple::before { background: var(--accent-purple); }
-  .artifact-scope .section-label.coral { color: var(--accent-coral); }
-  .artifact-scope .section-label.coral::before { background: var(--accent-coral); }
-  .artifact-scope .section-label.blue { color: var(--accent-blue); }
-  .artifact-scope .section-label.blue::before { background: var(--accent-blue); }
-  .artifact-scope .section-label.amber { color: var(--accent-amber); }
-  .artifact-scope .section-label.amber::before { background: var(--accent-amber); }
+  .artifact-scope .section-label.orange { color: var(--at-accent); }
+  .artifact-scope .section-label.orange::before { background: var(--at-accent); }
+  .artifact-scope .section-label.teal { color: var(--at-green); }
+  .artifact-scope .section-label.teal::before { background: var(--at-green); }
+  .artifact-scope .section-label.purple { color: var(--at-violet); }
+  .artifact-scope .section-label.purple::before { background: var(--at-violet); }
+  .artifact-scope .section-label.coral { color: var(--at-accent); }
+  .artifact-scope .section-label.coral::before { background: var(--at-accent); }
+  .artifact-scope .section-label.blue { color: var(--at-blue); }
+  .artifact-scope .section-label.blue::before { background: var(--at-blue); }
+  .artifact-scope .section-label.amber { color: var(--at-amber); }
+  .artifact-scope .section-label.amber::before { background: var(--at-amber); }
 
   .artifact-scope h2 {
-    font-family: var(--font-display);
+    font-family: var(--at-font-display);
     font-size: 32px;
     font-weight: 500;
     letter-spacing: -0.01em;
-    color: #fff;
+    color: var(--at-text);
     margin-bottom: 20px;
     line-height: 1.25;
   }
@@ -173,11 +115,11 @@ export const styles = `
   .artifact-scope p { margin-bottom: 20px; }
   .artifact-scope p + p { margin-top: 0; }
 
-  .artifact-scope strong { color: #fff; font-weight: 600; }
+  .artifact-scope strong { color: var(--at-text); font-weight: 600; }
 
   .artifact-scope .equation-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
+    background: var(--at-surface);
+    border: 1px solid var(--at-line);
     border-radius: 16px;
     padding: 40px;
     text-align: center;
@@ -190,29 +132,29 @@ export const styles = `
     position: absolute;
     top: 0; left: 0; right: 0;
     height: 3px;
-    background: linear-gradient(90deg, var(--accent-orange), var(--accent-teal), var(--accent-purple));
+    background: linear-gradient(90deg, var(--at-accent), var(--at-green), var(--at-violet));
   }
   .artifact-scope .equation {
-    font-family: var(--font-display);
+    font-family: var(--at-font-display);
     font-size: 36px;
     font-weight: 700;
-    color: #fff;
+    color: var(--at-text);
     letter-spacing: -0.01em;
   }
-  .artifact-scope .equation .eq-model { color: var(--accent-purple); }
-  .artifact-scope .equation .eq-plus { color: var(--text-dim); margin: 0 12px; font-weight: 300; }
-  .artifact-scope .equation .eq-harness { color: var(--accent-teal); }
+  .artifact-scope .equation .eq-model { color: var(--at-violet); }
+  .artifact-scope .equation .eq-plus { color: var(--at-faint); margin: 0 12px; font-weight: 300; }
+  .artifact-scope .equation .eq-harness { color: var(--at-green); }
   .artifact-scope .equation-caption {
     font-size: 14px;
-    color: var(--text-muted);
+    color: var(--at-muted);
     margin-top: 16px;
     font-style: italic;
-    font-family: var(--font-display);
+    font-family: var(--at-font-display);
   }
 
   .artifact-scope .diagram-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
+    background: var(--at-surface);
+    border: 1px solid var(--at-line);
     border-radius: 16px;
     padding: 32px 24px;
     margin: 32px 0;
@@ -230,14 +172,14 @@ export const styles = `
     .artifact-scope .timeline { grid-template-columns: 1fr; }
   }
   .artifact-scope .timeline-item {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
+    background: var(--at-surface);
+    border: 1px solid var(--at-line);
     border-radius: 14px;
     padding: 24px;
     position: relative;
     transition: border-color 0.25s;
   }
-  .artifact-scope .timeline-item:hover { border-color: var(--border-light); }
+  .artifact-scope .timeline-item:hover { border-color: var(--at-line-strong); }
   .artifact-scope .timeline-item::before {
     content: '';
     position: absolute;
@@ -245,36 +187,36 @@ export const styles = `
     height: 2px;
     border-radius: 1px;
   }
-  .artifact-scope .timeline-item.era-1::before { background: var(--text-dim); }
-  .artifact-scope .timeline-item.era-2::before { background: var(--accent-purple); }
-  .artifact-scope .timeline-item.era-3::before { background: var(--accent-orange); }
+  .artifact-scope .timeline-item.era-1::before { background: var(--at-faint); }
+  .artifact-scope .timeline-item.era-2::before { background: var(--at-violet); }
+  .artifact-scope .timeline-item.era-3::before { background: var(--at-accent); }
   .artifact-scope .timeline-era {
-    font-family: var(--font-mono);
+    font-family: var(--at-font-mono);
     font-size: 11px;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     margin-bottom: 8px;
   }
-  .artifact-scope .era-1 .timeline-era { color: var(--text-dim); }
-  .artifact-scope .era-2 .timeline-era { color: var(--accent-purple); }
-  .artifact-scope .era-3 .timeline-era { color: var(--accent-orange); }
+  .artifact-scope .era-1 .timeline-era { color: var(--at-faint); }
+  .artifact-scope .era-2 .timeline-era { color: var(--at-violet); }
+  .artifact-scope .era-3 .timeline-era { color: var(--at-accent); }
   .artifact-scope .timeline-title {
-    font-family: var(--font-display);
+    font-family: var(--at-font-display);
     font-weight: 500;
     font-size: 20px;
-    color: #fff;
+    color: var(--at-text);
     margin-bottom: 4px;
   }
   .artifact-scope .timeline-verb {
     font-size: 14px;
-    color: var(--text-muted);
+    color: var(--at-muted);
     font-style: italic;
-    font-family: var(--font-display);
+    font-family: var(--at-font-display);
     margin-bottom: 10px;
   }
   .artifact-scope .timeline-desc {
     font-size: 14px;
-    color: var(--text-muted);
+    color: var(--at-muted);
     line-height: 1.55;
   }
 
@@ -288,8 +230,8 @@ export const styles = `
     .artifact-scope .split-grid { grid-template-columns: 1fr; }
   }
   .artifact-scope .split-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
+    background: var(--at-surface);
+    border: 1px solid var(--at-line);
     border-radius: 14px;
     padding: 28px;
     position: relative;
@@ -301,28 +243,28 @@ export const styles = `
     width: 3px;
     border-radius: 3px 0 0 3px;
   }
-  .artifact-scope .split-card.guide::before { background: var(--accent-teal); }
-  .artifact-scope .split-card.sensor::before { background: var(--accent-purple); }
+  .artifact-scope .split-card.guide::before { background: var(--at-green); }
+  .artifact-scope .split-card.sensor::before { background: var(--at-violet); }
   .artifact-scope .split-card-title {
-    font-family: var(--font-display);
+    font-family: var(--at-font-display);
     font-weight: 500;
     font-size: 20px;
-    color: #fff;
+    color: var(--at-text);
     margin-bottom: 4px;
   }
   .artifact-scope .split-card-sub {
-    font-family: var(--font-mono);
+    font-family: var(--at-font-mono);
     font-size: 12px;
     text-transform: uppercase;
     letter-spacing: 0.06em;
     margin-bottom: 16px;
   }
-  .artifact-scope .guide .split-card-sub { color: var(--accent-teal); }
-  .artifact-scope .sensor .split-card-sub { color: var(--accent-purple); }
+  .artifact-scope .guide .split-card-sub { color: var(--at-green); }
+  .artifact-scope .sensor .split-card-sub { color: var(--at-violet); }
   .artifact-scope .split-card ul { list-style: none; padding: 0; }
   .artifact-scope .split-card li {
     font-size: 15px;
-    color: var(--text-muted);
+    color: var(--at-muted);
     padding: 6px 0 6px 20px;
     position: relative;
     line-height: 1.5;
@@ -334,8 +276,8 @@ export const styles = `
     width: 8px; height: 8px;
     border-radius: 50%;
   }
-  .artifact-scope .guide li::before { background: rgba(60,200,160,0.3); border: 1.5px solid var(--accent-teal); }
-  .artifact-scope .sensor li::before { background: rgba(155,138,255,0.3); border: 1.5px solid var(--accent-purple); }
+  .artifact-scope .guide li::before { background: var(--at-green-soft); border: 1.5px solid var(--at-green); }
+  .artifact-scope .sensor li::before { background: var(--at-violet-soft); border: 1.5px solid var(--at-violet); }
 
   .artifact-scope .car-grid {
     display: grid;
@@ -347,32 +289,32 @@ export const styles = `
     .artifact-scope .car-grid { grid-template-columns: 1fr; }
   }
   .artifact-scope .car-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
+    background: var(--at-surface);
+    border: 1px solid var(--at-line);
     border-radius: 14px;
     padding: 24px;
     text-align: center;
   }
   .artifact-scope .car-letter {
-    font-family: var(--font-display);
+    font-family: var(--at-font-display);
     font-size: 40px;
     font-weight: 700;
     line-height: 1;
     margin-bottom: 4px;
   }
-  .artifact-scope .car-card:nth-child(1) .car-letter { color: var(--accent-teal); }
-  .artifact-scope .car-card:nth-child(2) .car-letter { color: var(--accent-purple); }
-  .artifact-scope .car-card:nth-child(3) .car-letter { color: var(--accent-coral); }
+  .artifact-scope .car-card:nth-child(1) .car-letter { color: var(--at-green); }
+  .artifact-scope .car-card:nth-child(2) .car-letter { color: var(--at-violet); }
+  .artifact-scope .car-card:nth-child(3) .car-letter { color: var(--at-accent); }
   .artifact-scope .car-name {
-    font-family: var(--font-display);
+    font-family: var(--at-font-display);
     font-size: 18px;
     font-weight: 500;
-    color: #fff;
+    color: var(--at-text);
     margin-bottom: 4px;
   }
   .artifact-scope .car-desc {
     font-size: 13px;
-    color: var(--text-muted);
+    color: var(--at-muted);
     line-height: 1.5;
   }
   .artifact-scope .car-items {
@@ -383,18 +325,18 @@ export const styles = `
     justify-content: center;
   }
   .artifact-scope .car-tag {
-    font-family: var(--font-mono);
+    font-family: var(--at-font-mono);
     font-size: 11px;
     padding: 4px 10px;
     border-radius: 6px;
-    border: 1px solid var(--border);
-    color: var(--text-muted);
-    background: var(--bg-card-alt);
+    border: 1px solid var(--at-line);
+    color: var(--at-muted);
+    background: var(--at-inset);
   }
 
   .artifact-scope .crosscut {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
+    background: var(--at-surface);
+    border: 1px solid var(--at-line);
     border-radius: 14px;
     padding: 24px 28px;
     margin: 16px 0;
@@ -409,18 +351,18 @@ export const styles = `
     display: flex; align-items: center; justify-content: center;
     font-size: 18px;
   }
-  .artifact-scope .crosscut.context .crosscut-icon { background: rgba(245,194,76,0.15); color: var(--accent-amber); }
-  .artifact-scope .crosscut.state .crosscut-icon { background: rgba(91,156,245,0.15); color: var(--accent-blue); }
+  .artifact-scope .crosscut.context .crosscut-icon { background: var(--at-amber-soft); color: var(--at-amber); }
+  .artifact-scope .crosscut.state .crosscut-icon { background: var(--at-blue-soft); color: var(--at-blue); }
   .artifact-scope .crosscut-title {
-    font-family: var(--font-display);
+    font-family: var(--at-font-display);
     font-weight: 500;
     font-size: 17px;
-    color: #fff;
+    color: var(--at-text);
     margin-bottom: 2px;
   }
   .artifact-scope .crosscut-body {
     font-size: 14px;
-    color: var(--text-muted);
+    color: var(--at-muted);
     line-height: 1.55;
   }
   .artifact-scope .crosscut-tags {
@@ -428,31 +370,31 @@ export const styles = `
     margin-top: 10px;
   }
   .artifact-scope .crosscut-tags span {
-    font-family: var(--font-mono);
+    font-family: var(--at-font-mono);
     font-size: 11px;
     padding: 3px 8px;
     border-radius: 5px;
-    border: 1px solid var(--border);
-    color: var(--text-muted);
+    border: 1px solid var(--at-line);
+    color: var(--at-muted);
   }
 
   .artifact-scope .callout {
-    background: var(--bg-card);
-    border-left: 3px solid var(--accent-orange);
+    background: var(--at-surface);
+    border-left: 3px solid var(--at-accent);
     border-radius: 0 12px 12px 0;
     padding: 20px 24px;
     margin: 28px 0;
     font-size: 16px;
-    color: var(--text-muted);
+    color: var(--at-muted);
     line-height: 1.65;
     font-style: italic;
-    font-family: var(--font-display);
+    font-family: var(--at-font-display);
   }
   .artifact-scope .callout-source {
     font-style: normal;
     font-size: 12px;
-    font-family: var(--font-mono);
-    color: var(--text-dim);
+    font-family: var(--at-font-mono);
+    color: var(--at-faint);
     margin-top: 10px;
   }
 
@@ -465,37 +407,37 @@ export const styles = `
   .artifact-scope .stat-pill {
     flex: 1;
     min-width: 180px;
-    background: var(--bg-card);
-    border: 1px solid var(--border);
+    background: var(--at-surface);
+    border: 1px solid var(--at-line);
     border-radius: 12px;
     padding: 20px;
     text-align: center;
   }
   .artifact-scope .stat-number {
-    font-family: var(--font-display);
+    font-family: var(--at-font-display);
     font-size: 32px;
     font-weight: 700;
-    color: var(--accent-orange);
+    color: var(--at-accent);
     line-height: 1;
   }
   .artifact-scope .stat-label {
     font-size: 13px;
-    color: var(--text-muted);
+    color: var(--at-muted);
     margin-top: 6px;
   }
 
   .artifact-scope .codex-flow {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
+    background: var(--at-surface);
+    border: 1px solid var(--at-line);
     border-radius: 16px;
     padding: 32px 28px;
     margin: 32px 0;
   }
   .artifact-scope .codex-flow-title {
-    font-family: var(--font-display);
+    font-family: var(--at-font-display);
     font-weight: 500;
     font-size: 18px;
-    color: #fff;
+    color: var(--at-text);
     margin-bottom: 20px;
     text-align: center;
   }
@@ -520,37 +462,37 @@ export const styles = `
     right: -6px;
     top: 50%;
     transform: translateY(-50%);
-    color: var(--text-dim);
+    color: var(--at-faint);
     font-size: 20px;
   }
   .artifact-scope .codex-step-num {
     width: 32px; height: 32px;
     border-radius: 50%;
     display: inline-flex; align-items: center; justify-content: center;
-    font-family: var(--font-mono);
+    font-family: var(--at-font-mono);
     font-size: 13px;
     font-weight: 500;
     margin-bottom: 8px;
   }
-  .artifact-scope .codex-step:nth-child(1) .codex-step-num { background: rgba(60,200,160,0.15); color: var(--accent-teal); border: 1px solid rgba(60,200,160,0.3); }
-  .artifact-scope .codex-step:nth-child(2) .codex-step-num { background: rgba(155,138,255,0.15); color: var(--accent-purple); border: 1px solid rgba(155,138,255,0.3); }
-  .artifact-scope .codex-step:nth-child(3) .codex-step-num { background: rgba(240,113,90,0.15); color: var(--accent-coral); border: 1px solid rgba(240,113,90,0.3); }
-  .artifact-scope .codex-step:nth-child(4) .codex-step-num { background: rgba(242,140,56,0.15); color: var(--accent-orange); border: 1px solid rgba(242,140,56,0.3); }
+  .artifact-scope .codex-step:nth-child(1) .codex-step-num { background: var(--at-green-soft); color: var(--at-green); border: 1px solid var(--at-green-soft); }
+  .artifact-scope .codex-step:nth-child(2) .codex-step-num { background: var(--at-violet-soft); color: var(--at-violet); border: 1px solid var(--at-violet-soft); }
+  .artifact-scope .codex-step:nth-child(3) .codex-step-num { background: var(--at-amber-soft); color: var(--at-amber); border: 1px solid var(--at-amber-soft); }
+  .artifact-scope .codex-step:nth-child(4) .codex-step-num { background: var(--at-accent-soft); color: var(--at-accent); border: 1px solid var(--at-accent-soft); }
   .artifact-scope .codex-step-title {
     font-size: 14px;
     font-weight: 600;
-    color: #fff;
+    color: var(--at-text);
     margin-bottom: 4px;
   }
   .artifact-scope .codex-step-desc {
     font-size: 12px;
-    color: var(--text-muted);
+    color: var(--at-muted);
     line-height: 1.45;
   }
 
   .artifact-scope .rot-visual {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
+    background: var(--at-surface);
+    border: 1px solid var(--at-line);
     border-radius: 16px;
     padding: 28px;
     margin: 32px 0;
@@ -563,9 +505,9 @@ export const styles = `
     margin-bottom: 10px;
   }
   .artifact-scope .rot-bar-label {
-    font-family: var(--font-mono);
+    font-family: var(--at-font-mono);
     font-size: 12px;
-    color: var(--text-muted);
+    color: var(--at-muted);
     width: 100px;
     text-align: right;
     flex-shrink: 0;
@@ -573,7 +515,7 @@ export const styles = `
   .artifact-scope .rot-bar-track {
     flex: 1;
     height: 24px;
-    background: var(--bg-card-alt);
+    background: var(--at-inset);
     border-radius: 6px;
     overflow: hidden;
     position: relative;
@@ -584,16 +526,16 @@ export const styles = `
     transition: width 0.6s ease;
   }
   .artifact-scope .rot-bar-value {
-    font-family: var(--font-mono);
+    font-family: var(--at-font-mono);
     font-size: 12px;
-    color: var(--text-muted);
+    color: var(--at-muted);
     width: 44px;
     flex-shrink: 0;
   }
 
   .artifact-scope .insight-box {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
+    background: var(--at-surface);
+    border: 1px solid var(--at-line);
     border-radius: 14px;
     padding: 24px 28px;
     margin: 24px 0;
@@ -605,42 +547,42 @@ export const styles = `
     position: absolute;
     top: 0; left: 0; right: 0;
     height: 2px;
-    background: linear-gradient(90deg, var(--accent-teal), var(--accent-blue));
+    background: linear-gradient(90deg, var(--at-green), var(--at-blue));
   }
   .artifact-scope .insight-box-label {
-    font-family: var(--font-mono);
+    font-family: var(--at-font-mono);
     font-size: 11px;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--accent-teal);
+    color: var(--at-green);
     margin-bottom: 8px;
   }
   .artifact-scope .insight-box p {
     font-size: 16px;
-    color: var(--text);
+    color: var(--at-text);
     margin-bottom: 0;
   }
 
   .artifact-scope code {
-    font-family: var(--font-mono);
+    font-family: var(--at-font-mono);
     font-size: 0.88em;
-    background: var(--bg-card-alt);
+    background: var(--at-inset);
     padding: 2px 7px;
     border-radius: 5px;
-    color: var(--accent-teal);
-    border: 1px solid var(--border);
+    color: var(--at-green);
+    border: 1px solid var(--at-line);
   }
 
   .artifact-scope .footer {
     margin-top: 80px;
     padding-top: 32px;
-    border-top: 1px solid var(--border);
+    border-top: 1px solid var(--at-line);
     text-align: center;
   }
   .artifact-scope .footer-text {
     font-size: 13px;
-    color: var(--text-dim);
-    font-family: var(--font-mono);
+    color: var(--at-faint);
+    font-family: var(--at-font-mono);
   }
 
   .artifact-scope .reveal {
@@ -661,36 +603,29 @@ export const styles = `
     font-size: 14px;
     border-radius: 12px;
     overflow: hidden;
-    border: 1px solid var(--border);
+    border: 1px solid var(--at-line);
   }
   .artifact-scope .comparison-table th {
-    background: var(--bg-card-alt);
-    color: #fff;
-    font-family: var(--font-display);
+    background: var(--at-inset);
+    color: var(--at-text);
+    font-family: var(--at-font-display);
     font-weight: 500;
     font-size: 14px;
     padding: 14px 16px;
     text-align: left;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--at-line);
   }
   .artifact-scope .comparison-table td {
-    background: var(--bg-card);
-    color: var(--text-muted);
+    background: var(--at-surface);
+    color: var(--at-muted);
     padding: 12px 16px;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--at-line);
     line-height: 1.45;
   }
   .artifact-scope .comparison-table tr:last-child td { border-bottom: none; }
 `;
 
 export const html = `
-<div class="topbar">
-  <div class="topbar-inner">
-    <span class="logo"><a href="/">&#9664; harrytruong</a></span>
-    <span class="meta-tag">DEEP DIVE</span>
-  </div>
-</div>
-
 <div class="page-wrapper">
 
   <header class="hero reveal">
@@ -720,11 +655,11 @@ export const html = `
         <div class="stat-label">LangChain agent before<br>harness optimization</div>
       </div>
       <div class="stat-pill">
-        <div class="stat-number" style="color:var(--accent-teal)">66.5%</div>
+        <div class="stat-number" style="color:var(--at-green)">66.5%</div>
         <div class="stat-label">Same agent, same model<br>new harness only</div>
       </div>
       <div class="stat-pill">
-        <div class="stat-number" style="color:var(--accent-purple)">Top 5</div>
+        <div class="stat-number" style="color:var(--at-violet)">Top 5</div>
         <div class="stat-label">Terminal Bench 2.0<br>jumped from #30</div>
       </div>
     </div>
@@ -770,7 +705,7 @@ export const html = `
       <div class="split-card guide">
         <div class="split-card-title">Guides</div>
         <div class="split-card-sub">Feedforward controls</div>
-        <p style="font-size:14px;color:var(--text-muted);margin-bottom:14px">Steer the agent <strong>before</strong> it acts. Increase the probability of good results on the first attempt.</p>
+        <p style="font-size:14px;color:var(--at-muted);margin-bottom:14px">Steer the agent <strong>before</strong> it acts. Increase the probability of good results on the first attempt.</p>
         <ul>
           <li><strong>Computational:</strong> <code>AGENTS.md</code>, architecture rules, dependency constraints</li>
           <li><strong>Inferential:</strong> AI code review, LLM-as-judge pre-checks</li>
@@ -779,7 +714,7 @@ export const html = `
       <div class="split-card sensor">
         <div class="split-card-title">Sensors</div>
         <div class="split-card-sub">Feedback controls</div>
-        <p style="font-size:14px;color:var(--text-muted);margin-bottom:14px">Observe <strong>after</strong> the agent acts. Enable self-correction before issues reach human eyes.</p>
+        <p style="font-size:14px;color:var(--at-muted);margin-bottom:14px">Observe <strong>after</strong> the agent acts. Enable self-correction before issues reach human eyes.</p>
         <ul>
           <li><strong>Computational:</strong> Linters, type checkers, test suites, CI validation</li>
           <li><strong>Inferential:</strong> AI evaluators, semantic diff checks</li>
@@ -922,30 +857,30 @@ export const html = `
     <p>As the context window fills with tool outputs, past conversations, and intermediate results, models become measurably worse at reasoning. This is <strong>context rot</strong> — and it's the invisible enemy of every long-running agent.</p>
 
     <div class="rot-visual">
-      <div style="font-size:14px;color:var(--text-muted);margin-bottom:4px;font-family:var(--font-display);font-weight:500;color:#fff;">Agent reasoning quality vs. context usage</div>
+      <div style="font-size:14px;color:var(--at-muted);margin-bottom:4px;font-family:var(--at-font-display);font-weight:500;color:var(--at-text);">Agent reasoning quality vs. context usage</div>
       <div class="rot-bar-group">
         <div class="rot-bar-row">
           <div class="rot-bar-label">10% used</div>
-          <div class="rot-bar-track"><div class="rot-bar-fill" style="width:95%;background:linear-gradient(90deg,var(--accent-teal),#5bdeb8)"></div></div>
-          <div class="rot-bar-value" style="color:var(--accent-teal)">95%</div>
+          <div class="rot-bar-track"><div class="rot-bar-fill" style="width:95%;background:linear-gradient(90deg,var(--at-green),var(--at-green))"></div></div>
+          <div class="rot-bar-value" style="color:var(--at-green)">95%</div>
         </div>
         <div class="rot-bar-row">
           <div class="rot-bar-label">40% used</div>
-          <div class="rot-bar-track"><div class="rot-bar-fill" style="width:78%;background:linear-gradient(90deg,var(--accent-teal),var(--accent-amber))"></div></div>
-          <div class="rot-bar-value" style="color:var(--accent-amber)">78%</div>
+          <div class="rot-bar-track"><div class="rot-bar-fill" style="width:78%;background:linear-gradient(90deg,var(--at-green),var(--at-amber))"></div></div>
+          <div class="rot-bar-value" style="color:var(--at-amber)">78%</div>
         </div>
         <div class="rot-bar-row">
           <div class="rot-bar-label">70% used</div>
-          <div class="rot-bar-track"><div class="rot-bar-fill" style="width:52%;background:linear-gradient(90deg,var(--accent-amber),var(--accent-orange))"></div></div>
-          <div class="rot-bar-value" style="color:var(--accent-orange)">52%</div>
+          <div class="rot-bar-track"><div class="rot-bar-fill" style="width:52%;background:linear-gradient(90deg,var(--at-amber),var(--at-accent))"></div></div>
+          <div class="rot-bar-value" style="color:var(--at-accent)">52%</div>
         </div>
         <div class="rot-bar-row">
           <div class="rot-bar-label">95% used</div>
-          <div class="rot-bar-track"><div class="rot-bar-fill" style="width:28%;background:linear-gradient(90deg,var(--accent-coral),#e24b4a)"></div></div>
-          <div class="rot-bar-value" style="color:var(--accent-coral)">28%</div>
+          <div class="rot-bar-track"><div class="rot-bar-fill" style="width:28%;background:linear-gradient(90deg,var(--at-accent),var(--at-accent))"></div></div>
+          <div class="rot-bar-value" style="color:var(--at-accent)">28%</div>
         </div>
       </div>
-      <div style="font-size:12px;color:var(--text-dim);margin-top:12px;text-align:center;font-style:italic;font-family:var(--font-display)">Illustrative — quality degrades as irrelevant context accumulates</div>
+      <div style="font-size:12px;color:var(--at-faint);margin-top:12px;text-align:center;font-style:italic;font-family:var(--at-font-display)">Illustrative — quality degrades as irrelevant context accumulates</div>
     </div>
 
     <p>A cautionary tale: one team had their agent run the full test suite after every change. 4,000 lines of passing test output flooded the context window. The agent lost track of its actual task and started hallucinating about test files it had just read.</p>
@@ -1000,7 +935,7 @@ export const html = `
   </section>
 
   <footer class="footer">
-    <div class="footer-text">Researched and designed in the style of ByteByteGo · April 2026</div>
+    <div class="footer-text">Notes on harness engineering · April 2026</div>
   </footer>
 
 </div>

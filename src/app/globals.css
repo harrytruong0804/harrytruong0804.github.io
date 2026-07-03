@@ -99,9 +99,55 @@ button:focus-visible {
   outline-offset: 3px;
 }
 
-/* Artifact full-page */
+/* ---------- Artifact theme kit ----------
+   Posts consume these tokens so every artifact follows the site theme,
+   including dark mode. Usage rules: docs/ARTIFACT-STYLE.md */
 .artifact-scope {
+  /* surfaces */
+  --at-bg: var(--paper);
+  --at-surface: var(--paper-raised);
+  --at-inset: #ece5d3; /* code blocks, wells */
+  /* text */
+  --at-text: var(--ink);
+  --at-muted: var(--ink-soft);
+  --at-faint: var(--ink-faint);
+  /* lines */
+  --at-line: var(--line);
+  --at-line-strong: var(--line-strong);
+  /* brand accent */
+  --at-accent: var(--accent);
+  --at-accent-soft: var(--accent-soft);
+  /* semantic hues for diagrams & code */
+  --at-blue: #2456a6;
+  --at-green: #3e7d45;
+  --at-amber: #9a6a14;
+  --at-violet: #6d4fa3;
+  --at-blue-soft: rgba(36, 86, 166, 0.1);
+  --at-green-soft: rgba(62, 125, 69, 0.1);
+  --at-amber-soft: rgba(154, 106, 20, 0.12);
+  --at-violet-soft: rgba(109, 79, 163, 0.1);
+  /* type */
+  --at-font-display: var(--font-fraunces), Georgia, serif;
+  --at-font-body: var(--font-newsreader), Georgia, serif;
+  --at-font-mono: var(--font-spline-mono), ui-monospace, monospace;
+
   min-height: 100vh;
+  background: var(--at-bg);
+  color: var(--at-text);
+  font-family: var(--at-font-body);
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.dark .artifact-scope {
+  --at-inset: #211c15;
+  --at-blue: #82a7e8;
+  --at-green: #8fbe7d;
+  --at-amber: #d3a04d;
+  --at-violet: #b09ae0;
+  --at-blue-soft: rgba(130, 167, 232, 0.12);
+  --at-green-soft: rgba(143, 190, 125, 0.12);
+  --at-amber-soft: rgba(211, 160, 77, 0.14);
+  --at-violet-soft: rgba(176, 154, 224, 0.12);
 }
 
 /* Artifacts carry their own embedded site-nav topbar from the old convention;

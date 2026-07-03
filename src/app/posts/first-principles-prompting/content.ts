@@ -1,67 +1,9 @@
 export const styles = `
-  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,300&display=swap');
-
-  .artifact-scope {
-    --bg: #0f1117;
-    --surface: #1a1d27;
-    --surface2: #222636;
-    --border: #2e3347;
-    --accent: #f59e0b;
-    --accent2: #3b82f6;
-    --accent3: #10b981;
-    --red: #ef5350;
-    --text: #e2e8f0;
-    --muted: #8892a4;
-    --tag-bg: #1e2a3a;
-    --purple: #a78bfa;
-  }
-
   .artifact-scope, .artifact-scope * { margin: 0; padding: 0; box-sizing: border-box; }
 
   .artifact-scope {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'IBM Plex Sans', sans-serif;
     line-height: 1.7;
     font-size: 15px;
-  }
-
-  .artifact-scope .topbar {
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
-    padding: 12px 0;
-  }
-  .artifact-scope .topbar-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    max-width: 820px;
-    margin: 0 auto;
-    padding: 0 24px;
-  }
-  .artifact-scope .logo {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--accent);
-    letter-spacing: 0.05em;
-  }
-  .artifact-scope .logo a {
-    color: inherit;
-    text-decoration: none;
-  }
-  .artifact-scope .logo a:hover {
-    opacity: 0.8;
-  }
-  .artifact-scope .meta-tag {
-    background: var(--tag-bg);
-    border: 1px solid var(--border);
-    color: var(--accent2);
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 11px;
-    padding: 3px 10px;
-    border-radius: 3px;
-    letter-spacing: 0.08em;
   }
 
   .artifact-scope .hero {
@@ -71,9 +13,9 @@ export const styles = `
   }
 
   .artifact-scope .issue-line {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: var(--at-font-mono);
     font-size: 11px;
-    color: var(--accent);
+    color: var(--at-accent);
     letter-spacing: 0.12em;
     text-transform: uppercase;
     margin-bottom: 16px;
@@ -87,31 +29,31 @@ export const styles = `
     display: inline-block;
     width: 20px;
     height: 2px;
-    background: var(--accent);
+    background: var(--at-accent);
   }
 
   .artifact-scope h1 {
-    font-family: 'Fraunces', serif;
+    font-family: var(--at-font-display);
     font-size: clamp(28px, 5vw, 36px);
     font-weight: 300;
     line-height: 1.2;
-    color: #fff;
+    color: var(--at-text);
     margin-bottom: 20px;
     letter-spacing: -0.02em;
   }
   .artifact-scope h1 em {
-    color: var(--accent);
+    color: var(--at-accent);
     font-style: italic;
   }
 
   .artifact-scope .subtitle {
     font-size: 17px;
-    color: var(--muted);
+    color: var(--at-muted);
     font-weight: 300;
     max-width: 640px;
     line-height: 1.6;
     margin-bottom: 28px;
-    border-left: 3px solid var(--accent);
+    border-left: 3px solid var(--at-accent);
     padding-left: 16px;
   }
 
@@ -120,29 +62,29 @@ export const styles = `
     align-items: center;
     gap: 14px;
     padding: 16px 0 40px;
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
+    border-top: 1px solid var(--at-line);
+    border-bottom: 1px solid var(--at-line);
   }
   .artifact-scope .avatar {
     width: 36px; height: 36px;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--accent), #e06b00);
+    background: var(--at-accent);
     display: flex; align-items: center; justify-content: center;
-    font-weight: 700; font-size: 14px; color: #000;
+    font-weight: 700; font-size: 14px; color: var(--at-bg);
     flex-shrink: 0;
   }
   .artifact-scope .author-info { font-size: 13px; }
-  .artifact-scope .author-name { color: var(--text); font-weight: 500; }
-  .artifact-scope .author-date { color: var(--muted); }
+  .artifact-scope .author-name { color: var(--at-text); font-weight: 500; }
+  .artifact-scope .author-date { color: var(--at-muted); }
   .artifact-scope .read-time {
     margin-left: auto;
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: var(--at-font-mono);
     font-size: 11px;
-    color: var(--muted);
-    background: var(--surface2);
+    color: var(--at-muted);
+    background: var(--at-inset);
     padding: 4px 10px;
     border-radius: 3px;
-    border: 1px solid var(--border);
+    border: 1px solid var(--at-line);
   }
 
   .artifact-scope .content {
@@ -152,27 +94,27 @@ export const styles = `
   }
 
   .artifact-scope .callout {
-    background: var(--surface);
-    border-left: 3px solid var(--accent);
+    background: var(--at-surface);
+    border-left: 3px solid var(--at-accent);
     padding: 20px 24px;
     border-radius: 0 6px 6px 0;
     margin: 36px 0;
   }
   .artifact-scope .callout-title {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: var(--at-font-mono);
     font-size: 11px;
-    color: var(--accent);
+    color: var(--at-accent);
     text-transform: uppercase;
     letter-spacing: 0.08em;
     margin-bottom: 8px;
   }
-  .artifact-scope .callout p { font-size: 14px; color: var(--text); margin-bottom: 0; }
-  .artifact-scope .callout.insight { border-left-color: var(--accent2); }
-  .artifact-scope .callout.insight .callout-title { color: var(--accent2); }
+  .artifact-scope .callout p { font-size: 14px; color: var(--at-text); margin-bottom: 0; }
+  .artifact-scope .callout.insight { border-left-color: var(--at-blue); }
+  .artifact-scope .callout.insight .callout-title { color: var(--at-blue); }
 
   .artifact-scope .diagram-box {
-    background: var(--surface);
-    border: 1px solid var(--border);
+    background: var(--at-surface);
+    border: 1px solid var(--at-line);
     border-radius: 8px;
     padding: 28px;
     margin: 36px 0;
@@ -184,12 +126,12 @@ export const styles = `
     position: absolute;
     top: 0; left: 0; right: 0;
     height: 3px;
-    background: linear-gradient(90deg, var(--accent), var(--accent2), var(--accent3));
+    background: linear-gradient(90deg, var(--at-accent), var(--at-blue), var(--at-green));
   }
   .artifact-scope .diagram-title {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: var(--at-font-mono);
     font-size: 11px;
-    color: var(--muted);
+    color: var(--at-muted);
     text-transform: uppercase;
     letter-spacing: 0.08em;
     margin-bottom: 24px;
@@ -199,7 +141,7 @@ export const styles = `
   }
   .artifact-scope .diagram-title::before {
     content: '\\25B6';
-    color: var(--accent2);
+    color: var(--at-blue);
     font-size: 10px;
   }
 
@@ -207,58 +149,58 @@ export const styles = `
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 1px;
-    background: var(--border);
+    background: var(--at-line);
     border-radius: 6px;
     overflow: hidden;
   }
   .artifact-scope .framework-cell {
-    background: var(--surface2);
+    background: var(--at-inset);
     padding: 16px;
     display: flex;
     flex-direction: column;
     gap: 6px;
   }
   .artifact-scope .cell-phase {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: var(--at-font-mono);
     font-size: 10px;
-    color: var(--muted);
+    color: var(--at-muted);
     text-transform: uppercase;
     letter-spacing: 0.06em;
   }
   .artifact-scope .cell-label {
     font-size: 13px;
     font-weight: 600;
-    color: var(--text);
+    color: var(--at-text);
   }
   .artifact-scope .cell-desc {
     font-size: 12px;
-    color: var(--muted);
+    color: var(--at-muted);
     line-height: 1.5;
   }
 
   .artifact-scope .section-label {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: var(--at-font-mono);
     font-size: 10px;
-    color: var(--accent);
+    color: var(--at-accent);
     letter-spacing: 0.2em;
     text-transform: uppercase;
     margin: 52px 0 8px;
   }
   .artifact-scope h2 {
-    font-family: 'Fraunces', serif;
+    font-family: var(--at-font-display);
     font-size: clamp(22px, 3.5vw, 30px);
     font-weight: 300;
-    color: #fff;
+    color: var(--at-text);
     margin-bottom: 16px;
     line-height: 1.25;
   }
   .artifact-scope p {
-    color: var(--muted);
+    color: var(--at-muted);
     margin-bottom: 14px;
     font-size: 15px;
   }
-  .artifact-scope strong { color: var(--text); font-weight: 600; }
-  .artifact-scope em { color: var(--text); }
+  .artifact-scope strong { color: var(--at-text); font-weight: 600; }
+  .artifact-scope em { color: var(--at-text); }
 
   .artifact-scope .phase-header {
     display: flex;
@@ -276,46 +218,46 @@ export const styles = `
     font-size: 16px;
     flex-shrink: 0;
   }
-  .artifact-scope .phase-icon-deconstruct { background: rgba(245,158,11,0.15); }
-  .artifact-scope .phase-icon-question { background: rgba(59,130,246,0.15); }
-  .artifact-scope .phase-icon-rebuild { background: rgba(16,185,129,0.15); }
-  .artifact-scope .phase-icon-stress { background: rgba(239,68,68,0.15); }
-  .artifact-scope .phase-icon-scale { background: rgba(167,139,250,0.15); }
+  .artifact-scope .phase-icon-deconstruct { background: var(--at-amber-soft); }
+  .artifact-scope .phase-icon-question { background: var(--at-blue-soft); }
+  .artifact-scope .phase-icon-rebuild { background: var(--at-green-soft); }
+  .artifact-scope .phase-icon-stress { background: var(--at-accent-soft); }
+  .artifact-scope .phase-icon-scale { background: var(--at-violet-soft); }
 
   .artifact-scope .phase-meta { display: flex; flex-direction: column; gap: 3px; }
   .artifact-scope .phase-name {
     font-weight: 700;
     font-size: 17px;
-    color: #fff;
+    color: var(--at-text);
   }
   .artifact-scope .phase-desc {
     font-size: 12px;
-    color: var(--muted);
-    font-family: 'IBM Plex Mono', monospace;
+    color: var(--at-muted);
+    font-family: var(--at-font-mono);
   }
 
   .artifact-scope .prompt-list { display: flex; flex-direction: column; gap: 20px; margin: 28px 0; }
 
   .artifact-scope .prompt-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
+    background: var(--at-surface);
+    border: 1px solid var(--at-line);
     border-radius: 8px;
     overflow: hidden;
     transition: border-color 0.2s;
   }
-  .artifact-scope .prompt-card:hover { border-color: var(--accent2); }
+  .artifact-scope .prompt-card:hover { border-color: var(--at-blue); }
 
   .artifact-scope .prompt-header {
     display: flex;
     align-items: stretch;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--at-line);
   }
   .artifact-scope .prompt-num {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: var(--at-font-mono);
     font-size: 12px;
     font-weight: 600;
-    color: var(--bg);
-    background: var(--accent2);
+    color: var(--at-bg);
+    background: var(--at-blue);
     padding: 10px 14px;
     display: flex;
     align-items: center;
@@ -323,16 +265,16 @@ export const styles = `
     justify-content: center;
   }
   .artifact-scope .prompt-category {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: var(--at-font-mono);
     font-size: 11px;
-    color: var(--muted);
+    color: var(--at-muted);
     text-transform: uppercase;
     letter-spacing: 0.06em;
     padding: 10px 16px;
     display: flex;
     align-items: center;
-    border-right: 1px solid var(--border);
-    background: var(--surface2);
+    border-right: 1px solid var(--at-line);
+    background: var(--at-inset);
   }
   .artifact-scope .prompt-title-bar {
     padding: 10px 16px;
@@ -347,52 +289,52 @@ export const styles = `
 
   .artifact-scope .prompt-insight {
     font-size: 13px;
-    color: var(--muted);
+    color: var(--at-muted);
     margin-bottom: 14px;
     font-style: italic;
   }
 
   .artifact-scope .prompt-block {
-    background: var(--surface2);
-    border: 1px solid var(--border);
+    background: var(--at-inset);
+    border: 1px solid var(--at-line);
     border-radius: 6px;
     padding: 14px 16px;
     margin-bottom: 12px;
   }
   .artifact-scope .prompt-block-label {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: var(--at-font-mono);
     font-size: 10px;
-    color: var(--accent);
+    color: var(--at-accent);
     text-transform: uppercase;
     letter-spacing: 0.08em;
     margin-bottom: 8px;
   }
   .artifact-scope .prompt-text {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: var(--at-font-mono);
     font-size: 13px;
-    color: #c9d1d9;
+    color: var(--at-text);
     line-height: 1.6;
   }
   .artifact-scope .prompt-example {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: var(--at-font-mono);
     font-size: 12px;
-    color: var(--accent3);
+    color: var(--at-green);
     line-height: 1.6;
   }
 
   .artifact-scope .output-note {
     font-size: 12px;
-    color: var(--muted);
+    color: var(--at-muted);
     display: flex;
     align-items: flex-start;
     gap: 8px;
     margin-top: 10px;
   }
-  .artifact-scope .output-note::before { content: '\\2192'; color: var(--accent2); flex-shrink: 0; }
+  .artifact-scope .output-note::before { content: '\\2192'; color: var(--at-blue); flex-shrink: 0; }
 
   .artifact-scope .badge {
     display: inline-block;
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: var(--at-font-mono);
     font-size: 10px;
     font-weight: 600;
     padding: 2px 8px;
@@ -400,15 +342,15 @@ export const styles = `
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
-  .artifact-scope .badge-deconstruct { background: rgba(245,158,11,0.15); color: var(--accent); }
-  .artifact-scope .badge-question { background: rgba(59,130,246,0.15); color: var(--accent2); }
-  .artifact-scope .badge-rebuild { background: rgba(16,185,129,0.15); color: var(--accent3); }
-  .artifact-scope .badge-stress { background: rgba(239,68,68,0.15); color: #f87171; }
-  .artifact-scope .badge-scale { background: rgba(167,139,250,0.15); color: var(--purple); }
+  .artifact-scope .badge-deconstruct { background: var(--at-amber-soft); color: var(--at-amber); }
+  .artifact-scope .badge-question { background: var(--at-blue-soft); color: var(--at-blue); }
+  .artifact-scope .badge-rebuild { background: var(--at-green-soft); color: var(--at-green); }
+  .artifact-scope .badge-stress { background: var(--at-accent-soft); color: var(--at-accent); }
+  .artifact-scope .badge-scale { background: var(--at-violet-soft); color: var(--at-violet); }
 
   .artifact-scope .master-prompt {
-    background: var(--surface);
-    border: 1px solid var(--accent);
+    background: var(--at-surface);
+    border: 1px solid var(--at-accent);
     border-radius: 8px;
     padding: 28px;
     margin: 40px 0;
@@ -417,7 +359,7 @@ export const styles = `
   .artifact-scope .master-prompt .prompt-text {
     font-size: 14px;
     line-height: 1.8;
-    color: var(--text);
+    color: var(--at-text);
   }
 
   .artifact-scope .summary-table {
@@ -427,32 +369,32 @@ export const styles = `
     font-size: 13px;
   }
   .artifact-scope .summary-table th {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: var(--at-font-mono);
     font-size: 11px;
-    color: var(--muted);
+    color: var(--at-muted);
     text-transform: uppercase;
     letter-spacing: 0.06em;
     text-align: left;
     padding: 10px 14px;
-    border-bottom: 2px solid var(--border);
-    background: var(--surface);
+    border-bottom: 2px solid var(--at-line-strong);
+    background: var(--at-surface);
   }
   .artifact-scope .summary-table td {
     padding: 10px 14px;
-    border-bottom: 1px solid var(--border);
-    color: var(--muted);
+    border-bottom: 1px solid var(--at-line);
+    color: var(--at-muted);
     vertical-align: top;
   }
-  .artifact-scope .summary-table td:first-child { color: var(--text); font-weight: 500; }
-  .artifact-scope .summary-table tr:hover td { background: var(--surface2); }
+  .artifact-scope .summary-table td:first-child { color: var(--at-text); font-weight: 500; }
+  .artifact-scope .summary-table tr:hover td { background: var(--at-inset); }
 
   .artifact-scope .footnote {
     margin-top: 60px;
     padding-top: 24px;
-    border-top: 1px solid var(--border);
+    border-top: 1px solid var(--at-line);
     font-size: 12px;
-    color: var(--muted);
-    font-family: 'IBM Plex Mono', monospace;
+    color: var(--at-muted);
+    font-family: var(--at-font-mono);
   }
 
   @media (max-width: 600px) {
@@ -463,13 +405,6 @@ export const styles = `
 `;
 
 export const html = `
-<div class="topbar">
-  <div class="topbar-inner">
-    <span class="logo"><a href="/">&#9664; harrytruong</a></span>
-    <span class="meta-tag">AI PROMPTING</span>
-  </div>
-</div>
-
 <div class="hero">
   <div class="issue-line">AI Prompting</div>
   <h1>First Principles Prompting:<br><em>15 Prompts</em> That Rebuild Your Thinking</h1>
@@ -931,8 +866,8 @@ export const html = `
   </div>
 
   <div class="footnote">
-    harrytruong &middot; AI Prompting Series<br>
-    Inspired by first principles thinking &mdash; applied to AI prompting.
+    harrytruong &middot; The takeaway<br>
+    Sharper questions beat a smarter model &mdash; the answer is only as good as the problem you hand it.
   </div>
 
 </div>
