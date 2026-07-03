@@ -104,6 +104,22 @@ button:focus-visible {
   min-height: 100vh;
 }
 
+/* Artifacts carry their own embedded site-nav topbar from the old convention;
+   the posts layout now renders the themed SiteTopbar instead. */
+.artifact-scope .topbar {
+  display: none;
+}
+
+/* Tables can't shrink below min-content; on narrow screens let them scroll
+   instead of stretching the page. */
+@media (max-width: 640px) {
+  .artifact-scope table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .reveal {
     animation: none;
