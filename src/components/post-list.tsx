@@ -38,17 +38,22 @@ export default function PostList({ posts }: { posts: Post[] }) {
 
   return (
     <>
-      <div className="flex items-center gap-2 flex-wrap mb-6" role="group" aria-label="Filter posts by tag">
+      {/* Tag filter */}
+      <div
+        className="flex items-baseline gap-x-3 gap-y-1.5 flex-wrap mb-8 font-mono text-[12px]"
+        role="group"
+        aria-label="Filter posts by tag"
+      >
         {shownTags.map((tag) => (
           <button
             key={tag}
             type="button"
             aria-pressed={activeTag === tag}
             onClick={() => setActiveTag(activeTag === tag ? null : tag)}
-            className={`font-retro text-base px-2 py-0.5 border transition-colors cursor-pointer ${
+            className={`cursor-pointer transition-colors ${
               activeTag === tag
-                ? "bg-accent/25 text-accent border-accent/60"
-                : "bg-accent/5 text-foreground/50 border-border hover:text-accent/80 hover:border-accent/30"
+                ? "text-accent underline underline-offset-4 decoration-2"
+                : "text-ink-soft hover:text-accent"
             }`}
           >
             #{tag}
@@ -58,80 +63,84 @@ export default function PostList({ posts }: { posts: Post[] }) {
           <button
             type="button"
             onClick={() => setTagsExpanded(true)}
-            className="font-retro text-base px-2 py-0.5 text-foreground/40 hover:text-accent/80 transition-colors cursor-pointer"
+            className="cursor-pointer text-ink-faint hover:text-accent transition-colors"
           >
-            [+{hiddenCount} more]
+            +{hiddenCount} more
           </button>
         )}
         {tagsExpanded && tags.length > COLLAPSED_TAG_COUNT && (
           <button
             type="button"
             onClick={() => setTagsExpanded(false)}
-            className="font-retro text-base px-2 py-0.5 text-foreground/40 hover:text-accent/80 transition-colors cursor-pointer"
+            className="cursor-pointer text-ink-faint hover:text-accent transition-colors"
           >
-            [- less]
+            − less
           </button>
         )}
         {activeTag && (
           <button
             type="button"
             onClick={() => setActiveTag(null)}
-            className="font-retro text-base px-2 py-0.5 text-accent3/80 hover:text-accent3 transition-colors cursor-pointer"
+            className="cursor-pointer text-accent hover:opacity-70 transition-opacity"
           >
-            [x] clear
+            ✕ clear
           </button>
         )}
       </div>
 
-      <div className="grid gap-4">
+      {/* Catalog rows */}
+      <ol className="border-t border-line">
         {visible.map((post, i) => (
-          <Link key={post.slug} href={`/posts/${post.slug}`}>
-            <article className="pixel-border bg-surface p-4 sm:p-5 rounded-sm card-hover cursor-pointer group">
-              <div className="flex items-start justify-between gap-4">
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-baseline gap-3 mb-2">
-                    <span className="font-pixel text-xs text-accent/50 shrink-0">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <h3 className="font-pixel text-xs leading-relaxed text-foreground group-hover:text-accent transition-colors">
-                      {post.title}
-                    </h3>
-                  </div>
-                  <p className="font-retro text-lg text-foreground/60 leading-snug mb-3">
-                    {post.description}
-                  </p>
-                  <div className="flex items-center gap-3 flex-wrap">
-                    <time
-                      dateTime={post.date}
-                      className="font-retro text-base text-foreground/40"
-                    >
-                      {post.date}
-                    </time>
-                    {post.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="font-retro text-base px-2 py-0.5 bg-accent/10 text-accent/70 border border-accent/20"
-                      >
-                        #{tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+          <li
+            key={post.slug}
+            className="reveal border-b border-line"
+            style={{ animationDelay: `${Math.min(i * 45, 500)}ms` }}
+          >
+            <Link
+              href={`/posts/${post.slug}`}
+              className="group grid grid-cols-[3rem_1fr] sm:grid-cols-[4rem_1fr_6.5rem] gap-x-2 py-6 -mx-3 px-3 rounded-sm transition-colors hover:bg-accent-soft"
+            >
+              <span className="font-mono text-[12px] pt-[7px] text-ink-faint group-hover:text-accent transition-colors">
+                №{String(i + 1).padStart(2, "0")}
+              </span>
+
+              <div className="min-w-0">
+                <h3 className="font-display font-semibold text-xl sm:text-[1.35rem] leading-snug group-hover:text-accent transition-colors">
+                  {post.title}
+                </h3>
+                <p className="mt-2 text-[1.05rem] leading-relaxed text-ink-soft max-w-[62ch]">
+                  {post.description}
+                </p>
+                <p className="mt-3 font-mono text-[11.5px] text-ink-faint">
+                  <time dateTime={post.date} className="sm:hidden">
+                    {post.date} ·{" "}
+                  </time>
+                  {post.tags.join(" · ")}
+                </p>
+              </div>
+
+              <span className="hidden sm:flex flex-col items-end justify-between pt-[7px]">
+                <time
+                  dateTime={post.date}
+                  className="font-mono text-[12px] text-ink-faint"
+                >
+                  {post.date}
+                </time>
                 <span
                   aria-hidden="true"
-                  className="font-pixel text-xs text-accent/30 group-hover:text-accent transition-colors mt-1 hidden sm:block"
+                  className="font-mono text-[13px] text-accent opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all"
                 >
-                  {">"}
+                  read ↗
                 </span>
-              </div>
-            </article>
-          </Link>
+              </span>
+            </Link>
+          </li>
         ))}
-      </div>
+      </ol>
 
       {visible.length === 0 && (
-        <p className="font-retro text-xl text-foreground/50">
-          no artifacts match this tag.
+        <p className="py-10 italic text-ink-soft">
+          Nothing in the archive matches this tag.
         </p>
       )}
     </>

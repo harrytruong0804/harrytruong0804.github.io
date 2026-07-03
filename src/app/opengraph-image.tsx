@@ -15,69 +15,77 @@ export default function OgImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
-          padding: "80px",
-          background: "#0c0c0e",
-          backgroundImage:
-            "linear-gradient(rgba(56,189,248,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(56,189,248,0.06) 1px, transparent 1px)",
-          backgroundSize: "40px 40px",
-          fontFamily: "monospace",
+          padding: "90px",
+          background: "#f6f2e9",
+          color: "#201d18",
         }}
       >
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "20px",
-            marginBottom: "36px",
-          }}
-        >
-          <div
-            style={{
-              width: "22px",
-              height: "22px",
-              background: "#38bdf8",
-              boxShadow: "6px 6px 0 rgba(56,189,248,0.35)",
-            }}
-          />
-          <div
-            style={{
-              fontSize: "30px",
-              color: "#34d399",
-              letterSpacing: "0.2em",
-            }}
-          >
-            LEARNING ARTIFACTS
-          </div>
-        </div>
-        <div
-          style={{
-            fontSize: "96px",
-            fontWeight: 700,
-            color: "#e0e0e0",
-            display: "flex",
-          }}
-        >
-          <span style={{ color: "#38bdf8", marginRight: "24px" }}>&gt;</span>
-          {SITE_NAME}
-        </div>
-        <div
-          style={{
-            fontSize: "34px",
-            color: "#8b8b95",
-            marginTop: "28px",
-          }}
-        >
-          visual notes on graphics, USD, geospatial 3D & software design
-        </div>
+        {/* double rule, top */}
         <div
           style={{
             position: "absolute",
-            bottom: 0,
-            left: 0,
-            right: 0,
-            height: "14px",
-            background:
-              "linear-gradient(90deg, #38bdf8 0%, #a78bfa 50%, #34d399 100%)",
+            top: 56,
+            left: 90,
+            right: 90,
+            height: "6px",
+            borderTop: "3px solid #201d18",
+            borderBottom: "1.5px solid #201d18",
+            display: "flex",
+          }}
+        />
+
+        <div
+          style={{
+            fontSize: "26px",
+            letterSpacing: "0.25em",
+            color: "#bc3f22",
+            marginBottom: "40px",
+            display: "flex",
+          }}
+        >
+          HARRY TRUONG — LEARNING ARTIFACTS
+        </div>
+
+        <div
+          style={{
+            fontSize: "92px",
+            fontWeight: 700,
+            lineHeight: 1.05,
+            letterSpacing: "-0.02em",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <span>Visual notes,</span>
+          <span style={{ display: "flex" }}>
+            from&nbsp;
+            <span style={{ color: "#bc3f22", fontStyle: "italic" }}>
+              first principles.
+            </span>
+          </span>
+        </div>
+
+        <div
+          style={{
+            fontSize: "30px",
+            color: "#5f594e",
+            marginTop: "44px",
+            display: "flex",
+          }}
+        >
+          graphics · USD &amp; Omniverse · geospatial 3D · software design
+        </div>
+
+        {/* double rule, bottom */}
+        <div
+          style={{
+            position: "absolute",
+            bottom: 56,
+            left: 90,
+            right: 90,
+            height: "6px",
+            borderTop: "3px solid #201d18",
+            borderBottom: "1.5px solid #201d18",
             display: "flex",
           }}
         />
