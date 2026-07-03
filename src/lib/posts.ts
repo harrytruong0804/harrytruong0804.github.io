@@ -1,3 +1,6 @@
+import type { Metadata } from "next";
+import { SITE_URL, SITE_NAME, SITE_AUTHOR, SITE_GITHUB } from "./site";
+
 export interface Post {
   slug: string;
   title: string;
@@ -197,4 +200,33 @@ export function getAllPosts(): Post[] {
   return [...posts].sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
+}
+
+/** Full per-post Metadata: title, description, canonical, OpenGraph, Twitter. */
+export function postMetadata(slug: string): Metadata {
+  const post = getPost(slug);
+  if (!post) return {};
+  const url = `${SITE_URL}/posts/${post.slug}`;
+  return {
+    title: `${post.title} | ${SITE_NAME}`,
+    description: post.description,
+    keywords: post.tags,
+    authors: [{ name: SITE_AUTHOR, url: SITE_GITHUB }],
+    alternates: { canonical: url },
+    openGraph: {
+      type: "article",
+      url,
+      siteName: SITE_NAME,
+      title: post.title,
+      description: post.description,
+      publishedTime: post.date,
+      authors: [SITE_AUTHOR],
+      tags: post.tags,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.description,
+    },
+  };
 }
