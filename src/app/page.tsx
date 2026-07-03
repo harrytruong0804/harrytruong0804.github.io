@@ -6,7 +6,8 @@ import {
   SITE_AUTHOR,
   SITE_GITHUB,
 } from "@/lib/site";
-import PostList from "@/components/post-list";
+import { getDispatches } from "@/lib/dispatches";
+import HomeTabs from "@/components/home-tabs";
 import ThemeToggle from "@/components/theme-toggle";
 
 export default function Home() {
@@ -39,36 +40,19 @@ export default function Home() {
         <header className="pt-12 sm:pt-16 pb-10">
           <div className="flex items-center justify-between mb-12 sm:mb-16">
             <p className="font-mono text-[11px] tracking-[0.22em] uppercase text-ink-soft">
-              <span className="text-accent">Harry Truong</span> — learning
-              artifacts
+              <span className="text-accent">Harry Truong</span> · Engineer
             </p>
             <ThemeToggle />
           </div>
 
           <h1 className="font-display font-semibold text-[2.6rem] sm:text-6xl leading-[1.04] tracking-tight">
-            Visual notes,
-            <br />
-            from{" "}
-            <em className="text-accent font-medium">first principles.</em>
+            <em className="text-accent font-medium">Visual notes.</em>
           </h1>
-
-          <p className="mt-6 text-lg sm:text-xl italic text-ink-soft max-w-[46ch] leading-relaxed">
-            Deep dives on graphics, USD &amp; Omniverse, geospatial 3D, and
-            software design — each one a hand-built artifact.
-          </p>
         </header>
 
-        <div className="rule-double" />
-
-        {/* Index */}
-        <main className="pt-8 pb-4">
-          <div className="flex items-baseline justify-between mb-7">
-            <h2 className="font-mono text-[11px] tracking-[0.22em] uppercase text-ink-faint">
-              Index — {posts.length} entries
-            </h2>
-          </div>
-
-          <PostList posts={posts} />
+        {/* Writing / News */}
+        <main className="pb-4">
+          <HomeTabs posts={posts} dispatches={getDispatches()} />
         </main>
 
         {/* Footer */}

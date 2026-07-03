@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 import { SITE_NAME } from "@/lib/site";
 
-export const alt = `${SITE_NAME} — learning artifacts & visual notes`;
+export const alt = `${SITE_NAME} — visual notes`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -39,37 +39,32 @@ export default function OgImage() {
             fontSize: "26px",
             letterSpacing: "0.25em",
             color: "#bc3f22",
-            marginBottom: "40px",
+            marginBottom: "38px",
             display: "flex",
           }}
         >
-          HARRY TRUONG — LEARNING ARTIFACTS
+          HARRY TRUONG · ENGINEER
         </div>
 
         <div
           style={{
-            fontSize: "92px",
+            fontSize: "116px",
             fontWeight: 700,
-            lineHeight: 1.05,
+            lineHeight: 1.04,
             letterSpacing: "-0.02em",
+            color: "#bc3f22",
+            fontStyle: "italic",
             display: "flex",
-            flexDirection: "column",
           }}
         >
-          <span>Visual notes,</span>
-          <span style={{ display: "flex" }}>
-            from&nbsp;
-            <span style={{ color: "#bc3f22", fontStyle: "italic" }}>
-              first principles.
-            </span>
-          </span>
+          Visual notes.
         </div>
 
         <div
           style={{
             fontSize: "30px",
             color: "#5f594e",
-            marginTop: "44px",
+            marginTop: "42px",
             display: "flex",
           }}
         >
