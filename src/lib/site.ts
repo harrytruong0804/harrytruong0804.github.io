@@ -1,4 +1,4 @@
-export const SITE_URL = "https://harrytruong.vercel.app";
+export const SITE_URL = "https://harrytruong0804.github.io";
 export const SITE_NAME = "harrytruong";
 export const SITE_TITLE = "Harry Truong — Visual notes";
 export const SITE_DESCRIPTION =

@@ -1,6 +1,9 @@
 import { getAllPosts } from "@/lib/posts";
 import { SITE_URL, SITE_NAME, SITE_DESCRIPTION } from "@/lib/site";
 
+// Render once at build time so `output: export` can emit a static feed.xml.
+export const dynamic = "force-static";
+
 function escapeXml(s: string): string {
   return s
     .replace(/&/g, "&amp;")
