@@ -1,15 +1,27 @@
 import type { Metadata } from "next";
 import { SITE_URL, SITE_NAME, SITE_AUTHOR, SITE_GITHUB } from "./site";
 
+export type Category = "engineering" | "soft-skills";
+
 export interface Post {
   slug: string;
   title: string;
   description: string;
   date: string;
   tags: string[];
+  /** Homepage tab. Omitted = "engineering" (the default Writing tab). */
+  category?: Category;
 }
 
 export const posts: Post[] = [
+  {
+    slug: "pyramid-principle",
+    title: "The Pyramid Principle: Answer First",
+    description: "Your brain files ideas as a hierarchy, not a timeline — so lead with the conclusion and group the support beneath it. The consultant's structure for any message.",
+    date: "2026-07-06",
+    tags: ["communication", "soft-skills", "writing", "mental-models"],
+    category: "soft-skills",
+  },
   {
     slug: "adapter-vs-delegate",
     title: "Adapter vs Delegate",
@@ -175,6 +187,7 @@ export const posts: Post[] = [
     description: "Apply Socratic questioning to any engineering talk: a three-phase system for active listening, sharper questions, and retention that outlasts the session.",
     date: "2026-03-06",
     tags: ["career", "soft-skills", "learning"],
+    category: "soft-skills",
   },
   {
     slug: "tool-search-sequence",

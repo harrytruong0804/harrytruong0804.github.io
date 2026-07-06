@@ -5,7 +5,14 @@ import type { Post } from "@/lib/posts";
 import type { Dispatch } from "@/lib/dispatches";
 import PostList from "@/components/post-list";
 
-type TabId = "writing" | "news";
+type TabId = "writing" | "soft-skills" | "news";
+
+const ORDER: TabId[] = ["writing", "soft-skills", "news"];
+const HASH: Record<TabId, string> = {
+  writing: "",
+  "soft-skills": "#soft-skills",
+  news: "#news",
+};
 
 export default function HomeTabs({
   posts,
@@ -14,14 +21,27 @@ export default function HomeTabs({
   posts: Post[];
   dispatches: Dispatch[];
 }) {
+  const writing = posts.filter((p) => p.category !== "soft-skills");
+  const soft = posts.filter((p) => p.category === "soft-skills");
+
   const [tab, setTab] = useState<TabId>("writing");
   const writingRef = useRef<HTMLButtonElement>(null);
+  const softRef = useRef<HTMLButtonElement>(null);
   const newsRef = useRef<HTMLButtonElement>(null);
+  const refFor: Record<TabId, React.RefObject<HTMLButtonElement | null>> = {
+    writing: writingRef,
+    "soft-skills": softRef,
+    news: newsRef,
+  };
 
-  // Sync with the URL hash so /#news deep-links (and back/forward) work.
+  // Sync with the URL hash so /#soft-skills and /#news deep-link (and back/forward) work.
   useEffect(() => {
-    const sync = () =>
-      setTab(window.location.hash === "#news" ? "news" : "writing");
+    const sync = () => {
+      const h = window.location.hash;
+      setTab(
+        h === "#news" ? "news" : h === "#soft-skills" ? "soft-skills" : "writing"
+      );
+    };
     sync();
     window.addEventListener("hashchange", sync);
     return () => window.removeEventListener("hashchange", sync);
@@ -29,16 +49,16 @@ export default function HomeTabs({
 
   const select = (t: TabId) => {
     setTab(t);
-    const url = t === "news" ? "#news" : window.location.pathname;
-    history.replaceState(null, "", url);
+    history.replaceState(null, "", HASH[t] || window.location.pathname);
   };
 
   const onKey = (e: React.KeyboardEvent) => {
     if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
     e.preventDefault();
-    const next: TabId = tab === "writing" ? "news" : "writing";
+    const step = e.key === "ArrowRight" ? 1 : ORDER.length - 1;
+    const next = ORDER[(ORDER.indexOf(tab) + step) % ORDER.length];
     select(next);
-    (next === "news" ? newsRef : writingRef).current?.focus();
+    refFor[next].current?.focus();
   };
 
   return (
@@ -47,15 +67,23 @@ export default function HomeTabs({
         role="tablist"
         aria-label="Homepage sections"
         onKeyDown={onKey}
-        className="flex items-end gap-7 border-b border-line mb-8"
+        className="flex items-end gap-6 sm:gap-7 border-b border-line mb-8"
       >
         <Tab
           ref={writingRef}
           id="writing"
           active={tab === "writing"}
           label="Writing"
-          count={posts.length}
+          count={writing.length}
           onClick={() => select("writing")}
+        />
+        <Tab
+          ref={softRef}
+          id="soft-skills"
+          active={tab === "soft-skills"}
+          label="Soft skills"
+          count={soft.length}
+          onClick={() => select("soft-skills")}
         />
         <Tab
           ref={newsRef}
@@ -73,7 +101,15 @@ export default function HomeTabs({
         aria-labelledby="tab-writing"
         hidden={tab !== "writing"}
       >
-        {tab === "writing" && <PostList posts={posts} />}
+        {tab === "writing" && <PostList posts={writing} />}
+      </div>
+      <div
+        role="tabpanel"
+        id="panel-soft-skills"
+        aria-labelledby="tab-soft-skills"
+        hidden={tab !== "soft-skills"}
+      >
+        {tab === "soft-skills" && <PostList posts={soft} />}
       </div>
       <div
         role="tabpanel"
@@ -112,7 +148,7 @@ function Tab({
       aria-selected={active}
       tabIndex={active ? 0 : -1}
       onClick={onClick}
-      className={`-mb-px flex items-baseline gap-2 border-b-2 pb-3 font-mono text-[12px] uppercase tracking-[0.1em] cursor-pointer transition-colors ${
+      className={`-mb-px flex items-baseline gap-2 border-b-2 pb-3 font-mono text-[12px] uppercase tracking-[0.1em] cursor-pointer transition-colors whitespace-nowrap ${
         active
           ? "border-accent text-ink"
           : "border-transparent text-ink-faint hover:text-ink-soft"
