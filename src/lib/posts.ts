@@ -15,6 +15,14 @@ export interface Post {
 
 export const posts: Post[] = [
   {
+    slug: "reasoning-vs-presentation",
+    title: "How You Think Is Not How You Present",
+    description: "Deductive and inductive describe how you reach a conclusion; the Pyramid Principle describes how you present it — two perpendicular axes people keep conflating.",
+    date: "2026-07-07",
+    tags: ["communication", "soft-skills", "reasoning", "mental-models"],
+    category: "soft-skills",
+  },
+  {
     slug: "pyramid-principle",
     title: "The Pyramid Principle: Answer First",
     description: "Your brain files ideas as a hierarchy, not a timeline — so lead with the conclusion and group the support beneath it. The consultant's structure for any message.",
