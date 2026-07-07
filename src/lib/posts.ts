@@ -9,7 +9,7 @@ export interface Post {
   description: string;
   date: string;
   tags: string[];
-  /** Homepage tab. Omitted = "engineering" (the default Writing tab). */
+  /** Homepage tab. Omitted = "engineering" (the default Engineering tab). */
   category?: Category;
 }
 

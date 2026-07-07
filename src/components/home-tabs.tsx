@@ -73,7 +73,7 @@ export default function HomeTabs({
           ref={writingRef}
           id="writing"
           active={tab === "writing"}
-          label="Writing"
+          label="Engineering"
           count={writing.length}
           onClick={() => select("writing")}
         />
