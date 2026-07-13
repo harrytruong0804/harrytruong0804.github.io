@@ -15,6 +15,13 @@ export interface Post {
 
 export const posts: Post[] = [
   {
+    slug: "usd-instanceable-prototype",
+    title: "Instanceable & Prototype: Store the Mesh Once",
+    description: "Mark a USD prim instanceable and its geometry moves into a shared prototype — stored once and reused by every copy, while each instance keeps only its transform.",
+    date: "2026-07-13",
+    tags: ["usd", "omniverse", "graphics", "performance"],
+  },
+  {
     slug: "rasterization-vs-ray-tracing",
     title: "Rasterization vs Ray Tracing: Opposite Directions",
     description: "A rasterizer loops triangles and asks which pixels they cover; a ray tracer loops pixels and asks which triangle they hit — the same visibility test, run backwards.",
