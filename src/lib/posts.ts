@@ -15,6 +15,13 @@ export interface Post {
 
 export const posts: Post[] = [
   {
+    slug: "surface-normals",
+    title: "Normals: How a Face Catches the Light",
+    description: "A normal is the unit vector pointing straight out of a face. Lighting is a dot product between it and the light — which is why a flipped normal turns a surface black.",
+    date: "2026-07-13",
+    tags: ["graphics", "rendering", "shading", "geometry"],
+  },
+  {
     slug: "reasoning-vs-presentation",
     title: "How You Think Is Not How You Present",
     description: "Deductive and inductive describe how you reach a conclusion; the Pyramid Principle describes how you present it — two perpendicular axes people keep conflating.",
