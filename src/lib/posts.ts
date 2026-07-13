@@ -15,6 +15,13 @@ export interface Post {
 
 export const posts: Post[] = [
   {
+    slug: "rasterization-vs-ray-tracing",
+    title: "Rasterization vs Ray Tracing: Opposite Directions",
+    description: "A rasterizer loops triangles and asks which pixels they cover; a ray tracer loops pixels and asks which triangle they hit — the same visibility test, run backwards.",
+    date: "2026-07-13",
+    tags: ["graphics", "rendering", "gpu", "ray-tracing"],
+  },
+  {
     slug: "surface-normals",
     title: "Normals: How a Face Catches the Light",
     description: "A normal is the unit vector pointing straight out of a face. Lighting is a dot product between it and the light — which is why a flipped normal turns a surface black.",
