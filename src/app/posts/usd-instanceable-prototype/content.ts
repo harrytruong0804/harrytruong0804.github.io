@@ -26,6 +26,7 @@ export const styles = `
     color: var(--at-accent);
     margin: 3.2rem 0 0.4rem;
   }
+.artifact-scope h1,
 .artifact-scope h2 {
     font-family: var(--at-font-display);
     font-weight: 600;
@@ -122,7 +123,7 @@ export const html = `
 <div class="wrap">
 
   <p class="kicker">USD</p>
-  <h2>Instanceable &amp; Prototype: Store the Mesh Once</h2>
+  <h1>Instanceable &amp; Prototype: Store the Mesh Once</h1>
   <p class="lede">Flag a prim <code>instanceable</code> and USD splits it in two: the heavy geometry moves into a shared <em>prototype</em>, stored once, and every copy &mdash; each <em>instance</em> &mdash; keeps almost nothing but its own transform. A thousand copies, one mesh in memory.</p>
 
   <p>The whole idea is one move: <strong>separate what&rsquo;s unique from what&rsquo;s shared.</strong> A thousand chairs are the same mesh in a thousand places. So store the mesh once and store only the placement &mdash; a transform &mdash; a thousand times.</p>

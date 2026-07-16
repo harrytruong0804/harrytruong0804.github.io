@@ -18,6 +18,7 @@ export const styles = `
     color: var(--at-accent);
     margin: 3.4rem 0 0.4rem;
   }
+.artifact-scope h1,
 .artifact-scope h2 {
     font-family: var(--at-font-display);
     font-weight: 600;
@@ -164,7 +165,7 @@ export const html = `
 <div class="wrap">
 
   <p class="kicker">Communication</p>
-  <h2>How You Think Is Not How You Present</h2>
+  <h1>How You Think Is Not How You Present</h1>
   <p class="lede">For years I thought <em>deductive reasoning</em> and the Pyramid Principle were the same thing. They answer two different questions &mdash; one about thinking, one about talking &mdash; and they sit at a right angle to each other.</p>
 
   <p>The mix-up had a clean cause. Guides on the <a class="xref" href="/posts/pyramid-principle/">Pyramid Principle</a> talk about a &ldquo;deductive structure,&rdquo; and in the same breath tell you to <strong>state the conclusion first</strong>. So I quietly filed them as one idea: <em>deductive means lead with the conclusion.</em></p>

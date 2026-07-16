@@ -225,7 +225,7 @@ export const html = `
 <div class="footer">
   <div class="ornament">&#10086;</div>
   <p>harrytruong · Geospatial 3D series · Part 3 of 5 · June 2026</p>
-  <p style="margin-top:8px"><a href="/posts/gltf-jpeg-of-3d">Next → glTF: The JPEG of 3D</a></p>
+  <p style="margin-top:8px"><a href="/posts/gltf-jpeg-of-3d/">Next → glTF: The JPEG of 3D</a></p>
 </div>
 `;
 

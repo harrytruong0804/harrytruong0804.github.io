@@ -5,6 +5,7 @@ import {
   SITE_DESCRIPTION,
   SITE_AUTHOR,
   SITE_GITHUB,
+  postUrl,
 } from "@/lib/site";
 import { getDispatches } from "@/lib/dispatches";
 import HomeTabs from "@/components/home-tabs";
@@ -24,7 +25,7 @@ export default function Home() {
       "@type": "BlogPosting",
       headline: post.title,
       datePublished: post.date,
-      url: `${SITE_URL}/posts/${post.slug}`,
+      url: postUrl(post.slug),
     })),
   };
 

@@ -26,6 +26,7 @@ export const styles = `
     color: var(--at-accent);
     margin: 3.4rem 0 0.4rem;
   }
+.artifact-scope h1,
 .artifact-scope h2 {
     font-family: var(--at-font-display);
     font-weight: 600;
@@ -132,7 +133,7 @@ export const html = `
 <div class="wrap">
 
   <p class="kicker">Graphics</p>
-  <h2>Rasterization vs Ray Tracing: Opposite Directions</h2>
+  <h1>Rasterization vs Ray Tracing: Opposite Directions</h1>
   <p class="lede">Both turn triangles into a picture by solving one question &mdash; <em>what is visible at each pixel?</em> They just walk the triangle&harr;pixel relationship in opposite directions.</p>
 
   <p>Every renderer answers the same thing for every pixel on screen: of all the triangles in the scene, which one shows up here? A <strong>rasterizer</strong> and a <strong>ray tracer</strong> both compute that visibility &mdash; but one starts from the geometry and pushes toward the screen, and the other starts from the screen and reaches back into the scene.</p>

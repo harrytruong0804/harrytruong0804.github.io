@@ -409,7 +409,7 @@ stage (0,0,0)  &mdash;georef 2&mdash;&rarr;  origin&#8322;   (lat/lon/h of geore
 <div class="footer">
   <div class="ornament">&#10086;</div>
   <p>harrytruong · Cesium 101 · June 2026</p>
-  <p style="margin-top:8px"><a href="/posts/cesium-georeference-first-principles">&#9664; Companion → Translate, Georeference, GlobeAnchor, Binding</a></p>
+  <p style="margin-top:8px"><a href="/posts/cesium-georeference-first-principles/">&#9664; Companion → Translate, Georeference, GlobeAnchor, Binding</a></p>
 </div>
 `;
 

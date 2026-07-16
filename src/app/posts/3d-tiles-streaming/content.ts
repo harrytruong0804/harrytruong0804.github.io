@@ -315,7 +315,7 @@ else:
 <div class="footer">
   <div class="ornament">&#10086;</div>
   <p>harrytruong · Geospatial 3D series · Part 2 of 5 · June 2026</p>
-  <p style="margin-top:8px"><a href="/posts/google-photorealistic-3d-tiles">Next &rarr; Google Photorealistic 3D Tiles, Explained</a></p>
+  <p style="margin-top:8px"><a href="/posts/google-photorealistic-3d-tiles/">Next &rarr; Google Photorealistic 3D Tiles, Explained</a></p>
 </div>
 `;
 

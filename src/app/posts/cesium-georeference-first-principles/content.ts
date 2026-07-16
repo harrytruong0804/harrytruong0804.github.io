@@ -165,7 +165,7 @@ C     = ( 10, 0,   0)</pre>
 
 <div class="callout warn">
   <span class="title">This is the whole reason Cesium exists</span>
-  <p>You cannot hold &ldquo;6.3 million meters of Earth&rdquo; and &ldquo;1 centimeter of bolt&rdquo; in the same float at the same time. So a geospatial engine must <strong>split the number in two</strong>: a big <em>where on the planet</em> stored in high precision, and a small <em>local detail</em> the GPU can render safely. Every concept below is a consequence of that split. <em>(Part 1 of the Geospatial series goes deep on the precision math &mdash; <a href="/posts/cesium-on-omniverse">How Cesium Puts a 3D Scene on Planet Earth</a>.)</em></p>
+  <p>You cannot hold &ldquo;6.3 million meters of Earth&rdquo; and &ldquo;1 centimeter of bolt&rdquo; in the same float at the same time. So a geospatial engine must <strong>split the number in two</strong>: a big <em>where on the planet</em> stored in high precision, and a small <em>local detail</em> the GPU can render safely. Every concept below is a consequence of that split. <em>(Part 1 of the Geospatial series goes deep on the precision math &mdash; <a href="/posts/cesium-on-omniverse/">How Cesium Puts a 3D Scene on Planet Earth</a>.)</em></p>
 </div>
 
 <!-- ───────────────────────── 3. GEOREFERENCE ───────────────────────── -->
@@ -266,7 +266,7 @@ P_ecef = (X, Y, Z)</pre>
 
 <pre>P_stage = P_ecef &middot; M_ecefToUsd      (USD row-vector convention)</pre>
 
-<p><code>M_ecefToUsd</code> is the georeference&rsquo;s <code>cesium:ecefToUsdTransform</code> &mdash; derived from the origin you picked (it&rsquo;s the inverse of &ldquo;local &rarr; ECEF&rdquo;: the East-North-Up frame at the origin, possibly scaled). <strong>This is the step that needs the georeference.</strong> <em>(That ENU matrix isn&rsquo;t magic either &mdash; the companion post <a href="/posts/enu-from-first-principles">on the ENU frame</a> derives it as the Jacobian of position and dissects a real one.)</em></p>
+<p><code>M_ecefToUsd</code> is the georeference&rsquo;s <code>cesium:ecefToUsdTransform</code> &mdash; derived from the origin you picked (it&rsquo;s the inverse of &ldquo;local &rarr; ECEF&rdquo;: the East-North-Up frame at the origin, possibly scaled). <strong>This is the step that needs the georeference.</strong> <em>(That ENU matrix isn&rsquo;t magic either &mdash; the companion post <a href="/posts/enu-from-first-principles/">on the ENU frame</a> derives it as the Jacobian of position and dissects a real one.)</em></p>
 
 <div class="callout">
   <span class="title">Orientation too &mdash; not just position</span>
@@ -486,7 +486,7 @@ local  &rarr; (15, 0, 30)         &larr; small &amp; precise again</pre>
 <div class="footer">
   <div class="ornament">&#10086;</div>
   <p>harrytruong · Cesium 101 · June 2026</p>
-  <p style="margin-top:8px"><a href="/posts/cesium-on-omniverse">Related → How Cesium Puts a 3D Scene on Planet Earth</a></p>
+  <p style="margin-top:8px"><a href="/posts/cesium-on-omniverse/">Related → How Cesium Puts a 3D Scene on Planet Earth</a></p>
 </div>
 `;
 

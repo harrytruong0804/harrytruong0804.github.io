@@ -17,6 +17,7 @@ export const styles = `
     color: var(--at-accent);
     margin: 3.4rem 0 0.4rem;
   }
+.artifact-scope h1,
 .artifact-scope h2 {
     font-family: var(--at-font-display);
     font-weight: 600;
@@ -252,7 +253,7 @@ export const html = `
 <div class="wrap">
 
   <p class="kicker">Communication</p>
-  <h2>The Pyramid Principle: Answer First</h2>
+  <h1>The Pyramid Principle: Answer First</h1>
   <p class="lede">Your brain files ideas as a <em>hierarchy</em>, not a timeline. So put the conclusion on top and let the support hang beneath it &mdash; the structure consultants use for every report, email, and talk.</p>
 
   <p>Picture the status update most of us give:</p>

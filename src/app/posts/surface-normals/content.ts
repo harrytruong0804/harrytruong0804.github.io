@@ -25,6 +25,7 @@ export const styles = `
     color: var(--at-accent);
     margin: 3.4rem 0 0.4rem;
   }
+.artifact-scope h1,
 .artifact-scope h2 {
     font-family: var(--at-font-display);
     font-weight: 600;
@@ -112,7 +113,7 @@ export const html = `
 <div class="wrap">
 
   <p class="kicker">Graphics</p>
-  <h2>Normals: How a Face Catches the Light</h2>
+  <h1>Normals: How a Face Catches the Light</h1>
   <p class="lede">A mesh is just flat triangles. What tells each one which way it faces &mdash; and therefore how bright it should be &mdash; is a single arrow per face: the <em>normal</em>.</p>
 
   <p>Load a 3D model and you get a <strong>prim</strong> made of <strong>faces</strong>: flat polygons (triangles, once the GPU is done) stitched into a surface. Geometry alone is colorless. The moment you add a light, the renderer needs to know, for every face, one thing: <strong>which direction is it pointing?</strong> That direction is the normal &mdash; a unit-length vector standing straight out of the surface.</p>

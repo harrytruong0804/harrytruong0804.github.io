@@ -285,7 +285,7 @@ export const html = `
 <div class="footer">
   <div class="ornament">&#10086;</div>
   <p>harrytruong · Geospatial 3D series · Part 5 of 5 · June 2026</p>
-  <p style="margin-top:8px">Series complete · <a href="/posts/cesium-on-omniverse">Start over &rarr; How Cesium Puts a 3D Scene on Planet Earth</a></p>
+  <p style="margin-top:8px">Series complete · <a href="/posts/cesium-on-omniverse/">Start over &rarr; How Cesium Puts a 3D Scene on Planet Earth</a></p>
 </div>
 `;
 

@@ -308,7 +308,7 @@ export const html = `
 <div class="footer">
   <div class="ornament">&#10086;</div>
   <p>harrytruong · Geospatial 3D series · Part 1 of 5 · June 2026</p>
-  <p style="margin-top:8px"><a href="/posts/3d-tiles-streaming">Next → 3D Tiles: How to Stream a Planet That Won't Fit in RAM</a></p>
+  <p style="margin-top:8px"><a href="/posts/3d-tiles-streaming/">Next → 3D Tiles: How to Stream a Planet That Won't Fit in RAM</a></p>
 </div>
 `;
 

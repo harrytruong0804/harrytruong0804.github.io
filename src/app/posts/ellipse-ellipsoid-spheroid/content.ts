@@ -282,7 +282,7 @@ a = b  (about the spin axis)   &ne;   c  (along the polar axis)</pre>
 
 <div class="callout">
   <span class="title">Connection to the Geospatial 3D series</span>
-  <p>In the post <a href="/posts/cesium-on-omniverse">Cesium on Omniverse</a>, we met the &ldquo;WGS84 ellipsoid&rdquo; as the standard mathematical model for converting between <em>lat/lon/height</em> and <em>ECEF</em>. Now it is clear why: that reference surface is exactly an oblate spheroid.</p>
+  <p>In the post <a href="/posts/cesium-on-omniverse/">Cesium on Omniverse</a>, we met the &ldquo;WGS84 ellipsoid&rdquo; as the standard mathematical model for converting between <em>lat/lon/height</em> and <em>ECEF</em>. Now it is clear why: that reference surface is exactly an oblate spheroid.</p>
 </div>
 
 <!-- ───────────────────────── 7. WHY ───────────────────────── -->
@@ -336,7 +336,7 @@ a = b  (about the spin axis)   &ne;   c  (along the polar axis)</pre>
 <div class="footer">
   <div class="ornament">&#10086;</div>
   <p>harrytruong &middot; June 2026</p>
-  <p style="margin-top:8px"><a href="/posts/cesium-on-omniverse">Related &rarr; How Cesium Puts a 3D Scene on Planet Earth</a></p>
+  <p style="margin-top:8px"><a href="/posts/cesium-on-omniverse/">Related &rarr; How Cesium Puts a 3D Scene on Planet Earth</a></p>
 </div>
 `;
 

@@ -1,5 +1,5 @@
 import { getAllPosts } from "@/lib/posts";
-import { SITE_URL, SITE_NAME, SITE_DESCRIPTION } from "@/lib/site";
+import { SITE_URL, SITE_NAME, SITE_DESCRIPTION, postUrl } from "@/lib/site";
 
 // Render once at build time so `output: export` can emit a static feed.xml.
 export const dynamic = "force-static";
@@ -17,7 +17,7 @@ export function GET() {
   const posts = getAllPosts();
   const items = posts
     .map((post) => {
-      const url = `${SITE_URL}/posts/${post.slug}`;
+      const url = postUrl(post.slug);
       return `    <item>
       <title>${escapeXml(post.title)}</title>
       <link>${url}</link>

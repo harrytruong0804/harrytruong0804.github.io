@@ -1,5 +1,11 @@
 import type { Metadata } from "next";
-import { SITE_URL, SITE_NAME, SITE_AUTHOR, SITE_GITHUB } from "./site";
+import {
+  SITE_NAME,
+  SITE_AUTHOR,
+  SITE_GITHUB,
+  SITE_OG_IMAGE,
+  postUrl,
+} from "./site";
 
 export type Category = "engineering" | "soft-skills";
 
@@ -248,7 +254,15 @@ export function getAllPosts(): Post[] {
 export function postMetadata(slug: string): Metadata {
   const post = getPost(slug);
   if (!post) return {};
-  const url = `${SITE_URL}/posts/${post.slug}`;
+  const url = postUrl(post.slug);
+  // Declaring openGraph here replaces the root layout's object wholesale, so the
+  // image from src/app/opengraph-image.tsx is not inherited — restate it.
+  const image = {
+    url: SITE_OG_IMAGE,
+    width: 1200,
+    height: 630,
+    alt: `${post.title} — ${SITE_NAME}`,
+  };
   return {
     title: `${post.title} | ${SITE_NAME}`,
     description: post.description,
@@ -264,11 +278,13 @@ export function postMetadata(slug: string): Metadata {
       publishedTime: post.date,
       authors: [SITE_AUTHOR],
       tags: post.tags,
+      images: [image],
     },
     twitter: {
       card: "summary_large_image",
       title: post.title,
       description: post.description,
+      images: [image],
     },
   };
 }
