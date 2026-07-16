@@ -3,8 +3,8 @@ import {
   SITE_URL,
   SITE_NAME,
   SITE_AUTHOR,
-  SITE_GITHUB,
   SITE_OG_IMAGE,
+  AUTHOR_SAME_AS,
   postUrl,
 } from "@/lib/site";
 
@@ -29,7 +29,7 @@ export default function PostJsonLd({ post }: { post: Post }) {
       "@id": PERSON_ID,
       name: SITE_AUTHOR,
       url: SITE_URL,
-      sameAs: [SITE_GITHUB],
+      sameAs: AUTHOR_SAME_AS,
     },
     publisher: { "@id": PERSON_ID },
     isPartOf: { "@type": "Blog", name: SITE_NAME, url: SITE_URL },
