@@ -261,6 +261,7 @@ export function postMetadata(slug: string): Metadata {
     url: SITE_OG_IMAGE,
     width: 1200,
     height: 630,
+    type: "image/png",
     alt: `${post.title} — ${SITE_NAME}`,
   };
   return {

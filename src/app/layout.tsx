@@ -7,6 +7,7 @@ import {
   SITE_DESCRIPTION,
   SITE_AUTHOR,
   SITE_GITHUB,
+  SITE_OG_IMAGE,
 } from "@/lib/site";
 import "./globals.css";
 
@@ -27,6 +28,14 @@ const splineMono = Spline_Sans_Mono({
   variable: "--font-spline-mono",
 });
 
+const OG_IMAGE = {
+  url: SITE_OG_IMAGE,
+  width: 1200,
+  height: 630,
+  type: "image/png",
+  alt: `${SITE_NAME} — visual notes`,
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: SITE_TITLE,
@@ -43,11 +52,13 @@ export const metadata: Metadata = {
     siteName: SITE_NAME,
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
+    images: [OG_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
+    images: [OG_IMAGE],
   },
   robots: {
     index: true,
