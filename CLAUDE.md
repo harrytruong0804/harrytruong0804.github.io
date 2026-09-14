@@ -2,10 +2,11 @@
 
 ## Deployment
 
-- Hosted on **Vercel Hobby plan** (owner: `harrytruong0804` / `Noi Truong`)
-- Hobby plan only allows the project owner to deploy. Commits by other git authors (e.g. `Harry <harry.truong@akila3d.com>`) will be **blocked**.
-- **Always use the PR workflow**: push to a feature branch, create a PR, and merge via GitHub. The merge commit is attributed to the repo owner, which Vercel accepts.
-- **Never push directly to `master`** — it will trigger a blocked deployment.
+- Hosted on **GitHub Pages** at https://harrytruong0804.github.io (no custom domain). Vercel is no longer used.
+- `.github/workflows/deploy.yml`: every push to `main` runs `npm ci` → `npm run build` (static export to `out/`) → `touch out/.nojekyll` → `actions/deploy-pages`. Takes about a minute.
+- **Pushing to `main` publishes.** Run `npm run build` locally first: a failed build means no deploy.
+- This repo is **public** — keep private drafts out of it.
+- Check deploys: `gh run list --limit 5`
 
 ## Blog Structure
 
@@ -19,6 +20,4 @@
 
 ## Git
 
-- Production branch: `master`
-- Default PR base: `master`
-- Commits should NOT include `Co-Authored-By` trailers (Vercel Hobby treats them as collaborators)
+- Production branch: `main` (the only branch; there is no `master`)
