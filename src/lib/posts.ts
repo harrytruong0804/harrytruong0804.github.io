@@ -21,6 +21,13 @@ export interface Post {
 
 export const posts: Post[] = [
   {
+    slug: "pi-vs-deepseek-harness",
+    title: "Pi vs DeepSeek Harness: Extend the Loop or Replace It",
+    description: "Pi keeps one small agent loop and lets you hook around it; DeepSeek Harness makes the loop itself a plugin. One customizes behavior, the other architecture.",
+    date: "2026-09-14",
+    tags: ["ai", "agents", "architecture", "harness"],
+  },
+  {
     slug: "usd-instanceable-prototype",
     title: "Instanceable & Prototype: Store the Mesh Once",
     description: "Mark a USD prim instanceable and its geometry moves into a shared prototype — stored once and reused by every copy, while each instance keeps only its transform.",
