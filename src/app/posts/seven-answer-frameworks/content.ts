@@ -170,6 +170,8 @@ export const html = `
   <h1>Seven Question Types, Seven Frameworks, One Headline</h1>
   <p class="lede">Every technical interview question wants one of seven outputs: a definition, a cause, a design, a diagnosis, an optimization, a decision, or a judgment. Name the output, pick the matching framework, then <em>compress it into one sentence and say that first</em>.</p>
 
+  <p>This started as a fix for a familiar failure. Asked a good question, I would freeze, then ramble: true things in no order, with no sentence the interviewer could hold on to. The cure turned out to be the one I had already used for IELTS speaking, and the one dozens of YouTube interview guides keep circling: <strong>a small set of frameworks, drilled until the structure is a reflex</strong> and only the answer is audible. What follows is that set, compressed to seven.</p>
+
   <div class="dl">
     <a class="btn" href="/downloads/seven-answer-frameworks.pdf" download>Download the PDF</a>
     <p class="note">The full framework in one document: router map, compression rules, seven worked examples, the practice ladder, and a one-page cheat sheet. English, 10 pages.</p>
@@ -275,6 +277,21 @@ export const html = `
       <div class="stage last"><span class="n">4</span><span class="h">Interview</span><span class="flow">Q &rarr; answer</span>Conclusion-first and natural. The framework surfaces only for recovery.</div>
     </div>
     <figcaption>Each stage removes one visible piece of scaffolding. Runtime target: question, compressed claim, supporting reasoning.</figcaption>
+  </figure>
+
+  <p class="kicker">Beyond answering</p>
+  <h2>The same seven letters, from the other chair</h2>
+
+  <p>The frameworks run in reverse. As the interviewer, when a candidate stalls, hand them the next letter as a hint: <em>what would break this design? what evidence would separate those two causes? under which condition would you pick the other one?</em> The question type tells you which prompt to offer, and the candidate&rsquo;s reasoning surfaces without you giving the answer away.</p>
+
+  <figure>
+    <div class="two">
+      <div class="box blue"><span class="h">Answering</span><p>Route, reason, compress, say the headline, expand on demand.</p></div>
+      <div class="box violet"><span class="h">Asking</span><p>Route the question, then offer its letters one at a time as prompts when the other person is stuck.</p></div>
+      <div class="box good"><span class="h">Meetings and collaboration</span><p>A design review is GFM, an incident call is HEFR, a vendor decision is CTD. Naming the type ends the rambling.</p></div>
+      <div class="box bad"><span class="h">Everyday conversation</span><p>&ldquo;Why is this good?&rdquo; wants IMO. &ldquo;What happened?&rdquo; wants a judgment, then the story. Same habit, no acronyms spoken.</p></div>
+    </div>
+    <figcaption>Interview answers were the training ground. The habit transfers to any exchange that has a question in it.</figcaption>
   </figure>
 
   <div class="final">Do not try to say the framework. Use it to find the most important sentence, say that sentence first, and let everything else prove it.</div>
